@@ -15,25 +15,30 @@
  */
 function handleStarResult(resultData) {
     console.log("handleStarResult: populating star table from resultData");
+    console.log(resultData);
 
     // Populate the star table
     // Find the empty table body by id "star_table_body"
     let starTableBodyElement = jQuery("#movie_table_body");
 
     // Iterate through resultData, no more than 10 entries
-    for (let i = 0; i < Math.min(10, resultData.length); i++) {
-
+    for (let i = 0; i < Math.min(20, resultData.length); i++) {
+        console.log(resultData[i]);
         // Concatenate the html tags with resultData jsonObject
         let rowHTML = "";
         rowHTML += "<tr>";
         rowHTML +=
             "<th>" +
             // Add a link to single-star.html with id passed with GET url parameter
-            '<a href="single-star.html?id=' + resultData[i]['star_id'] + '">'
-            + resultData[i]["star_name"] +     // display star_name for the link text
+            '<a href="single-star.html?id=' + resultData[i]['movie_id'] + '">'
+            + resultData[i]["movie_title"] +     // display star_name for the link text
             '</a>' +
             "</th>";
-        rowHTML += "<th>" + resultData[i]["star_dob"] + "</th>";
+        rowHTML += "<th>" + resultData[i]["movie_year"] + "</th>";
+        rowHTML += "<th>" + resultData[i]["movie_director"] + "</th>";
+        rowHTML += "<th>" + resultData[i]["movie_stars"] + "</th>";
+        rowHTML += "<th>" + resultData[i]["movie_genres"] + "</th>";
+        rowHTML += "<th>" + resultData[i]["average_rating"] + "</th>";
         rowHTML += "</tr>";
 
         // Append the row created to the table body, which will refresh the page

@@ -16,7 +16,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 // Declaring a WebServlet called SingleStarServlet, which maps to url "/api/single-star"
-@WebServlet(name = "SingleMovieServlet", urlPatterns = "/api/single-movie")
+@WebServlet(name = "SingleMovieServlet", urlPatterns = "/api/movies")
 public class SingleMovieServlet extends HttpServlet {
     private static final long serialVersionUID = 2L;
 
@@ -78,15 +78,16 @@ public class SingleMovieServlet extends HttpServlet {
             JsonArray jsonArray = new JsonArray();
 
             while (rs.next()) {
-
+                String movieId = rs.getString("movie_id");
                 String movieTitle = rs.getString("movie_title");
                 String movieYear = rs.getString("movie_year");
                 String movieDirector = rs.getString("movie_director");
                 String movieGenres = rs.getString("movie_genres");
                 String movieStars = rs.getString("movie_stars");
-                double averageRating = rs.getDouble("average_rating");
+                double averageRating = Math.round(rs.getDouble("average_rating") * 10.0) / 10.0;
 
                 JsonObject jsonObject = new JsonObject();
+                jsonObject.addProperty("movie_id", movieId);
                 jsonObject.addProperty("movie_title", movieTitle);
                 jsonObject.addProperty("movie_year", movieYear);
                 jsonObject.addProperty("movie_director", movieDirector);
