@@ -12,16 +12,15 @@ import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 
-
-// Declaring a WebServlet called MovieServlet, which maps to url "/api/movies"
-@WebServlet(name = "MovieServlet", urlPatterns = "/api/hibyemovies")
+// Declaring a WebServlet called SingleStarServlet, which maps to url "/api/single-star"
+@WebServlet(name = "MovieServlet", urlPatterns = "/api/movies")
 public class MovieServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2L;
 
-    // Create a dataSource which registered in web.
+    // Create a dataSource which registered in web.xml
     private DataSource dataSource;
 
     public void init(ServletConfig config) {
@@ -33,7 +32,8 @@ public class MovieServlet extends HttpServlet {
     }
 
     /**
-     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+     * response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
@@ -42,40 +42,63 @@ public class MovieServlet extends HttpServlet {
         // Output stream to STDOUT
         PrintWriter out = response.getWriter();
 
-        // Get a connection from dataSource and let resource manager close the connection after usage.
         try (Connection conn = dataSource.getConnection()) {
 
-            // Declare our statement
-            Statement statement = conn.createStatement();
+            String query = "SELECT " +
+                    "    m.id AS movie_id," +
+                    "    m.title AS movie_title," +
+                    "    m.year AS movie_year," +
+                    "    m.director AS movie_director," +
+                    "    SUBSTRING_INDEX(GROUP_CONCAT(DISTINCT g.name), ',', 3) AS movie_genres," +
+                    "    SUBSTRING_INDEX(GROUP_CONCAT(DISTINCT s.name), ',', 3) AS movie_stars," +
+                    "    AVG(r.rating) AS average_rating " +
+                    "FROM " +
+                    "    movies m " +
+                    "LEFT JOIN " +
+                    "    genres_in_movies gm ON m.id = gm.movieId " +
+                    "LEFT JOIN " +
+                    "    genres g ON gm.genreId = g.id " +
+                    "LEFT JOIN " +
+                    "    stars_in_movies sm ON m.id = sm.movieId " +
+                    "LEFT JOIN " +
+                    "    stars s ON sm.starId = s.id " +
+                    "LEFT JOIN " +
+                    "    ratings r ON m.id = r.movieId " +
+                    "GROUP BY " +
+                    "    m.id, m.title, m.year, m.director " +
+                    "ORDER BY " +
+                    "    average_rating DESC " +
+                    "LIMIT " +
+                    "    20;";
 
-            String query = "SELECT * from movies";
+            PreparedStatement statement = conn.prepareStatement(query);
 
-            // Perform the query
-            ResultSet rs = statement.executeQuery(query);
+            ResultSet rs = statement.executeQuery();
 
             JsonArray jsonArray = new JsonArray();
 
-            // Iterate through each row of rs
             while (rs.next()) {
-                String movie_id = rs.getString("id");
-                String movie_title = rs.getString("title");
-                String movie_year = rs.getString("year");
-                String movie_director = rs.getString("director");
+                String movieId = rs.getString("movie_id");
+                String movieTitle = rs.getString("movie_title");
+                String movieYear = rs.getString("movie_year");
+                String movieDirector = rs.getString("movie_director");
+                String movieGenres = rs.getString("movie_genres");
+                String movieStars = rs.getString("movie_stars");
+                double averageRating = Math.round(rs.getDouble("average_rating") * 10.0) / 10.0;
 
-                // Create a JsonObject based on the data we retrieve from rs
                 JsonObject jsonObject = new JsonObject();
-                jsonObject.addProperty("movie_id", movie_id);
-                jsonObject.addProperty("movie_title", movie_title);
-                jsonObject.addProperty("movie_year", movie_year);
-                jsonObject.addProperty("movie_director", movie_director);
+                jsonObject.addProperty("movie_id", movieId);
+                jsonObject.addProperty("movie_title", movieTitle);
+                jsonObject.addProperty("movie_year", movieYear);
+                jsonObject.addProperty("movie_director", movieDirector);
+                jsonObject.addProperty("movie_genres", movieGenres);
+                jsonObject.addProperty("movie_stars", movieStars);
+                jsonObject.addProperty("average_rating", averageRating);
 
                 jsonArray.add(jsonObject);
             }
             rs.close();
             statement.close();
-
-            // Log to localhost log
-            request.getServletContext().log("getting " + jsonArray.size() + " results");
 
             // Write JSON string to output
             out.write(jsonArray.toString());
@@ -83,12 +106,13 @@ public class MovieServlet extends HttpServlet {
             response.setStatus(200);
 
         } catch (Exception e) {
-
             // Write error message JSON object to output
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("errorMessage", e.getMessage());
             out.write(jsonObject.toString());
 
+            // Log error to localhost log
+            request.getServletContext().log("Error:", e);
             // Set response status to 500 (Internal Server Error)
             response.setStatus(500);
         } finally {
@@ -98,4 +122,6 @@ public class MovieServlet extends HttpServlet {
         // Always remember to close db connection after usage. Here it's done by try-with-resources
 
     }
+
 }
+

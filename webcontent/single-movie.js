@@ -57,17 +57,6 @@ function handleResult(resultData) {
             '</a>'
      */
     console.log("handleResult: populating movie table from resultData");
-
-    // Populate the movie table
-    let movieTableBodyElement = jQuery("#movie_table_body");
-    for (let i = 0; i < resultData.length; i++) {
-        let rowHTML = "";
-        rowHTML += "<tr>";
-        rowHTML += "<th><a href='single-star.html?id=" + resultData[i]["star_id"] + "'>" + resultData[i]["star_name"] + "</a></th>";
-        rowHTML += "<th>" + resultData[i]["star_dob"] + "</th>"; // Assuming you have the date of birth available
-        rowHTML += "</tr>";
-        movieTableBodyElement.append(rowHTML);
-    }
 }
 
 /**
@@ -75,7 +64,7 @@ function handleResult(resultData) {
  */
 
 // Get id from URL
-let starId = getParameterByName('id');
+let movieId = getParameterByName('id');
 
 // Makes the HTTP GET request and registers on success callback function handleResult
 jQuery.ajax({
