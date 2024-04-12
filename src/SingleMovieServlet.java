@@ -49,19 +49,12 @@ public class SingleMovieServlet extends HttpServlet {
                     "    m.title AS movie_title," +
                     "    m.year AS movie_year," +
                     "    m.director AS movie_director," +
-                    "    GROUP_CONCAT(DISTINCT g.name) AS movie_genres," +
-                    "    GROUP_CONCAT(DISTINCT s.name) AS movie_stars," +
+                    "    (SELECT GROUP_CONCAT(DISTINCT s.id SEPARATOR ';') FROM stars_in_movies sm JOIN stars s ON sm.starId = s.id WHERE sm.movieId = m.id) AS star_ids," +
+                    "    (SELECT GROUP_CONCAT(DISTINCT s.name SEPARATOR ';') FROM stars_in_movies sm JOIN stars s ON sm.starId = s.id WHERE sm.movieId = m.id) AS star_names," +
+                    "    (SELECT GROUP_CONCAT(DISTINCT g.name) FROM genres_in_movies gm JOIN genres g ON gm.genreId = g.id WHERE gm.movieId = m.id) AS movie_genres," +
                     "    AVG(r.rating) AS average_rating " +
                     "FROM " +
                     "    movies m " +
-                    "LEFT JOIN " +
-                    "    genres_in_movies gm ON m.id = gm.movieId " +
-                    "LEFT JOIN " +
-                    "    genres g ON gm.genreId = g.id " +
-                    "LEFT JOIN " +
-                    "    stars_in_movies sm ON m.id = sm.movieId " +
-                    "LEFT JOIN " +
-                    "    stars s ON sm.starId = s.id " +
                     "LEFT JOIN " +
                     "    ratings r ON m.id = r.movieId " +
                     "GROUP BY " +
@@ -83,7 +76,8 @@ public class SingleMovieServlet extends HttpServlet {
                 String movieYear = rs.getString("movie_year");
                 String movieDirector = rs.getString("movie_director");
                 String movieGenres = rs.getString("movie_genres");
-                String movieStars = rs.getString("movie_stars");
+                String movieStars = rs.getString("star_names");
+                String movieStarIds = rs.getString("star_ids");
                 double averageRating = Math.round(rs.getDouble("average_rating") * 10.0) / 10.0;
 
                 JsonObject jsonObject = new JsonObject();
@@ -93,6 +87,7 @@ public class SingleMovieServlet extends HttpServlet {
                 jsonObject.addProperty("movie_director", movieDirector);
                 jsonObject.addProperty("movie_genres", movieGenres);
                 jsonObject.addProperty("movie_stars", movieStars);
+                jsonObject.addProperty("movie_starIds", movieStarIds);
                 jsonObject.addProperty("average_rating", averageRating);
 
                 jsonArray.add(jsonObject);

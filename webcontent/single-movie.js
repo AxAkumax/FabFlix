@@ -45,12 +45,32 @@ function handleResult(resultData) {
     let starInfoElement = jQuery("#movie_info");
 
     // append two html <p> created to the h3 body, which will refresh the page
-    starInfoElement.append("<p>Movie Title: " + resultData[0]["movie_title"] + "</p>" +
-        "<p>Director: " + resultData[0]["movie_director"] + "</p>" +
-        "<p>Rating: " + resultData[0]["average_rating"] + "</p>" +
-        "<p>Year: " + resultData[0]["movie_year"] + "</p>" +
-    "<p>Genres: " + resultData[0]["movie_genres"] + "</p>" +
-    "<p>Stars: " + resultData[0]["movie_stars"] + "</p>");
+    let content = "";
+    content+="<p>Movie Title: " + resultData[0]["movie_title"] + "</p>" +
+    "<p>Director: " + resultData[0]["movie_director"] + "</p>" +
+    "<p>Rating: " + resultData[0]["average_rating"] + "</p>" +
+    "<p>Year: " + resultData[0]["movie_year"] + "</p>" +
+    "<p>Genres: " + resultData[0]["movie_genres"] + "</p>";
+
+    let star_ids = resultData[0]['movie_starIds'].split(';');
+    let star_names = resultData[0]['movie_stars'].split(';');
+    let star_entries = "";
+    let length  = star_ids.length;
+    for (let j = 0; j < length; j++) {
+
+        // Concatenate the html tags with resultData jsonObject
+        star_entries +=
+            // Add a link to single-star.html with id passed with GET url parameter
+            '<a href="single-star.html?id=' + star_ids[j] + '">'
+            + star_names[j] +     // display star_name for the link text
+            '</a>';
+        if (j< length-1){
+            star_entries+=", ";
+        }
+    }
+    content += "<p>Stars: "+star_entries+"</p>";
+
+    starInfoElement.append(content);
 
     /* '<a href="single-star.html?id=' + resultData[i]['star_id'] + '">'
             + resultData[i]["star_name"] +     // display star_name for the link text
