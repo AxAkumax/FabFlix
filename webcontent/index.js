@@ -36,9 +36,30 @@ function handleStarResult(resultData) {
             "</th>";
         rowHTML += "<th>" + resultData[i]["movie_year"] + "</th>";
         rowHTML += "<th>" + resultData[i]["movie_director"] + "</th>";
-        rowHTML += "<th>" + resultData[i]["movie_stars"] + "</th>";
+
+        let star_ids = resultData[i]['movie_starIds'].split(';');
+        let star_names = resultData[i]['movie_stars'].split(';');
+
+        // Iterate through resultData, no more than 10 entries
+        let star_entries = ""
+        let length  = Math.min(3, star_ids.length);
+        for (let j = 0; j < length; j++) {
+
+            // Concatenate the html tags with resultData jsonObject
+
+            star_entries +=
+                // Add a link to single-star.html with id passed with GET url parameter
+                '<a href="single-star.html?id=' + star_ids[j] + '">'
+                + star_names[j] +     // display star_name for the link text
+                '</a>';
+            if (j< length-1){
+                star_entries+=", ";
+            }
+        }
+        rowHTML += "<th>" + star_entries + "</th>";
         rowHTML += "<th>" + resultData[i]["movie_genres"] + "</th>";
         rowHTML += "<th>" + resultData[i]["average_rating"] + "</th>";
+
         rowHTML += "</tr>";
 
         // Append the row created to the table body, which will refresh the page
