@@ -13,23 +13,33 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
+<!--     Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
 
     <title>Movie List</title>
 </head>
 <body>
 
 
-<h1>Movies</h1>
+<header>Fablix <span style="font-size: 6.5vw;">&#10025; </span></header>
+<h2>Top 20 Movies</h2>
 
 <!-- Id "star_table" is useful for jQuery to find the html element with id, class here is mapping to Bootstrap defined class CSS -->
-<table id=movie_table class="table table-striped">
+<table id=movie_table class="table table-hover table-dark">
     <!-- Create a table header -->
     <thead>
     <tr>
         <!-- Titles of each column-->
+        <th>#</th>
         <th>Title</th>
         <th>Year</th>
         <th>Director</th>
@@ -53,6 +63,9 @@
 <!-- Note the url does not contain a "/" in the beginning, which means the url is relative to current path
      otherwise the url is relative to the root path-->
 <script src="index.js"></script>
+<footer>
+    &#xa9; 2024 Akshita Akumalla, Niharika Kumar
+</footer>
 </body>
 
 

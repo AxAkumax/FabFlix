@@ -21,12 +21,15 @@ function handleStarResult(resultData) {
     // Find the empty table body by id "star_table_body"
     let starTableBodyElement = jQuery("#movie_table_body");
 
+
     // Iterate through resultData, no more than 10 entries
     for (let i = 0; i < Math.min(20, resultData.length); i++) {
         console.log(resultData[i]);
         // Concatenate the html tags with resultData jsonObject
+
         let rowHTML = "";
         rowHTML += "<tr>";
+        rowHTML +="<th>"+(i + 1).toString()+"</th>"; // Adding row number
         rowHTML +=
             "<th>" +
             // Add a link to single-star.html with id passed with GET url parameter
