@@ -19,7 +19,7 @@ h2{
     text-align: left;
    color: lightgrey;
     font-size: 2.4vw;
-    padding-left: 2.5vw;
+    padding-left: 2.6vw;
     padding-bottom: 1.3vw;
     font-family: "DM Sans", sans-serif;
     font-weight: 400;
@@ -40,6 +40,8 @@ a:hover {
     color: lightgrey; /* white text color for the table */
     font-family: "DM Sans", sans-serif;
     font-style: normal;
+    max-width: 96vw; /* Set a maximum width for the table */
+    margin: 0 auto;
 }
 
 /*#movie_table th {*/
@@ -50,11 +52,19 @@ a:hover {
     color: lightgrey; /* white text color for table body rows */
 }
 footer{
-    padding-top: 1vw;
-    padding-bottom: 0.5vw;
-    padding-left: 0.5vw;
+    padding-top: 1.2vw;
+    padding-bottom: 1.2vw;
+    padding-left: 0.8vw;
     background-color: black;
     color: #bb86fc; /* white text color for the table */
     font-family: "DM Sans", sans-serif;
     font-style: normal;
+    font-size: 1.3vw;
+}
+header, h2, #movie_table, footer {
+    margin-top: 0; /* Remove default margin */
+    margin-bottom: 0; /* Remove default margin */
+}
+body{
+    background-color: black;
 }
