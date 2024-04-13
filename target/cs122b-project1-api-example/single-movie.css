@@ -3,6 +3,27 @@ html{
     height: 100%;
     background-color: black;
 }
+
+.custom-navbar {
+    background-color: #bb86fc;
+    color: black;
+    width: 100%;
+    margin: 0;
+    padding-top: 0vw;
+    padding-bottom: 0vw;
+}
+.custom-navbar .navbar-brand,
+.custom-navbar .navbar-nav .nav-link {
+    color: black; /* Set the text color to black */
+    width: 100%;
+    padding-left: 0.2vw;
+    margin: 0;
+}
+
+body{
+    margin-top: 6vw;
+}
+
 h2{
     background-color: black;
     padding-top: 1.5vw;

@@ -4,6 +4,23 @@ html{
     height: 100%;
     background-color: black;
 }
+
+.custom-navbar {
+    background-color: #bb86fc;
+    color: black;
+    width: 100%;
+    margin: 0;
+    padding-top: 0vw;
+    padding-bottom: 0vw;
+}
+.custom-navbar .navbar-brand,
+.custom-navbar .navbar-nav .nav-link {
+    color: black; /* Set the text color to black */
+    width: 100%;
+    padding-left: 0.2vw;
+    margin: 0;
+}
+
 header{
     padding: 0.6vw;
     font-size: 5vw;
@@ -16,14 +33,16 @@ header{
 }
 h2{
     background-color: black;
-    text-align: left;
-   color: lightgrey;
-    font-size: 2.4vw;
+    text-align: center;
+    color:  #bb86fc;
+    font-size: 3vw;
     padding-left: 2.6vw;
     padding-bottom: 1.3vw;
     font-family: "DM Sans", sans-serif;
     font-weight: 400;
     font-style: normal;
+    margin-top: 6vw;
+    margin-bottom: 1.2vw;
 }
 a {
     color: lightgrey;  /* blue color */
@@ -61,7 +80,7 @@ footer{
     font-style: normal;
     font-size: 1.3vw;
 }
-header, h2, #movie_table, footer {
+header, #movie_table, footer {
     margin-top: 0; /* Remove default margin */
     margin-bottom: 0; /* Remove default margin */
 }
