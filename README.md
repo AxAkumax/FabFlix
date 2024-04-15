@@ -1,7 +1,7 @@
 Team: Suika-Lords
 Members: Akshita Akumalla, Niharika Kumar
 
-Demo URL:
+Demo URL: https://drive.google.com/file/d/1ybeHYVwyHdH1Pnel0FcHPy50phsNGeA3/view?usp=sharing
 
 Contributions:
 
@@ -17,5 +17,6 @@ Contributions:
 		- linked single movie and single star pages
 		- attached movie links in star page
 		- worked on the query to get top 20 movies
-		- worked on decorating the website with margins using CSS and bootstrap
+		- worked on decorating the website with margins using CSS and bootstrap (and the color schemes)
 		- showed stars DOB as N/A instead of null
+    		- uploaded database files 
