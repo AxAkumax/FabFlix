@@ -13,7 +13,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<!--     Bootstrap CSS -->
+    <!--     Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
@@ -41,25 +41,31 @@
 
 <h2>Top 20 Movies</h2>
 
-<!-- Id "star_table" is useful for jQuery to find the html element with id, class here is mapping to Bootstrap defined class CSS -->
-<table id=movie_table class="table table-hover table-dark">
-    <!-- Create a table header -->
-    <thead>
-    <tr>
-        <!-- Titles of each column-->
-        <th>#</th>
-        <th>Title</th>
-        <th>Year</th>
-        <th>Director</th>
-        <th>Stars</th>
-        <th>Genres</th>
-        <th>Rating</th>
-    </tr>
-    </thead>
-    <!-- Table body is left empty here, will be populated with the data retrieved with index.js -->
-    <!-- Again, id "star_table_body" is useful for jQuery to find this html element -->
-    <tbody id=movie_table_body></tbody>
-</table>
+
+<div class="container">
+    <div class="row" id="movie_cards">
+        <!-- Id "star_table" is useful for jQuery to find the html element with id, class here is mapping to Bootstrap defined class CSS -->
+        <table id=movie_table class="table table-hover table-dark">
+            <!-- Create a table header -->
+            <thead>
+            <tr>
+                <!-- Titles of each column-->
+                <th>#</th>
+                <th>Title</th>
+                <th>Year</th>
+                <th>Director</th>
+                <th>Stars</th>
+                <th>Genres</th>
+                <th>Rating</th>
+            </tr>
+            </thead>
+            <!-- Table body is left empty here, will be populated with the data retrieved with index.js -->
+            <!-- Again, id "star_table_body" is useful for jQuery to find this html element -->
+            <tbody id=movie_table_body></tbody>
+        </table>
+    </div>
+</div>
+
 
 <!-- Load jQuery and Bootstrap JS -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

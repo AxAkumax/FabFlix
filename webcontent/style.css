@@ -59,7 +59,7 @@ a:hover {
     color: lightgrey; /* white text color for the table */
     font-family: "DM Sans", sans-serif;
     font-style: normal;
-    max-width: 96vw; /* Set a maximum width for the table */
+    max-width: 97vw; /* Set a maximum width for the table */
     margin: 0 auto;
 }
 
@@ -69,7 +69,15 @@ a:hover {
 
 #movie_table tbody tr {
     color: lightgrey; /* white text color for table body rows */
+    transition: all 0.3s ease; /* Add transition for smooth animation */
 }
+
+
+#movie_table tbody tr:hover {
+    background-color: #333; /* Darken background color when hovered */
+    transform: scale(1.1); /* Increase size of row when hovered */
+}
+
 footer{
     padding-top: 1.2vw;
     padding-bottom: 1.2vw;

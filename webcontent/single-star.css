@@ -43,7 +43,7 @@ p{
     font-weight: 500;
     font-style: normal;
     font-size: 2vw;
-    padding-left: 6.9vw;
+    padding-left: 13.8vw;
     color: lightgrey;
     margin-bottom: 1vw;
 }
@@ -61,17 +61,33 @@ a:hover {
     color: lightgrey; /* white text color for the table */
     font-family: "DM Sans", sans-serif;
     font-style: normal;
-    max-width: 87vw; /* Set a maximum width for the table */
-    margin: 0 auto;
+    max-width: 75vw; /* Set a maximum width for the table */
+    margin: 0 auto; /* Center the table horizontally */
 }
 
-/*#movie_table th {*/
-/*    color: lightgrey; !* white text color for table headers *!*/
-/*}*/
 
 #movie_table tbody tr {
     color: lightgrey; /* white text color for table body rows */
+    transition: all 0.3s ease; /* Add transition for smooth animation */
 }
+
+#movie_table tbody tr:hover {
+    background-color: #333; /* Darken background color when hovered */
+    transform: scale(1.1); /* Increase size of row when hovered */
+}
+
+/* Adjusting column widths */
+#movie_table th:nth-child(3), /* Select the third column (Director) */
+#movie_table td:nth-child(3) { /* Select the third column (Director) */
+    width: 20%; /* Set the width of the Director column */
+}
+
+/* Add padding to the content within the Movie Title column */
+#movie_table th:first-child,
+#movie_table td:first-child { /* Select the first column (Movie Title) */
+    padding-left: 4vw;
+}
+
 footer{
     position: absolute;
     bottom: 0;
