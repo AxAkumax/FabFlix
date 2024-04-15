@@ -47,7 +47,7 @@ function handleResult(resultData) {
     // append two html <p> created to the h3 body, which will refresh the page
 
     let content = "";
-    content+="<h2>Star Name: " + "<span style='color: #bb86fc;'>" + resultData[0]["star_name"] + "</span></h2>";
+    content+="<h2>" + "<span style='color: #bb86fc;'>" + resultData[0]["star_name"] + "</span></h2>";
     let dob = "";
     if (resultData[0]["star_dob"]==null){
         dob = "N/A";
