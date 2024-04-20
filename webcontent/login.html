@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="login.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+    <title>Login</title>
+
+</head>
+<body>
+<h1>Fabflix <span style="font-size: 6.6vw;">&#10025; </span> </h1>
+<p id = "caption"> Your Ticket To An Unrivaled Streaming Experience </p>
+<p> Start browsing</p>
+
+<!--    <form action="./index.html" method="post">-->
+<!--        <label for="email">Email:</label><br>-->
+<!--        <input type="text" id="email" name="email" required><br>-->
+<!--        <label for="password">Password:</label><br>-->
+<!--        <input type="password" id="password" name="password" required><br><br>-->
+<!--        <input type="submit" value="Login">-->
+<!--    </form>-->
+<div class = "form-container">
+    <form action="api/login" method="POST">
+        <div class="input-container">
+            <label for="email">&nbsp;&nbsp;&nbsp;&nbsp;Email:</label>
+            <input type="text" id="email" name="email" required>
+        </div>
+        <div class="input-container">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <div class="submit-container">
+        <input type="submit" value="Login">
+        </div>
+    </form>
+</div>
+<script src="login.js"></script>
+
+</body>
+</html>
