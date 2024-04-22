@@ -5,21 +5,30 @@ html{
     background-color: black;
 }
 
+body{
+    background-color: black;
+}
+
 .custom-navbar {
     background-color: #bb86fc;
     color: black;
-    width: 100%;
-    margin: 0;
-    padding-top: 0vw;
-    padding-bottom: 0vw;
+    /*width: 100%;*/
+    /*margin: 0;*/
+    /*padding-top: 0vw;*/
+    /*padding-bottom: 0vw;*/
 }
-.custom-navbar .navbar-brand,
-.custom-navbar .navbar-nav .nav-link {
-    color: black; /* Set the text color to black */
-    width: 100%;
-    padding-left: 0.2vw;
-    margin: 0;
+
+.navbar a {
+    color: black;
 }
+
+/*.custom-navbar .navbar-brand,*/
+/*.custom-navbar .navbar-nav .nav-link {*/
+/*    color: black; !* Set the text color to black *!*/
+/*    !*width: 100%;*!*/
+/*    !*padding-left: 0.2vw;*!*/
+/*    !*margin: 0;*!*/
+/*}*/
 
 header{
     padding: 0.6vw;
@@ -31,6 +40,7 @@ header{
     font-weight: 500;
     font-style: normal;
 }
+
 h2{
     background-color: black;
     text-align: center;
@@ -92,6 +102,7 @@ header, #movie_table, footer {
     margin-top: 0; /* Remove default margin */
     margin-bottom: 0; /* Remove default margin */
 }
-body{
-    background-color: black;
-}
+
+
+
+
