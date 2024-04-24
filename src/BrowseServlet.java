@@ -40,6 +40,7 @@ public class BrowseServlet extends HttpServlet {
         try (Connection conn = dataSource.getConnection()) {
 
             String genreIdParameter = request.getParameter("genreId");
+            String titleStartParameter = request.getParameter("titleStart");
 
             if (genreIdParameter != null) {
                 System.out.println("line 45 " + genreIdParameter);
@@ -53,6 +54,41 @@ public class BrowseServlet extends HttpServlet {
 
                 PreparedStatement statement = conn.prepareStatement(query);
                 statement.setInt(1, genreId);
+                ResultSet rs = statement.executeQuery();
+                JsonArray jsonArray = new JsonArray();
+                System.out.println(rs);
+                while (rs.next()) {
+                    String title = rs.getString("title");
+                    System.out.println(title);
+                    JsonObject jsonObject = new JsonObject();
+                    jsonObject.addProperty("title", title);
+                    jsonArray.add(jsonObject);
+                }
+
+                rs.close();
+                statement.close();
+
+                // Write JSON string to output
+                out.write(jsonArray.toString());
+                // Set response status to 200 (OK)
+                response.setStatus(200);
+            }
+            else if (titleStartParameter != null) {
+                System.out.println("line 77 " + titleStartParameter);
+                String query;
+                PreparedStatement statement;
+                if (titleStartParameter.equals("*")) {
+                    System.out.println("line 88 " + titleStartParameter);
+                    query = "SELECT title FROM movies WHERE title REGEXP '^[^a-zA-Z0-9]'";
+                    statement = conn.prepareStatement(query);
+                }
+                else {
+                    // Execute SQL query to get movies for the given genreId
+                    query = "SELECT title FROM movies WHERE LOWER(title) LIKE LOWER(?)";
+                    statement = conn.prepareStatement(query);
+                    statement.setString(1, titleStartParameter + "%");
+                }
+
                 ResultSet rs = statement.executeQuery();
                 JsonArray jsonArray = new JsonArray();
                 System.out.println(rs);
