@@ -43,25 +43,57 @@ public class BrowseServlet extends HttpServlet {
             String titleStartParameter = request.getParameter("titleStart");
 
             if (genreIdParameter != null) {
-                System.out.println("line 45 " + genreIdParameter);
+                System.out.println("line 46 " + genreIdParameter);
                 int genreId = Integer.parseInt(genreIdParameter);
                 // Execute SQL query to get movies for the given genreId
-                String query = "SELECT movies.title " +
-                                "FROM genres_in_movies " +
-                                "JOIN movies ON genres_in_movies.movieId = movies.id " +
-                                "JOIN genres ON genres_in_movies.genreId = genres.id " +
-                                "WHERE genres_in_movies.genreId = ?";
+                String query = "SELECT " +
+                        "m.id AS movie_id, " +
+                        "m.title AS movie_title, " +
+                        "m.year AS movie_year, " +
+                        "m.director AS movie_director, " +
+                        "(SELECT GROUP_CONCAT(DISTINCT CONCAT(s.id, ';', s.name) SEPARATOR ';') " +
+                        "FROM stars_in_movies sm JOIN stars s ON sm.starId = s.id " +
+                        "WHERE sm.movieId = m.id) AS star_ids_and_names, " +
+                        "(SELECT GROUP_CONCAT(DISTINCT g.name) " +
+                        "FROM genres_in_movies gm JOIN genres g ON gm.genreId = g.id " +
+                        "WHERE gm.movieId = m.id) AS movie_genres, " +
+                        "AVG(r.rating) AS average_rating " +
+                        "FROM movies m " +
+                        "LEFT JOIN ratings r ON m.id = r.movieId " +
+                        "JOIN genres_in_movies gm ON gm.movieId = m.id " +
+                        "WHERE gm.genreId = ? " +
+                        "GROUP BY m.id, m.title, m.year, m.director " +
+                        "ORDER BY average_rating DESC;";
 
+
+                System.out.println("line 67");
                 PreparedStatement statement = conn.prepareStatement(query);
                 statement.setInt(1, genreId);
+                System.out.println("line 70");
                 ResultSet rs = statement.executeQuery();
+                System.out.println("line 72");
                 JsonArray jsonArray = new JsonArray();
                 System.out.println(rs);
                 while (rs.next()) {
-                    String title = rs.getString("title");
-                    System.out.println(title);
+                    String movieId = rs.getString("movie_id");
+                    String movieTitle = rs.getString("movie_title");
+                    String movieYear = rs.getString("movie_year");
+                    String movieDirector = rs.getString("movie_director");
+                    String starIdsAndNames = rs.getString("star_ids_and_names");
+                    String movieGenres = rs.getString("movie_genres");
+                    double averageRating = Math.round(rs.getDouble("average_rating") * 10.0) / 10.0;
+
                     JsonObject jsonObject = new JsonObject();
-                    jsonObject.addProperty("title", title);
+                    jsonObject.addProperty("movie_id", movieId);
+                    jsonObject.addProperty("movie_title", movieTitle);
+                    jsonObject.addProperty("movie_year", movieYear);
+                    jsonObject.addProperty("movie_director", movieDirector);
+                    jsonObject.addProperty("star_ids_and_names", starIdsAndNames);
+                    jsonObject.addProperty("movie_genres", movieGenres);
+//                    jsonObject.addProperty("movie_stars", movieStars);
+//                    jsonObject.addProperty("movie_starIds", movieStarIds);
+                    jsonObject.addProperty("average_rating", averageRating);
+
                     jsonArray.add(jsonObject);
                 }
 
@@ -79,12 +111,49 @@ public class BrowseServlet extends HttpServlet {
                 PreparedStatement statement;
                 if (titleStartParameter.equals("*")) {
                     System.out.println("line 88 " + titleStartParameter);
-                    query = "SELECT title FROM movies WHERE title REGEXP '^[^a-zA-Z0-9]'";
+                    // query = "SELECT title FROM movies WHERE title REGEXP '^[^a-zA-Z0-9]'";
+                    query = "SELECT " +
+                            "m.id AS movie_id, " +
+                            "m.title AS movie_title, " +
+                            "m.year AS movie_year, " +
+                            "m.director AS movie_director, " +
+                            "(SELECT GROUP_CONCAT(DISTINCT CONCAT(s.id, ';', s.name) SEPARATOR ';') " +
+                            "FROM stars_in_movies sm JOIN stars s ON sm.starId = s.id " +
+                            "WHERE sm.movieId = m.id) AS star_ids_and_names, " +
+                            "(SELECT GROUP_CONCAT(DISTINCT g.name) " +
+                            "FROM genres_in_movies gm JOIN genres g ON gm.genreId = g.id " +
+                            "WHERE gm.movieId = m.id) AS movie_genres, " +
+                            "AVG(r.rating) AS average_rating " +
+                            "FROM movies m " +
+                            "LEFT JOIN ratings r ON m.id = r.movieId " +
+                            "JOIN genres_in_movies gm ON gm.movieId = m.id " +
+                            "WHERE m.title REGEXP '^[^a-zA-Z0-9]' " +
+                            "GROUP BY m.id, m.title, m.year, m.director " +
+                            "ORDER BY average_rating DESC;";
                     statement = conn.prepareStatement(query);
                 }
                 else {
                     // Execute SQL query to get movies for the given genreId
-                    query = "SELECT title FROM movies WHERE LOWER(title) LIKE LOWER(?)";
+                    // query = "SELECT title FROM movies WHERE LOWER(title) LIKE LOWER(?)";
+
+                    query = "SELECT " +
+                            "m.id AS movie_id, " +
+                            "m.title AS movie_title, " +
+                            "m.year AS movie_year, " +
+                            "m.director AS movie_director, " +
+                            "(SELECT GROUP_CONCAT(DISTINCT CONCAT(s.id, ';', s.name) SEPARATOR ';') " +
+                            "FROM stars_in_movies sm JOIN stars s ON sm.starId = s.id " +
+                            "WHERE sm.movieId = m.id) AS star_ids_and_names, " +
+                            "(SELECT GROUP_CONCAT(DISTINCT g.name) " +
+                            "FROM genres_in_movies gm JOIN genres g ON gm.genreId = g.id " +
+                            "WHERE gm.movieId = m.id) AS movie_genres, " +
+                            "AVG(r.rating) AS average_rating " +
+                            "FROM movies m " +
+                            "LEFT JOIN ratings r ON m.id = r.movieId " +
+                            "JOIN genres_in_movies gm ON gm.movieId = m.id " +
+                            "WHERE LOWER(m.title) LIKE LOWER(?) " +
+                            "GROUP BY m.id, m.title, m.year, m.director " +
+                            "ORDER BY average_rating DESC;";
                     statement = conn.prepareStatement(query);
                     statement.setString(1, titleStartParameter + "%");
                 }
@@ -93,10 +162,25 @@ public class BrowseServlet extends HttpServlet {
                 JsonArray jsonArray = new JsonArray();
                 System.out.println(rs);
                 while (rs.next()) {
-                    String title = rs.getString("title");
-                    System.out.println(title);
+                    String movieId = rs.getString("movie_id");
+                    String movieTitle = rs.getString("movie_title");
+                    String movieYear = rs.getString("movie_year");
+                    String movieDirector = rs.getString("movie_director");
+                    String starIdsAndNames = rs.getString("star_ids_and_names");
+                    String movieGenres = rs.getString("movie_genres");
+                    double averageRating = Math.round(rs.getDouble("average_rating") * 10.0) / 10.0;
+
                     JsonObject jsonObject = new JsonObject();
-                    jsonObject.addProperty("title", title);
+                    jsonObject.addProperty("movie_id", movieId);
+                    jsonObject.addProperty("movie_title", movieTitle);
+                    jsonObject.addProperty("movie_year", movieYear);
+                    jsonObject.addProperty("movie_director", movieDirector);
+                    jsonObject.addProperty("movie_genres", movieGenres);
+                    jsonObject.addProperty("star_ids_and_names", starIdsAndNames);
+//                    jsonObject.addProperty("movie_stars", movieStars);
+//                    jsonObject.addProperty("movie_starIds", movieStarIds);
+                    jsonObject.addProperty("average_rating", averageRating);
+
                     jsonArray.add(jsonObject);
                 }
 

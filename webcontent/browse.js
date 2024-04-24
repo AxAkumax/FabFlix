@@ -21,7 +21,13 @@ function handleGenreClick(event) {
             for (let i = 0; i < resultData.length; i++) {
                 let rowHTML = ""
                 rowHTML += "<tr>";
-                rowHTML +="<th>" + resultData[i]['title'] + "</th>";
+                rowHTML += "<th>" + (i+1) + "</th>";
+                rowHTML += "<th>" + resultData[i]["movie_title"] + "</th>";
+                rowHTML += "<th>" + resultData[i]["movie_year"] + "</th>";
+                rowHTML += "<th>" + resultData[i]["movie_director"] + "</th>";
+                rowHTML += "<th>" + resultData[i]["star_ids_and_names"] + "</th>";
+                rowHTML += "<th>" + resultData[i]["movie_genres"] + "</th>";
+                rowHTML += "<th>" + resultData[i]["average_rating"] + "</th>";
                 rowHTML += "</tr>";
                 browsingBodyElement.append(rowHTML)
             }
@@ -60,7 +66,13 @@ function handleAlphabetClick(event)
             for (let i = 0; i < resultData.length; i++) {
                 let rowHTML = ""
                 rowHTML += "<tr>";
-                rowHTML +="<th>" + resultData[i]['title'] + "</th>";
+                rowHTML += "<th>" + (i+1) + "</th>";
+                rowHTML += "<th>" + resultData[i]["movie_title"] + "</th>";
+                rowHTML += "<th>" + resultData[i]["movie_year"] + "</th>";
+                rowHTML += "<th>" + resultData[i]["movie_director"] + "</th>";
+                rowHTML += "<th>" + resultData[i]["star_ids_and_names"] + "</th>";
+                rowHTML += "<th>" + resultData[i]["movie_genres"] + "</th>";
+                rowHTML += "<th>" + resultData[i]["average_rating"] + "</th>";
                 rowHTML += "</tr>";
                 browsingBodyElement.append(rowHTML)
             }
