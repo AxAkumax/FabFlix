@@ -18,6 +18,20 @@ body{
     /*padding-bottom: 0vw;*/
 }
 
+.table-borderless {
+    border: none; /* Remove borders */
+}
+
+a {
+    color: lightgrey;
+    text-align: center;
+}
+
+/* Color for links when hovered */
+a:hover {
+    color: #bb86fc; /* orange color */
+}
+
 .navbar a {
     color: black;
 }
@@ -25,6 +39,7 @@ body{
 .section-title {
     color: lightgrey;
 }
+
 
 footer{
     padding-top: 1.2vw;
