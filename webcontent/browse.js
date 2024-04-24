@@ -13,16 +13,19 @@ function handleGenreClick(event) {
             // Handle successful response
             console.log("Genre movies:", resultData);
 
-            // Clear previous results
-            jQuery("#browsing_results").empty();
+            let browsingBodyElement = jQuery("#browsing_table_body");
 
-            // Display genre movies below browsing section
-            let resultsHtml = "<h5>Genre Movies</h5><ul>";
+            // Clear previous results
+            browsingBodyElement.empty();
+
             for (let i = 0; i < resultData.length; i++) {
-                resultsHtml += "<li>" + resultData[i].title + "</li>";
+                let rowHTML = ""
+                rowHTML += "<tr>";
+                rowHTML +="<th>" + resultData[i]['title'] + "</th>";
+                rowHTML += "</tr>";
+                browsingBodyElement.append(rowHTML)
             }
-            resultsHtml += "</ul>";
-            jQuery("#browsing_results").html(resultsHtml);
+
         },
         error: function(xhr, status, error) {
             // Handle error
@@ -48,15 +51,20 @@ function handleAlphabetClick(event)
             console.log("Alphabet movies:", resultData);
 
             // Clear previous results
-            jQuery("#browsing_results").empty();
+            let browsingBodyElement = jQuery("#browsing_table_body");
 
-            // Display genre movies below browsing section
-            let resultsHtml = "<h5>Title Movies</h5><ul>";
+            // Clear previous results
+            browsingBodyElement.empty();
+
+
             for (let i = 0; i < resultData.length; i++) {
-                resultsHtml += "<li>" + resultData[i].title + "</li>";
+                let rowHTML = ""
+                rowHTML += "<tr>";
+                rowHTML +="<th>" + resultData[i]['title'] + "</th>";
+                rowHTML += "</tr>";
+                browsingBodyElement.append(rowHTML)
             }
-            resultsHtml += "</ul>";
-            jQuery("#browsing_results").html(resultsHtml);
+
         },
         error: function (xhr, status, error) {
             // Handle error

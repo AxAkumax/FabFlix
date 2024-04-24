@@ -46,7 +46,7 @@ public class BrowseServlet extends HttpServlet {
                 System.out.println("line 45 " + genreIdParameter);
                 int genreId = Integer.parseInt(genreIdParameter);
                 // Execute SQL query to get movies for the given genreId
-                String query = "SELECT genres.id, movies.title " +
+                String query = "SELECT movies.title " +
                                 "FROM genres_in_movies " +
                                 "JOIN movies ON genres_in_movies.movieId = movies.id " +
                                 "JOIN genres ON genres_in_movies.genreId = genres.id " +
