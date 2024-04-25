@@ -75,11 +75,28 @@ public class BrowseServlet extends HttpServlet {
                 JsonArray jsonArray = new JsonArray();
                 System.out.println(rs);
                 while (rs.next()) {
+                    String stars_and_ids = rs.getString("star_ids_and_names");
+                    String[] parts = stars_and_ids.split(";");
+
+                    String movieStars = "";
+                    String movieStarIds = "";
+
+                    for (int i = 0; i < parts.length; i += 2) {
+                        String id = parts[i] + ", ";
+                        String name = parts[i+1] + ", ";
+
+                        movieStarIds += id;
+                        movieStars += name;
+                    }
+
+                    movieStars = movieStars.substring(0, movieStars.length() - 2);
+                    movieStarIds = movieStarIds.substring(0, movieStarIds.length() - 2);
+
+
                     String movieId = rs.getString("movie_id");
                     String movieTitle = rs.getString("movie_title");
                     String movieYear = rs.getString("movie_year");
                     String movieDirector = rs.getString("movie_director");
-                    String starIdsAndNames = rs.getString("star_ids_and_names");
                     String movieGenres = rs.getString("movie_genres");
                     double averageRating = Math.round(rs.getDouble("average_rating") * 10.0) / 10.0;
 
@@ -88,10 +105,9 @@ public class BrowseServlet extends HttpServlet {
                     jsonObject.addProperty("movie_title", movieTitle);
                     jsonObject.addProperty("movie_year", movieYear);
                     jsonObject.addProperty("movie_director", movieDirector);
-                    jsonObject.addProperty("star_ids_and_names", starIdsAndNames);
+                    jsonObject.addProperty("movie_stars", movieStars);
+                    jsonObject.addProperty("movie_starIds", movieStarIds);
                     jsonObject.addProperty("movie_genres", movieGenres);
-//                    jsonObject.addProperty("movie_stars", movieStars);
-//                    jsonObject.addProperty("movie_starIds", movieStarIds);
                     jsonObject.addProperty("average_rating", averageRating);
 
                     jsonArray.add(jsonObject);
@@ -111,7 +127,7 @@ public class BrowseServlet extends HttpServlet {
                 PreparedStatement statement;
                 if (titleStartParameter.equals("*")) {
                     System.out.println("line 88 " + titleStartParameter);
-                    // query = "SELECT title FROM movies WHERE title REGEXP '^[^a-zA-Z0-9]'";
+
                     query = "SELECT " +
                             "m.id AS movie_id, " +
                             "m.title AS movie_title, " +
@@ -162,11 +178,27 @@ public class BrowseServlet extends HttpServlet {
                 JsonArray jsonArray = new JsonArray();
                 System.out.println(rs);
                 while (rs.next()) {
+                    String stars_and_ids = rs.getString("star_ids_and_names");
+                    String[] parts = stars_and_ids.split(";");
+
+                    String movieStars = "";
+                    String movieStarIds = "";
+
+                    for (int i = 0; i < parts.length; i += 2) {
+                        String id = parts[i] + ", ";
+                        String name = parts[i+1] + ", ";
+
+                        movieStarIds += id;
+                        movieStars += name;
+                    }
+
+                    movieStars = movieStars.substring(0, movieStars.length() - 2);
+                    movieStarIds = movieStarIds.substring(0, movieStarIds.length() - 2);
+
                     String movieId = rs.getString("movie_id");
                     String movieTitle = rs.getString("movie_title");
                     String movieYear = rs.getString("movie_year");
                     String movieDirector = rs.getString("movie_director");
-                    String starIdsAndNames = rs.getString("star_ids_and_names");
                     String movieGenres = rs.getString("movie_genres");
                     double averageRating = Math.round(rs.getDouble("average_rating") * 10.0) / 10.0;
 
@@ -176,9 +208,8 @@ public class BrowseServlet extends HttpServlet {
                     jsonObject.addProperty("movie_year", movieYear);
                     jsonObject.addProperty("movie_director", movieDirector);
                     jsonObject.addProperty("movie_genres", movieGenres);
-                    jsonObject.addProperty("star_ids_and_names", starIdsAndNames);
-//                    jsonObject.addProperty("movie_stars", movieStars);
-//                    jsonObject.addProperty("movie_starIds", movieStarIds);
+                    jsonObject.addProperty("movie_stars", movieStars);
+                    jsonObject.addProperty("movie_starIds", movieStarIds);
                     jsonObject.addProperty("average_rating", averageRating);
 
                     jsonArray.add(jsonObject);

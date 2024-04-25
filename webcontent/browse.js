@@ -22,10 +22,42 @@ function handleGenreClick(event) {
                 let rowHTML = ""
                 rowHTML += "<tr>";
                 rowHTML += "<th>" + (i+1) + "</th>";
-                rowHTML += "<th>" + resultData[i]["movie_title"] + "</th>";
+
+                rowHTML +=
+                    "<th>" +
+                    // Add a link to single-star.html with id passed with GET url parameter
+                    '<a href="single-movie.html?id=' + resultData[i]['movie_id'] + '">'
+                    + resultData[i]["movie_title"] +     // display star_name for the link text
+                    '</a>' +
+                    "</th>";
+
+
                 rowHTML += "<th>" + resultData[i]["movie_year"] + "</th>";
                 rowHTML += "<th>" + resultData[i]["movie_director"] + "</th>";
-                rowHTML += "<th>" + resultData[i]["star_ids_and_names"] + "</th>";
+
+
+                let star_ids = resultData[i]['movie_starIds'].split(', ');
+                let star_names = resultData[i]['movie_stars'].split(', ');
+
+                let star_entries = "";
+
+                let length  = Math.min(3, star_ids.length);
+                for (let j = 0; j < length; j++) {
+
+                    // Concatenate the html tags with resultData jsonObject
+                    star_entries +=
+                        // Add a link to single-star.html with id passed with GET url parameter
+                        '<a href="single-star.html?id=' + star_ids[j] + '">'
+                        + star_names[j] +     // display star_name for the link text
+                        '</a>';
+                    if (j< length-1){
+                        star_entries+=", ";
+                    }
+                }
+
+                rowHTML += "<th>" + star_entries + "</th>";
+
+
                 rowHTML += "<th>" + resultData[i]["movie_genres"] + "</th>";
                 rowHTML += "<th>" + resultData[i]["average_rating"] + "</th>";
                 rowHTML += "</tr>";
@@ -67,10 +99,39 @@ function handleAlphabetClick(event)
                 let rowHTML = ""
                 rowHTML += "<tr>";
                 rowHTML += "<th>" + (i+1) + "</th>";
-                rowHTML += "<th>" + resultData[i]["movie_title"] + "</th>";
+
+                rowHTML +=
+                    "<th>" +
+                    // Add a link to single-star.html with id passed with GET url parameter
+                    '<a href="single-movie.html?id=' + resultData[i]['movie_id'] + '">'
+                    + resultData[i]["movie_title"] +     // display star_name for the link text
+                    '</a>' +
+                    "</th>";
+
                 rowHTML += "<th>" + resultData[i]["movie_year"] + "</th>";
                 rowHTML += "<th>" + resultData[i]["movie_director"] + "</th>";
-                rowHTML += "<th>" + resultData[i]["star_ids_and_names"] + "</th>";
+
+                let star_ids = resultData[i]['movie_starIds'].split(', ');
+                let star_names = resultData[i]['movie_stars'].split(', ');
+
+                let star_entries = "";
+
+                let length  = Math.min(3, star_ids.length);
+                for (let j = 0; j < length; j++) {
+
+                    // Concatenate the html tags with resultData jsonObject
+                    star_entries +=
+                        // Add a link to single-star.html with id passed with GET url parameter
+                        '<a href="single-star.html?id=' + star_ids[j] + '">'
+                        + star_names[j] +     // display star_name for the link text
+                        '</a>';
+                    if (j< length-1){
+                        star_entries+=", ";
+                    }
+                }
+
+                rowHTML += "<th>" + star_entries + "</th>";
+
                 rowHTML += "<th>" + resultData[i]["movie_genres"] + "</th>";
                 rowHTML += "<th>" + resultData[i]["average_rating"] + "</th>";
                 rowHTML += "</tr>";
@@ -96,7 +157,7 @@ function handleBrowseResult(resultData) {
     // Iterate through the resultData array
     for (let i = 0; i < resultData.length; i++) {
         // Add a new row for every third genre or at the beginning of the loop
-        if (i % 3 === 0) {
+        if (i % 5 === 0) {
             // Close the previous row if it exists
             if (i !== 0) {
                 row += "</tr>";
@@ -131,7 +192,7 @@ function handleBrowseResult(resultData) {
     // Iterate through the resultData array
     for (let i = 0; i < resultData2.length; i++) {
         // Add a new row for every third genre or at the beginning of the loop
-        if (i % 3 === 0) {
+        if (i % 8 === 0) {
             // Close the previous row if it exists
             if (i !== 0) {
                 row2 += "</tr>";

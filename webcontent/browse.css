@@ -11,15 +11,46 @@ body{
 
 .custom-navbar {
     background-color: #bb86fc;
-    color: black;
-    /*width: 100%;*/
-    /*margin: 0;*/
-    /*padding-top: 0vw;*/
-    /*padding-bottom: 0vw;*/
 }
 
-.table-borderless {
-    border: none; /* Remove borders */
+#browsing_table {
+    background-color: black; /* black background color for the table */
+    color: lightgrey; /* white text color for the table */
+    font-family: "DM Sans", sans-serif;
+    font-style: normal;
+    max-width: 97vw; /* Set a maximum width for the table */
+    margin: 0 auto;
+}
+
+#browsing_table tbody tr {
+    color: lightgrey; /* white text color for table body rows */
+    transition: all 0.3s ease; /* Add transition for smooth animation */
+}
+
+#browsing_table tbody tr:hover {
+    background-color: #333; /* Darken background color when hovered */
+    transform: scale(1.1); /* Increase size of row when hovered */
+}
+
+#genre_table, #genre_table_body,
+#genre_table_body td, #genre_table_body tr{
+    border-style: hidden;
+    text-align: center;
+}
+
+#alphabet_table, #alphabet_table_body {
+    border-style: hidden;
+    text-align: center;
+}
+
+#alphabet_table_body td, #alphabet_table_body tr {
+    border-style: hidden;
+    text-align: center;
+    width: 10vw;
+}
+
+.container mt-5 {
+    margin-bottom: 5vw;
 }
 
 a {
@@ -32,12 +63,10 @@ a:hover {
     color: #bb86fc; /* orange color */
 }
 
-.navbar a {
-    color: black;
-}
-
 .section-title {
     color: lightgrey;
+    text-align: center;
+    margin-top: 4dvw;
 }
 
 

@@ -11,16 +11,17 @@ body{
 
 .custom-navbar {
     background-color: #bb86fc;
-    color: black;
-    /*width: 100%;*/
-    /*margin: 0;*/
-    /*padding-top: 0vw;*/
-    /*padding-bottom: 0vw;*/
+}
+
+.custom-navbar a {
+    color: blue;
 }
 
 .navbar a {
     color: black;
 }
+
+
 
 /*.custom-navbar .navbar-brand,*/
 /*.custom-navbar .navbar-nav .nav-link {*/
