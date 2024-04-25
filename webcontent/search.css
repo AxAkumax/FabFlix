@@ -24,6 +24,7 @@ html{
     margin-top: 3vw;
     margin-left: 1.5vw;
     margin-right: 1.5vw;
+    max-width: 90 vw%;
 }
 
 footer{
@@ -68,8 +69,10 @@ h2, p{
     color: lightgrey; /* white text color for the table */
     font-family: "DM Sans", sans-serif;
     font-style: normal;
-    max-width: 97vw; /* Set a maximum width for the table */
-    margin: 0 auto;
+    max-width: 80vw; /* Set a maximum width for the table */
+    margin-top: 3vw;
+    margin-left: 2vw;
+    margin-right: 2vw;
 }
 
 /*#movie_table th {*/
