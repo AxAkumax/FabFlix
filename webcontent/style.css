@@ -13,15 +13,13 @@ body{
     background-color: #bb86fc;
 }
 
-.custom-navbar a {
-    color: blue;
+.navbar a {
+    color: white;
 }
 
-.navbar a {
+.navbar a:hover {
     color: black;
 }
-
-
 
 /*.custom-navbar .navbar-brand,*/
 /*.custom-navbar .navbar-nav .nav-link {*/

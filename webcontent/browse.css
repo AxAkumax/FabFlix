@@ -13,6 +13,14 @@ body{
     background-color: #bb86fc;
 }
 
+.navbar a {
+    color: white;
+}
+
+.navbar a:hover {
+    color: black;
+}
+
 #browsing_table {
     background-color: black; /* black background color for the table */
     color: lightgrey; /* white text color for the table */

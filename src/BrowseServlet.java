@@ -56,7 +56,8 @@ public class BrowseServlet extends HttpServlet {
                         "WHERE sm.movieId = m.id) AS star_ids_and_names, " +
                         "(SELECT GROUP_CONCAT(DISTINCT g.name) " +
                         "FROM genres_in_movies gm JOIN genres g ON gm.genreId = g.id " +
-                        "WHERE gm.movieId = m.id) AS movie_genres, " +
+                        "WHERE gm.movieId = m.id " +
+                        "ORDER BY g.name ASC) AS movie_genres, " +
                         "AVG(r.rating) AS average_rating " +
                         "FROM movies m " +
                         "LEFT JOIN ratings r ON m.id = r.movieId " +
@@ -66,14 +67,11 @@ public class BrowseServlet extends HttpServlet {
                         "ORDER BY average_rating DESC;";
 
 
-                System.out.println("line 67");
                 PreparedStatement statement = conn.prepareStatement(query);
                 statement.setInt(1, genreId);
-                System.out.println("line 70");
                 ResultSet rs = statement.executeQuery();
-                System.out.println("line 72");
                 JsonArray jsonArray = new JsonArray();
-                System.out.println(rs);
+
                 while (rs.next()) {
                     String stars_and_ids = rs.getString("star_ids_and_names");
                     String[] parts = stars_and_ids.split(";");
