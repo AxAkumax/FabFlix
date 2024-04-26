@@ -56,7 +56,9 @@ function handleMovieData(resultData) {
         rowHTML += "<td>" + movie.title + "</td>";
         rowHTML += "<td>" + movie.year + "</td>";
         rowHTML += "<td>" + movie.director + "</td>";
-        rowHTML += "<td>" + movie.genres + "</td>";
+
+        let sortedGenres = movie.genres.split(', ').sort().join(', ');
+        rowHTML += "<td>" + sortedGenres + "</td>";
 
         let star_id_names = movie.stars.split(";");
         let stars = [];
