@@ -47,10 +47,10 @@ function handleResult(resultData) {
     // append two html <p> created to the h3 body, which will refresh the page
     let content = "";
     content+="<h2>" + "<span style='color: #bb86fc;'>" + resultData[0]["movie_title"] + "</span></h2>" +
-    "<p>Director: " + resultData[0]["movie_director"] + "</p>" +
-    "<p>Rating: " + resultData[0]["average_rating"] + "</p>" +
-    "<p>Year: " + resultData[0]["movie_year"] + "</p>" +
-    "<p>Genres: " + resultData[0]["movie_genres"] + "</p>";
+        "<p>Director: " + resultData[0]["movie_director"] + "</p>" +
+        "<p>Rating: " + resultData[0]["average_rating"] + "</p>" +
+        "<p>Year: " + resultData[0]["movie_year"] + "</p>" +
+        "<p>Genres: " + resultData[0]["movie_genres"] + "</p>";
 
     let star_ids = resultData[0]['movie_starIds'].split(';');
     let star_names = resultData[0]['movie_stars'].split(';');

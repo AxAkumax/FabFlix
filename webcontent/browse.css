@@ -5,20 +5,18 @@ html{
     background-color: black;
 }
 
-body{
-    background-color: black;
-}
-
 .custom-navbar {
     background-color: #bb86fc;
 }
 
-.navbar a {
-    color: white;
+.navbar-nav .nav-link, .nav-link {
+    color: black !important; /* Set the text color to black */
 }
-
-.navbar a:hover {
-    color: black;
+.navbar-nav .nav-link:hover{
+    color: white !important;
+}
+.nav-link:hover {
+    color: white !important;
 }
 
 #browsing_table {
@@ -77,8 +75,10 @@ a:hover {
     margin-top: 4dvw;
 }
 
-
 footer{
+    bottom: 0;
+    margin-top: auto;
+    width: 100%;
     padding-top: 1.2vw;
     padding-bottom: 1.2vw;
     padding-left: 0.8vw;
@@ -89,7 +89,13 @@ footer{
     font-size: 1.3vw;
 }
 
-footer {
-    margin-top: 0; /* Remove default margin */
-    margin-bottom: 0; /* Remove default margin */
+body {
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure the body covers the entire viewport height */
+}
+
+main {
+    flex: 1; /* Allow main content to expand and push footer to the bottom */
 }

@@ -27,19 +27,34 @@
 <body>
 <!-- Navigation bar -->
 <nav class="navbar navbar-expand-lg navbar-dark custom-navbar fixed-top">
+    <span class="navbar-brand">
+        <span style="font-size: 1.6vw;padding-left: 0.5vw;">&#10025; </span>
+        <span style="font-size: 1.2vw;"> Fabflix </span>
+    </span>
 
-    <a class="navbar-brand mr-auto" href="index.html">
-        <span style="font-size: 2.2vw;padding-left: 0.5vw;">&#10025; </span>
-        <span style="font-size: 1.4vw;"> Fabflix </span>
-    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-    <a class="navbar-brand" href="">
-        <span style="font-size: 1.3vw; padding-right: 1.7vw" > Search </span>
-    </a>
-    <div class="ml-auto">
-        <a class="navbar-brand" href="login.html">
-            <span style="font-size: 1.3vw; padding-right: 1.7vw" > Logout </span>
-        </a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="index.html"> Home <span class="sr-only">(current)</span></a>
+            </li>
+
+            <li class="nav-item active">
+                <a class="nav-link" href=""> Search <span class="sr-only">(current)</span></a>
+            </li>
+
+            <li class="nav-item active">
+                <a class="nav-link" href="browse.html"> Browse <span class="sr-only">(current)</span></a>
+            </li>
+
+        </ul>
+
+        <a class="nav-link" href="login.html">Logout</a>
+
     </div>
 </nav>
 
@@ -125,6 +140,10 @@
 
 <!-- Your custom JavaScript file -->
 <script src="search.js"></script>
+<footer>
+    &#xa9; 2024 Akshita Akumalla, Niharika Kumar
+</footer>
+
 </body>
 
 
