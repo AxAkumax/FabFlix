@@ -21,10 +21,17 @@ html{
     margin: 0;
 }
 #form-field{
-    margin-top: 3vw;
+    margin-top: 4vw;
     margin-left: 1.5vw;
     margin-right: 1.5vw;
-    max-width: 90 vw%;
+}
+
+#searchForm{
+    width: 90%;
+    margin-top: 2vw;
+}
+label{
+    color: lightgray;
 }
 
 footer{
@@ -52,7 +59,7 @@ body{
     border-radius: 5px;
     cursor: pointer; /* Change cursor to pointer on hover */
     transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-    margin-bottom: 1vw;
+    margin-bottom: 0.9vw;
 }
 .btn-purple:hover{
     background-color: black;
@@ -69,23 +76,19 @@ h2, p{
     color: lightgrey; /* white text color for the table */
     font-family: "DM Sans", sans-serif;
     font-style: normal;
-    max-width: 80vw; /* Set a maximum width for the table */
-    margin-top: 3vw;
-    margin-left: 2vw;
-    margin-right: 2vw;
+    max-width: 87vw; /* Set a maximum width for the table */
+    margin: 0 auto;
 }
-
-/*#movie_table th {*/
-/*    color: lightgrey; !* white text color for table headers *!*/
-/*}*/
 
 #movie_table tbody tr {
     color: lightgrey; /* white text color for table body rows */
     transition: all 0.3s ease; /* Add transition for smooth animation */
 }
 
-
 #movie_table tbody tr:hover {
     background-color: #333; /* Darken background color when hovered */
     transform: scale(1.1); /* Increase size of row when hovered */
+}
+#searchResults{
+    margin-top: 2vw;
 }

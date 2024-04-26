@@ -120,9 +120,13 @@ public class SearchServlet extends HttpServlet {
                 movieObject.addProperty("director", rs.getString("movie_director"));
                 movieObject.addProperty("genres", rs.getString("movie_genres"));
                 movieObject.addProperty("stars", rs.getString("star_ids_and_names"));
-                movieObject.addProperty("rating", rs.getDouble("average_rating"));
+                //movieObject.addProperty("rating", rs.getDouble("average_rating"));
+                double averageRating = Math.round(rs.getDouble("average_rating") * 10.0) / 10.0;
+                movieObject.addProperty("rating", averageRating);
+
                 movieArray.add(movieObject);
             }
+
 
             jsonResponse.add("movies", movieArray);
             response.setStatus(HttpServletResponse.SC_OK);
