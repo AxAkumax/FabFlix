@@ -59,7 +59,7 @@ body{
     border-radius: 5px;
     cursor: pointer; /* Change cursor to pointer on hover */
     transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-    margin-bottom: 0.9vw;
+    margin-bottom: 0.3vw;
 }
 .btn-purple:hover{
     background-color: black;
@@ -91,4 +91,8 @@ h2, p{
 }
 #searchResults{
     margin-top: 2vw;
+}
+#noResults, #noParameters{
+    text-align: center;
+    color: lightgray;
 }

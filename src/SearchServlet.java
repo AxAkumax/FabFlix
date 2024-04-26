@@ -47,6 +47,9 @@ public class SearchServlet extends HttpServlet {
             String director = request.getParameter("director");
             String starName = request.getParameter("starName");
 
+            String sortAttribute = request.getParameter("sortAttribute"); // Get sort attribute
+            String sortOrder = request.getParameter("sortOrder"); // Get sort order
+
             //BUILD QUERY
             String query = "SELECT " +
                     "m.id AS movie_id, " +
@@ -87,8 +90,27 @@ public class SearchServlet extends HttpServlet {
                 }
             }
 
-            query += " GROUP BY m.id, m.title, m.year, m.director " +
-                    "ORDER BY average_rating DESC ";
+            // Group by movie attributes
+            query += " GROUP BY m.id, m.title, m.year, m.director ";
+
+            // Append ORDER BY clause
+           query+= "ORDER BY ";
+            if ("title".equalsIgnoreCase(sortAttribute)) {
+                query+="m.title "; // Sort by title
+            } else if ("rating".equalsIgnoreCase(sortAttribute)) {
+               query+="average_rating "; // Sort by rating
+            } else {
+                // Default to sorting by rating if no valid sort attribute is provided
+                query+="average_rating ";
+            }
+
+            // Append the sort order
+            if ("desc".equalsIgnoreCase(sortOrder)) {
+                query+="DESC"; // Sort in descending order
+            } else {
+                query+= "ASC"; // Sort in ascending order by default
+            }
+
 
             //case-insensitive and substring matching
             assert conn != null;

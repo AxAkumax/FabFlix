@@ -48,30 +48,57 @@
     <form id="searchForm" action="api/search">
         <div class="form-row">
             <div class="form-group col-md-3">
-                <label for="inputTitle">Title</label>
+                <label for="inputTitle">Title:</label>
                 <input type="text" class="form-control" id="inputTitle" placeholder="Enter movie title">
             </div>
             <div class="form-group col-md-3">
-                <label for="inputYear">Year</label>
+                <label for="inputYear">Year:</label>
                 <input type="text" class="form-control" id="inputYear" placeholder="Enter release year">
             </div>
             <div class="form-group col-md-3">
-                <label for="inputDirector">Director</label>
+                <label for="inputDirector">Director:</label>
                 <input type="text" class="form-control" id="inputDirector" placeholder="Enter director name">
             </div>
             <div class="form-group col-md-3">
-                <label for="inputStar">Star's Name</label>
+                <label for="inputStar">Star's Name:</label>
                 <input type="text" class="form-control" id="inputStar" placeholder="Enter Star's name">
             </div>
+
+            <div class="form-group col-md-3">
+                <label for="sortAttribute">Sort by:</label>
+                <select class="form-control form-control-sm" id="sortAttribute" name="sortAttribute">
+                    <option value="title">Title</option>
+                    <option value="rating" selected>Rating</option>
+                </select>
+            </div>
+
+            <!-- Dropdown menu for selecting the order -->
+            <div class="form-group col-md-3">
+                <label for="sortOrder">Order:</label>
+                <select class="form-control form-control-sm" id="sortOrder" name="sortOrder">
+                    <option value="asc">Ascending</option>
+                    <option value="desc" selected>Descending</option>
+                </select>
+            </div>
+
         </div>
+
         <button type="submit" class="btn btn-purple">Search</button>
     </form>
 </div>
 
 <!-- Search results will be displayed here -->
 <div id="searchResults" class="row justify-content-center">
+    <div id="noResultsMessage" class="text-center" style="display: none; justify-content: center;
+    margin-top: 1vw; align-items: center; width: 100%; height: 100%;">
+        <p id = "noResults">No movies found</p>
+    </div>
+    <div id="nParametersMessage" class="text-center" style="display: none; justify-content: center;
+    margin-top: 1vw; align-items: center; width: 100%; height: 100%;">
+        <p id = "noParameters">No parameters given</p>
+    </div>
     <table id=movie_table class="table table-hover table-dark">
-        <thead>
+        <thead style="display: none;">
         <tr>
             <th>Title</th>
             <th>Year</th>

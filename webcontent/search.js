@@ -8,7 +8,9 @@ function submitSearchForm(event) {
         "title": $("#inputTitle").val(),
         "year": $("#inputYear").val(),
         "director": $("#inputDirector").val(),
-        "starName": $("#inputStar").val()
+        "starName": $("#inputStar").val(),
+        "sortAttribute": $("#sortAttribute").val(), // Get the value of sortAttribute
+        "sortOrder": $("#sortOrder").val()
     };
     // Remove empty values from form data
     Object.keys(formData).forEach(function(key) {
@@ -16,6 +18,17 @@ function submitSearchForm(event) {
             delete formData[key];
         }
     });
+
+    if (Object.keys(formData).length === 2) {
+        // Display a message or perform any other action indicating that the form is empty
+        $("#movie_table_body").empty();
+        $("#movie_table thead").hide();
+        $("#noResultsMessage").hide();
+        $("#nParametersMessage").show();
+
+        return; // Exit the function
+    }
+
     // Convert form data object to query string
     var queryString = $.param(formData);
 
@@ -46,9 +59,28 @@ function handleMovieData(resultData) {
     console.log("handleMovieData: populating movie table from resultData");
     console.log(resultData);
 
-    // Clear existing table rows
-    $("#movie_table_body").empty();
+    $("#nParametersMessage").hide();
 
+    var table = $("#movie_table_body");
+    var tableHeadings = $("#movie_table thead");
+
+    // Clear existing table rows
+    table.empty();
+    var noResultsMessage = $("#noResultsMessage");
+
+    // Check if the movies array is empty
+    if (resultData.movies.length === 0) {
+        console.log("No movies found.");
+        // Hide the table and show the no results message
+        table.hide();
+        tableHeadings.hide()
+        noResultsMessage.show();
+        return; // Exit the function early if no movies are found
+    }
+
+    noResultsMessage.hide();
+    table.show();
+    tableHeadings.show()
     // Iterate through search results and populate table
     resultData.movies.forEach(function(movie) {
         // Construct HTML for table row
