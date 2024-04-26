@@ -1,26 +1,24 @@
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
+import com.google.gson.JsonObject;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
-
-/**
- * A servlet that takes input from a html <form> and talks to MySQL moviedbexample,
- * generates output as a html <table>
- */
 
 @WebServlet(name = "LoginServlet", urlPatterns = "/api/login")
 public class LoginServlet extends HttpServlet {
-
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
     private DataSource dataSource;
 
     public void init(ServletConfig config) {
@@ -31,91 +29,54 @@ public class LoginServlet extends HttpServlet {
         }
     }
 
-//    public void doGet(HttpServletRequest request, HttpServletResponse response)
-//            throws IOException {
-//
-//        // Content type and output stream remain the same
-//
-//        PrintWriter out = response.getWriter();
-//
-////        out.println("<html><head><title>Login</title></head>");
-////        out.println("<body><h1>Login</h1>");
-////
-////        // Display the login form
-////        out.println("<form action='./index.html' method='post'>");
-////        out.println("Email: <input type='text' name='email'><br>");
-////        out.println("Password: <input type='password' name='password'><br>");
-////        out.println("<input type='submit' value='Login'>");
-////        out.println("</form>");
-////
-////        out.println("</body></html>");
-//
-//        String email = request.getParameter("email");
-//        String password = request.getParameter("password");
-//
-//        try {
-//            Connection dbCon = dataSource.getConnection();
-//            Statement statement = dbCon.createStatement();
-//
-//            String query = String.format("SELECT * FROM customers WHERE email='%s' AND password='%s'", email, password);
-//            ResultSet rs = statement.executeQuery(query);
-//
-//            if (rs.next()) {
-//                // Authentication successful
-//                // Use request.getContextPath() to prepend the context path dynamically
-//                response.sendRedirect(request.getContextPath() + "/webcontent/index.html");
-//            } else {
-//                // Authentication failed
-//                response.sendRedirect(request.getContextPath() + "/webcontent/login.html");
-//                //response.sendRedirect("login.html");
-//            }
-//
-//            rs.close();
-//            statement.close();
-//            dbCon.close();
-//
-//        } catch (Exception e) {
-//            // Error handling
-//            e.printStackTrace();
-//        }
-//    }
-public void doGet(HttpServletRequest request, HttpServletResponse response)
-        throws IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        PrintWriter out = response.getWriter();
+        JsonObject responseJsonObject = new JsonObject();
 
-    String email = request.getParameter("email");
-    String password = request.getParameter("password");
-    PrintWriter out = response.getWriter();
+        /* This example only allows username/password to be test/test
+        /  in the real project, you should talk to the database to verify username/password
+        */
+        try {
+            Connection dbCon = dataSource.getConnection();
+            String query = "SELECT * FROM customers WHERE email = ?";
 
-    try {
-        Connection dbCon = dataSource.getConnection();
+            PreparedStatement emailCheckStatement = dbCon.prepareStatement(query);
+            emailCheckStatement.setString(1, email);
 
-        // Use prepared statement with parameterized query
-        String query = "SELECT * FROM customers WHERE email = ? AND password = ?";
-        PreparedStatement preparedStatement = dbCon.prepareStatement(query);
-        preparedStatement.setString(1, email);
-        preparedStatement.setString(2, password);
+            ResultSet emailResultSet = emailCheckStatement.executeQuery();
 
-        ResultSet rs = preparedStatement.executeQuery();
 
-        if (rs.next()) {
-            // Authentication successful
-            response.sendRedirect(request.getContextPath() + "/index.html");
-        } else {
-            // Authentication failed
-            response.sendRedirect(request.getContextPath() + "/login.html?error=true");
+            if (emailResultSet.next()) {
+                // Email exists in the database, now check if the password matches
+                String storedPassword = emailResultSet.getString("password");
+
+                if (password.equals(storedPassword)) {
+                    request.getSession().setAttribute("user", email);
+                    responseJsonObject.addProperty("status", "success");
+                    responseJsonObject.addProperty("message", "success");
+                } else {
+                    // Password is incorrect
+                    // Redirect to login.html with error parameter
+                    responseJsonObject.addProperty("status", "fail");
+                    request.getServletContext().log("Login failed");
+                    responseJsonObject.addProperty("message", "*Incorrect password");
+                }
+            }
+            else {
+                responseJsonObject.addProperty("status", "fail");
+                request.getServletContext().log("Login failed");
+                responseJsonObject.addProperty("message", "*User " + email + " does not exist");
+            }
+
+            emailResultSet.close();
+            emailCheckStatement.close();
+            response.getWriter().write(responseJsonObject.toString());
         }
-
-        rs.close();
-        preparedStatement.close();
-        dbCon.close();
-
-    } catch (Exception e) {
-        // Error handling
-        e.printStackTrace();
+        catch (Exception e) {
+            responseJsonObject.addProperty("errorMessage", e.getMessage());
+            e.printStackTrace();
+        }
     }
-}
-    public void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws IOException {
-            doGet(request, response);
-        }
 }
