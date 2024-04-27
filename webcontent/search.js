@@ -9,8 +9,8 @@ function submitSearchForm(event) {
         "year": $("#inputYear").val(),
         "director": $("#inputDirector").val(),
         "starName": $("#inputStar").val(),
-        "sortAttribute": $("#sortAttribute").val(), // Get the value of sortAttribute
-        "sortOrder": $("#sortOrder").val()
+        "sortAttribute": $("#sortAttribute").val() // Get the value of sortAttribute
+        // "sortOrder": $("#sortOrder").val()
     };
     // Remove empty values from form data
     Object.keys(formData).forEach(function(key) {
@@ -19,7 +19,7 @@ function submitSearchForm(event) {
         }
     });
 
-    if (Object.keys(formData).length === 2) {
+    if (Object.keys(formData).length === 1) {
         // Display a message or perform any other action indicating that the form is empty
         $("#movie_table_body").empty();
         $("#movie_table thead").hide();
@@ -134,3 +134,4 @@ function handleMovieData(resultData) {
 $(document).ready(function() {
     $("#searchForm").submit(submitSearchForm);
 });
+
