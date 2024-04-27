@@ -82,15 +82,45 @@ function handleMovieData(resultData) {
     table.show();
     tableHeadings.show()
     // Iterate through search results and populate table
+    console.log(resultData);
+
     resultData.movies.forEach(function(movie) {
         // Construct HTML for table row
+
         var rowHTML = "<tr>";
-        rowHTML += "<td>" + movie.title + "</td>";
+
+        let movie_link = '<a href="single-movie.html?id=' + movie.id + '">' + movie.title + '</a>';
+
+        rowHTML += "<td>" + movie_link + "</td>";
         rowHTML += "<td>" + movie.year + "</td>";
         rowHTML += "<td>" + movie.director + "</td>";
 
-        let sortedGenres = movie.genres.split(', ').sort().join(', ');
-        rowHTML += "<td>" + sortedGenres + "</td>";
+        let genre_id_names = movie.genres.split(";");
+        let genres = [];
+
+        for (let i = 0; i < genre_id_names.length; i += 2) {
+            let genre_id = genre_id_names[i];
+            let genre_name = genre_id_names[i + 1];
+            genres.push({ id: genre_id, name: genre_name });
+        }
+        //sorted alphabetically
+        genres.sort((a, b) => a.name.localeCompare(b.name));
+
+        let genre_entry = "";
+
+        for (let i = 0; i < genres.length; i++) {
+            let genre = genres[i];
+
+            let genre_link = '<a href="browse.html?genreId=' + genre.id + '">' + genre.name + '</a>';
+            genre_entry += genre_link;
+
+            // Add comma and space if it's not the last star
+            if (i < genres.length - 1) {
+                genre_entry += ", ";
+            }
+        }
+
+        rowHTML += "<td>" + genre_entry + "</td>";
 
         let star_id_names = movie.stars.split(";");
         let stars = [];
