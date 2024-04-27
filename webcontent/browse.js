@@ -3,8 +3,6 @@ let titleStart = null;
 
 
 // Function to create browsing results
-
-
 function create_browsing_result(url) {
     // Make AJAX request to fetch genre movies
     jQuery.ajax({
@@ -91,14 +89,17 @@ function handleBrowseClick(event) {
             "sortAttribute": $("#sortAttribute").val(), // Get the value of sortAttribute
         };
     }
-
+    console.log("formData:", formData);
     // Convert form data object to query string
     var queryString = $.param(formData);
 
-    // Construct URL with form data
-    var url = "api/browse";
-    if (queryString) {
-        url += "?" + queryString;
+    var url = "";
+    if ( genreId !== undefined) {
+        url = "api/genre?genreId=" + genreId + "&sortAttribute=" + $("#sortAttribute").val();
+    } else if (titleStart !== undefined) {
+        url = "api/movie?titleStart=" + titleStart + "&sortAttribute=" + $("#sortAttribute").val();
+    } else {
+        url = "api/browse";
     }
 
     console.log("Constructed URL:", url); // Log the constructed URL
@@ -112,7 +113,7 @@ function handleBrowseResult(resultData) {
     let genresElement = jQuery("#genre_table_body");
     let row = "";
 
-    // Iterate through the resultData array
+    // Iterate through the resultData array to populate genre links
     for (let i = 0; i < resultData.length; i++) {
         // Add a new row for every fifth genre or at the beginning of the loop
         if (i % 5 === 0) {
@@ -124,11 +125,11 @@ function handleBrowseResult(resultData) {
             row += "<tr>";
         }
 
-        row += "<td>" +
-            '<a href="#" class="genre-link" data-genre-id="' + resultData[i]['genreId'] + '">' +
-            resultData[i]["genreName"] +     // display genreName for the link text
-            '</a>' +
-            "</td>";
+        // Construct the genre link with appropriate href attribute
+        let genreLink = '<a href="#" class="genre-link" data-genre-id="' + resultData[i]['genreId'] + '">' + resultData[i]["genreName"] + '</a>';
+
+        // Append the genre link to the row
+        row += "<td>" + genreLink + "</td>";
     }
 
     // Close the last row
@@ -137,15 +138,14 @@ function handleBrowseResult(resultData) {
     // Append the constructed row to the genresElement
     genresElement.append(row);
 
-    let alphabetElement = jQuery("#alphabet_table_body");
-    let row2 = "";
-    let resultData2 = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
-        'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
-        's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0',
-        '1', '2', '3', '4', '5', '6', '7', '8', '9', '*']
+    // Add click event listener to genre links
+    jQuery(".genre-link").click(handleBrowseClick);
 
-    // Iterate through the resultData array
-    for (let i = 0; i < resultData2.length; i++) {
+    // Dynamically generate alphabet links
+    let alphabetElement = jQuery("#alphabet_table_body");
+    let alphabetArray = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '*'];
+    let row2 = "";
+    for (let i = 0; i < alphabetArray.length; i++) {
         // Add a new row for every eighth alphabet or at the beginning of the loop
         if (i % 8 === 0) {
             // Close the previous row if it exists
@@ -156,36 +156,28 @@ function handleBrowseResult(resultData) {
             row2 += "<tr>";
         }
 
-        row2 += "<td>" +
+        // Construct the alphabet link with appropriate href attribute
+        let alphabetLink = '<a href="#" class="alphabet-link" data-alphabet="' + alphabetArray[i] + '">' + alphabetArray[i].toUpperCase() + '</a>';
 
-            '<a href="#" class="alphabet-link" data-alphabet="' + resultData2[i] + '">' +
-            resultData2[i] +     // display alphabet for the link text
-            '<a href="#" id = "alphabet_click" class="alphabet-link" data-alphabet="' + resultData2[i] + '">' +
-            resultData2[i] +     // display genreName for the link text
-            '</a>' +
-            "</td>";
+        // Append the alphabet link to the row
+        row2 += "<td>" + alphabetLink + "</td>";
     }
-
     // Close the last row
     row2 += "</tr>";
 
     // Append the constructed row to the alphabetElement
     alphabetElement.append(row2);
 
-
-    // Add click event listener to genre and alphabet links
-
-
-    // Add click event listener to genre links
-    jQuery(".genre-link").click(handleBrowseClick);
+    // Add click event listener to alphabet links
     jQuery(".alphabet-link").click(handleBrowseClick);
 }
+
 
 // Makes the HTTP GET request and registers on success callback function handleBrowseResult
 jQuery.ajax({
     dataType: "json",
     method: "GET",
-    url: "api/browse",
+    url: "api/genre",
     success: (resultData) => handleBrowseResult(resultData)
 });
 
@@ -216,12 +208,20 @@ function handleDropdownChange() {
     console.log(titleStart);
 
     // Convert form data object to query string
-    var queryString = $.param(formData);
-
-    // Construct URL with form data
-    var url = "api/browse";
-    if (queryString) {
-        url += "?" + queryString;
+    // var queryString = $.param(formData);
+    //
+    // // Construct URL with form data
+    // var url = "api/browse";
+    // if (queryString) {
+    //     url += "?" + queryString;
+    // }
+    var url = "";
+    if (genreId !== null) {
+        url = "api/genre?genreId=" + genreId + "&sortAttribute=" + $("#sortAttribute").val();
+    } else if (titleStart !== null) {
+        url = "api/movie?titleStart=" + titleStart + "&sortAttribute=" + $("#sortAttribute").val();
+    } else {
+        url = "api/browse";
     }
 
     create_browsing_result(url);

@@ -17,7 +17,9 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 
-@WebServlet(name = "BrowseServlet", urlPatterns = "/api/browse")
+//@WebServlet(name = "BrowseServlet", urlPatterns = "/api/browse")
+//test
+@WebServlet(name = "BrowseServlet", urlPatterns = {"/api/genre/*", "/api/movie/*"})
 public class BrowseServlet extends HttpServlet {
 
     private DataSource dataSource;

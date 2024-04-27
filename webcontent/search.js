@@ -111,7 +111,7 @@ function handleMovieData(resultData) {
         for (let i = 0; i < genres.length; i++) {
             let genre = genres[i];
 
-            let genre_link = '<a href="browse.html?genreId=' + genre.id + '">' + genre.name + '</a>';
+            let genre_link = '<a href="browse.html#api/genre?genreId=' + genre.id + '">' + genre.name + '</a>';
             genre_entry += genre_link;
 
             // Add comma and space if it's not the last star
