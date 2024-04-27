@@ -42,6 +42,8 @@ public class BrowseServlet extends HttpServlet {
             String genreIdParameter = request.getParameter("genreId");
             String titleStartParameter = request.getParameter("titleStart");
 
+            String sortAttribute = request.getParameter("sortAttribute"); // Get sort attribute
+
             if (genreIdParameter != null) {
                 System.out.println("line 46 " + genreIdParameter);
                 int genreId = Integer.parseInt(genreIdParameter);
@@ -63,9 +65,12 @@ public class BrowseServlet extends HttpServlet {
                         "LEFT JOIN ratings r ON m.id = r.movieId " +
                         "JOIN genres_in_movies gm ON gm.movieId = m.id " +
                         "WHERE gm.genreId = ? " +
-                        "GROUP BY m.id, m.title, m.year, m.director " +
-                        "ORDER BY average_rating DESC;";
+                        "GROUP BY m.id, m.title, m.year, m.director ";
 
+
+                System.out.println(sortAttribute);
+
+                query += "ORDER BY " + sortAttribute;
 
                 PreparedStatement statement = conn.prepareStatement(query);
                 statement.setInt(1, genreId);

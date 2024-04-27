@@ -1,7 +1,10 @@
 let genreId = null;
 let titleStart = null;
 
+
 // Function to create browsing results
+
+
 function create_browsing_result(url) {
     // Make AJAX request to fetch genre movies
     jQuery.ajax({
@@ -64,10 +67,13 @@ function create_browsing_result(url) {
     });
 }
 
-// Function to handle click on genre or alphabet link
+    // Call the function to fetch and display browsing results
+
 function handleBrowseClick(event) {
     // Prevent default link behavior
     event.preventDefault();
+
+    console.log(this);
 
     genreId = jQuery(this).data("genre-id");
     titleStart = jQuery(this).data("alphabet");
@@ -90,15 +96,14 @@ function handleBrowseClick(event) {
     var queryString = $.param(formData);
 
     // Construct URL with form data
-    var baseUrl = "api/browse";
-    var url = baseUrl;
+    var url = "api/browse";
     if (queryString) {
         url += "?" + queryString;
     }
 
-    // Update the browser URL
+    console.log("Constructed URL:", url); // Log the constructed URL
 
-    // Call the function to fetch and display browsing results
+
     create_browsing_result(url);
 }
 
@@ -152,8 +157,11 @@ function handleBrowseResult(resultData) {
         }
 
         row2 += "<td>" +
+
             '<a href="#" class="alphabet-link" data-alphabet="' + resultData2[i] + '">' +
             resultData2[i] +     // display alphabet for the link text
+            '<a href="#" id = "alphabet_click" class="alphabet-link" data-alphabet="' + resultData2[i] + '">' +
+            resultData2[i] +     // display genreName for the link text
             '</a>' +
             "</td>";
     }
@@ -164,7 +172,11 @@ function handleBrowseResult(resultData) {
     // Append the constructed row to the alphabetElement
     alphabetElement.append(row2);
 
+
     // Add click event listener to genre and alphabet links
+
+
+    // Add click event listener to genre links
     jQuery(".genre-link").click(handleBrowseClick);
     jQuery(".alphabet-link").click(handleBrowseClick);
 }
@@ -177,6 +189,8 @@ jQuery.ajax({
     success: (resultData) => handleBrowseResult(resultData)
 });
 
+
+
 // Function to handle change in the dropdown menu
 function handleDropdownChange() {
     var selectedOption = $(this).val(); // Get the selected option value
@@ -188,8 +202,10 @@ function handleDropdownChange() {
             "sortAttribute": $("#sortAttribute").val(), // Get the value of sortAttribute
         };
     }
-    else if (titleStart !== undefined)
-    {
+
+
+    else if (titleStart !== undefined) {
+
         var formData = {
             "titleStart": titleStart,
             "sortAttribute": $("#sortAttribute").val(), // Get the value of sortAttribute
@@ -209,7 +225,7 @@ function handleDropdownChange() {
     }
 
     create_browsing_result(url);
-}
 
-// Add change event listener to the dropdown menu
+}
 $("#sortAttribute").change(handleDropdownChange);
+
