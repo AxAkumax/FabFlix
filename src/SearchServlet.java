@@ -59,9 +59,9 @@ public class SearchServlet extends HttpServlet {
                     "(SELECT GROUP_CONCAT(DISTINCT CONCAT(s.id, ';', s.name) SEPARATOR ';') " +
                     "FROM stars_in_movies sm JOIN stars s ON sm.starId = s.id " +
                     "WHERE sm.movieId = m.id) AS star_ids_and_names, " +
-                    "(SELECT GROUP_CONCAT(DISTINCT g.name) " +
+                    "(SELECT GROUP_CONCAT(DISTINCT CONCAT(g.id, ';', g.name) SEPARATOR ';') " +
                     "FROM genres_in_movies gm JOIN genres g ON gm.genreId = g.id " +
-                    "WHERE gm.movieId = m.id) AS movie_genres, " +
+                    "WHERE gm.movieId = m.id) AS movie_id_genres, " +
                     "AVG(r.rating) AS average_rating " +
                     "FROM movies m " +
                     "LEFT JOIN ratings r ON m.id = r.movieId ";
@@ -139,12 +139,14 @@ public class SearchServlet extends HttpServlet {
             // Iterate through result set and add movie objects to the array
             while (rs.next()) {
                 JsonObject movieObject = new JsonObject();
+                movieObject.addProperty("id", rs.getString("movie_id"));
                 movieObject.addProperty("title", rs.getString("movie_title"));
                 movieObject.addProperty("year", rs.getString("movie_year"));
                 movieObject.addProperty("director", rs.getString("movie_director"));
-                movieObject.addProperty("genres", rs.getString("movie_genres"));
+
+                movieObject.addProperty("genres", rs.getString("movie_id_genres"));
                 movieObject.addProperty("stars", rs.getString("star_ids_and_names"));
-                //movieObject.addProperty("rating", rs.getDouble("average_rating"));
+
                 double averageRating = Math.round(rs.getDouble("average_rating") * 10.0) / 10.0;
                 movieObject.addProperty("rating", averageRating);
 
