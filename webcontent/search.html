@@ -93,14 +93,15 @@
                 </select>
             </div>
 
-<!--            &lt;!&ndash; Dropdown menu for selecting the order &ndash;&gt;-->
-<!--            <div class="form-group col-md-3">-->
-<!--                <label for="sortOrder">Order:</label>-->
-<!--                <select class="form-control form-control-sm" id="sortOrder" name="sortOrder">-->
-<!--                    <option value="asc">Ascending</option>-->
-<!--                    <option value="desc" selected>Descending</option>-->
-<!--                </select>-->
-<!--            </div>-->
+            <div class="form-group col-md-3">
+                <label for="moviesPerPage">Movies per Page:</label>
+                <select class="form-control form-control-sm" id="moviesPerPage">
+                    <option value="10" selected>10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
 
         </div>
 
@@ -110,7 +111,7 @@
 
 <!-- Search results will be displayed here -->
 <div id="searchResults" class="row justify-content-center">
-    <div id="noResultsMessage" class="text-center" style="display: none; justify-content: center;
+    <div id="noResultsMessage" class="text-center" style=" display: none; justify-content: center;
     margin-top: 1vw; align-items: center; width: 100%; height: 100%;">
         <p id = "noResults">No movies found</p>
     </div>
@@ -133,6 +134,10 @@
         <!-- Search results will be dynamically added here using JavaScript -->
         </tbody>
     </table>
+</div>
+<div id ="prevNextButton" class="row justify-content-center" style = "margin-top: 2.5vw; margin-bottom: 1vw; display: none;">
+    <button id="prevBtn" class="btn btn-secondary mr-2" onclick="prevPage()"> < Prev</button>
+    <button id="nextBtn" class="btn btn-secondary" onclick="nextPage()">Next > </button>
 </div>
 
 <!-- Bootstrap and other JavaScript libraries -->

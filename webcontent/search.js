@@ -1,17 +1,23 @@
 // Function to handle form submission
+// Global variable to store the current page number
+var currentPage = 1;
+
 // Function to handle form submission
 function submitSearchForm(event) {
     event.preventDefault(); // Prevent default form submission
 
     // Manually construct form data object
+
     var formData = {
         "title": $("#inputTitle").val(),
         "year": $("#inputYear").val(),
         "director": $("#inputDirector").val(),
         "starName": $("#inputStar").val(),
-        "sortAttribute": $("#sortAttribute").val() // Get the value of sortAttribute
-        // "sortOrder": $("#sortOrder").val()
+        "sortAttribute": $("#sortAttribute").val(), // Get the value of sortAttribute
+        page: currentPage, // Use the current page number
+        recordsPerPage: $("#moviesPerPage").val()
     };
+
     // Remove empty values from form data
     Object.keys(formData).forEach(function(key) {
         if (formData[key] === "") {
@@ -19,11 +25,12 @@ function submitSearchForm(event) {
         }
     });
 
-    if (Object.keys(formData).length === 1) {
+    if (Object.keys(formData).length === 3) {
         // Display a message or perform any other action indicating that the form is empty
         $("#movie_table_body").empty();
         $("#movie_table thead").hide();
         $("#noResultsMessage").hide();
+        $("#prevNextButton").hide();
         $("#nParametersMessage").show();
 
         return; // Exit the function
@@ -37,7 +44,6 @@ function submitSearchForm(event) {
     if (queryString) {
         url += "?" + queryString;
     }
-    console.log("Constructed URL:", url); // Log the constructed URL
 
     // Perform AJAX request to fetch search results
     $.ajax({
@@ -52,6 +58,20 @@ function submitSearchForm(event) {
             console.error("Error occurred while fetching search results:", error);
         }
     });
+}
+
+// Function to handle "Next" button click
+function nextPage() {
+    currentPage++; // Increment current page number
+    submitSearchForm(new Event('submit')); // Submit the form with updated page number
+}
+
+// Function to handle "Prev" button click
+function prevPage() {
+    if (currentPage > 1) {
+        currentPage--; // Decrement current page number if not already on the first page
+        submitSearchForm(new Event('submit')); // Submit the form with updated page number
+    }
 }
 
 // Function to handle movie data and update the table
@@ -81,11 +101,14 @@ function handleMovieData(resultData) {
     noResultsMessage.hide();
     table.show();
     tableHeadings.show()
+    $("#prevNextButton").show()
     // Iterate through search results and populate table
     console.log(resultData);
 
-    resultData.movies.forEach(function(movie) {
+    var startIndex = (currentPage - 1) * $("#moviesPerPage").val() + 1
+    for (let j = 0; j < resultData.movies.length; j++) {
         // Construct HTML for table row
+        let movie = resultData.movies[j];
 
         var rowHTML = "<tr>";
 
@@ -101,7 +124,7 @@ function handleMovieData(resultData) {
         for (let i = 0; i < genre_id_names.length; i += 2) {
             let genre_id = genre_id_names[i];
             let genre_name = genre_id_names[i + 1];
-            genres.push({ id: genre_id, name: genre_name });
+            genres.push({id: genre_id, name: genre_name});
         }
         //sorted alphabetically
         genres.sort((a, b) => a.name.localeCompare(b.name));
@@ -129,7 +152,7 @@ function handleMovieData(resultData) {
         for (let i = 0; i < star_id_names.length; i += 2) {
             let star_id = star_id_names[i];
             let star_name = star_id_names[i + 1];
-            stars.push({ id: star_id, name: star_name });
+            stars.push({id: star_id, name: star_name});
         }
 
         // Sort the stars array by star name in ascending order
@@ -157,11 +180,18 @@ function handleMovieData(resultData) {
 
         // Append row to table
         $("#movie_table_body").append(rowHTML);
-    });
+        startIndex+=1;
+    }
+
 }
 
 // Event listener for form submission
 $(document).ready(function() {
     $("#searchForm").submit(submitSearchForm);
+    // Event listener for "Next" button click
+    $("#nextBtn").click(nextPage);
+
+    // Event listener for "Prev" button click
+    $("#prevBtn").click(prevPage);
 });
 

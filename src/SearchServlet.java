@@ -48,7 +48,10 @@ public class SearchServlet extends HttpServlet {
             String starName = request.getParameter("starName");
 
             String sortAttribute = request.getParameter("sortAttribute"); // Get sort attribute
-//            String sortOrder = request.getParameter("sortOrder"); // Get sort order
+            int currentPage = Integer.parseInt(request.getParameter("page"));
+            int recordsPerPage = Integer.parseInt(request.getParameter("recordsPerPage"));
+            // Calculate offset for pagination
+            int offset = (currentPage - 1) * recordsPerPage;
 
             //BUILD QUERY
             String query = "SELECT " +
@@ -93,26 +96,7 @@ public class SearchServlet extends HttpServlet {
             // Group by movie attributes
             query += " GROUP BY m.id, m.title, m.year, m.director ";
 
-            query += "ORDER BY " + sortAttribute;
-
-//            // Append ORDER BY clause
-//           query+= "ORDER BY ";
-//            if ("title".equalsIgnoreCase(sortAttribute)) {
-//                query+="m.title "; // Sort by title
-//            } else if ("rating".equalsIgnoreCase(sortAttribute)) {
-//               query+="average_rating "; // Sort by rating
-//            } else {
-//                // Default to sorting by rating if no valid sort attribute is provided
-//                query+="average_rating ";
-//            }
-//
-//            // Append the sort order
-//            if ("desc".equalsIgnoreCase(sortOrder)) {
-//                query+="DESC"; // Sort in descending order
-//            } else {
-//                query+= "ASC"; // Sort in ascending order by default
-//            }
-
+            query += " ORDER BY " + sortAttribute + " LIMIT ? OFFSET ?";
 
             //case-insensitive and substring matching
             assert conn != null;
@@ -131,6 +115,9 @@ public class SearchServlet extends HttpServlet {
             if (starName != null) {
                 statement.setString(parameterIndex, "%" + starName.toLowerCase() + "%");
             }
+
+            statement.setInt(parameterIndex++, recordsPerPage);
+            statement.setInt(parameterIndex, offset);
 
             ResultSet rs = statement.executeQuery();
 

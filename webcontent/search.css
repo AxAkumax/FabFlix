@@ -103,6 +103,26 @@ body {
     flex-direction: column;
     min-height: 100vh; /* Ensure the body covers the entire viewport height */
 }
+#prevBtn, #nextBtn{
+    background-color: #bb86fc;
+    color: black; /* Set the text color */
+    border: 1px solid transparent;
+    border-radius: 5px;
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+#nextBtn:hover{
+    background-color: black;
+    color: lightgray;
+    border-color: lightgray;
+    border-width: thin;
+}
+#prevBtn:hover{
+    background-color: black;
+    color: lightgray;
+    border-color: lightgray;
+    border-width: thin;
+}
 
 main {
     flex: 1; /* Allow main content to expand and push footer to the bottom */
