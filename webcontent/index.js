@@ -1,84 +1,66 @@
-/**
- * This example is following frontend and backend separation.
- *
- * Before this .js is loaded, the html skeleton is created.
- *
- * This .js performs two steps:
- *      1. Use jQuery to talk to backend API to get the json data.
- *      2. Populate the data to correct html elements.
- */
+$(document).ready(function() {
+    // Parse URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const title = urlParams.get('title');
+    const year = urlParams.get('year');
+    const director = urlParams.get('director');
+    const starName = urlParams.get('starName');
+    const sortAttribute = urlParams.get('sortAttribute');
+    const page = urlParams.get('page');
+    const recordsPerPage = urlParams.get('recordsPerPage');
 
-
-/**
- * Handles the data returned by the API, read the jsonObject and populate data into html elements
- * @param resultData jsonObject
- */
-function handleStarResult(resultData) {
-    console.log("handleStarResult: populating star table from resultData");
-    console.log(resultData);
-
-    // Populate the star table
-    // Find the empty table body by id "star_table_body"
-    let starTableBodyElement = jQuery("#movie_table_body");
-
-
-    // Iterate through resultData, no more than 10 entries
-    for (let i = 0; i < Math.min(20, resultData.length); i++) {
-        console.log(resultData[i]);
-        // Concatenate the html tags with resultData jsonObject
-
-        let rowHTML = "";
-        rowHTML += "<tr>";
-        rowHTML +="<th>"+(i + 1).toString()+"</th>"; // Adding row number
-        rowHTML +=
-            "<th>" +
-            // Add a link to single-star.html with id passed with GET url parameter
-            '<a href="single-movie.html?id=' + resultData[i]['movie_id'] + '">'
-            + resultData[i]["movie_title"] +     // display star_name for the link text
-            '</a>' +
-            "</th>";
-        rowHTML += "<th>" + resultData[i]["movie_year"] + "</th>";
-        rowHTML += "<th>" + resultData[i]["movie_director"] + "</th>";
-
-        let star_ids = resultData[i]['movie_starIds'].split(';');
-        let star_names = resultData[i]['movie_stars'].split(';');
-
-        // Iterate through resultData, no more than 10 entries
-        let star_entries = ""
-        let length  = Math.min(3, star_ids.length);
-        for (let j = 0; j < length; j++) {
-
-            // Concatenate the html tags with resultData jsonObject
-
-            star_entries +=
-                // Add a link to single-star.html with id passed with GET url parameter
-                '<a href="single-star.html?id=' + star_ids[j] + '">'
-                + star_names[j] +     // display star_name for the link text
-                '</a>';
-            if (j< length-1){
-                star_entries+=", ";
+    // Check if any search criteria is present
+    if (title || year || director || starName) {
+        // Perform AJAX request to fetch search results
+        $.ajax({
+            url: 'api/movies', // Adjust the URL as per your API endpoint
+            type: 'GET',
+            dataType: 'json',
+            data: {
+                title: title,
+                year: year,
+                director: director,
+                starName: starName,
+                sortAttribute: sortAttribute,
+                page: page,
+                recordsPerPage: recordsPerPage
+            },
+            success: function(response) {
+                // Process the response and display search results
+                const movies = response.movies;
+                if (movies.length > 0) {
+                    displaySearchResults(movies);
+                } else {
+                    // Display message for no results
+                    $('#noResultsMessage').show();
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                // Handle errors
+                console.error('Error:', textStatus, errorThrown);
             }
-        }
-        rowHTML += "<th>" + star_entries + "</th>";
-        rowHTML += "<th>" + resultData[i]["movie_genres"] + "</th>";
-        rowHTML += "<th>" + resultData[i]["average_rating"] + "</th>";
-
-        rowHTML += "</tr>";
-
-        // Append the row created to the table body, which will refresh the page
-        starTableBodyElement.append(rowHTML);
+        });
+    } else {
+        // Display message for no parameters given
+        $('#nParametersMessage').show();
     }
-}
-
-
-/**
- * Once this .js is loaded, following scripts will be executed by the browser
- */
-
-// Makes the HTTP GET request and registers on success callback function handleStarResult
-jQuery.ajax({
-    dataType: "json", // Setting return data type
-    method: "GET", // Setting request method
-    url: "api/movies", // Setting request url, which is mapped by StarsServlet in Stars.java
-    success: (resultData) => handleStarResult(resultData) // Setting callback function to handle data returned successfully by the StarsServlet
 });
+
+// Function to display search results
+function displaySearchResults(movies) {
+    const tbody = $('#movie_table_body');
+    tbody.empty(); // Clear existing rows
+    movies.forEach(function(movie) {
+        const row = '<tr>' +
+            '<td>' + movie.title + '</td>' +
+            '<td>' + movie.year + '</td>' +
+            '<td>' + movie.director + '</td>' +
+            '<td>' + movie.genres + '</td>' +
+            '<td>' + movie.stars + '</td>' +
+            '<td>' + movie.rating + '</td>' +
+            '</tr>';
+        tbody.append(row);
+    });
+    // Show the search results table
+    $('#movie_table').show();
+}

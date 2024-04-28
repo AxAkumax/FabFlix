@@ -98,6 +98,15 @@
                 <option value="average_rating DESC, title DESC">Rating DESC, Title DESC</option>
             </select>
         </div>
+        <div class="form-group col-md-3">
+            <label for="moviesPerPage">Movies per Page:</label>
+            <select class="form-control form-control-sm" id="moviesPerPage">
+                <option value="10" selected>10</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+            </select>
+        </div>
 
         <!-- Id "star_table" is useful for jQuery to find the html element with id, class here is mapping to Bootstrap defined class CSS -->
         <table id=browsing_table class="table table-hover table-dark">
@@ -118,6 +127,10 @@
             <!-- Again, id "star_table_body" is useful for jQuery to find this html element -->
             <tbody id=browsing_table_body></tbody>
         </table>
+        <div id ="prevNextButton" class="row justify-content-center" style = "margin-top: 2.5vw; margin-bottom: 1vw;">
+            <button type="button" class="btn btn-primary mr-2" id="prevBtn">Previous</button>
+            <button type="button" class="btn btn-primary" id="nextBtn">Next</button>
+        </div>
     </div>
 </div>
 

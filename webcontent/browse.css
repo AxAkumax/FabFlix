@@ -99,3 +99,6 @@ body {
 main {
     flex: 1; /* Allow main content to expand and push footer to the bottom */
 }
+label{
+    color: lightgray;
+}

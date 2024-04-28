@@ -45,6 +45,9 @@ public class BrowseServlet extends HttpServlet {
             String titleStartParameter = request.getParameter("titleStart");
 
             String sortAttribute = request.getParameter("sortAttribute"); // Get sort attribute
+            int recordsPerPage = Integer.parseInt(request.getParameter("recordsPerPage"));
+            int currentPage = Integer.parseInt(request.getParameter("page"));
+            int offset = (currentPage - 1) * recordsPerPage;
 
             if (genreIdParameter != null) {
                 System.out.println("line 46 " + genreIdParameter);
@@ -72,10 +75,14 @@ public class BrowseServlet extends HttpServlet {
 
                 System.out.println(sortAttribute);
 
-                query += "ORDER BY " + sortAttribute;
+                query += "ORDER BY " + sortAttribute + " LIMIT ? OFFSET ?";
 
                 PreparedStatement statement = conn.prepareStatement(query);
                 statement.setInt(1, genreId);
+
+                statement.setInt(2, recordsPerPage); // Set limit
+                statement.setInt(3, offset); // Set offset
+
                 ResultSet rs = statement.executeQuery();
                 JsonArray jsonArray = new JsonArray();
 
@@ -152,6 +159,11 @@ public class BrowseServlet extends HttpServlet {
                             "GROUP BY m.id, m.title, m.year, m.director " +
                             "ORDER BY average_rating DESC;";
                     statement = conn.prepareStatement(query);
+                    query+= " LIMIT ? OFFSET ?";
+
+                    statement.setInt(1, recordsPerPage); // Set limit
+                    statement.setInt(2, offset); // Set offset
+
                 }
                 else {
                     // Execute SQL query to get movies for the given genreId
@@ -177,6 +189,10 @@ public class BrowseServlet extends HttpServlet {
                             "ORDER BY average_rating DESC;";
                     statement = conn.prepareStatement(query);
                     statement.setString(1, titleStartParameter + "%");
+                    query+= " LIMIT ? OFFSET ?";
+
+                    statement.setInt(2, recordsPerPage); // Set limit
+                    statement.setInt(3, offset); // Set offset
                 }
 
                 ResultSet rs = statement.executeQuery();
@@ -232,6 +248,12 @@ public class BrowseServlet extends HttpServlet {
                 String query = "SELECT id, name FROM genres ORDER BY name ASC;";
 
                 PreparedStatement statement = conn.prepareStatement(query);
+
+                query+= " LIMIT ? OFFSET ?";
+
+                statement.setInt(1, recordsPerPage); // Set limit
+                statement.setInt(2, offset); // Set offset
+
                 ResultSet rs = statement.executeQuery();
                 JsonArray jsonArray = new JsonArray();
 
