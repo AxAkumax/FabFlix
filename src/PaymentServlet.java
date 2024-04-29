@@ -17,10 +17,8 @@ import javax.sql.DataSource;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -75,6 +73,29 @@ public class PaymentServlet extends HttpServlet {
         if (action.equals("total")) {
             total_amount = Integer.parseInt(jsonData.get("total").getAsString());
         }
+        else if (action.equals("process_payment")) {
+
+            PrintWriter out = response.getWriter();
+            JsonObject jsonResult = new JsonObject();
+
+            try {
+                if (checkCreditCardRecords(jsonData)) {
+                    jsonResult.addProperty("result", "success");
+                    response.setStatus(200);
+                }
+                else {
+                    jsonResult.addProperty("result", "fail");
+                }
+            }
+            catch (SQLException e) {
+                System.out.println(e);
+                jsonResult.addProperty("result", "fail");
+            }
+            finally {
+                out.write(jsonResult.toString());
+            }
+
+        }
     }
 
     // Utility function to parse request body to JSON
@@ -92,4 +113,45 @@ public class PaymentServlet extends HttpServlet {
         // Parse the request body to JSON
         return JsonParser.parseString(sb.toString()).getAsJsonObject();
     }
+
+    public boolean checkCreditCardRecords(JsonObject jsonData) throws SQLException {
+        String firstName = jsonData.get("firstName").getAsString();
+        String lastName = jsonData.get("lastName").getAsString();
+        String creditCardNumber = jsonData.get("creditCardNumber").getAsString();
+        int expirationDate = jsonData.get("expirationDate").getAsInt();
+        int expirationMonth = jsonData.get("expirationMonth").getAsInt();
+        int expirationYear = jsonData.get("expirationYear").getAsInt();
+
+        try (Connection conn = dataSource.getConnection()) {
+            String query = "SELECT ccId, firstName, lastName, expiration " +
+                    "FROM creditcards cc " +
+                    "WHERE ccId = ? AND firstName = ? AND lastName = ? AND expiration = ?";
+
+            LocalDate localDate = LocalDate.of(expirationYear, expirationMonth, expirationDate);
+            Date date = Date.valueOf(localDate);
+
+            PreparedStatement statement = conn.prepareStatement(query);
+            statement.setString(1, creditCardNumber);
+            statement.setString(2, firstName);
+            statement.setString(3, lastName);
+            statement.setDate(4, date);
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) { // Move cursor to the first row
+                System.out.println(rs.getString("ccId"));
+                System.out.println(rs.getString("firstName"));
+                System.out.println(rs.getString("lastName"));
+                System.out.println(rs.getString("expiration"));
+                return true;
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+
+        return false;
+    }
+
+
 }

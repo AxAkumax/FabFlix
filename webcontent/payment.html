@@ -67,7 +67,39 @@
 
 <h3 id="cart_total"> Cart Total: $0 </h3>
 
+<div class="container">
+    <form id="payment_form">
+        <div class="form-group">
+            <label for="first_name">First Name</label>
+            <input type="text" class="form-control" id="first_name" required>
+        </div>
+        <div class="form-group">
+            <label for="last_name">Last Name</label>
+            <input type="text" class="form-control" id="last_name" required>
+        </div>
+        <div class="form-group">
+            <label for="credit_card_number">Credit Card Number</label>
+            <input type="text" class="form-control" id="credit_card_number" required>
+        </div>
 
+        <div class="form-group">
+            <label for="expiration_date">Expiration Date</label>
+            <input type="number" class="form-control" id="expiration_date" min="1" max="31" required>
+        </div>
+        <div class="form-group">
+            <label for="expiration_month">Expiration Month</label>
+            <input type="number" class="form-control" id="expiration_month" min="1" max="12" required>
+        </div>
+        <div class="form-group">
+            <label for="expiration_year">Expiration Year</label>
+            <input type="number" class="form-control" id="expiration_year" required>
+        </div>
+
+
+
+        <button type="submit" id="submit_button" class="btn btn-primary">Place Order</button>
+    </form>
+</div>
 
 
 <!-- Load jQuery and Bootstrap JS -->

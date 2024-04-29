@@ -8,6 +8,10 @@ body{
     background-color: black;
 }
 
+label {
+    color: white;
+}
+
 .custom-navbar {
     background-color: #bb86fc;
 }
@@ -20,6 +24,13 @@ body{
 }
 .nav-link:hover {
     color: white !important;
+}
+
+#submit_button {
+    margin-left: 65vw;
+    margin-top: 5vw;
+    color: white;
+    background-color: #bb86fc;;
 }
 
 header{
