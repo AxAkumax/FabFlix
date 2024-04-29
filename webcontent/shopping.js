@@ -110,6 +110,64 @@ function updateMovieCount(data) {
     });
 }
 
+// Function to enable/disable the payment button based on the cart total
+function togglePaymentButton(cartTotal) {
+    const paymentButton = $("#payment_button");
+    if (cartTotal > 0) {
+        paymentButton.removeAttr("disabled");
+    } else {
+        paymentButton.attr("disabled", "disabled");
+    }
+}
+
+// Add an event listener to update the payment button status when the cart total changes
+$("#cart_total").on("DOMSubtreeModified", function() {
+    // Extract the cart total value
+    const cartTotalText = $(this).text();
+    const cartTotal = parseInt(cartTotalText.replace("Cart Total: $ ", ""));
+
+    // Toggle the payment button based on the cart total
+    togglePaymentButton(cartTotal);
+});
+
+// Initially set the button status based on the initial cart total
+$(document).ready(function() {
+    const cartTotalText = $("#cart_total").text();
+    const cartTotal = parseInt(cartTotalText.replace("Cart Total: $ ", ""));
+
+    // Toggle the payment button based on the initial cart total
+    togglePaymentButton(cartTotal);
+});
+
+// Function to handle payment button click
+$("#payment_button").click(function() {
+    // Add your payment processing logic here
+
+    const cartTotalText = $("#cart_total").text();
+    const cartTotal = parseInt(cartTotalText.replace("Cart Total: $ ", ""));
+
+    let data = {
+        "total": cartTotal,
+        "action": "total"
+    };
+
+    // Send an AJAX POST request to your backend API to add the movie to the cart
+    $.ajax({
+        type: "POST",
+        url: "api/payment", // Replace this with the actual endpoint of your backend API
+        contentType: "application/json",
+        data: JSON.stringify(data),
+        success: function(response) {
+            console.log("successfully sent the payment PaymentServlet");
+            window.location.href = "payment.html";
+        },
+        error: function(xhr, status, error) {
+            // Handle errors if any
+            console.error("Error adding movie to cart:", error);
+        }
+    });
+});
+
 $.ajax({
     url: "api/cart",
     method: "GET",

@@ -136,15 +136,12 @@ public class ShoppingServlet extends HttpServlet {
 
                     jsonArray.add(jsonObject);
                 }
-
                 rs.close();
                 statement.close();
             }
-
         } catch (Exception e) {
-            // Handle exceptions
+            System.out.println(e);
         }
-
         return jsonArray;
     }
 
