@@ -62,12 +62,20 @@ $('#payment_form').submit(function(event) {
             // Handle errors if any
             console.error("Error authenticating credit card user:", error);
             // please enter the correct information
+            var label = $('#wrong_information_label').val();
+            label.text("Unable to authenticate user info. Please enter correct information");
         }
     });
 });
 
 function handleResult(response) {
     if (response["result"] == "success") {
+        var label = $('#wrong_information_label');
+        label.text("");
         window.location.href = "confirmation.html";
+    }
+    else {
+        var label = $('#wrong_information_label');
+        label.text("Unable to authenticate user info. Please enter correct information.");
     }
 }
