@@ -7,6 +7,13 @@ $(document).ready(function() {
 function fetchSearchResults(){
         // Extract search parameters from the URL
         var urlParams = new URLSearchParams(window.location.search);
+        var genreId = urlParams.get('genreId'); // Check if genreId parameter exists
+        if (genreId) {
+            console.log(genreId);
+            console.log("before going into fetch movies by genre");
+            fetchMoviesByGenre(genreId);
+            return;
+        }
         var title = urlParams.get('title');
         var year = urlParams.get('year');
         var director = urlParams.get('director');
@@ -42,8 +49,33 @@ function fetchSearchResults(){
 
 
 // Function to populate the table with search results
+function fetchMoviesByGenre(genreId) {
+    // Make AJAX request to fetch movies by genreId
+    formData = {};
+    if(genreId){
+        formData["genreId"] = genreId;
+    }
+    console.log("formData: ", formData);
+    $.ajax({
+        url: "api/browse",
+        method: "GET",
+        dataType: "json",
+        data: formData,
+        success: function (resultData) {
+            // Populate the table with genre results
+            console.log("success");
+            console.log("genreId!!:",genreId);
+            console.log("resultData in fetch: ", resultData);
+            populateTable(resultData);
+        },
+        error: function (xhr, status, error) {
+            console.log(genreId);
+            console.error("Error occurred while fetching genre movies:", error);
+        }
+    });
+}
 function populateTable(resultData) {
-    console.log(resultData);
+    console.log("Result data:", resultData);
     var table = $("#movie_table_body");
     var tableHeadings = $("#movie_table thead");
 
