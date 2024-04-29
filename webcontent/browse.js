@@ -227,5 +227,6 @@ function handleDropdownChange() {
     create_browsing_result(url);
 
 }
+
 $("#sortAttribute").change(handleDropdownChange);
 

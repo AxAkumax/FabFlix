@@ -44,7 +44,8 @@ function handleStarResult(resultData) {
         let star_names = resultData[i]['movie_stars'].split(';');
 
         // Iterate through resultData, no more than 10 entries
-        let star_entries = ""
+        let star_entries = "";
+
         let length  = Math.min(3, star_ids.length);
         for (let j = 0; j < length; j++) {
 
@@ -90,7 +91,8 @@ jQuery.ajax({
 function addToCart(movieId) {
     // Create a JSON object containing the movie ID
     let data = {
-        "movieId": movieId
+        "movieId": movieId,
+        "action": "increment"
     };
 
     // Send an AJAX POST request to your backend API to add the movie to the cart
