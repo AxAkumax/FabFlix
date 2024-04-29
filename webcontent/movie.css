@@ -1,0 +1,102 @@
+html{
+    width: 100%;
+    height: 100%;
+    background-color: black;
+}
+
+.custom-navbar {
+    background-color: #bb86fc;
+}
+
+.navbar-nav .nav-link, .nav-link {
+    color: black !important; /* Set the text color to black */
+}
+.navbar-nav .nav-link:hover{
+    color: white !important;
+}
+.nav-link:hover {
+    color: white !important;
+}
+
+body{
+    background-color: black;
+}
+h1{
+    color: lightgray;
+    margin-bottom: 0.9vw;
+    text-align: center;
+    margin-top: 6.5vw;
+    font-family: "DM Sans", sans-serif;
+}
+h2, p{
+    color: white;
+}
+#movie_table {
+    background-color: black; /* black background color for the table */
+    color: lightgrey; /* white text color for the table */
+    font-family: "DM Sans", sans-serif;
+    font-style: normal;
+    max-width: 87vw; /* Set a maximum width for the table */
+    margin: 0 auto;
+}
+
+#movie_table tbody tr {
+    color: lightgrey; /* white text color for table body rows */
+    transition: all 0.3s ease; /* Add transition for smooth animation */
+}
+
+#movie_table tbody tr:hover {
+    background-color: #333; /* Darken background color when hovered */
+    transform: scale(1.1); /* Increase size of row when hovered */
+}
+#searchResults{
+    margin-top: 2vw;
+}
+#noResults, #noParameters{
+    text-align: center;
+    color: lightgray;
+}
+
+footer{
+    bottom: 0;
+    margin-top: auto;
+    width: 100%;
+    padding-top: 1.2vw;
+    padding-bottom: 1.2vw;
+    padding-left: 0.8vw;
+    background-color: black;
+    color: #bb86fc; /* white text color for the table */
+    font-family: "DM Sans", sans-serif;
+    font-style: normal;
+    font-size: 1.3vw;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure the body covers the entire viewport height */
+}
+#prevBtn, #nextBtn{
+    background-color: #bb86fc;
+    color: black; /* Set the text color */
+    border: 1px solid transparent;
+    border-radius: 5px;
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+#nextBtn:hover{
+    background-color: black;
+    color: lightgray;
+    border-color: lightgray;
+    border-width: thin;
+}
+#prevBtn:hover{
+    background-color: black;
+    color: lightgray;
+    border-color: lightgray;
+    border-width: thin;
+}
+
+main {
+    flex: 1; /* Allow main content to expand and push footer to the bottom */
+}
