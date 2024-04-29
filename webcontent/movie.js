@@ -50,7 +50,7 @@ function fetchSearchResults(){
 
 // Function to populate the table with search results
 function fetchMoviesByGenre(genreId) {
-    // Make AJAX request to fetch movies by genreId
+    //Make AJAX request to fetch movies by genreId
     formData = {};
     if(genreId){
         formData["genreId"] = genreId;

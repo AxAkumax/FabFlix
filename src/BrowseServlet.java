@@ -41,7 +41,7 @@ public class BrowseServlet extends HttpServlet {
 
         try (Connection conn = dataSource.getConnection()) {
 
-            String genreIdParameter = request.getParameter("genreId");
+             String genreIdParameter = request.getParameter("genreId");
 //            String titleStartParameter = request.getParameter("titleStart");
 //
 //            String sortAttribute = request.getParameter("sortAttribute"); // Get sort attribute
@@ -53,15 +53,20 @@ public class BrowseServlet extends HttpServlet {
                 System.out.println("line 46 " + genreIdParameter);
                 int genreId = Integer.parseInt(genreIdParameter);
                 // Execute SQL query to get movies for the given genreId
-                String query = "SELECT m.id AS movie_id, m.title AS movie_title, m.year AS movie_year, " +
+                String query = "SELECT " +
+                "m.id AS movie_id, " +
+                        "m.title AS movie_title, " +
+                        "m.year AS movie_year, " +
                         "m.director AS movie_director, " +
                         "GROUP_CONCAT(DISTINCT CONCAT(s.id, ';', s.name) SEPARATOR ';') AS star_ids_and_names, " +
-                        "GROUP_CONCAT(DISTINCT CONCAT(g.id, ';', g.name) SEPARATOR ';') AS genres " +
+                        "GROUP_CONCAT(DISTINCT CONCAT(g.id, ';', g.name) SEPARATOR ';') AS genres, " +
+                        "AVG(r.rating) AS average_rating " + // Calculate average rating
                         "FROM movies m " +
                         "JOIN genres_in_movies gm ON m.id = gm.movieId " +
                         "JOIN genres g ON gm.genreId = g.id " +
                         "JOIN stars_in_movies sm ON m.id = sm.movieId " +
                         "JOIN stars s ON sm.starId = s.id " +
+                        "LEFT JOIN ratings r ON m.id = r.movieId " + // Join with ratings table
                         "WHERE g.id = ? " +
                         "GROUP BY m.id, m.title, m.year, m.director";
 
@@ -85,7 +90,7 @@ public class BrowseServlet extends HttpServlet {
                     String movieTitle = rs.getString("movie_title");
                     String movieYear = rs.getString("movie_year");
                     String movieDirector = rs.getString("movie_director");
-                    String movieGenres = rs.getString("movie_id_genres");
+                    String movieGenres = rs.getString("genres");
                     double averageRating = Math.round(rs.getDouble("average_rating") * 10.0) / 10.0;
 
                     JsonObject jsonObject = new JsonObject();
