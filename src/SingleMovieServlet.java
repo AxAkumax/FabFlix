@@ -58,9 +58,11 @@ public class SingleMovieServlet extends HttpServlet {
                     "(SELECT GROUP_CONCAT(DISTINCT CONCAT(s.id, ';', s.name) SEPARATOR ';') " +
                     "FROM stars_in_movies sm JOIN stars s ON sm.starId = s.id " +
                     "WHERE sm.movieId = m.id) AS star_ids_and_names, " +
-                    "(SELECT GROUP_CONCAT(DISTINCT g.name) " +
+
+                    "(SELECT GROUP_CONCAT(DISTINCT CONCAT(g.id, ';', g.name) SEPARATOR ';') " +
                     "FROM genres_in_movies gm JOIN genres g ON gm.genreId = g.id " +
-                    "WHERE gm.movieId = m.id) AS movie_genres, " +
+                    "WHERE gm.movieId = m.id) AS genres, " +
+
                     "AVG(r.rating) AS average_rating " +
                     "FROM movies m " +
                     "LEFT JOIN ratings r ON m.id = r.movieId " +
@@ -103,7 +105,7 @@ public class SingleMovieServlet extends HttpServlet {
                 String movieTitle = rs.getString("movie_title");
                 String movieYear = rs.getString("movie_year");
                 String movieDirector = rs.getString("movie_director");
-                String movieGenres = rs.getString("movie_genres");
+                String movieGenres = rs.getString("genres");
 
                 double averageRating = Math.round(rs.getDouble("average_rating") * 10.0) / 10.0;
 

@@ -53,8 +53,13 @@ public class SingleStarServlet extends HttpServlet {
             // Get a connection from dataSource
 
             // Construct a query with parameter represented by "?"
-            String query = "SELECT * from stars as s, stars_in_movies as sim, movies as m " +
-                    "where m.id = sim.movieId and sim.starId = s.id and s.id = ?";
+            String query = "SELECT *, " +
+                    "(SELECT GROUP_CONCAT(DISTINCT CONCAT(g.id, ';', g.name) SEPARATOR ';') " +
+                    "FROM genres_in_movies gm JOIN genres g ON gm.genreId = g.id " +
+                    "WHERE gm.movieId = m.id) AS genres " +
+                    "FROM stars as s, stars_in_movies as sim, movies as m " +
+                    "WHERE m.id = sim.movieId AND sim.starId = s.id AND s.id = ?";
+
 
             // Declare our statement
             PreparedStatement statement = conn.prepareStatement(query);
@@ -79,6 +84,7 @@ public class SingleStarServlet extends HttpServlet {
                 String movieTitle = rs.getString("title");
                 String movieYear = rs.getString("year");
                 String movieDirector = rs.getString("director");
+                String genres = rs.getString("genres");
 
                 // Create a JsonObject based on the data we retrieve from rs
 
@@ -90,6 +96,7 @@ public class SingleStarServlet extends HttpServlet {
                 jsonObject.addProperty("movie_title", movieTitle);
                 jsonObject.addProperty("movie_year", movieYear);
                 jsonObject.addProperty("movie_director", movieDirector);
+                jsonObject.addProperty("movie_genres", genres);
 
                 jsonArray.add(jsonObject);
             }

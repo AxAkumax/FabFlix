@@ -81,7 +81,7 @@ public class SearchServlet extends HttpServlet {
                     "       LIMIT 3) AS topStars) AS star_ids_and_names, "
                     +
 
-            "(SELECT GROUP_CONCAT(DISTINCT CONCAT(g.id, ';', g.name) SEPARATOR ';') " +
+                    "(SELECT GROUP_CONCAT(DISTINCT CONCAT(g.id, ';', g.name) SEPARATOR ';') " +
                     "FROM genres_in_movies gm JOIN genres g ON gm.genreId = g.id " +
                     "WHERE gm.movieId = m.id) AS movie_id_genres, " +
 
