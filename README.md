@@ -1,17 +1,17 @@
 Team: Suika-Lords
 Members: Akshita Akumalla, Niharika Kumar
 
-Demo URL:
+Demo URL: https://youtu.be/Hh2ZzjDoFcY
 
 Contributions:
 	Project 2:
-		Akshita
-			  - Created and linked the Login page
-			  - Implemented searching page
-			  - Implemented substring matching
-			  - Rewrote Browsing.js so that Searching and Browsing both lead to Movie List page
-			  - Implemented jump functionality so that movie list page is maintained when returned
-			  - Implemented pagination (prev/next feature)
+	Akshita
+		  - Created and linked the Login page
+		  - Implemented searching page
+		  - Implemented substring matching
+		  - Rewrote Browsing.js so that Searching and Browsing both lead to Movie List page
+		  - Implemented jump functionality so that movie list page is maintained when returned
+		  - Implemented pagination (prev/next feature)
 
         Niharika
 	            - Wrote Browsing Servlet
