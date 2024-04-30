@@ -8,12 +8,13 @@ function fetchSearchResults(){
         // Extract search parameters from the URL
         var urlParams = new URLSearchParams(window.location.search);
         var genreId = urlParams.get('genreId'); // Check if genreId parameter exists
+        var character =  urlParams.get('character');
         var sortAttribute = urlParams.get('sortAttribute');
         var recordsPerPage = urlParams.get('recordsPerPage');
-        if (genreId) {
+        if (genreId || character) {
             console.log(genreId);
             console.log("before going into fetch movies by genre");
-            fetchMoviesByGenre(genreId, sortAttribute, recordsPerPage);
+            fetchMoviesByGenre(genreId, character, sortAttribute, recordsPerPage);
             return;
         }
         var title = urlParams.get('title');
@@ -39,10 +40,12 @@ function fetchSearchResults(){
             data: formData,
             success: function(resultData) {
                 // Populate the table with search results
+                $("#noResultsMessage").hide();
                 console.log("sucesss");
                 populateTable(resultData);
             },
             error: function(xhr, status, error) {
+                $("#noResultsMessage").show();
                 console.error("Error occurred while fetching search results:", error);
             }
         });
@@ -50,11 +53,14 @@ function fetchSearchResults(){
 
 
 // Function to populate the table with search results
-function fetchMoviesByGenre(genreId, sortAttribute, recordsPerPage) {
+function fetchMoviesByGenre(genreId, character, sortAttribute, recordsPerPage) {
     //Make AJAX request to fetch movies by genreId
     formData = {};
     if(genreId){
         formData["genreId"] = genreId;
+    }
+    if(character){
+        formData["character"] = character;
     }
     formData["sortAttribute"] = sortAttribute;
     formData["recordsPerPage"] = recordsPerPage;
@@ -86,14 +92,14 @@ function populateTable(resultData) {
     table.empty();
     var noResultsMessage = $("#noResultsMessage");
 
-    // Check if the movies array is empty
-    if (resultData.movies.length === 0) {
+    if (!resultData || !resultData.movies || resultData.movies.length === 0) {
         console.log("No movies found.");
         // Hide the table and show the no results message
+        noResultsMessage.show();
         table.hide();
         tableHeadings.hide()
-        noResultsMessage.show();
-        return; // Exit the function early if no movies are found
+        return;
+
     }
 
     noResultsMessage.hide();

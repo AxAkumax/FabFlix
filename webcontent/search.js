@@ -7,6 +7,13 @@ function submitSearchForm(event) {
     event.preventDefault(); // Prevent default form submission
 
     // Manually construct form data object
+    let title =  $("#inputTitle").val();
+    let year = $("#inputYear").val();
+    let director = $("#inputDirector").val();
+    let starName =  $("#inputStar").val();
+    let sortAttribute = $("#sortAttribute").val();
+    let page = currentPage;
+    let recordsPage = $("#moviesPerPage").val();
 
     var formData = {
         "title": $("#inputTitle").val(),
@@ -18,6 +25,7 @@ function submitSearchForm(event) {
         recordsPerPage: $("#moviesPerPage").val()
     };
 
+
     // Remove empty values from form data
     Object.keys(formData).forEach(function(key) {
         if (!formData[key] && formData[key] !== 0) { // Also check for 0, as it's a valid value
@@ -27,15 +35,11 @@ function submitSearchForm(event) {
 
     if (Object.keys(formData).length === 3) {
         // Display a message or perform any other action indicating that the form is empty
-        $("#movie_table_body").empty();
-        $("#movie_table thead").hide();
-        $("#noResultsMessage").hide();
-        $("#prevNextButton").hide();
         $("#nParametersMessage").show();
 
         return; // Exit the function
     }
-
+    $("#nParametersMessage").hide();
     // Convert form data object to query string
     var queryString = $.param(formData);
 
@@ -51,10 +55,13 @@ function submitSearchForm(event) {
         method: "GET",
         dataType: "json",
         success: function(resultData) {
+
             redirectToNewPage(formData);
 
         },
         error: function(xhr, status, error) {
+            console.log(formData);
+            console.log(url);
             console.error("Error occurred while fetching search results:", error);
         }
     });

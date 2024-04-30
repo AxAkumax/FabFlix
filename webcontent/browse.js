@@ -34,8 +34,22 @@ function handleResult(resultData) {
     let letters = ["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F","H","I","J","K","L","M","N","O","P",
     "Q","R","S","T","U","V","W","X","Y","Z","*"];
     for(let i=0; i<letters.length; i++){
-        let alphalink = $("<a class='browse-link'>").attr("href", "movie.html?character=" + letters[i]).text(letters[i]);
+        // let alphalink = $("<a class='browse-link'>").attr("href", "movie.html?character=" + letters[i]).text(letters[i]);
+        // alphaSpan.append(alphalink);
+
+        let alphalink = $("<a class='browse-link'>")
+            .attr("href", "movie.html?character=" + letters[i]).text(letters[i]);
+
+        // Append dropdown option values to the genre links
+        let sortAttribute = "title ASC, average_rating ASC";
+        let moviesPerPage = "10";
+        let urlParams = "&sortAttribute=" + encodeURIComponent(sortAttribute)
+            + "&recordsPerPage=" + encodeURIComponent(moviesPerPage);
+        alphalink.attr("href", alphalink.attr("href") + urlParams);
+
         alphaSpan.append(alphalink);
+
+
         if (i < letters.length - 1) {
             alphaSpan.append(", ");
         }
