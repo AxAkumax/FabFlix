@@ -49,26 +49,20 @@ function handleResult(resultData) {
     content+="<h2>" + "<span style='color: #bb86fc;'>" + resultData[0]["movie_title"] + "</span></h2>" +
         "<p>Director: " + resultData[0]["movie_director"] + "</p>" +
         "<p>Rating: " + resultData[0]["average_rating"] + "</p>" +
-        "<p>Year: " + resultData[0]["movie_year"] + "</p>" +
-        "<p>Genres: " + resultData[0]["movie_genres"] + "</p>";
+        "<p>Year: " + resultData[0]["movie_year"] + "</p>";
 
-    let star_ids = resultData[0]['movie_starIds'].split(';');
-    let star_names = resultData[0]['movie_stars'].split(';');
-    let star_entries = "";
-    let length  = star_ids.length;
-    for (let j = 0; j < length; j++) {
+        // "<p>Genres: " + resultData[0]["movie_genres"] + "</p>";
+        let genre_id_names = resultData[0]["movie_genres"].split(";");
 
-        // Concatenate the html tags with resultData jsonObject
-        star_entries +=
-            // Add a link to single-star.html with id passed with GET url parameter
-            '<a href="single-star.html?id=' + star_ids[j] + '">'
-            + star_names[j] +     // display star_name for the link text
-            '</a>';
-        if (j< length-1){
-            star_entries+=", ";
+        let genres = [];
+
+        for (let i = 0; i < genre_id_names.length; i += 2) {
+            let genre_id = genre_id_names[i];
+            let genre_name = genre_id_names[i + 1];
+            genres.push({id: genre_id, name: genre_name});
         }
-    }
-    content += "<p>Stars: "+star_entries+"</p>";
+        //sorted alphabetically
+        genres.sort((a, b) => a.name.localeCompare(b.name));
 
     // delete button
     content += '<p> <button type="button" class="btn btn-outline-secondary" ' +

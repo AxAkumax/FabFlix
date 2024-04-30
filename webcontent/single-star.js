@@ -68,11 +68,48 @@ function handleResult(resultData) {
     for (let i = 0; i < Math.min(10, resultData.length); i++) {
         let rowHTML = "";
         rowHTML += "<tr>";
-        rowHTML += "<th>" + '<a href="single-movie.html?id=' + resultData[i]['movie_id'] + '">'
+        rowHTML += "<td>" + '<a href="single-movie.html?id=' + resultData[i]['movie_id'] + '">'
             + resultData[i]["movie_title"] +     // display star_name for the link text
-            '</a>' + "</th>";
-        rowHTML += "<th>" + resultData[i]["movie_year"] + "</th>";
-        rowHTML += "<th>" + resultData[i]["movie_director"] + "</th>";
+            '</a>' + "</td>";
+        rowHTML += "<td>" + resultData[i]["movie_year"] + "</td>";
+        rowHTML += "<td>" + resultData[i]["movie_director"] + "</td>";
+
+        let genre_id_names = resultData[i]["movie_genres"].split(";");
+
+        let genres = [];
+
+        for (let i = 0; i < genre_id_names.length; i += 2) {
+            let genre_id = genre_id_names[i];
+            let genre_name = genre_id_names[i + 1];
+            genres.push({id: genre_id, name: genre_name});
+        }
+        //sorted alphabetically
+        genres.sort((a, b) => a.name.localeCompare(b.name));
+
+        let genreSpan = $("<span>");
+
+        for (let i = 0; i < Math.min(3, genres.length); i++) {
+            let genre = genres[i];
+
+            let genreLink = $("<a class='browse-link'>")
+                .attr("href", "movie.html?genreId=" + genre.id)
+                .text(genre.name);
+            // Append dropdown option values to the genre links
+            let sortAttribute = "title ASC, average_rating ASC";
+            let moviesPerPage = "10";
+            let urlParams = "&sortAttribute=" + encodeURIComponent(sortAttribute)
+                + "&recordsPerPage=" + encodeURIComponent(moviesPerPage);
+            genreLink.attr("href", genreLink.attr("href") + urlParams);
+
+            genreSpan.append(genreLink);
+            if (i < genres.length - 1) {
+                genreSpan.append(", ");
+            }
+        }
+        let genreSpanHTML = genreSpan.prop('outerHTML');
+
+        rowHTML +="<td>" + genreSpanHTML + "</td>";
+
         rowHTML += "</tr>";
 
         // Append the row created to the table body, which will refresh the page
