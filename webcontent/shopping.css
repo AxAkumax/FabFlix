@@ -23,7 +23,6 @@ body{
     color: white !important;
 }
 
-
 header{
     padding: 0.6vw;
     font-size: 5vw;
@@ -48,22 +47,37 @@ h2{
     margin-top: 6vw;
     margin-bottom: 1.2vw;
 }
-a {
-    color: lightgrey;  /* blue color */
+
+h3 {
+    background-color: black;
+    text-align: left;
+    color:  #bb86fc;
+    font-size: 1.8vw;
+    padding-left: 13vw;
+    padding-bottom: 1.3vw;
+    font-family: "DM Sans", sans-serif;
+    font-weight: 200;
+    font-style: normal;
+    margin-bottom: 1.2vw;
 }
 
-/* Color for links when hovered */
-a:hover {
-    color: #bb86fc; /* orange color */
+.button-container {
+    text-align: right;
 }
 
-/* Styling for the table */
-#movie_table {
+#payment_button {
+    margin-right: 13vw;
+    margin-top: 5vw;
+    color: white;
+    background-color: #bb86fc;;
+}
+
+#shopping_table {
     background-color: black; /* black background color for the table */
     color: lightgrey; /* white text color for the table */
     font-family: "DM Sans", sans-serif;
     font-style: normal;
-    max-width: 98vw; /* Set a maximum width for the table */
+    max-width: 97vw; /* Set a maximum width for the table */
     margin: 0 auto;
 }
 
@@ -71,17 +85,16 @@ a:hover {
 /*    color: lightgrey; !* white text color for table headers *!*/
 /*}*/
 
-#movie_table tbody tr {
+#shopping_table tbody tr {
     color: lightgrey; /* white text color for table body rows */
     transition: all 0.3s ease; /* Add transition for smooth animation */
 }
 
 
-#movie_table tbody tr:hover {
+#shopping_table tbody tr:hover {
     background-color: #333; /* Darken background color when hovered */
     transform: scale(1.1); /* Increase size of row when hovered */
 }
-
 
 footer{
     bottom: 0;
@@ -106,12 +119,3 @@ body {
 main {
     flex: 1; /* Allow main content to expand and push footer to the bottom */
 }
-
-header, #movie_table {
-    margin-top: 0; /* Remove default margin */
-    margin-bottom: 0; /* Remove default margin */
-}
-
-
-
-

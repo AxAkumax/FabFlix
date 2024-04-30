@@ -2,7 +2,7 @@
 
     This .html performs two steps:
     1. Create a html template skeleton, with all the elements defined (some left empty) and named with ids.
-    2. Load single-star.js to populate the data into empty elements.
+    2. Load index.js to populate the data into empty elements.
     -->
 
 <!doctype html>
@@ -13,18 +13,20 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
+    <!--     Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <link rel="stylesheet" type="text/css" href="single-star.css">
+    <link rel="stylesheet" type="text/css" href="shopping.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
 
+    <title>Movie List</title>
 </head>
 <body>
+
 
 <nav class="navbar navbar-expand-lg navbar-dark custom-navbar fixed-top">
     <span class="navbar-brand">
@@ -60,23 +62,38 @@
     </div>
 </nav>
 
-<!-- H3 body is left empty here, will be populated with the data retrieved with single-star.js -->
-<!-- single-star.js will find this html element by it's id "star_info" -->
-<h3 id="star_info"></h3>
-<table id=movie_table class="table table-hover table-dark">
-    <thead>
-    <tr>
-        <th>Movie Title</th>
-        <th>Release Year</th>
-        <th>Director</th>
-        <th>
-    </tr>
-    </thead>
 
-    <!-- Table body is left empty here, will be populated with the data retrieved with single-star.js -->
-    <!-- single-star.js will find this html element by it's id "movie_table_body" -->
-    <tbody id=movie_table_body></tbody>
-</table>
+<h2>Shopping Cart</h2>
+
+<h3 id="cart_total"> Cart Total: $0 </h3>
+
+<div class="container">
+    <div class="row" id="shopping_cards">
+        <!-- Id "star_table" is useful for jQuery to find the html element with id, class here is mapping to Bootstrap defined class CSS -->
+        <table id=shopping_table class="table table-hover table-dark">
+            <!-- Create a table header -->
+            <thead>
+            <tr>
+                <!-- Titles of each column-->
+                <th>#</th>
+                <th>Title</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total Price</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <!-- Table body is left empty here, will be populated with the data retrieved with index.js -->
+            <!-- Again, id "star_table_body" is useful for jQuery to find this html element -->
+            <tbody id=shopping_table_body></tbody>
+        </table>
+    </div>
+</div>
+
+<div class="button-container">
+    <button id="payment_button" type="button" class="btn btn-primary" disabled>Proceed to Payment</button>
+</div>
+
 
 <!-- Load jQuery and Bootstrap JS -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -84,10 +101,10 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 <!-- Load our own JS file -->
-<!-- The path is relative to single-star.html, since these two files are in the same directory -->
+<!-- The path is relative to index.html, since these two files are in the same directory -->
 <!-- Note the url does not contain a "/" in the beginning, which means the url is relative to current path
      otherwise the url is relative to the root path-->
-<script src="single-star.js"></script>
+<script src="shopping.js"></script>
 <footer>
     &#xa9; 2024 Akshita Akumalla, Niharika Kumar
 </footer>
