@@ -58,28 +58,10 @@ body{
 h2, p{
     color: white;
 }
-#movie_table {
-    background-color: black; /* black background color for the table */
-    color: lightgrey; /* white text color for the table */
-    font-family: "DM Sans", sans-serif;
-    font-style: normal;
-    max-width: 87vw; /* Set a maximum width for the table */
-    margin: 0 auto;
-}
-
-#movie_table tbody tr {
-    color: lightgrey; /* white text color for table body rows */
-    transition: all 0.3s ease; /* Add transition for smooth animation */
-}
-
-#movie_table tbody tr:hover {
-    background-color: #333; /* Darken background color when hovered */
-    transform: scale(1.1); /* Increase size of row when hovered */
-}
 #searchResults{
     margin-top: 2vw;
 }
-#noResults, #noParameters{
+#noResults, #noParameters, #noResultsMessage{
     text-align: center;
     color: lightgray;
 }
