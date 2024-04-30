@@ -64,6 +64,33 @@ function handleResult(resultData) {
         //sorted alphabetically
         genres.sort((a, b) => a.name.localeCompare(b.name));
 
+
+        let genreSpan = $("<span>");
+        for (let i = 0; i < genres.length; i++) {
+            let genre_id = genres[i].id;
+            let genre_name = genres[i].name;
+
+            let genreLink = $("<a class='browse-link'>")
+                .attr("href", "movie.html?genreId=" + genre_id)
+                .text(genre_name);
+
+            // Append dropdown option values to the genre links
+            let sortAttribute = "title ASC, average_rating ASC";
+            let moviesPerPage = "10";
+            let urlParams = "&sortAttribute=" + encodeURIComponent(sortAttribute)
+                + "&recordsPerPage=" + encodeURIComponent(moviesPerPage);
+            genreLink.attr("href", genreLink.attr("href") + urlParams);
+
+            genreSpan.append(genreLink);
+            if (i < resultData.length - 1) {
+                genreSpan.append(", ");
+            }
+        }
+        let genreSpanHTML = genreSpan.prop('outerHTML');
+        content+= "<p>Genres: "+genreSpanHTML+"</p>";
+
+
+
     // delete button
     content += '<p> <button type="button" class="btn btn-outline-secondary" ' +
         'onclick="addToCart(\'' + resultData[0]["movie_id"] + '\')"> Add to Cart </button> </p>';
