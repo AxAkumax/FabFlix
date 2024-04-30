@@ -42,12 +42,12 @@ public class BrowseServlet extends HttpServlet {
         try (Connection conn = dataSource.getConnection()) {
 
              String genreIdParameter = request.getParameter("genreId");
-//            String titleStartParameter = request.getParameter("titleStart");
-//
-//            String sortAttribute = request.getParameter("sortAttribute"); // Get sort attribute
-//            int recordsPerPage = Integer.parseInt(request.getParameter("recordsPerPage"));
-//            int currentPage = Integer.parseInt(request.getParameter("page"));
-//            int offset = (currentPage - 1) * recordsPerPage;
+            //String titleStartParameter = request.getParameter("titleStart");
+
+            String sortAttribute = request.getParameter("sortAttribute"); // Get sort attribute
+            int recordsPerPage = Integer.parseInt(request.getParameter("recordsPerPage"));
+            int currentPage = Integer.parseInt(request.getParameter("page"));
+            int offset = (currentPage - 1) * recordsPerPage;
 
             if (genreIdParameter != null) {
                 System.out.println("line 46 " + genreIdParameter);
@@ -55,7 +55,7 @@ public class BrowseServlet extends HttpServlet {
                 // Execute SQL query to get movies for the given genreId
                 String query = "SELECT " +
                 "m.id AS movie_id, " +
-                        "m.title AS movie_title, " +
+                        "m.title AS title, " +
                         "m.year AS movie_year, " +
                         "m.director AS movie_director, " +
                         "GROUP_CONCAT(DISTINCT CONCAT(s.id, ';', s.name) SEPARATOR ';') AS star_ids_and_names, " +
@@ -72,14 +72,23 @@ public class BrowseServlet extends HttpServlet {
 
                 //System.out.println(sortAttribute);
 
-                //query += "ORDER BY " + sortAttribute;
-                //+ " LIMIT ? OFFSET ?";
+                String[] sortAttributes = sortAttribute.split(", ");
+                StringBuilder orderByClause = new StringBuilder();
+                for (String attribute : sortAttributes) {
+                    orderByClause.append(attribute).append(", ");
+                }
+                // Remove the trailing comma and space
+                orderByClause.setLength(orderByClause.length() - 2);
+
+                query += " ORDER BY " + orderByClause.toString() + " LIMIT ? OFFSET ?";
+
+                System.out.println("Constructed SQL query: " + query);
 
                 PreparedStatement statement = conn.prepareStatement(query);
                 statement.setInt(1, genreId);
 
-    //                statement.setInt(2, recordsPerPage); // Set limit
-//                statement.setInt(3, offset); // Set offset
+                statement.setInt(2, recordsPerPage); // Set limit
+                statement.setInt(3, offset); // Set offset
 
                 ResultSet rs = statement.executeQuery();
                 JsonArray jsonArray = new JsonArray();
@@ -87,7 +96,7 @@ public class BrowseServlet extends HttpServlet {
                 while (rs.next()) {
 
                     String movieId = rs.getString("movie_id");
-                    String movieTitle = rs.getString("movie_title");
+                    String movieTitle = rs.getString("title");
                     String movieYear = rs.getString("movie_year");
                     String movieDirector = rs.getString("movie_director");
                     String movieGenres = rs.getString("genres");

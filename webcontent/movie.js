@@ -8,18 +8,19 @@ function fetchSearchResults(){
         // Extract search parameters from the URL
         var urlParams = new URLSearchParams(window.location.search);
         var genreId = urlParams.get('genreId'); // Check if genreId parameter exists
+        var sortAttribute = urlParams.get('sortAttribute');
+        var recordsPerPage = urlParams.get('recordsPerPage');
         if (genreId) {
             console.log(genreId);
             console.log("before going into fetch movies by genre");
-            fetchMoviesByGenre(genreId);
+            fetchMoviesByGenre(genreId, sortAttribute, recordsPerPage);
             return;
         }
         var title = urlParams.get('title');
         var year = urlParams.get('year');
         var director = urlParams.get('director');
         var starName = urlParams.get('starName');
-        var sortAttribute = urlParams.get('sortAttribute');
-        var recordsPerPage = urlParams.get('recordsPerPage');
+
 
         var formData = {};
         if(title){ formData["title"]=title;}
@@ -49,12 +50,16 @@ function fetchSearchResults(){
 
 
 // Function to populate the table with search results
-function fetchMoviesByGenre(genreId) {
+function fetchMoviesByGenre(genreId, sortAttribute, recordsPerPage) {
     //Make AJAX request to fetch movies by genreId
     formData = {};
     if(genreId){
         formData["genreId"] = genreId;
     }
+    formData["sortAttribute"] = sortAttribute;
+    formData["recordsPerPage"] = recordsPerPage;
+    formData["page"]=currentPage;
+
     console.log("formData: ", formData);
     $.ajax({
         url: "api/browse",
@@ -64,8 +69,6 @@ function fetchMoviesByGenre(genreId) {
         success: function (resultData) {
             // Populate the table with genre results
             console.log("success");
-            console.log("genreId!!:",genreId);
-            console.log("resultData in fetch: ", resultData);
             populateTable(resultData);
         },
         error: function (xhr, status, error) {
@@ -123,21 +126,28 @@ function populateTable(resultData) {
         //sorted alphabetically
         genres.sort((a, b) => a.name.localeCompare(b.name));
 
-        let genre_entry = "";
+        let genreSpan = $("<span>");
 
         for (let i = 0; i < genres.length; i++) {
             let genre = genres[i];
 
-            let genre_link = '<a href="browse.html#api/genre?genreId=' + genre.id + '">' + genre.name + '</a>';
-            genre_entry += genre_link;
+            let genreLink = $("<a class='browse-link'>")
+                .attr("href", "movie.html?genreId=" + genre.id)
+                .text(genre.name);
+            // Append dropdown option values to the genre links
+            let sortAttribute = $("#sortAttribute").val();
+            let moviesPerPage = $("#moviesPerPage").val();
+            let urlParams = "&sortAttribute=" + encodeURIComponent(sortAttribute)
+                + "&recordsPerPage=" + encodeURIComponent(moviesPerPage);
+            genreLink.attr("href", genreLink.attr("href") + urlParams);
 
-            // Add comma and space if it's not the last star
+            genreSpan.append(genreLink);
             if (i < genres.length - 1) {
-                genre_entry += ", ";
+                genreSpan.append(", ");
             }
         }
-
-        rowHTML += "<td>" + genre_entry + "</td>";
+        let genreSpanHTML = genreSpan.prop('outerHTML');
+        rowHTML += "<td>" + genreSpanHTML + "</td>";
 
         let star_id_names = movie.stars.split(";");
         let stars = [];
@@ -191,3 +201,38 @@ function prevPage() {
 }
 $("#nextBtn").click(nextPage);
 $("#prevBtn").click(prevPage);
+
+$(document).ready(function() {
+    $("#sortForm").submit(submitSortForm);
+});
+
+function submitSortForm(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    // Extract selected values from the dropdowns
+    var sortAttribute = $('#sortAttribute').val();
+    var moviesPerPage = $('#moviesPerPage').val();
+
+    // Construct the new URL with updated parameters
+    var currentUrl = window.location.href;
+    var updatedUrl = updateQueryStringParameter(currentUrl, 'sortAttribute', sortAttribute);
+    updatedUrl = updateQueryStringParameter(updatedUrl, 'recordsPerPage', moviesPerPage);
+
+    // Redirect to the updated URL
+    window.location.href = updatedUrl;
+
+    currentPage = 1;
+    //fetchSearchResults();
+}
+
+// Function to update query string parameters in a URL
+function updateQueryStringParameter(uri, key, value) {
+    var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+    var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+    if (uri.match(re)) {
+        return uri.replace(re, '$1' + key + "=" + value + '$2');
+    }
+    else {
+        return uri + separator + key + "=" + value;
+    }
+}

@@ -28,7 +28,7 @@ h1{
     margin-top: 6.5vw;
     font-family: "DM Sans", sans-serif;
 }
-h2, p{
+h2, p, label{
     color: white;
 }
 #movie_table {
@@ -96,7 +96,41 @@ body {
     border-color: lightgray;
     border-width: thin;
 }
-
+.container{
+    margin-top: 1vw;
+    margin-bottom: 1vw;
+    margin-left: 1vw;
+    width: 100%;
+}
 main {
     flex: 1; /* Allow main content to expand and push footer to the bottom */
+}
+
+#form-field{
+    margin-top: 1.5vw;
+    margin-left: 32vw;
+    margin-right: 1.5vw;
+    margin-bottom: 1vw;
+}
+
+#sortForm{
+    width: 100%;
+    margin-top: 2vw;
+}
+#form-field .btn-purple {
+    background-color: #bb86fc;
+    color: black; /* Set the text color */
+    border: 1px solid transparent;
+    border-radius: 5px;
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    margin-left: 1vw;
+    margin-top: 1.8vw;
+}
+.btn-purple:hover{
+    background-color: black;
+    color: lightgray;
+    border-color: lightgray;
+    border-width: thin;
+
 }

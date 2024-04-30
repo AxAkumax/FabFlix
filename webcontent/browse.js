@@ -10,7 +10,17 @@ function handleResult(resultData) {
         let genre_id = resultData[i].genre_id;
         let genre_name = resultData[i].genre_name;
 
-        let genreLink =$("<a class='browse-link'>").attr("href", "movie.html?genreId=" + genre_id).text(genre_name);
+        let genreLink = $("<a class='browse-link'>")
+            .attr("href", "movie.html?genreId=" + genre_id)
+            .text(genre_name);
+
+        // Append dropdown option values to the genre links
+        let sortAttribute = "title ASC, average_rating ASC";
+        let moviesPerPage = "10";
+        let urlParams = "&sortAttribute=" + encodeURIComponent(sortAttribute)
+            + "&recordsPerPage=" + encodeURIComponent(moviesPerPage);
+        genreLink.attr("href", genreLink.attr("href") + urlParams);
+
         genreSpan.append(genreLink);
         if (i < resultData.length - 1) {
             genreSpan.append(", ");
@@ -31,11 +41,15 @@ function handleResult(resultData) {
         }
     }
     alphabet_table_body.append(alphaSpan);
+
+    addDropdownListeners();
 }
 
 jQuery.ajax({
     dataType: "json", // Setting return data type
     method: "GET", // Setting request method
     url: "api/genre", // Setting request url, which is mapped by StarsServlet in Stars.java
-    success: (resultData) => handleResult(resultData) // Setting callback function to handle data returned successfully by the StarsServlet
+    success: (resultData)=>{
+    handleResult(resultData);
+    }// Setting callback function to handle data returned successfully by the StarsServlet
 });
