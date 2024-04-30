@@ -6,7 +6,7 @@ function fillCart(cart_items) {
     // Clear the table body first to avoid duplicating items
     tableBody.empty();
 
-    let grant_total = 0;
+    let grand_total = 0;
 
     for (let i = 0; i < cart_items.length; i++) {
         let rowHTML = "";
@@ -39,20 +39,20 @@ function fillCart(cart_items) {
         rowHTML += "<th>" + "$ " + movie_price + "</th>";
 
         // total price for that item
-        rowHTML += "<th>" + "$ " + total + "</th>"
+        rowHTML += "<th>" + "$ " + total + "</th>";
 
         // delete button
         rowHTML += '<th><button id=type="button" class="btn btn-danger btn-sm" ' +
                     'onclick="Delete(\'' + cart_items[i]["movieId"] + '\')">Delete</button></th>';
 
-        grant_total += total;
+        grand_total += total;
 
         rowHTML += "</tr>";
         tableBody.append(rowHTML);
     }
 
     let cartTotalElement = $('#cart_total');
-    cartTotalElement.text("Cart Total: $ " + grant_total);
+    cartTotalElement.text("Cart Total: $ " + grand_total);
 }
 
 

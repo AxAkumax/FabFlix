@@ -52,6 +52,19 @@ h2{
     margin-bottom: 1.2vw;
 }
 
+h3 {
+    background-color: black;
+    text-align: left;
+    color:  #bb86fc;
+    font-size: 1.8vw;
+    padding-left: 13vw;
+    padding-bottom: 1.3vw;
+    font-family: "DM Sans", sans-serif;
+    font-weight: 200;
+    font-style: normal;
+    margin-bottom: 1.2vw;
+}
+
 
 footer{
     bottom: 0;

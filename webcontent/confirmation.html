@@ -63,7 +63,34 @@
 
 <h2>Confirmation</h2>
 
+<h3> Order Details</h3>
 
+<h3 id="sale_id_label"></h3>
+<h3 id="customer_id_label"></h3>
+<h3 id="total_price"></h3>
+
+
+<div class="container">
+    <div class="row" id="shopping_cards">
+        <!-- Id "star_table" is useful for jQuery to find the html element with id, class here is mapping to Bootstrap defined class CSS -->
+        <table id=confirmation_movies_table class="table table-hover table-dark">
+            <!-- Create a table header -->
+            <thead>
+            <tr>
+                <!-- Titles of each column-->
+                <th>#</th>
+                <th>Movie Title</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total Price</th>
+            </tr>
+            </thead>
+            <!-- Table body is left empty here, will be populated with the data retrieved with index.js -->
+            <!-- Again, id "star_table_body" is useful for jQuery to find this html element -->
+            <tbody id=confirmation_movies_table_body></tbody>
+        </table>
+    </div>
+</div>
 <!-- Load jQuery and Bootstrap JS -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
