@@ -19,46 +19,28 @@ html{
     color: white !important;
 }
 
-#browsing_table {
-    background-color: black; /* black background color for the table */
-    color: lightgrey; /* white text color for the table */
-    font-family: "DM Sans", sans-serif;
-    font-style: normal;
-    max-width: 97vw; /* Set a maximum width for the table */
-    margin: 0 auto;
+.browse-section{
+    margin-top: 5vw;
+    margin-left: 11vw;
+    margin-bottom: 2vw;
+    align-items: center;
+}
+.browse-section1{
+    margin-left: 11vw;
+    margin-bottom: 2vw;
+    align-items: center;
+}
+h2{
+    margin-bottom: 1.6vw;
 }
 
-#browsing_table tbody tr {
-    color: lightgrey; /* white text color for table body rows */
-    transition: all 0.3s ease; /* Add transition for smooth animation */
+.browse-link{
+    font-size: large;
+    margin-left: 1vw;
+    margin-right: 1vw;
+    margin-bottom: 5vw !important;
+    margin-top: 3vw;
 }
-
-#browsing_table tbody tr:hover {
-    background-color: #333; /* Darken background color when hovered */
-    transform: scale(1.1); /* Increase size of row when hovered */
-}
-
-#genre_table, #genre_table_body,
-#genre_table_body td, #genre_table_body tr{
-    border-style: hidden;
-    text-align: center;
-}
-
-#alphabet_table, #alphabet_table_body {
-    border-style: hidden;
-    text-align: center;
-}
-
-#alphabet_table_body td, #alphabet_table_body tr {
-    border-style: hidden;
-    text-align: center;
-    width: 10vw;
-}
-
-.container mt-5 {
-    margin-bottom: 5vw;
-}
-
 a {
     color: lightgrey;
     text-align: center;
@@ -98,4 +80,7 @@ body {
 
 main {
     flex: 1; /* Allow main content to expand and push footer to the bottom */
+}
+label{
+    color: lightgray;
 }

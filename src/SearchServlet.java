@@ -48,7 +48,10 @@ public class SearchServlet extends HttpServlet {
             String starName = request.getParameter("starName");
 
             String sortAttribute = request.getParameter("sortAttribute"); // Get sort attribute
-//            String sortOrder = request.getParameter("sortOrder"); // Get sort order
+            int currentPage = Integer.parseInt(request.getParameter("page"));
+            int recordsPerPage = Integer.parseInt(request.getParameter("recordsPerPage"));
+            // Calculate offset for pagination
+            int offset = (currentPage - 1) * recordsPerPage;
 
             //BUILD QUERY
             String query = "SELECT " +
@@ -56,12 +59,32 @@ public class SearchServlet extends HttpServlet {
                     "m.title AS movie_title, " +
                     "m.year AS movie_year, " +
                     "m.director AS movie_director, " +
-                    "(SELECT GROUP_CONCAT(DISTINCT CONCAT(s.id, ';', s.name) SEPARATOR ';') " +
-                    "FROM stars_in_movies sm JOIN stars s ON sm.starId = s.id " +
-                    "WHERE sm.movieId = m.id) AS star_ids_and_names, " +
-                    "(SELECT GROUP_CONCAT(DISTINCT CONCAT(g.id, ';', g.name) SEPARATOR ';') " +
+
+                    "(SELECT GROUP_CONCAT(CONCAT(topStars.starId, ';', topStars.name) SEPARATOR ';') " +
+                    " FROM (SELECT s.id AS starId, s.name, COUNT(*) AS movieCount " +
+                    "       FROM stars s " +
+                    "       JOIN stars_in_movies sm ON s.id = sm.starId " +
+                    "       WHERE s.id IN (SELECT starId FROM stars_in_movies WHERE movieId = m.id) " +
+                    "       GROUP BY s.id, s.name " +
+                    "       ORDER BY " +
+                    "           CASE " +
+                    "               WHEN COUNT(*) = (SELECT COUNT(*) " +
+                    "                                   FROM stars_in_movies " +
+                    "                                   WHERE movieId = m.id " +
+                    "                                   GROUP BY movieId, starId " +
+                    "                                   ORDER BY COUNT(*) DESC " +
+                    "                                   LIMIT 1) " +
+                    "               THEN s.name " +
+                    "               ELSE movieCount " +
+                    "           END DESC, " +
+                    "           s.name ASC " +
+                    "       LIMIT 3) AS topStars) AS star_ids_and_names, "
+                    +
+
+            "(SELECT GROUP_CONCAT(DISTINCT CONCAT(g.id, ';', g.name) SEPARATOR ';') " +
                     "FROM genres_in_movies gm JOIN genres g ON gm.genreId = g.id " +
                     "WHERE gm.movieId = m.id) AS movie_id_genres, " +
+
                     "AVG(r.rating) AS average_rating " +
                     "FROM movies m " +
                     "LEFT JOIN ratings r ON m.id = r.movieId ";
@@ -93,26 +116,7 @@ public class SearchServlet extends HttpServlet {
             // Group by movie attributes
             query += " GROUP BY m.id, m.title, m.year, m.director ";
 
-            query += "ORDER BY " + sortAttribute;
-
-//            // Append ORDER BY clause
-//           query+= "ORDER BY ";
-//            if ("title".equalsIgnoreCase(sortAttribute)) {
-//                query+="m.title "; // Sort by title
-//            } else if ("rating".equalsIgnoreCase(sortAttribute)) {
-//               query+="average_rating "; // Sort by rating
-//            } else {
-//                // Default to sorting by rating if no valid sort attribute is provided
-//                query+="average_rating ";
-//            }
-//
-//            // Append the sort order
-//            if ("desc".equalsIgnoreCase(sortOrder)) {
-//                query+="DESC"; // Sort in descending order
-//            } else {
-//                query+= "ASC"; // Sort in ascending order by default
-//            }
-
+            query += " ORDER BY " + sortAttribute + " LIMIT ? OFFSET ?";
 
             //case-insensitive and substring matching
             assert conn != null;
@@ -131,6 +135,9 @@ public class SearchServlet extends HttpServlet {
             if (starName != null) {
                 statement.setString(parameterIndex, "%" + starName.toLowerCase() + "%");
             }
+
+            statement.setInt(parameterIndex++, recordsPerPage);
+            statement.setInt(parameterIndex, offset);
 
             ResultSet rs = statement.executeQuery();
 

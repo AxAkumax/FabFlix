@@ -1,0 +1,377 @@
+Index: webcontent/search.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!-- This example is following frontend and backend separation.\n\n    This .html performs two steps:\n    1. Create a html template skeleton, with all the elements defined (some left empty) and named with ids.\n    2. Load index.js to populate the data into empty elements.\n    -->\n\n<!doctype html>\n<html lang=\"en\">\n<head>\n    <!-- Required meta tags -->\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\"\n          content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\n\n    <!--     Bootstrap CSS -->\n    <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css\"\n          integrity=\"sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm\" crossorigin=\"anonymous\">\n\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"search.css\">\n\n    <link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n    <link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n    <link href=\"https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Poppins:wght@300;500&display=swap\" rel=\"stylesheet\">\n    <title>Search</title>\n</head>\n<body>\n<!-- Navigation bar -->\n<nav class=\"navbar navbar-expand-lg navbar-dark custom-navbar fixed-top\">\n    <span class=\"navbar-brand\">\n        <span style=\"font-size: 1.6vw;padding-left: 0.5vw;\">&#10025; </span>\n        <span style=\"font-size: 1.2vw;\"> Fabflix </span>\n    </span>\n\n    <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\"\n            aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n        <span class=\"navbar-toggler-icon\"></span>\n    </button>\n\n    <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n        <ul class=\"navbar-nav mr-auto\">\n            <li class=\"nav-item active\">\n                <a class=\"nav-link\" href=\"index.html\"> Home <span class=\"sr-only\">(current)</span></a>\n            </li>\n\n            <li class=\"nav-item active\">\n                <a class=\"nav-link\" href=\"\"> Search <span class=\"sr-only\">(current)</span></a>\n            </li>\n\n            <li class=\"nav-item active\">\n                <a class=\"nav-link\" href=\"browse.html\"> Browse <span class=\"sr-only\">(current)</span></a>\n            </li>\n\n        </ul>\n\n        <a class=\"nav-link\" href=\"login.html\">Logout</a>\n\n    </div>\n</nav>\n\n<!-- Search form -->\n<div id = \"form-field\" class=\"row justify-content-center\">\n    <form id=\"searchForm\" action=\"index.html\">\n        <div class=\"form-row\">\n            <div class=\"form-group col-md-3\">\n                <label for=\"inputTitle\">Title:</label>\n                <input type=\"text\" class=\"form-control\" id=\"inputTitle\" placeholder=\"Enter movie title\">\n            </div>\n            <div class=\"form-group col-md-3\">\n                <label for=\"inputYear\">Year:</label>\n                <input type=\"text\" class=\"form-control\" id=\"inputYear\" placeholder=\"Enter release year\">\n            </div>\n            <div class=\"form-group col-md-3\">\n                <label for=\"inputDirector\">Director:</label>\n                <input type=\"text\" class=\"form-control\" id=\"inputDirector\" placeholder=\"Enter director name\">\n            </div>\n            <div class=\"form-group col-md-3\">\n                <label for=\"inputStar\">Star's Name:</label>\n                <input type=\"text\" class=\"form-control\" id=\"inputStar\" placeholder=\"Enter Star's name\">\n            </div>\n\n            <div class=\"form-group col-md-3\">\n                <label for=\"sortAttribute\">Sort by:</label>\n                <select class=\"form-control form-control-sm\" id=\"sortAttribute\" name=\"sortAttribute\">\n                    <option value=\"title ASC, average_rating ASC\" selected>Title ASC, Rating ASC</option>\n                    <option value=\"title ASC, average_rating DESC\">Title ASC, Rating DESC</option>\n                    <option value=\"title DESC, average_rating ASC\">Title DESC, Rating ASC</option>\n                    <option value=\"title DESC, average_rating DESC\">Title DESC, Rating DESC</option>\n                    <option value=\"average_rating ASC, title ASC\">Rating ASC, Title ASC</option>\n                    <option value=\"average_rating ASC, title DESC\">Rating ASC, Title DESC</option>\n                    <option value=\"average_rating DESC, title ASC\">Rating DESC, Title ASC</option>\n                    <option value=\"average_rating DESC, title DESC\">Rating DESC, Title DESC</option>\n                </select>\n            </div>\n\n            <div class=\"form-group col-md-3\">\n                <label for=\"moviesPerPage\">Movies per Page:</label>\n                <select class=\"form-control form-control-sm\" id=\"moviesPerPage\">\n                    <option value=\"10\" selected>10</option>\n                    <option value=\"25\">25</option>\n                    <option value=\"50\">50</option>\n                    <option value=\"100\">100</option>\n                </select>\n            </div>\n\n        </div>\n\n        <button type=\"submit\" class=\"btn btn-purple\">Search</button>\n    </form>\n</div>\n\n<!-- Search results will be displayed here -->\n<div id=\"searchResults\" class=\"row justify-content-center\">\n    <div id=\"noResultsMessage\" class=\"text-center\" style=\" display: none; justify-content: center;\n    margin-top: 1vw; align-items: center; width: 100%; height: 100%;\">\n        <p id = \"noResults\">No movies found</p>\n    </div>\n    <div id=\"nParametersMessage\" class=\"text-center\" style=\"display: none; justify-content: center;\n    margin-top: 1vw; align-items: center; width: 100%; height: 100%;\">\n        <p id = \"noParameters\">No parameters given</p>\n    </div>\n    <table id=movie_table class=\"table table-hover table-dark\">\n        <thead style=\"display: none;\">\n        <tr>\n            <th>Title</th>\n            <th>Year</th>\n            <th>Director</th>\n            <th>Genres</th>\n            <th>Stars</th>\n            <th>Rating</th>\n        </tr>\n        </thead>\n        <tbody id=movie_table_body>\n        <!-- Search results will be dynamically added here using JavaScript -->\n        </tbody>\n    </table>\n</div>\n<div id =\"prevNextButton\" class=\"row justify-content-center\" style = \"margin-top: 2.5vw; margin-bottom: 1vw; display: none;\">\n    <button id=\"prevBtn\" class=\"btn btn-secondary mr-2\" onclick=\"prevPage()\"> < Prev</button>\n    <button id=\"nextBtn\" class=\"btn btn-secondary\" onclick=\"nextPage()\">Next > </button>\n</div>\n\n<!-- Bootstrap and other JavaScript libraries -->\n<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js\"></script>\n<script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js\"\n        integrity=\"sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q\"\n        crossorigin=\"anonymous\"></script>\n<script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js\"\n        integrity=\"sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl\"\n        crossorigin=\"anonymous\"></script>\n\n<!-- Your custom JavaScript file -->\n<script src=\"search.js\"></script>\n<footer>\n    &#xa9; 2024 Akshita Akumalla, Niharika Kumar\n</footer>\n\n</body>\n\n\n</html>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/webcontent/search.html b/webcontent/search.html
+--- a/webcontent/search.html	
++++ b/webcontent/search.html	
+@@ -60,7 +60,7 @@
+ 
+ <!-- Search form -->
+ <div id = "form-field" class="row justify-content-center">
+-    <form id="searchForm" action="index.html">
++    <form id="searchForm">
+         <div class="form-row">
+             <div class="form-group col-md-3">
+                 <label for="inputTitle">Title:</label>
+@@ -109,36 +109,6 @@
+     </form>
+ </div>
+ 
+-<!-- Search results will be displayed here -->
+-<div id="searchResults" class="row justify-content-center">
+-    <div id="noResultsMessage" class="text-center" style=" display: none; justify-content: center;
+-    margin-top: 1vw; align-items: center; width: 100%; height: 100%;">
+-        <p id = "noResults">No movies found</p>
+-    </div>
+-    <div id="nParametersMessage" class="text-center" style="display: none; justify-content: center;
+-    margin-top: 1vw; align-items: center; width: 100%; height: 100%;">
+-        <p id = "noParameters">No parameters given</p>
+-    </div>
+-    <table id=movie_table class="table table-hover table-dark">
+-        <thead style="display: none;">
+-        <tr>
+-            <th>Title</th>
+-            <th>Year</th>
+-            <th>Director</th>
+-            <th>Genres</th>
+-            <th>Stars</th>
+-            <th>Rating</th>
+-        </tr>
+-        </thead>
+-        <tbody id=movie_table_body>
+-        <!-- Search results will be dynamically added here using JavaScript -->
+-        </tbody>
+-    </table>
+-</div>
+-<div id ="prevNextButton" class="row justify-content-center" style = "margin-top: 2.5vw; margin-bottom: 1vw; display: none;">
+-    <button id="prevBtn" class="btn btn-secondary mr-2" onclick="prevPage()"> < Prev</button>
+-    <button id="nextBtn" class="btn btn-secondary" onclick="nextPage()">Next > </button>
+-</div>
+ 
+ <!-- Bootstrap and other JavaScript libraries -->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+Index: webcontent/search.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>$(document).ready(function() {\n    // Listen for form submission\n    $('#searchForm').submit(function(event) {\n        // Prevent default form submission\n        event.preventDefault();\n\n        // Retrieve form data\n        var formData = {\n            title: $('#inputTitle').val(),\n            year: $('#inputYear').val(),\n            director: $('#inputDirector').val(),\n            starName: $('#inputStar').val(),\n            sortAttribute: $('#sortAttribute').val(),\n            page: 1, // Assuming initial page is 1\n            recordsPerPage: $('#moviesPerPage').val()\n        };\n\n        // Construct URL with form data as parameters\n        var url = 'index.html?' + $.param(formData);\n\n        // Redirect to index.html with form data as URL parameters\n        window.location.href = url;\n    });\n});\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/webcontent/search.js b/webcontent/search.js
+--- a/webcontent/search.js	
++++ b/webcontent/search.js	
+@@ -1,24 +1,196 @@
+-$(document).ready(function() {
+-    // Listen for form submission
+-    $('#searchForm').submit(function(event) {
+-        // Prevent default form submission
+-        event.preventDefault();
++// Function to handle form submission
++// Global variable to store the current page number
++var currentPage = 1;
++
++// Function to handle form submission
++function submitSearchForm(event) {
++    event.preventDefault(); // Prevent default form submission
+ 
+-        // Retrieve form data
+-        var formData = {
+-            title: $('#inputTitle').val(),
+-            year: $('#inputYear').val(),
+-            director: $('#inputDirector').val(),
+-            starName: $('#inputStar').val(),
+-            sortAttribute: $('#sortAttribute').val(),
+-            page: 1, // Assuming initial page is 1
+-            recordsPerPage: $('#moviesPerPage').val()
+-        };
++    // Manually construct form data object
++
++    var formData = {
++        "title": $("#inputTitle").val(),
++        "year": $("#inputYear").val(),
++        "director": $("#inputDirector").val(),
++        "starName": $("#inputStar").val(),
++        "sortAttribute": $("#sortAttribute").val(), // Get the value of sortAttribute
++        page: currentPage, // Use the current page number
++        recordsPerPage: $("#moviesPerPage").val()
++    };
+ 
+-        // Construct URL with form data as parameters
+-        var url = 'index.html?' + $.param(formData);
++    // Remove empty values from form data
++    Object.keys(formData).forEach(function(key) {
++        if (formData[key] === "") {
++            delete formData[key];
++        }
++    });
++
++    if (Object.keys(formData).length === 3) {
++        // Display a message or perform any other action indicating that the form is empty
++        $("#movie_table_body").empty();
++        $("#movie_table thead").hide();
++        $("#noResultsMessage").hide();
++        $("#prevNextButton").hide();
++        $("#nParametersMessage").show();
+ 
+-        // Redirect to index.html with form data as URL parameters
+-        window.location.href = url;
++        return; // Exit the function
++    }
++
++    // Convert form data object to query string
++    var queryString = $.param(formData);
++
++    // Construct URL with form data
++    var url = "api/movies";
++    if (queryString) {
++        url += "?" + queryString;
++    }
++
++    // Perform AJAX request to fetch search results
++    $.ajax({
++        url: url,
++        method: "GET",
++        dataType: "json",
++        success: function(resultData) {
++            // Handle the received data
++            handleMovieData(resultData);
++        },
++        error: function(xhr, status, error) {
++            console.error("Error occurred while fetching search results:", error);
++        }
+     });
++}
++
++// Function to handle "Next" button click
++function nextPage() {
++    currentPage++; // Increment current page number
++    submitSearchForm(new Event('submit')); // Submit the form with updated page number
++}
++
++// Function to handle "Prev" button click
++function prevPage() {
++    if (currentPage > 1) {
++        currentPage--; // Decrement current page number if not already on the first page
++        submitSearchForm(new Event('submit')); // Submit the form with updated page number
++    }
++}
++
++// Function to handle movie data and update the table
++function handleMovieData(resultData) {
++    console.log("handleMovieData: populating movie table from resultData");
++    console.log(resultData);
++
++    $("#nParametersMessage").hide();
++
++    var table = $("#movie_table_body");
++    var tableHeadings = $("#movie_table thead");
++
++    // Clear existing table rows
++    table.empty();
++    var noResultsMessage = $("#noResultsMessage");
++
++    // Check if the movies array is empty
++    if (resultData.movies.length === 0) {
++        console.log("No movies found.");
++        // Hide the table and show the no results message
++        table.hide();
++        tableHeadings.hide()
++        noResultsMessage.show();
++        return; // Exit the function early if no movies are found
++    }
++
++    noResultsMessage.hide();
++    table.show();
++    tableHeadings.show()
++    $("#prevNextButton").show()
++    // Iterate through search results and populate table
++    console.log(resultData);
++
++    var startIndex = (currentPage - 1) * $("#moviesPerPage").val() + 1
++    for (let j = 0; j < resultData.movies.length; j++) {
++        // Construct HTML for table row
++        let movie = resultData.movies[j];
++
++        var rowHTML = "<tr>";
++
++        let movie_link = '<a href="single-movie.html?id=' + movie.id + '">' + movie.title + '</a>';
++
++        rowHTML += "<td>" + movie_link + "</td>";
++        rowHTML += "<td>" + movie.year + "</td>";
++        rowHTML += "<td>" + movie.director + "</td>";
++
++        let genre_id_names = movie.genres.split(";");
++        let genres = [];
++
++        for (let i = 0; i < genre_id_names.length; i += 2) {
++            let genre_id = genre_id_names[i];
++            let genre_name = genre_id_names[i + 1];
++            genres.push({id: genre_id, name: genre_name});
++        }
++        //sorted alphabetically
++        genres.sort((a, b) => a.name.localeCompare(b.name));
++
++        let genre_entry = "";
++
++        for (let i = 0; i < genres.length; i++) {
++            let genre = genres[i];
++
++            let genre_link = '<a href="browse.html#api/genre?genreId=' + genre.id + '">' + genre.name + '</a>';
++            genre_entry += genre_link;
++
++            // Add comma and space if it's not the last star
++            if (i < genres.length - 1) {
++                genre_entry += ", ";
++            }
++        }
++
++        rowHTML += "<td>" + genre_entry + "</td>";
++
++        let star_id_names = movie.stars.split(";");
++        let stars = [];
++
++        // Create star objects and push them into the stars array
++        for (let i = 0; i < star_id_names.length; i += 2) {
++            let star_id = star_id_names[i];
++            let star_name = star_id_names[i + 1];
++            stars.push({id: star_id, name: star_name});
++        }
++
++        // Sort the stars array by star name in ascending order
++        stars.sort((a, b) => a.name.localeCompare(b.name));
++
++        // Initialize the star_entry string
++        let star_entry = '';
++
++        // Construct hyperlinks for sorted stars
++        for (let i = 0; i < stars.length; i++) {
++            let star = stars[i];
++            let star_link = '<a href="single-star.html?id=' + star.id + '">' + star.name + '</a>';
++            star_entry += star_link;
++
++            // Add comma and space if it's not the last star
++            if (i < stars.length - 1) {
++                star_entry += ", ";
++            }
++        }
++
++        // Display hyperlinked star names
++        rowHTML += "<td>" + star_entry + "</td>";
++        rowHTML += "<td>" + movie.rating + "</td>";
++        rowHTML += "</tr>";
++
++        // Append row to table
++        $("#movie_table_body").append(rowHTML);
++        startIndex+=1;
++    }
++
++}
++
++// Event listener for form submission
++$(document).ready(function() {
++    $("#searchForm").submit(submitSearchForm);
++    // Event listener for "Next" button click
++    $("#nextBtn").click(nextPage);
++
++    // Event listener for "Prev" button click
++    $("#prevBtn").click(prevPage);
+ });
+Index: webcontent/index.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>$(document).ready(function() {\n    // Parse URL parameters\n    const urlParams = new URLSearchParams(window.location.search);\n    const title = urlParams.get('title');\n    const year = urlParams.get('year');\n    const director = urlParams.get('director');\n    const starName = urlParams.get('starName');\n    const sortAttribute = urlParams.get('sortAttribute');\n    const page = urlParams.get('page');\n    const recordsPerPage = urlParams.get('recordsPerPage');\n\n    // Check if any search criteria is present\n    if (title || year || director || starName) {\n        // Perform AJAX request to fetch search results\n        $.ajax({\n            url: 'api/movies', // Adjust the URL as per your API endpoint\n            type: 'GET',\n            dataType: 'json',\n            data: {\n                title: title,\n                year: year,\n                director: director,\n                starName: starName,\n                sortAttribute: sortAttribute,\n                page: page,\n                recordsPerPage: recordsPerPage\n            },\n            success: function(response) {\n                // Process the response and display search results\n                const movies = response.movies;\n                if (movies.length > 0) {\n                    displaySearchResults(movies);\n                } else {\n                    // Display message for no results\n                    $('#noResultsMessage').show();\n                }\n            },\n            error: function(jqXHR, textStatus, errorThrown) {\n                // Handle errors\n                console.error('Error:', textStatus, errorThrown);\n            }\n        });\n    } else {\n        // Display message for no parameters given\n        $('#nParametersMessage').show();\n    }\n});\n\n// Function to display search results\nfunction displaySearchResults(movies) {\n    const tbody = $('#movie_table_body');\n    tbody.empty(); // Clear existing rows\n    movies.forEach(function(movie) {\n        const row = '<tr>' +\n            '<td>' + movie.title + '</td>' +\n            '<td>' + movie.year + '</td>' +\n            '<td>' + movie.director + '</td>' +\n            '<td>' + movie.genres + '</td>' +\n            '<td>' + movie.stars + '</td>' +\n            '<td>' + movie.rating + '</td>' +\n            '</tr>';\n        tbody.append(row);\n    });\n    // Show the search results table\n    $('#movie_table').show();\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/webcontent/index.js b/webcontent/index.js
+--- a/webcontent/index.js	
++++ b/webcontent/index.js	
+@@ -1,66 +1,0 @@
+-$(document).ready(function() {
+-    // Parse URL parameters
+-    const urlParams = new URLSearchParams(window.location.search);
+-    const title = urlParams.get('title');
+-    const year = urlParams.get('year');
+-    const director = urlParams.get('director');
+-    const starName = urlParams.get('starName');
+-    const sortAttribute = urlParams.get('sortAttribute');
+-    const page = urlParams.get('page');
+-    const recordsPerPage = urlParams.get('recordsPerPage');
+-
+-    // Check if any search criteria is present
+-    if (title || year || director || starName) {
+-        // Perform AJAX request to fetch search results
+-        $.ajax({
+-            url: 'api/movies', // Adjust the URL as per your API endpoint
+-            type: 'GET',
+-            dataType: 'json',
+-            data: {
+-                title: title,
+-                year: year,
+-                director: director,
+-                starName: starName,
+-                sortAttribute: sortAttribute,
+-                page: page,
+-                recordsPerPage: recordsPerPage
+-            },
+-            success: function(response) {
+-                // Process the response and display search results
+-                const movies = response.movies;
+-                if (movies.length > 0) {
+-                    displaySearchResults(movies);
+-                } else {
+-                    // Display message for no results
+-                    $('#noResultsMessage').show();
+-                }
+-            },
+-            error: function(jqXHR, textStatus, errorThrown) {
+-                // Handle errors
+-                console.error('Error:', textStatus, errorThrown);
+-            }
+-        });
+-    } else {
+-        // Display message for no parameters given
+-        $('#nParametersMessage').show();
+-    }
+-});
+-
+-// Function to display search results
+-function displaySearchResults(movies) {
+-    const tbody = $('#movie_table_body');
+-    tbody.empty(); // Clear existing rows
+-    movies.forEach(function(movie) {
+-        const row = '<tr>' +
+-            '<td>' + movie.title + '</td>' +
+-            '<td>' + movie.year + '</td>' +
+-            '<td>' + movie.director + '</td>' +
+-            '<td>' + movie.genres + '</td>' +
+-            '<td>' + movie.stars + '</td>' +
+-            '<td>' + movie.rating + '</td>' +
+-            '</tr>';
+-        tbody.append(row);
+-    });
+-    // Show the search results table
+-    $('#movie_table').show();
+-}
+Index: webcontent/index.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!-- This example is following frontend and backend separation.\n\n    This .html performs two steps:\n    1. Create a html template skeleton, with all the elements defined (some left empty) and named with ids.\n    2. Load index.js to populate the data into empty elements.\n    -->\n\n<!doctype html>\n<html lang=\"en\">\n<head>\n    <!-- Required meta tags -->\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\"\n          content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\n\n    <!--     Bootstrap CSS -->\n    <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css\"\n          integrity=\"sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm\" crossorigin=\"anonymous\">\n\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\">\n\n    <link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n    <link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n    <link href=\"https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Poppins:wght@300;500&display=swap\" rel=\"stylesheet\">\n\n    <title>Movie List</title>\n</head>\n<body>\n\n\n<nav class=\"navbar navbar-expand-lg navbar-dark custom-navbar fixed-top\">\n    <span class=\"navbar-brand\">\n        <span style=\"font-size: 1.6vw;padding-left: 0.5vw;\">&#10025; </span>\n        <span style=\"font-size: 1.2vw;\"> Fabflix </span>\n    </span>\n\n    <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\"\n            aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n        <span class=\"navbar-toggler-icon\"></span>\n    </button>\n\n    <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n        <ul class=\"navbar-nav mr-auto\">\n            <li class=\"nav-item active\">\n                <a class=\"nav-link\" href=\"\"> Home <span class=\"sr-only\">(current)</span></a>\n            </li>\n\n            <li class=\"nav-item active\">\n                <a class=\"nav-link\" href=\"search.html\"> Search <span class=\"sr-only\">(current)</span></a>\n            </li>\n\n            <li class=\"nav-item active\">\n                <a class=\"nav-link\" href=\"browse.html\"> Browse <span class=\"sr-only\">(current)</span></a>\n            </li>\n\n        </ul>\n\n        <a class=\"nav-link\" href=\"login.html\">Logout</a>\n\n    </div>\n</nav>\n\n\n<div id=\"searchResults\" class=\"row justify-content-center\">\n    <div id=\"noResultsMessage\" class=\"text-center\" style=\" display: none; justify-content: center;\n    margin-top: 1vw; align-items: center; width: 100%; height: 100%;\">\n        <p id = \"noResults\">No movies found</p>\n    </div>\n    <div id=\"nParametersMessage\" class=\"text-center\" style=\"display: none; justify-content: center;\n    margin-top: 1vw; align-items: center; width: 100%; height: 100%;\">\n        <p id = \"noParameters\">No parameters given</p>\n    </div>\n    <table id=movie_table class=\"table table-hover table-dark\">\n        <thead style=\"display: none;\">\n        <tr>\n            <th>Title</th>\n            <th>Year</th>\n            <th>Director</th>\n            <th>Genres</th>\n            <th>Stars</th>\n            <th>Rating</th>\n        </tr>\n        </thead>\n        <tbody id=movie_table_body>\n        <!-- Search results will be dynamically added here using JavaScript -->\n        </tbody>\n    </table>\n</div>\n<div id =\"prevNextButton\" class=\"row justify-content-center\" style = \"margin-top: 2.5vw; margin-bottom: 1vw; display: none;\">\n    <button id=\"prevBtn\" class=\"btn btn-secondary mr-2\" onclick=\"prevPage()\"> < Prev</button>\n    <button id=\"nextBtn\" class=\"btn btn-secondary\" onclick=\"nextPage()\">Next > </button>\n</div>\n\n\n<!-- Load jQuery and Bootstrap JS -->\n<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js\"></script>\n<script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js\"></script>\n<script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js\"></script>\n\n<!-- Load our own JS file -->\n<!-- The path is relative to index.html, since these two files are in the same directory -->\n<!-- Note the url does not contain a \"/\" in the beginning, which means the url is relative to current path\n     otherwise the url is relative to the root path-->\n<script src=\"index.js\"></script>\n<footer>\n    &#xa9; 2024 Akshita Akumalla, Niharika Kumar\n</footer>\n</body>\n\n\n</html>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/webcontent/index.html b/webcontent/index.html
+--- a/webcontent/index.html	
++++ b/webcontent/index.html	
+@@ -60,6 +60,7 @@
+     </div>
+ </nav>
+ 
++<div id="searchFormContainer"></div>
+ 
+ <div id="searchResults" class="row justify-content-center">
+     <div id="noResultsMessage" class="text-center" style=" display: none; justify-content: center;

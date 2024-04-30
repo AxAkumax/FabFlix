@@ -55,82 +55,18 @@
     </div>
 </nav>
 
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-lg-6 d-flex justify-content-center"> <!-- Center content horizontally -->
 
-            <!-- Left section: Browse by Genres -->
-            <div class="browse-section">
-                <h5 class="section-title">Browse by Genres</h5>
-
-                <table id=genre_table class="table table-borderless table-sm">
-                    <tbody id=genre_table_body></tbody>
-                </table>
-
-            </div>
-
-        </div>
-        <div class="col-lg-6 d-flex justify-content-center"> <!-- Center content horizontally -->
-            <!-- Right section: Browse by Movie Titles -->
-            <div class="browse-section">
-                <h5 class="section-title">Browse by Movie Titles</h5>
-
-                <table id=alphabet_table class="table table-sm table-borderless">
-                    <tbody id=alphabet_table_body></tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+<div class="browse-section" style="width: 80%;">
+    <h2 class="section-title">Browse by Genres</h2>
+    <div id="genre_table_body"></div>
 </div>
 
 
-<div class="container">
-    <div class="row" id="browsing_results">
-
-        <div class="form-group col-md-3">
-            <label for="sortAttribute">Sort by:</label>
-            <select class="form-control form-control-sm" id="sortAttribute" name="sortAttribute">
-                <option value="title ASC, average_rating ASC" selected>Title ASC, Rating ASC</option>
-                <option value="title ASC, average_rating DESC">Title ASC, Rating DESC</option>
-                <option value="title DESC, average_rating ASC">Title DESC, Rating ASC</option>
-                <option value="title DESC, average_rating DESC">Title DESC, Rating DESC</option>
-                <option value="average_rating ASC, title ASC">Rating ASC, Title ASC</option>
-                <option value="average_rating ASC, title DESC">Rating ASC, Title DESC</option>
-                <option value="average_rating DESC, title ASC">Rating DESC, Title ASC</option>
-                <option value="average_rating DESC, title DESC">Rating DESC, Title DESC</option>
-            </select>
-        </div>
-
-<!--        &lt;!&ndash; Dropdown menu for selecting the order &ndash;&gt;-->
-<!--        <div class="form-group col-md-3">-->
-<!--            <label for="sortOrder">Order:</label>-->
-<!--            <select class="form-control form-control-sm" id="sortOrder" name="sortOrder">-->
-<!--                <option value="asc">Ascending</option>-->
-<!--                <option value="desc" selected>Descending</option>-->
-<!--            </select>-->
-<!--        </div>-->
-
-        <!-- Id "star_table" is useful for jQuery to find the html element with id, class here is mapping to Bootstrap defined class CSS -->
-        <table id=browsing_table class="table table-hover table-dark">
-            <!-- Create a table header -->
-            <thead>
-            <tr>
-                <!-- Titles of each column-->
-                <th>#</th>
-                <th>Title</th>
-                <th>Year</th>
-                <th>Director</th>
-                <th>Stars</th>
-                <th>Genres</th>
-                <th>Rating</th>
-            </tr>
-            </thead>
-            <!-- Table body is left empty here, will be populated with the data retrieved with index.js -->
-            <!-- Again, id "star_table_body" is useful for jQuery to find this html element -->
-            <tbody id=browsing_table_body></tbody>
-        </table>
-    </div>
+<div class="browse-section1" style="width: 80%;">
+    <h2 class="section-title">Browse by Movie Titles</h2>
+    <div id="alphabet_table_body"></div>
 </div>
+
 
 <!-- Load jQuery and Bootstrap JS -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
