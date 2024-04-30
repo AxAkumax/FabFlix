@@ -1,7 +1,7 @@
 Team: Suika-Lords
 Members: Akshita Akumalla, Niharika Kumar
 
-Demo URL: https://drive.google.com/file/d/1wl-ciasx-qPHA2oCT9uSsLCLzXVoIQIx/view?usp=sharing
+Demo URL: 
 
 Contributions:
 	Project 2:
@@ -17,7 +17,7 @@ Contributions:
 			- Implemented browsing page
 			- Implemented sorting the movie results
    			- Created and linked Shopping/Payment/Confirmation pages
-      			- Added the 'checkout and 'add to cart' feature on all pages
+      		- Added the 'checkout and 'add to cart' feature on all pages
 	 		- Handled customer transactional information to check payment against database
 
 
