@@ -44,7 +44,8 @@ function handleStarResult(resultData) {
         let star_names = resultData[i]['movie_stars'].split(';');
 
         // Iterate through resultData, no more than 10 entries
-        let star_entries = ""
+        let star_entries = "";
+
         let length  = Math.min(3, star_ids.length);
         for (let j = 0; j < length; j++) {
 
@@ -62,6 +63,9 @@ function handleStarResult(resultData) {
         rowHTML += "<th>" + star_entries + "</th>";
         rowHTML += "<th>" + resultData[i]["movie_genres"] + "</th>";
         rowHTML += "<th>" + resultData[i]["average_rating"] + "</th>";
+
+        rowHTML += '<th> <button type="button" class="btn btn-outline-secondary" ' +
+            'onclick="addToCart(\'' + resultData[i]["movie_id"] + '\')"> Add </button> </th>';
 
         rowHTML += "</tr>";
 
@@ -82,3 +86,29 @@ jQuery.ajax({
     url: "api/movies", // Setting request url, which is mapped by StarsServlet in Stars.java
     success: (resultData) => handleStarResult(resultData) // Setting callback function to handle data returned successfully by the StarsServlet
 });
+
+
+function addToCart(movieId) {
+    // Create a JSON object containing the movie ID
+    let data = {
+        "movieId": movieId,
+        "action": "increment"
+    };
+
+    // Send an AJAX POST request to your backend API to add the movie to the cart
+    $.ajax({
+        type: "POST",
+        url: "api/cart", // Replace this with the actual endpoint of your backend API
+        contentType: "application/json",
+        data: JSON.stringify(data),
+        success: function(response) {
+            // Handle the success response from the server
+            console.log("Movie successfully added to cart");
+            // Optionally, can redirect the user to the shopping cart page after adding the movie
+        },
+        error: function(xhr, status, error) {
+            // Handle errors if any
+            console.error("Error adding movie to cart:", error);
+        }
+    });
+}

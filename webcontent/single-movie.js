@@ -64,49 +64,12 @@ function handleResult(resultData) {
         //sorted alphabetically
         genres.sort((a, b) => a.name.localeCompare(b.name));
 
-        let genreSpan = $("<span>");
-
-        for (let i = 0; i < Math.min(3, genres.length); i++) {
-            let genre = genres[i];
-
-            let genreLink = $("<a class='browse-link'>")
-                .attr("href", "movie.html?genreId=" + genre.id)
-                .text(genre.name);
-            // Append dropdown option values to the genre links
-            let sortAttribute = "title ASC, average_rating ASC";
-            let moviesPerPage = "10";
-            let urlParams = "&sortAttribute=" + encodeURIComponent(sortAttribute)
-                + "&recordsPerPage=" + encodeURIComponent(moviesPerPage);
-            genreLink.attr("href", genreLink.attr("href") + urlParams);
-
-            genreSpan.append(genreLink);
-            if (i < genres.length - 1) {
-                genreSpan.append(", ");
-            }
-        }
-        let genreSpanHTML = genreSpan.prop('outerHTML');
-        content += "<p> Genres: " + genreSpanHTML + "</p>";
+    // delete button
+    content += '<p> <button type="button" class="btn btn-outline-secondary" ' +
+        'onclick="addToCart(\'' + resultData[0]["movie_id"] + '\')"> Add to Cart </button> </p>';
 
 
-        let star_ids = resultData[0]['movie_starIds'].split(';');
-        let star_names = resultData[0]['movie_stars'].split(';');
-        let star_entries = "";
-        let length  = star_ids.length;
-        for (let j = 0; j < length; j++) {
-
-            // Concatenate the html tags with resultData jsonObject
-            star_entries +=
-                // Add a link to single-star.html with id passed with GET url parameter
-                '<a href="single-star.html?id=' + star_ids[j] + '">'
-                + star_names[j] +     // display star_name for the link text
-                '</a>';
-            if (j< length-1){
-                star_entries+=", ";
-            }
-        }
-        content += "<p>Stars: "+star_entries+"</p>";
-
-        starInfoElement.append(content);
+    starInfoElement.append(content);
 
     /* '<a href="single-star.html?id=' + resultData[i]['star_id'] + '">'
             + resultData[i]["star_name"] +     // display star_name for the link text
@@ -114,6 +77,34 @@ function handleResult(resultData) {
      */
     console.log("handleResult: populating movie table from resultData");
 }
+
+
+function addToCart(movieId) {
+    // Create a JSON object containing the movie ID
+
+    let data = {
+        "movieId": movieId,
+        "action": "increment"
+    };
+
+    // Send an AJAX POST request to your backend API to add the movie to the cart
+    $.ajax({
+        type: "POST",
+        url: "api/cart", // Replace this with the actual endpoint of your backend API
+        contentType: "application/json",
+        data: JSON.stringify(data),
+        success: function(response) {
+            // Handle the success response from the server
+            console.log("Movie successfully added to cart");
+            // Optionally, can redirect the user to the shopping cart page after adding the movie
+        },
+        error: function(xhr, status, error) {
+            // Handle errors if any
+            console.error("Error adding movie to cart:", error);
+        }
+    });
+}
+
 
 /**
  * Once this .js is loaded, following scripts will be executed by the browser\
