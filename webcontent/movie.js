@@ -134,7 +134,7 @@ function populateTable(resultData) {
 
         let genreSpan = $("<span>");
 
-        for (let i = 0; i < genres.length; i++) {
+        for (let i = 0; i < Math.min(3, genres.length); i++) {
             let genre = genres[i];
 
             let genreLink = $("<a class='browse-link'>")

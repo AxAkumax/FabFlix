@@ -25,7 +25,6 @@ function submitSearchForm(event) {
         recordsPerPage: $("#moviesPerPage").val()
     };
 
-
     // Remove empty values from form data
     Object.keys(formData).forEach(function(key) {
         if (!formData[key] && formData[key] !== 0) { // Also check for 0, as it's a valid value

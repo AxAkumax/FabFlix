@@ -66,7 +66,28 @@ public class BrowseServlet extends HttpServlet {
                         "m.title AS title, " +
                         "m.year AS movie_year, " +
                         "m.director AS movie_director, " +
-                        "GROUP_CONCAT(DISTINCT CONCAT(s.id, ';', s.name) SEPARATOR ';') AS star_ids_and_names, " +
+
+                        "(SELECT GROUP_CONCAT(CONCAT(topStars.starId, ';', topStars.name) SEPARATOR ';') " +
+                        " FROM (SELECT s.id AS starId, s.name, COUNT(*) AS movieCount " +
+                        "       FROM stars s " +
+                        "       JOIN stars_in_movies sm ON s.id = sm.starId " +
+                        "       WHERE s.id IN (SELECT starId FROM stars_in_movies WHERE movieId = m.id) " +
+                        "       GROUP BY s.id, s.name " +
+                        "       ORDER BY " +
+                        "           CASE " +
+                        "               WHEN COUNT(*) = (SELECT COUNT(*) " +
+                        "                                   FROM stars_in_movies " +
+                        "                                   WHERE movieId = m.id " +
+                        "                                   GROUP BY movieId, starId " +
+                        "                                   ORDER BY COUNT(*) DESC " +
+                        "                                   LIMIT 1) " +
+                        "               THEN s.name " +
+                        "               ELSE movieCount " +
+                        "           END DESC, " +
+                        "           s.name ASC " +
+                        "       LIMIT 3) AS topStars) AS star_ids_and_names, "
+                        +
+
                         "GROUP_CONCAT(DISTINCT CONCAT(g.id, ';', g.name) SEPARATOR ';') AS genres, " +
                         "AVG(r.rating) AS average_rating " + // Calculate average rating
                         "FROM movies m " +
@@ -77,8 +98,6 @@ public class BrowseServlet extends HttpServlet {
                         "LEFT JOIN ratings r ON m.id = r.movieId " + // Join with ratings table
                         "WHERE g.id = ? " +
                         "GROUP BY m.id, m.title, m.year, m.director";
-
-                //System.out.println(sortAttribute);
 
                 query += " ORDER BY " + orderByClause.toString() + " LIMIT ? OFFSET ?";
 
@@ -133,9 +152,28 @@ public class BrowseServlet extends HttpServlet {
                             "m.title AS title, " +
                             "m.year AS movie_year, " +
                             "m.director AS movie_director, " +
-                            "(SELECT GROUP_CONCAT(DISTINCT CONCAT(s.id, ';', s.name) SEPARATOR ';') " +
-                            "FROM stars_in_movies sm JOIN stars s ON sm.starId = s.id " +
-                            "WHERE sm.movieId = m.id) AS star_ids_and_names, " +
+
+                            "(SELECT GROUP_CONCAT(CONCAT(topStars.starId, ';', topStars.name) SEPARATOR ';') " +
+                            " FROM (SELECT s.id AS starId, s.name, COUNT(*) AS movieCount " +
+                            "       FROM stars s " +
+                            "       JOIN stars_in_movies sm ON s.id = sm.starId " +
+                            "       WHERE s.id IN (SELECT starId FROM stars_in_movies WHERE movieId = m.id) " +
+                            "       GROUP BY s.id, s.name " +
+                            "       ORDER BY " +
+                            "           CASE " +
+                            "               WHEN COUNT(*) = (SELECT COUNT(*) " +
+                            "                                   FROM stars_in_movies " +
+                            "                                   WHERE movieId = m.id " +
+                            "                                   GROUP BY movieId, starId " +
+                            "                                   ORDER BY COUNT(*) DESC " +
+                            "                                   LIMIT 1) " +
+                            "               THEN s.name " +
+                            "               ELSE movieCount " +
+                            "           END DESC, " +
+                            "           s.name ASC " +
+                            "       LIMIT 3) AS topStars) AS star_ids_and_names, "
+
+                            +
                             "(SELECT GROUP_CONCAT(DISTINCT CONCAT(g.id, ';', g.name) SEPARATOR ';') " +
                             "FROM genres_in_movies gm JOIN genres g ON gm.genreId = g.id " +
                             "WHERE gm.movieId = m.id) AS genres, " +
@@ -161,9 +199,28 @@ public class BrowseServlet extends HttpServlet {
                             "m.title AS title, " +
                             "m.year AS movie_year, " +
                             "m.director AS movie_director, " +
-                            "(SELECT GROUP_CONCAT(DISTINCT CONCAT(s.id, ';', s.name) SEPARATOR ';') " +
-                            "FROM stars_in_movies sm JOIN stars s ON sm.starId = s.id " +
-                            "WHERE sm.movieId = m.id) AS star_ids_and_names, " +
+
+                            "(SELECT GROUP_CONCAT(CONCAT(topStars.starId, ';', topStars.name) SEPARATOR ';') " +
+                            " FROM (SELECT s.id AS starId, s.name, COUNT(*) AS movieCount " +
+                            "       FROM stars s " +
+                            "       JOIN stars_in_movies sm ON s.id = sm.starId " +
+                            "       WHERE s.id IN (SELECT starId FROM stars_in_movies WHERE movieId = m.id) " +
+                            "       GROUP BY s.id, s.name " +
+                            "       ORDER BY " +
+                            "           CASE " +
+                            "               WHEN COUNT(*) = (SELECT COUNT(*) " +
+                            "                                   FROM stars_in_movies " +
+                            "                                   WHERE movieId = m.id " +
+                            "                                   GROUP BY movieId, starId " +
+                            "                                   ORDER BY COUNT(*) DESC " +
+                            "                                   LIMIT 1) " +
+                            "               THEN s.name " +
+                            "               ELSE movieCount " +
+                            "           END DESC, " +
+                            "           s.name ASC " +
+                            "       LIMIT 3) AS topStars) AS star_ids_and_names, "
+                            +
+
                             "(SELECT GROUP_CONCAT(DISTINCT CONCAT(g.id, ';', g.name) SEPARATOR ';') " +
                             "FROM genres_in_movies gm JOIN genres g ON gm.genreId = g.id " +
                             "WHERE gm.movieId = m.id) AS genres, " +
