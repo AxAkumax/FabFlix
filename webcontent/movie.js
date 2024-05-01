@@ -22,7 +22,6 @@ function fetchSearchResults(){
         var director = urlParams.get('director');
         var starName = urlParams.get('starName');
 
-
         var formData = {};
         if(title){ formData["title"]=title;}
         if(year){ formData["year"]=year; }
@@ -31,6 +30,8 @@ function fetchSearchResults(){
         if(sortAttribute){ formData["sortAttribute"]=sortAttribute; }
         if(recordsPerPage){ formData["recordsPerPage"]=recordsPerPage; }
         formData["page"]=currentPage;
+
+        console.log(formData);
 
         // Make AJAX request to fetch search results with updated page number
         $.ajax({
@@ -41,7 +42,9 @@ function fetchSearchResults(){
             success: function(resultData) {
                 // Populate the table with search results
                 $("#noResultsMessage").hide();
+                console.log(formData);
                 console.log("sucesss");
+
                 populateTable(resultData);
             },
             error: function(xhr, status, error) {
