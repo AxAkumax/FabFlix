@@ -16,6 +16,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet(name = "SearchServlet", urlPatterns = "/api/search")
 public class SearchServlet extends HttpServlet {
@@ -59,75 +61,62 @@ public class SearchServlet extends HttpServlet {
                     "m.title AS movie_title, " +
                     "m.year AS movie_year, " +
                     "m.director AS movie_director, " +
-
-                    " (SELECT GROUP_CONCAT(CONCAT(topStars.starId, ';', topStars.name) ORDER BY topStars.movieCount DESC, topStars.name ASC SEPARATOR ';') " +
-                    " FROM (SELECT s.id AS starId, " +
-                    " s.name, " +
-                    " COUNT(*) AS movieCount " +
-                    " FROM stars s " +
-                    " JOIN stars_in_movies sm ON s.id = sm.starId " +
-                    " WHERE sm.movieId = m.id " +
-                    " GROUP BY s.id, s.name " +
-                    " LIMIT 3) AS topStars) AS star_ids_and_names, "
-                    +
-
+                    "(SELECT GROUP_CONCAT(DISTINCT CONCAT(s.id, ';', s.name) SEPARATOR ';') " +
+                    "FROM stars_in_movies sm JOIN stars s ON sm.starId = s.id " +
+                    "WHERE sm.movieId = m.id) AS star_ids_and_names, " +
                     "(SELECT GROUP_CONCAT(DISTINCT CONCAT(g.id, ';', g.name) SEPARATOR ';') " +
                     "FROM genres_in_movies gm JOIN genres g ON gm.genreId = g.id " +
                     "WHERE gm.movieId = m.id) AS movie_id_genres, " +
-
                     "AVG(r.rating) AS average_rating " +
                     "FROM movies m " +
-                    "LEFT JOIN ratings r ON m.id = r.movieId ";
+                    "LEFT JOIN ratings r ON m.id = r.movieId " +
+                    "LEFT JOIN stars_in_movies sm ON m.id = sm.movieId " +
+                    "LEFT JOIN stars s ON sm.starId = s.id ";
 
-            if (title != null || year != null || director != null || starName != null) {
-                query += "WHERE ";
-                boolean isFirstCondition = true;
-                if (title != null) {
-                    query += "LOWER(m.title) LIKE ?";
-                    isFirstCondition = false;
-                }
-                if (year != null) {
-                    if (!isFirstCondition) query += " AND ";
-                    query += "m.year = ?";
-                    isFirstCondition = false;
-                }
-                if (director != null) {
-                    if (!isFirstCondition) query += " AND ";
-                    query += "LOWER(m.director) LIKE ?";
-                    isFirstCondition = false;
-                }
-                if (starName != null) {
-                    if (!isFirstCondition) query += " AND ";
-                    // Use a subquery to check if any star in the movie matches the provided name
-                    query += "m.id IN (SELECT sm.movieId FROM stars_in_movies sm JOIN stars s ON sm.starId = s.id WHERE LOWER(s.name) LIKE ?)";
-                }
-            }
+// Condition for WHERE clause
+            String conditions = "";
+            List<String> parameters = new ArrayList<>();
 
-            // Group by movie attributes
-            query += " GROUP BY m.id, m.title, m.year, m.director ";
-
-            query += " ORDER BY " + sortAttribute + " LIMIT ? OFFSET ?";
-
-            //case-insensitive and substring matching
-            assert conn != null;
-
-            PreparedStatement statement = conn.prepareStatement(query);
-            int parameterIndex = 1;
             if (title != null) {
-                statement.setString(parameterIndex++, "%" + title.toLowerCase() + "%");
+                conditions += "LOWER(m.title) LIKE ? ";
+                parameters.add("%" + title.toLowerCase() + "%");
             }
             if (year != null) {
-                statement.setString(parameterIndex++, year);
+                if (!conditions.isEmpty()) conditions += "AND ";
+                conditions += "m.year = ? ";
+                parameters.add(year);
             }
             if (director != null) {
-                statement.setString(parameterIndex++, "%" + director.toLowerCase() + "%");
+                if (!conditions.isEmpty()) conditions += "AND ";
+                conditions += "LOWER(m.director) LIKE ? ";
+                parameters.add("%" + director.toLowerCase() + "%");
             }
             if (starName != null) {
-                statement.setString(parameterIndex, "%" + starName.toLowerCase() + "%");
+                if (!conditions.isEmpty()) conditions += "AND ";
+                conditions += "s.name LIKE ? ";
+                parameters.add("%" + starName.toLowerCase() + "%");
             }
 
+            if (!conditions.isEmpty()) {
+                query += "WHERE " + conditions;
+            }
+
+// Group by and order by
+            query += "GROUP BY m.id, m.title, m.year, m.director " +
+                    "ORDER BY " + sortAttribute +
+                    " LIMIT ? OFFSET ?";
+
+            PreparedStatement statement = conn.prepareStatement(query);
+
+// Set parameters
+            int parameterIndex = 1;
+            for (String param : parameters) {
+                statement.setString(parameterIndex++, param);
+            }
+
+// Set limit and offset parameters for pagination
             statement.setInt(parameterIndex++, recordsPerPage);
-            statement.setInt(parameterIndex, offset);
+            statement.setInt(parameterIndex, (currentPage - 1) * recordsPerPage);
 
             ResultSet rs = statement.executeQuery();
 
@@ -149,7 +138,6 @@ public class SearchServlet extends HttpServlet {
 
                 movieArray.add(movieObject);
             }
-
 
             jsonResponse.add("movies", movieArray);
             response.setStatus(HttpServletResponse.SC_OK);
