@@ -47,8 +47,12 @@ p{
     font-size: 1.8vw;
     padding-left: 8vw;
     color: lightgrey;
+    margin-bottom: 1.5vw;
 }
-h2, p{
+#stars{
+    margin-bottom: 2.1vw;
+}
+h2{
     margin: 0vw;
 }
 a {

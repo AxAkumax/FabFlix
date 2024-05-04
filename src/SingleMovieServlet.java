@@ -55,9 +55,16 @@ public class SingleMovieServlet extends HttpServlet {
                     "m.title AS movie_title, " +
                     "m.year AS movie_year, " +
                     "m.director AS movie_director, " +
-                    "(SELECT GROUP_CONCAT(DISTINCT CONCAT(s.id, ';', s.name) SEPARATOR ';') " +
-                    "FROM stars_in_movies sm JOIN stars s ON sm.starId = s.id " +
-                    "WHERE sm.movieId = m.id) AS star_ids_and_names, " +
+
+                    "(SELECT GROUP_CONCAT(DISTINCT CONCAT(s.id, ';', s.name, ';', total_movies) ORDER BY total_movies DESC, s.name ASC SEPARATOR ';') " +
+                    " FROM (SELECT starId, COUNT(*) AS total_movies " +
+                    "       FROM stars_in_movies " +
+                    "       GROUP BY starId " +
+                    "       ) AS star_movies " +
+                    " JOIN stars s ON star_movies.starId = s.id " +
+                    " JOIN stars_in_movies sm ON s.id = sm.starId " +
+                    " WHERE sm.movieId = m.id " +
+                    ") AS star_ids_and_names, " +
 
                     "(SELECT GROUP_CONCAT(DISTINCT CONCAT(g.id, ';', g.name) SEPARATOR ';') " +
                     "FROM genres_in_movies gm JOIN genres g ON gm.genreId = g.id " +
@@ -82,30 +89,12 @@ public class SingleMovieServlet extends HttpServlet {
 
             while (rs.next()) {
 
-                String stars_and_ids = rs.getString("star_ids_and_names");
-                String[] parts = stars_and_ids.split(";");
-
-                String movieStars = "";
-                String movieStarIds = "";
-
-                for (int i = 0; i < parts.length; i += 2) {
-                    String mid = parts[i] + ";";
-                    String name = parts[i+1] + ";";
-
-                    movieStarIds += mid;
-                    movieStars += name;
-
-                }
-
-                movieStars = movieStars.substring(0, movieStars.length() - 1);
-                movieStarIds = movieStarIds.substring(0, movieStarIds.length() - 1);
-
-
                 String movieId = rs.getString("movie_id");
                 String movieTitle = rs.getString("movie_title");
                 String movieYear = rs.getString("movie_year");
                 String movieDirector = rs.getString("movie_director");
                 String movieGenres = rs.getString("genres");
+                String stars_and_ids = rs.getString("star_ids_and_names");
 
                 double averageRating = Math.round(rs.getDouble("average_rating") * 10.0) / 10.0;
 
@@ -115,8 +104,7 @@ public class SingleMovieServlet extends HttpServlet {
                 jsonObject.addProperty("movie_year", movieYear);
                 jsonObject.addProperty("movie_director", movieDirector);
                 jsonObject.addProperty("movie_genres", movieGenres);
-                jsonObject.addProperty("movie_stars", movieStars);
-                jsonObject.addProperty("movie_starIds", movieStarIds);
+                jsonObject.addProperty("movie_stars", stars_and_ids);
                 jsonObject.addProperty("average_rating", averageRating);
 
                 jsonArray.add(jsonObject);
