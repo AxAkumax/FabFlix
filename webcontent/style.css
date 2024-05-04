@@ -34,11 +34,20 @@ header{
     font-weight: 500;
     font-style: normal;
 }
-
+h1{
+    color: #bb86fc;
+    font-family: "DM Sans", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    margin-top: 10vw;
+    margin-left: 3vw;
+    font-size: 21vw;
+    margin-bottom: 1vw;
+}
 h2{
     background-color: black;
     text-align: center;
-    color:  #bb86fc;
+    color:  lightgray;
     font-size: 3vw;
     padding-left: 2.6vw;
     padding-bottom: 1.3vw;
@@ -57,31 +66,13 @@ a:hover {
     color: #bb86fc; /* orange color */
 }
 
-/* Styling for the table */
-#movie_table {
-    background-color: black; /* black background color for the table */
-    color: lightgrey; /* white text color for the table */
+p{
+    color: lightgray;
+    text-align: center;
+    font-size: 3vw;
     font-family: "DM Sans", sans-serif;
     font-style: normal;
-    max-width: 98vw; /* Set a maximum width for the table */
-    margin: 0 auto;
 }
-
-/*#movie_table th {*/
-/*    color: lightgrey; !* white text color for table headers *!*/
-/*}*/
-
-#movie_table tbody tr {
-    color: lightgrey; /* white text color for table body rows */
-    transition: all 0.3s ease; /* Add transition for smooth animation */
-}
-
-
-#movie_table tbody tr:hover {
-    background-color: #333; /* Darken background color when hovered */
-    transform: scale(1.1); /* Increase size of row when hovered */
-}
-
 
 footer{
     bottom: 0;
@@ -107,10 +98,18 @@ main {
     flex: 1; /* Allow main content to expand and push footer to the bottom */
 }
 
-header, #movie_table {
+header {
     margin-top: 0; /* Remove default margin */
     margin-bottom: 0; /* Remove default margin */
 }
+
+.container {
+    position: relative;
+    width: 200px;
+    height: 200px;
+}
+
+
 
 
 

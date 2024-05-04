@@ -159,17 +159,16 @@ function populateTable(resultData) {
         rowHTML += "<td>" + genreSpanHTML + "</td>";
 
         let star_id_names = movie.stars.split(";");
+        console.log(movie.stars);
         let stars = [];
 
         // Create star objects and push them into the stars array
-        for (let i = 0; i < star_id_names.length; i += 2) {
+        for (let i = 0; i <  Math.min(star_id_names.length, 9); i += 3) {
             let star_id = star_id_names[i];
             let star_name = star_id_names[i + 1];
-            stars.push({id: star_id, name: star_name});
+            let total_movies = star_id_names[i + 2];
+            stars.push({ id: star_id, name: star_name, total_movies: total_movies });
         }
-
-        // Sort the stars array by star name in ascending order
-        stars.sort((a, b) => a.name.localeCompare(b.name));
 
         // Initialize the star_entry string
         let star_entry = '';
@@ -186,8 +185,9 @@ function populateTable(resultData) {
             }
         }
 
-        // Display hyperlinked star names
+        //Display hyperlinked star names
         rowHTML += "<td>" + star_entry + "</td>";
+        //rowHTML += "<td>" + movie.stars + "</td>";
         rowHTML += "<td>" + movie.rating + "</td>";
 
         rowHTML += '<td> <button type="button" class="btn btn-outline-secondary" ' +

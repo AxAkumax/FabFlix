@@ -61,9 +61,17 @@ public class SearchServlet extends HttpServlet {
                     "m.title AS movie_title, " +
                     "m.year AS movie_year, " +
                     "m.director AS movie_director, " +
-                    "(SELECT GROUP_CONCAT(DISTINCT CONCAT(s.id, ';', s.name) SEPARATOR ';') " +
-                    "FROM stars_in_movies sm JOIN stars s ON sm.starId = s.id " +
-                    "WHERE sm.movieId = m.id) AS star_ids_and_names, " +
+
+                    "(SELECT GROUP_CONCAT(DISTINCT CONCAT(s.id, ';', s.name, ';', total_movies) ORDER BY total_movies DESC, s.name ASC SEPARATOR ';') " +
+                    " FROM (SELECT starId, COUNT(*) AS total_movies " +
+                    "       FROM stars_in_movies " +
+                    "       GROUP BY starId " +
+                    "       ) AS star_movies " +
+                    " JOIN stars s ON star_movies.starId = s.id " +
+                    " JOIN stars_in_movies sm ON s.id = sm.starId " +
+                    " WHERE sm.movieId = m.id " +
+                    ") AS star_ids_and_names, " +
+
                     "(SELECT GROUP_CONCAT(DISTINCT CONCAT(g.id, ';', g.name) SEPARATOR ';') " +
                     "FROM genres_in_movies gm JOIN genres g ON gm.genreId = g.id " +
                     "WHERE gm.movieId = m.id) AS movie_id_genres, " +
