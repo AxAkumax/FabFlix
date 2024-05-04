@@ -60,7 +60,6 @@ public class SingleStarServlet extends HttpServlet {
                     "FROM stars as s, stars_in_movies as sim, movies as m " +
                     "WHERE m.id = sim.movieId AND sim.starId = s.id AND s.id = ?";
 
-
             // Declare our statement
             PreparedStatement statement = conn.prepareStatement(query);
 

@@ -65,7 +65,7 @@ function handleResult(resultData) {
     let movieTableBodyElement = jQuery("#movie_table_body");
 
     // Concatenate the html tags with resultData jsonObject to create table rows
-    for (let i = 0; i < Math.min(10, resultData.length); i++) {
+    for (let i = 0; i <  resultData.length; i++) {
         let rowHTML = "";
         rowHTML += "<tr>";
         rowHTML += "<td>" + '<a href="single-movie.html?id=' + resultData[i]['movie_id'] + '">'
@@ -88,7 +88,7 @@ function handleResult(resultData) {
 
         let genreSpan = $("<span>");
 
-        for (let i = 0; i < Math.min(3, genres.length); i++) {
+        for (let i = 0; i <  genres.length; i++) {
             let genre = genres[i];
 
             let genreLink = $("<a class='browse-link'>")
