@@ -110,11 +110,38 @@ function handleResult(resultData) {
 
         rowHTML +="<td>" + genreSpanHTML + "</td>";
 
+        rowHTML += '<td> <button type="button" class="btn btn-outline-secondary" ' +
+            'onclick="addToCart(\'' + resultData[i]['movie_id'] + '\')"> Add </button> </td>';
+
         rowHTML += "</tr>";
 
         // Append the row created to the table body, which will refresh the page
         movieTableBodyElement.append(rowHTML);
     }
+}
+function addToCart(movieId) {
+    // Create a JSON object containing the movie ID
+    let data = {
+        "movieId": movieId,
+        "action": "increment"
+    };
+
+    // Send an AJAX POST request to your backend API to add the movie to the cart
+    $.ajax({
+        type: "POST",
+        url: "api/cart", // Replace this with the actual endpoint of your backend API
+        contentType: "application/json",
+        data: JSON.stringify(data),
+        success: function(response) {
+            // Handle the success response from the server
+            console.log("Movie successfully added to cart");
+            // Optionally, can redirect the user to the shopping cart page after adding the movie
+        },
+        error: function(xhr, status, error) {
+            // Handle errors if any
+            console.error("Error adding movie to cart:", error);
+        }
+    });
 }
 
 /**
