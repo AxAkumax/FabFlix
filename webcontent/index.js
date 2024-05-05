@@ -114,7 +114,6 @@ function addToCart(movieId) {
 }
 
 
-
 /**
  * Once this index.js is loaded, following scripts will be executed by the browser
  */
