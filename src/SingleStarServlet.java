@@ -58,7 +58,8 @@ public class SingleStarServlet extends HttpServlet {
                     "FROM genres_in_movies gm JOIN genres g ON gm.genreId = g.id " +
                     "WHERE gm.movieId = m.id) AS genres " +
                     "FROM stars as s, stars_in_movies as sim, movies as m " +
-                    "WHERE m.id = sim.movieId AND sim.starId = s.id AND s.id = ?";
+                    "WHERE m.id = sim.movieId AND sim.starId = s.id AND s.id = ?"
+                    + "ORDER BY m.year DESC, m.title ASC";
 
             // Declare our statement
             PreparedStatement statement = conn.prepareStatement(query);

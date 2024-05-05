@@ -114,3 +114,17 @@ body {
 main {
     flex: 1; /* Allow main content to expand and push footer to the bottom */
 }
+
+.navigation {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-top: 8vw;
+}

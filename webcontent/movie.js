@@ -277,3 +277,13 @@ function updateQueryStringParameter(uri, key, value) {
         return uri + separator + key + "=" + value;
     }
 }
+
+window.addEventListener('beforeunload', () => {
+    sessionStorage.setItem('previousPage', window.location.href);
+});
+
+// Function to navigate back to the previous page
+document.getElementById('goBack').addEventListener('click', () => {
+    const previousPage = sessionStorage.getItem('previousPage') || '/';
+    window.location.href = previousPage;
+});
