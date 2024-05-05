@@ -40,23 +40,23 @@ h1{
     font-weight: 400;
     font-style: normal;
     margin-top: 10vw;
-    margin-left: 3vw;
-    font-size: 21vw;
-    margin-bottom: 1vw;
-}
-h2{
-    background-color: black;
+    /*margin-left: 5.1vw;*/
     text-align: center;
-    color:  lightgray;
-    font-size: 3vw;
-    padding-left: 2.6vw;
-    padding-bottom: 1.3vw;
-    font-family: "DM Sans", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    margin-top: 6vw;
-    margin-bottom: 1.2vw;
+    font-size: 18vw;
+    margin-bottom: 1vw;
+    opacity: 0; /* Initially hidden */
+    animation: fadeIn 2s ease forwards; /* Animation name, duration, timing function, and fill mode */
 }
+
+@keyframes fadeIn {
+    from {
+        opacity: 0; /* Start opacity */
+    }
+    to {
+        opacity: 1; /* End opacity */
+    }
+}
+
 a {
     color: lightgrey;  /* blue color */
 }
@@ -72,6 +72,9 @@ p{
     font-size: 3vw;
     font-family: "DM Sans", sans-serif;
     font-style: normal;
+    margin-bottom: 4vw;
+    margin-left: 1vw;
+    margin-right: 3vw;
 }
 
 footer{
@@ -108,9 +111,37 @@ header {
     width: 200px;
     height: 200px;
 }
+.img-text-container{
+    display: flex;
+    align-items: center; /* Align items vertically */
+    margin-left: 9vw;
+    margin-right: 9vw;
+    margin-bottom: 4.5vw;
+}
 
+.slideshow-container {
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto; /* Center the slideshow horizontally */
+    flex-wrap: nowrap;
+}
 
+.slide {
+    display: none;
+}
 
+.fade {
+    animation: fadeEffect 4s infinite;
+}
 
-
-
+@keyframes fadeEffect {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
