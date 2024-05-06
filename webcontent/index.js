@@ -76,7 +76,7 @@ function handleMovieResult(resultData) {
 
         // Column: add to cart button
         rowHTML += '<th> <button type="button" class="btn btn-outline-secondary" ' +
-            'onclick="addToCart(\'' + resultData[i]["movie_id"] + '\')"> Add </button> </th>';
+            'onclick="addToCart(\'' + resultData[i]["movie_id"] + '\', this)"> Add </button> </th>';
 
         rowHTML += "</tr>";
 
@@ -89,13 +89,16 @@ function handleMovieResult(resultData) {
 /**
  * Handles the add movie to cart functionality
  **/
-function addToCart(movieId) {
+function addToCart(movieId, buttonElement) {
 
     // Create a JSON object containing the movie ID
     let data = {
         "movieId": movieId,
         "action": "increment"
     };
+
+    // Save the original text of the button
+    let originalText = "Add";
 
     // Send an AJAX POST request to apo/cart to add the movie to the cart
     $.ajax({
@@ -106,9 +109,20 @@ function addToCart(movieId) {
         success: function(response) {
             console.log("Movie successfully added to cart from index.js");
             console.log(response);
+
+            // Change the color of the button when successfully added to cart
+            $(buttonElement).removeClass("btn-outline-secondary").addClass("btn-success");
+            $(buttonElement).text("Added");
+
+            // Revert the color back to original after 1 second
+            setTimeout(function() {
+                $(buttonElement).removeClass("btn-success").addClass("btn-outline-secondary");
+                $(buttonElement).text(originalText);
+            }, 500);
         },
         error: function(xhr, status, error) {
             console.error("Error adding movie to cart from index.js: ", error);
+
         }
     });
 }
