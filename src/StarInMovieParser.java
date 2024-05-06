@@ -92,10 +92,9 @@ public class StarInMovieParser extends DefaultHandler {
 
         if (tempStarMovie != null) {
             if (qName.equalsIgnoreCase("m")) {
-                //add it to the list
                 starMovies.add(tempStarMovie);
             }
-            else if (qName.equals("is")) {
+            else if (qName.equalsIgnoreCase("is")) {
                 tempStarMovie.setDirector(tempVal);
             }
             else if (qName.equalsIgnoreCase("t")) {
