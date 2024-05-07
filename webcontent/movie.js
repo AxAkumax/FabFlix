@@ -1,75 +1,94 @@
-var currentPage = 1;
+var currentPage =  1;
 
 $(document).ready(function() {
+    var urlParams = new URLSearchParams(window.location.search);
+    var page = urlParams.get('page');
+    currentPage = parseInt(page) || 1; // Initialize currentPage with the value from URL, default to 1 if not found
+
     fetchSearchResults(); // Call fetchSearchResults directly
 });
 
 function fetchSearchResults(){
-        // Extract search parameters from the URL
-        var urlParams = new URLSearchParams(window.location.search);
-        var genreId = urlParams.get('genreId'); // Check if genreId parameter exists
-        var character =  urlParams.get('character');
-        var sortAttribute = urlParams.get('sortAttribute');
-        var recordsPerPage = urlParams.get('recordsPerPage');
-        var page = urlParams.get('page');
-        if (genreId || character) {
-            console.log(genreId);
-            console.log("before going into fetch movies by genre");
-            fetchMoviesByGenre(genreId, character, sortAttribute, recordsPerPage,page);
-            return;
-        }
-        var title = urlParams.get('title');
-        var year = urlParams.get('year');
-        var director = urlParams.get('director');
-        var starName = urlParams.get('starName');
+    // Extract search parameters from the URL
+    var urlParams = new URLSearchParams(window.location.search);
+    var genreId = urlParams.get('genreId'); // Check if genreId parameter exists
+    var character =  urlParams.get('character');
+    var sortAttribute = urlParams.get('sortAttribute');
+    var recordsPerPage = urlParams.get('recordsPerPage');
+    var page = urlParams.get('page');
 
-        var formData = {};
-        if(title){ formData["title"]=title;}
-        if(year){ formData["year"]=year; }
-        if(director){ formData["director"]=director; }
-        if(starName){ formData["starName"]=starName; }
-        if(sortAttribute){ formData["sortAttribute"]=sortAttribute; }
-        if(recordsPerPage){ formData["recordsPerPage"]=recordsPerPage; }
-        formData["page"]=page;
-
-        console.log(formData);
-
-        // Make AJAX request to fetch search results with updated page number
-        $.ajax({
-            url: "api/search", // Update with your API endpoint
-            method: "GET",
-            dataType: "json",
-            data: formData,
-            success: function(resultData) {
-                // Populate the table with search results
-                $("#noResultsMessage").hide();
-                console.log(formData);
-                console.log("sucesss");
-
-                populateTable(resultData);
-
-                console.log(resultData.movies.length);
-                console.log(recordsPerPage);
-
-                if (resultData && resultData.movies && resultData.movies.length === parseInt(recordsPerPage)) {
-                    $("#nextBtn").prop("disabled", false); // Enable Next button
-                } else {
-                    $("#nextBtn").prop("disabled", true); // Disable Next button
-                }
-                if(currentPage>1){
-                    $("#prevBtn").prop("disabled", false); // Enable Next button
-                }
-                else{
-                    $("#prevBtn").prop("disabled", true);
-                }
-
-            },
-            error: function(xhr, status, error) {
-                $("#noResultsMessage").show();
-                console.error("Error occurred while fetching search results:", error);
-            }
-        });
+    if (genreId || character) {
+        console.log(genreId);
+        console.log("before going into fetch movies by genre");
+        fetchMoviesByGenre(genreId, character, sortAttribute, recordsPerPage,page);
+        return;
     }
+    var title = urlParams.get('title');
+    var year = urlParams.get('year');
+    var director = urlParams.get('director');
+    var starName = urlParams.get('starName');
+
+    var formData = {};
+    if(title){ formData["title"]=title;}
+    if(year){ formData["year"]=year; }
+    if(director){ formData["director"]=director; }
+    if(starName){ formData["starName"]=starName; }
+    if(sortAttribute){ formData["sortAttribute"]=sortAttribute; }
+    if(recordsPerPage){ formData["recordsPerPage"]=recordsPerPage; }
+    formData["page"]=page;
+
+    console.log(formData);
+
+    // Make AJAX request to fetch search results with updated page number
+    $.ajax({
+        url: "api/search", // Update with your API endpoint
+        method: "GET",
+        dataType: "json",
+        data: formData,
+        success: function(resultData) {
+            // Populate the table with search results
+            $("#noResultsMessage").hide();
+            console.log(formData);
+            console.log("sucesss");
+            console.log("CURRENT PAGE: ", currentPage);
+
+            populateTable(resultData);
+
+            console.log(resultData.movies.length);
+            console.log(recordsPerPage);
+
+            // if (resultData && resultData.movies && resultData.movies.length === parseInt(recordsPerPage)) {
+            //     $("#nextBtn").prop("disabled", false); // Enable Next button
+            // } else {
+            //     $("#nextBtn").prop("disabled", true); // Disable Next button
+            // }
+            if (resultData.hasOwnProperty("hasNextPage")) {
+                // Extract the value of hasNextPage
+                var hasNextPage = resultData.hasNextPage;
+
+                if (!hasNextPage) {
+                    // No more pages available, disable the next button
+                    $("#nextBtn").prop("disabled", true);
+                } else {
+                    // More pages available, enable the next button
+                    $("#nextBtn").prop("disabled", false);
+                }
+            }
+
+            if(currentPage>1){
+                $("#prevBtn").prop("disabled", false); // Enable Next button
+            }
+            else{
+                $("#prevBtn").prop("disabled", true);
+            }
+
+        },
+        error: function(xhr, status, error) {
+            $("#noResultsMessage").show();
+            console.error("Error occurred while fetching search results:", error);
+        }
+    });
+}
 
 
 // Function to populate the table with search results
@@ -86,6 +105,7 @@ function fetchMoviesByGenre(genreId, character, sortAttribute, recordsPerPage, p
     formData["recordsPerPage"] = recordsPerPage;
     formData["page"]=page;
 
+    currentPage = page;
     console.log("formData: ", formData);
     $.ajax({
         url: "api/browse",
@@ -95,12 +115,30 @@ function fetchMoviesByGenre(genreId, character, sortAttribute, recordsPerPage, p
         success: function (resultData) {
             // Populate the table with genre results
             console.log("success");
+            console.log(formData);
+
+            console.log("CURRENT PAGE: ", currentPage);
+
+            $("#noResultsMessage").hide();
 
             populateTable(resultData);
             if (resultData && resultData.movies && resultData.movies.length === parseInt(recordsPerPage)) {
                 $("#nextBtn").prop("disabled", false); // Enable Next button
             } else {
                 $("#nextBtn").prop("disabled", true); // Disable Next button
+            }
+            if (resultData.hasOwnProperty("hasNextPage")) {
+                // Extract the value of hasNextPage
+                console.log("went into the hasOwnProperty function!!!!!!!!");
+                var hasNextPage = resultData.hasNextPage;
+
+                if (!hasNextPage) {
+                    // No more pages available, disable the next button
+                    $("#nextBtn").prop("disabled", true);
+                } else {
+                    // More pages available, enable the next button
+                    $("#nextBtn").prop("disabled", false);
+                }
             }
 
             if(currentPage>1){
@@ -118,7 +156,6 @@ function fetchMoviesByGenre(genreId, character, sortAttribute, recordsPerPage, p
     });
 }
 function populateTable(resultData) {
-    console.log("Result data:", resultData);
     var table = $("#movie_table_body");
     var tableHeadings = $("#movie_table thead");
 
@@ -130,9 +167,9 @@ function populateTable(resultData) {
 
         if(currentPage>1){
             $("#prevBtn").prop("disabled", false);
-            window.location.href = sessionStorage.getItem('recentURL');
+            //window.location.href = sessionStorage.getItem('recentURL');
         }
-        else {
+        else if (currentPage===1) {
             console.log("No movies found.");
             // Hide the table and show the no results message
             noResultsMessage.show();
@@ -140,7 +177,6 @@ function populateTable(resultData) {
             tableHeadings.hide()
         }
         return;
-
     }
 
     noResultsMessage.hide();
@@ -273,6 +309,7 @@ function addToCart(movieId) {
 
 function nextPage() {
     currentPage++; // Increment current page number
+    console.log("Next Page: Current Page is now", currentPage);
     updatePageQueryParam();
     storeRecentURL();
     fetchSearchResults(); // Submit the form with updated page number
@@ -282,6 +319,7 @@ function nextPage() {
 function prevPage() {
     if (currentPage > 1) {
         currentPage--; // Decrement current page number if not already on the first page
+        console.log("Next Page: Current Page is now", currentPage);
         updatePageQueryParam();
         storeRecentURL();
         fetchSearchResults();
@@ -294,10 +332,10 @@ function updatePageQueryParam() {
     window.history.replaceState({ path: updatedUrl }, '', updatedUrl);
 }
 
-$("#nextBtn").click(nextPage);
-$("#prevBtn").click(prevPage);
 
 $(document).ready(function() {
+    $("#nextBtn").click(nextPage);
+    $("#prevBtn").click(prevPage);
     $("#sortForm").submit(submitSortForm);
 });
 

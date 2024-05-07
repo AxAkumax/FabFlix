@@ -95,36 +95,48 @@ public class BrowseServlet extends HttpServlet {
                 PreparedStatement statement = conn.prepareStatement(query);
                 statement.setInt(1, genreId);
 
-                statement.setInt(2, recordsPerPage); // Set limit
+                statement.setInt(2, recordsPerPage + 1); // Set limit
                 statement.setInt(3, offset); // Set offset
 
                 ResultSet rs = statement.executeQuery();
                 JsonArray jsonArray = new JsonArray();
+                boolean hasNextPage = false; // Flag to track if there are more pages available
 
                 while (rs.next()) {
+                    if (jsonArray.size() < recordsPerPage) {
+                        String movieId = rs.getString("movie_id");
+                        String movieTitle = rs.getString("title");
+                        String movieYear = rs.getString("movie_year");
+                        String movieDirector = rs.getString("movie_director");
+                        String movieGenres = rs.getString("genres");
+                        double averageRating = Math.round(rs.getDouble("average_rating") * 10.0) / 10.0;
 
-                    String movieId = rs.getString("movie_id");
-                    String movieTitle = rs.getString("title");
-                    String movieYear = rs.getString("movie_year");
-                    String movieDirector = rs.getString("movie_director");
-                    String movieGenres = rs.getString("genres");
-                    double averageRating = Math.round(rs.getDouble("average_rating") * 10.0) / 10.0;
+                        JsonObject jsonObject = new JsonObject();
+                        jsonObject.addProperty("id", movieId);
+                        jsonObject.addProperty("title", movieTitle);
+                        jsonObject.addProperty("year", movieYear);
+                        jsonObject.addProperty("director", movieDirector);
+                        jsonObject.addProperty("stars", rs.getString("star_ids_and_names"));
+                        jsonObject.addProperty("genres", movieGenres);
+                        jsonObject.addProperty("rating", averageRating);
+                        jsonArray.add(jsonObject);
+                    }
+                    else{
+                        hasNextPage = true; // Set the flag indicating more pages are available
+                        break; // Exit the loop as we fetched more records than the recordsPerPage
+                    }
+                }
 
-                    JsonObject jsonObject = new JsonObject();
-                    jsonObject.addProperty("id", movieId);
-                    jsonObject.addProperty("title", movieTitle);
-                    jsonObject.addProperty("year", movieYear);
-                    jsonObject.addProperty("director", movieDirector);
-                    jsonObject.addProperty("stars", rs.getString("star_ids_and_names"));
-                    jsonObject.addProperty("genres", movieGenres);
-                    jsonObject.addProperty("rating", averageRating);
-
-                    jsonArray.add(jsonObject);
+                if (jsonArray.size() > recordsPerPage) {
+                    jsonArray.remove(jsonArray.size() - 1);
+                    hasNextPage = true;
                 }
 
                 rs.close();
                 statement.close();
                 jsonResponse.add("movies", jsonArray);
+                jsonResponse.addProperty("hasNextPage", hasNextPage);
+
                 out.print(jsonResponse.toString());
 
                 response.setStatus(200);
@@ -164,7 +176,7 @@ public class BrowseServlet extends HttpServlet {
 
                     query+= " ORDER BY " + orderByClause.toString() + " LIMIT ? OFFSET ?";
                     statement = conn.prepareStatement(query);
-                    statement.setInt(1, recordsPerPage); // Set limit
+                    statement.setInt(1, recordsPerPage + 1); // Set limit
                     statement.setInt(2, offset); // Set offset
 
                 }
@@ -201,37 +213,49 @@ public class BrowseServlet extends HttpServlet {
                     query+= " ORDER BY " + orderByClause.toString() + " LIMIT ? OFFSET ?";
                     statement = conn.prepareStatement(query);
                     statement.setString(1, titleStartParameter + "%");
-                    statement.setInt(2, recordsPerPage); // Set limit
+                    statement.setInt(2, recordsPerPage + 1); // Set limit
                     statement.setInt(3, offset); // Set offset
                 }
 
                 ResultSet rs = statement.executeQuery();
                 JsonArray jsonArray = new JsonArray();
+                boolean hasNextPage = false; // Flag to track if there are more pages available
 
                 while (rs.next()) {
+                    if (jsonArray.size() < recordsPerPage) {
+                        String movieId = rs.getString("movie_id");
+                        String movieTitle = rs.getString("title");
+                        String movieYear = rs.getString("movie_year");
+                        String movieDirector = rs.getString("movie_director");
+                        String movieGenres = rs.getString("genres");
+                        double averageRating = Math.round(rs.getDouble("average_rating") * 10.0) / 10.0;
 
-                    String movieId = rs.getString("movie_id");
-                    String movieTitle = rs.getString("title");
-                    String movieYear = rs.getString("movie_year");
-                    String movieDirector = rs.getString("movie_director");
-                    String movieGenres = rs.getString("genres");
-                    double averageRating = Math.round(rs.getDouble("average_rating") * 10.0) / 10.0;
+                        JsonObject jsonObject = new JsonObject();
+                        jsonObject.addProperty("id", movieId);
+                        jsonObject.addProperty("title", movieTitle);
+                        jsonObject.addProperty("year", movieYear);
+                        jsonObject.addProperty("director", movieDirector);
+                        jsonObject.addProperty("stars", rs.getString("star_ids_and_names"));
+                        jsonObject.addProperty("genres", movieGenres);
+                        jsonObject.addProperty("rating", averageRating);
 
-                    JsonObject jsonObject = new JsonObject();
-                    jsonObject.addProperty("id", movieId);
-                    jsonObject.addProperty("title", movieTitle);
-                    jsonObject.addProperty("year", movieYear);
-                    jsonObject.addProperty("director", movieDirector);
-                    jsonObject.addProperty("stars", rs.getString("star_ids_and_names"));
-                    jsonObject.addProperty("genres", movieGenres);
-                    jsonObject.addProperty("rating", averageRating);
+                        jsonArray.add(jsonObject);
+                    }
+                    else{
+                        hasNextPage = true; // Set the flag indicating more pages are available
+                        break; // Exit the loop as we fetched more records than the recordsPerPage
+                    }
+                }
 
-                    jsonArray.add(jsonObject);
+
+                if (!hasNextPage && jsonArray.size() == recordsPerPage) {
+                    jsonArray.remove(jsonArray.size() - 1);
                 }
 
                 rs.close();
                 statement.close();
                 jsonResponse.add("movies", jsonArray);
+                jsonResponse.addProperty("hasNextPage", hasNextPage);
                 out.print(jsonResponse.toString());
 
                 response.setStatus(200);
