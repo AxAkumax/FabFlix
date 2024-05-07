@@ -174,12 +174,19 @@ jQuery.ajax({
     success: (resultData) => handleResult(resultData) // Setting callback function to handle data returned successfully by the SingleStarServlet
 });
 
-window.addEventListener('beforeunload', () => {
-    sessionStorage.setItem('previousPage', window.location.href);
+// Function to retrieve the most recent URL from session storage
+function getRecentURL() {
+    return sessionStorage.getItem('recentURL');
+}
+
+
+document.getElementById('goBack').addEventListener('click', () => {
+    var recentURL = getRecentURL();
+    if (recentURL) {
+        // Redirect back to the recent URL (movie page)
+        window.location.href = recentURL;
+    } else {
+        // Handle case when no recent URL is stored
+    }
 });
 
-// Function to navigate back to the previous page
-document.getElementById('goBack').addEventListener('click', () => {
-    const previousPage = sessionStorage.getItem('previousPage') || '/';
-    window.location.href = previousPage;
-});

@@ -29,7 +29,7 @@ function fetchSearchResults(){
         if(starName){ formData["starName"]=starName; }
         if(sortAttribute){ formData["sortAttribute"]=sortAttribute; }
         if(recordsPerPage){ formData["recordsPerPage"]=recordsPerPage; }
-        formData["page"]=currentPage;
+        formData["page"]=urlParams.get('page');
 
         console.log(formData);
 
@@ -119,6 +119,7 @@ function populateTable(resultData) {
         var rowHTML = "<tr>";
 
         let movie_link = '<a href="single-movie.html?id=' + movie.id + '">' + movie.title + '</a>';
+        storeRecentURL();
 
         rowHTML += "<td>" + movie_link + "</td>";
         rowHTML += "<td>" + movie.year + "</td>";
@@ -177,6 +178,9 @@ function populateTable(resultData) {
         for (let i = 0; i < stars.length; i++) {
             let star = stars[i];
             let star_link = '<a href="single-star.html?id=' + star.id + '">' + star.name + '</a>';
+
+            storeRecentURL();
+
             star_entry += star_link;
 
             // Add comma and space if it's not the last star
@@ -187,6 +191,7 @@ function populateTable(resultData) {
 
         //Display hyperlinked star names
         rowHTML += "<td>" + star_entry + "</td>";
+
         //rowHTML += "<td>" + movie.stars + "</td>";
         rowHTML += "<td>" + movie.rating + "</td>";
 
@@ -230,6 +235,8 @@ function addToCart(movieId) {
 
 function nextPage() {
     currentPage++; // Increment current page number
+    updatePageQueryParam();
+    storeRecentURL();
     fetchSearchResults(); // Submit the form with updated page number
 }
 
@@ -237,9 +244,18 @@ function nextPage() {
 function prevPage() {
     if (currentPage > 1) {
         currentPage--; // Decrement current page number if not already on the first page
+        updatePageQueryParam();
+        storeRecentURL();
         fetchSearchResults();
     }
 }
+
+function updatePageQueryParam() {
+    var currentUrl = window.location.href;
+    var updatedUrl = updateQueryStringParameter(currentUrl, 'page', currentPage);
+    window.history.replaceState({ path: updatedUrl }, '', updatedUrl);
+}
+
 $("#nextBtn").click(nextPage);
 $("#prevBtn").click(prevPage);
 
@@ -278,12 +294,13 @@ function updateQueryStringParameter(uri, key, value) {
     }
 }
 
-window.addEventListener('beforeunload', () => {
-    sessionStorage.setItem('previousPage', window.location.href);
-});
+function storeRecentURL() {
+    // Include the current page number in the URL
+    var currentURL = window.location.href;
+    var recentURL = updateQueryStringParameter(currentURL, 'page', currentPage);
+    console.log(recentURL);
+    sessionStorage.setItem('recentURL', recentURL);
+}
 
-// Function to navigate back to the previous page
-document.getElementById('goBack').addEventListener('click', () => {
-    const previousPage = sessionStorage.getItem('previousPage') || '/';
-    window.location.href = previousPage;
-});
+// Call this function before redirecting to single movie or single star page
+storeRecentURL();
