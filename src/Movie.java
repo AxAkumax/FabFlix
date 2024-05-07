@@ -4,9 +4,11 @@ public class Movie {
     private String title;
     private String year;
     private String director;
+    private String reason;
     private ArrayList<String> genres;
 
     public Movie() {
+        this.reason = "None";
         this.genres = new ArrayList<String>();
     }
 
@@ -26,6 +28,10 @@ public class Movie {
         this.genres.add(genre);
     }
 
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -36,6 +42,10 @@ public class Movie {
 
     public String getYear() {
         return year;
+    }
+
+    public String getReason() {
+        return reason;
     }
 
     public ArrayList<String> getGenres() {

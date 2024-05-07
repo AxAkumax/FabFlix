@@ -1,4 +1,4 @@
-No of Movies '12115'.
+No of Movies '12081'.
 Title: Always Tell Your Wife
 Year: 1922
 Director: Hitchcock
@@ -2276,11 +2276,6 @@ Genres: []
 
 Title: Fabiola
 Year: 1923
-Director: Palermi
-Genres: [Epic]
-
-Title: Mesalina
-Year: 1924
 Director: Palermi
 Genres: [Epic]
 
@@ -6556,22 +6551,22 @@ Genres: [Thriller]
 
 Title: Ivy
 Year: 1947
-Director: S.Wood 
+Director: S.Wood
 Genres: []
 
 Title: Command Decision
 Year: 1948
-Director: S.Wood 
+Director: S.Wood
 Genres: []
 
 Title: Stratton Story
 Year: 1949
-Director: S.Wood 
+Director: S.Wood
 Genres: [null]
 
 Title: Ambush
 Year: 1950
-Director: S.Wood 
+Director: S.Wood
 Genres: []
 
 Title: Lord Jim
@@ -9326,7 +9321,7 @@ Genres: [null]
 
 Title: Jealousy
 Year: 1945
-Director: Machaty 
+Director: Machaty
 Genres: [Drama]
 
 Title: Maciste in Hell
@@ -9839,7 +9834,7 @@ Year: 1944
 Director: Dieterle
 Genres: [Romantic]
 
-Title: Love Letters 
+Title: Love Letters
 Year: 1945
 Director: Dieterle
 Genres: [Drama]
@@ -9896,7 +9891,7 @@ Genres: [Musical]
 
 Title: Lili Marlene
 Year: 1927
-Director: Unknown55 
+Director: Unknown55
 Genres: [Musical]
 
 Title: The Noose
@@ -10338,11 +10333,6 @@ Title: Charlie Chan in Paris
 Year: 1935
 Director: Seiler
 Genres: [Mystery, Comedy]
-
-Title: Crime School
-Year: 1938
-Director: 
-Genres: []
 
 Title: You Can't Get Away With Murder
 Year: 1939
@@ -11283,11 +11273,6 @@ Title: Los Olvidados
 Year: 1950
 Director: Bunuel
 Genres: [Drama]
-
-Title: El grand cavalcodos
-Year: 19yy
-Director: Bunuel
-Genres: []
 
 Title: Wuthering Heights
 Year: 1952
@@ -13007,11 +12992,6 @@ Genres: [Drama]
 Title: Winged Victory
 Year: 1944
 Director: Cukor
-Genres: []
-
-Title: Desire Me
-Year: 1947
-Director: 
 Genres: []
 
 Title: A Double Life
@@ -16779,11 +16759,6 @@ Year: 1934
 Director: Alexandrov
 Genres: [Musical]
 
-Title: Babes in Toyland
-Year: 1934
-Director: ``Buddy''? Charles Rogers
-Genres: [Musical]
-
 Title: Swedenhielms
 Year: 1935
 Director: Molander
@@ -18636,47 +18611,47 @@ Genres: [Thriller]
 
 Title: Best Friends
 Year: 1975
-Director: N.Nosseck 
+Director: N.Nosseck
 Genres: []
 
 Title: Las Vegas Lady
 Year: 1976
-Director: N.Nosseck 
+Director: N.Nosseck
 Genres: [Drama]
 
 Title: Youngblood
 Year: 1978
-Director: N.Nosseck 
+Director: N.Nosseck
 Genres: [Action]
 
 Title: Dreamer
 Year: 1979
-Director: N.Nosseck 
+Director: N.Nosseck
 Genres: []
 
 Title: King of the Mountain
 Year: 1981
-Director: N.Nosseck 
+Director: N.Nosseck
 Genres: [Action]
 
 Title: Night Partners
 Year: 1983
-Director: N.Nosseck 
+Director: N.Nosseck
 Genres: [Action]
 
 Title: Roman Holiday
 Year: 1987
-Director: N.Nosseck 
+Director: N.Nosseck
 Genres: [Romantic]
 
 Title: Full Exposure: The Sex Tape Scandal
 Year: 1989
-Director: N.Nosseck 
+Director: N.Nosseck
 Genres: [Pornography]
 
 Title: A Mother's Justice
 Year: 1991
-Director: N.Nosseck 
+Director: N.Nosseck
 Genres: [Drama]
 
 Title: Virginity
@@ -18689,30 +18664,10 @@ Year: 1954
 Director: Hansen
 Genres: [Drama]
 
-Title: A Girl with Ideas
-Year: 1937
-Director: 
-Genres: []
-
-Title: Four Girls in White
-Year: 1939
-Director: 
-Genres: []
-
-Title: Whistling in the Dark
-Year: 1941
-Director: 
-Genres: []
-
 Title: Rio Rita
 Year: 1942
 Director: S.Simon
 Genres: [Comedy, Musical]
-
-Title: Song of the Open Road
-Year: 1944
-Director: 
-Genres: []
 
 Title: Son of Lassie
 Year: 1945
@@ -18867,11 +18822,6 @@ Genres: []
 Title: The Black Tulip
 Year: 1963
 Director: ChristianJaque
-Genres: []
-
-Title: Secret Agents
-Year: 1966
-Director: 
 Genres: []
 
 Title: The Saint Versus ...
@@ -19928,11 +19878,6 @@ Title: The Blue Lamp
 Year: 1950
 Director: B.Dearden
 Genres: [Thriller]
-
-Title: I Believe in You
-Year: 1952
-Director: 
-Genres: []
 
 Title: Who Done It
 Year: 1956
@@ -21172,11 +21117,6 @@ Genres: [Action]
 Title: Dick Tracy Meets Gruesome
 Year: 1947
 Director: Rawlins
-Genres: [Action]
-
-Title: 
-Year: 1947
-Director: Dassin
 Genres: [Action]
 
 Title: The Naked City
@@ -22659,7 +22599,7 @@ Year: 1963
 Director: R.Wise
 Genres: [Horror]
 
-Title: The 
+Title: The
 Year: 1965
 Director: R.Wise
 Genres: [Musical]
@@ -23891,11 +23831,6 @@ Genres: [Uncategorized]
 
 Title: Der G\"artner von Toulouse
 Year: 1982
-Director: W.Staudte
-Genres: [Uncategorized]
-
-Title: Catherine of Russia
-Year: 19yy
 Director: W.Staudte
 Genres: [Uncategorized]
 
@@ -25289,11 +25224,6 @@ Year: 1984
 Director: Donen
 Genres: []
 
-Title: 
-Year: 1949
-Director: W.Jackson
-Genres: []
-
 Title: Cinderella
 Year: 1949
 Director: W.Jackson
@@ -25916,12 +25846,12 @@ Genres: []
 
 Title: Vengeance is Mine
 Year: 1980
-Director: Imamura 
+Director: Imamura
 Genres: []
 
 Title: Ballad of Narayama
 Year: 1981
-Director: Imamura 
+Director: Imamura
 Genres: []
 
 Title: Black Rain
@@ -27951,7 +27881,7 @@ Genres: [null]
 
 Title: Doctor's Wives
 Year: 1970
-Director: Schaefer 
+Director: Schaefer
 Genres: [Pornography]
 
 Title: F. Scott Fitzgerald and the Last of the Belles
@@ -28374,11 +28304,6 @@ Year: 1986
 Director: Alan~Smithee
 Genres: []
 
-Title: Morgan Stewart's Coming Home
-Year: 199x
-Director: Alan~Smithee
-Genres: []
-
 Title: Ghost Fever
 Year: 1987
 Director: Alan~Smithee
@@ -28409,11 +28334,6 @@ Year: 1994
 Director: Alan~Smithee
 Genres: []
 
-Title: Raging Angels
-Year: 199x
-Director: Alan~Smithee
-Genres: []
-
 Title: Too Bad She's Bad
 Year: 1955
 Director: Blasetti
@@ -28439,7 +28359,7 @@ Year: 1957
 Director: B.Edwards
 Genres: [null]
 
-Title: This Happy Feeling 
+Title: This Happy Feeling
 Year: 1958
 Director: B.Edwards
 Genres: [Romantic, Comedy]
@@ -29229,7 +29149,7 @@ Year: 1993
 Director: Altman
 Genres: [Black]
 
-Title: Ready to Wear 
+Title: Ready to Wear
 Year: 1994
 Director: Altman
 Genres: [Comedy]
@@ -30073,11 +29993,6 @@ Title: The Electric Horseman
 Year: 1979
 Director: Pollock
 Genres: [Western]
-
-Title: 
-Year: 1999
-Director: Pollock
-Genres: []
 
 Title: Kiss Before Dying
 Year: 1956
@@ -32076,17 +31991,17 @@ Genres: []
 
 Title: The Lost World: Jurrasic Park
 Year: 1997
-Director: Spielberg 
+Director: Spielberg
 Genres: [null]
 
 Title: Amistad
 Year: 1997
-Director: Spielberg 
+Director: Spielberg
 Genres: [Documentary]
 
 Title: Saving Private Ryan
 Year: 1998
-Director: Spielberg 
+Director: Spielberg
 Genres: [Drama]
 
 Title: The Woman Who Turned to Salt
@@ -32326,17 +32241,17 @@ Genres: [null]
 
 Title: La Ceremonie
 Year: 1997
-Director: Chabrol 
+Director: Chabrol
 Genres: [Drama]
 
 Title: The Swindle
 Year: 1998
-Director: Chabrol 
+Director: Chabrol
 Genres: []
 
 Title: Merci pour le Chocolat
 Year: 2000
-Director: Chabrol 
+Director: Chabrol
 Genres: []
 
 Title: To Catch a Butterfly
@@ -33376,12 +33291,12 @@ Genres: [null]
 
 Title: For Ever Mozart
 Year: 1995
-Director: Godard 
+Director: Godard
 Genres: [Drama]
 
 Title: Histoire(s) du Cinema
 Year: 1997
-Director: Godard 
+Director: Godard
 Genres: [History]
 
 Title: Curtains for Me
@@ -33596,7 +33511,7 @@ Genres: []
 
 Title: Joseph Andrews
 Year: 1977
-Director: T.Richardson 
+Director: T.Richardson
 Genres: [Adventure]
 
 Title: The Border
@@ -34748,16 +34663,6 @@ Title: Situation Hopeless -- But Not Serious
 Year: 1965
 Director: G.Reinhardt
 Genres: [Comedy]
-
-Title: 
-Year: 1954
-Director: G.Reinhardt
-Genres: []
-
-Title: 
-Year: 1954
-Director: G.Reinhardt
-Genres: []
 
 Title: Pitfall
 Year: 1961
@@ -36789,11 +36694,6 @@ Year: 1993
 Director: Ph.Kaufman
 Genres: [Thriller, null]
 
-Title: Stop Train 349
-Year: 199x
-Director: Haedrich 
-Genres: [Thriller]
-
 Title: The Long Silence
 Year: 1963
 Director: R.Douglas
@@ -37341,12 +37241,12 @@ Genres: [Drama]
 
 Title: The People vs. Larry Flynt
 Year: 1996
-Director: Forman 
+Director: Forman
 Genres: [null]
 
 Title: Man in the Moon
 Year: 1999
-Director: Forman 
+Director: Forman
 Genres: [Comedy]
 
 Title: Loving Couples
@@ -37834,19 +37734,19 @@ Year: 1994
 Director: Loach
 Genres: [null, Drama]
 
-Title: Land and Freedom 
+Title: Land and Freedom
 Year: 1996
-Director: Loach 
+Director: Loach
 Genres: [Drama]
 
 Title: Carla's Song
 Year: 1998
-Director: Loach 
+Director: Loach
 Genres: [Romantic]
 
 Title: My Name is Joe
 Year: 1999
-Director: Loach 
+Director: Loach
 Genres: [Drama]
 
 Title: Licensed to Kill
@@ -37891,7 +37791,7 @@ Genres: [Drama]
 
 Title: The Pince of Homburg
 Year: 1997
-Director: Bellocchio 
+Director: Bellocchio
 Genres: []
 
 Title: Sister of Satan
@@ -37993,11 +37893,6 @@ Title: La Fayette
 Year: 1965
 Director: Dreville
 Genres: []
-
-Title: The Human Duplicators
-Year: 1965
-Director: 
-Genres: [Sci-Fi]
 
 Title: Until the Ship Sails
 Year: 1966
@@ -38798,11 +38693,6 @@ Title: Rocky
 Year: 1976
 Director: J.G.Avildsen
 Genres: [Romantic]
-
-Title: Karate Kid
-Year: 199x
-Director: J.G.Avildsen 
-Genres: []
 
 Title: Neighbors
 Year: 1981
@@ -39721,7 +39611,7 @@ Genres: []
 
 Title: At Long Last Love
 Year: 1975
-Director: Bogdanovich 
+Director: Bogdanovich
 Genres: []
 
 Title: Nickelodeon
@@ -39741,7 +39631,7 @@ Genres: [Documentary]
 
 Title: Texasville
 Year: 1989
-Director: Bogdanovich 
+Director: Bogdanovich
 Genres: []
 
 Title: Noises Off
@@ -39989,7 +39879,7 @@ Year: 1992
 Director: Schroeder
 Genres: [Thriller]
 
-Title: Before and After 
+Title: Before and After
 Year: 1996
 Director: Schroeder
 Genres: [Drama]
@@ -40821,12 +40711,12 @@ Genres: [Romantic]
 
 Title: Blood and Wine
 Year: 1997
-Director: Rafelson 
+Director: Rafelson
 Genres: [Thriller]
 
 Title: Poodle Springs
 Year: 1998
-Director: Rafelson 
+Director: Rafelson
 Genres: [Thriller]
 
 Title: The Bird with the Crystal Plumage
@@ -41021,7 +40911,7 @@ Genres: [null]
 
 Title: Scaramouche
 Year: 1976
-Director: E.Castellani 
+Director: E.Castellani
 Genres: [Action, Romantic]
 
 Title: A New Leaf
@@ -41339,11 +41229,6 @@ Year: 1970
 Director: Kastle
 Genres: [Documentary]
 
-Title: The Eternal City
-Year: 196x
-Director: Scorsese
-Genres: [Drama]
-
 Title: Who's That Knocking on My Door
 Year: 1970
 Director: Scorsese
@@ -41431,22 +41316,22 @@ Genres: [Romantic]
 
 Title: A Personal Journey with Martin Scorsese Through American Movies
 Year: 1994
-Director: Scorsese 
+Director: Scorsese
 Genres: [null]
 
 Title: Casino
 Year: 1996
-Director: Scorsese 
+Director: Scorsese
 Genres: [Drama]
 
 Title: Kundun
 Year: 1997
-Director: Scorsese 
+Director: Scorsese
 Genres: [null]
 
 Title: Bringing Out the Dead
 Year: 1999
-Director: Scorsese 
+Director: Scorsese
 Genres: [Drama]
 
 Title: Il Dolce Vita
@@ -41455,8 +41340,8 @@ Director: Raffaele Donato
 Genres: [History]
 
 Title: Gangs of New York
-Year: 2001 
-Director: Scorsese 
+Year: 2001
+Director: Scorsese
 Genres: []
 
 Title: Woodstock
@@ -41784,14 +41669,14 @@ Year: 1984
 Director: W.Craven
 Genres: [Horror]
 
-Title: The Serpent and the Rainbow 
+Title: The Serpent and the Rainbow
 Year: 1985
-Director: W 
+Director: W
 Genres: [Horror]
 
 Title: Shocker
 Year: 1985
-Director: W 
+Director: W
 Genres: [Horror]
 
 Title: The Return of the Swamp Thing
@@ -41809,39 +41694,39 @@ Year: 1994
 Director: W.Craven
 Genres: [Horror]
 
-Title: A Vampire in Brooklyn 
+Title: A Vampire in Brooklyn
 Year: 1995
-Director: W.Craven 
+Director: W.Craven
 Genres: [Horror]
 
-Title: The Haunting 
+Title: The Haunting
 Year: 1996
-Director: W 
+Director: W
 Genres: [Horror]
 
 Title: Scream
 Year: 1996
-Director: W.Craven 
+Director: W.Craven
 Genres: [Horror]
 
 Title: Scream 2
 Year: 1997
-Director: W.Craven 
+Director: W.Craven
 Genres: [Horror]
 
 Title: Music of the Heart
 Year: 1999
-Director: W.Craven 
+Director: W.Craven
 Genres: [Documentary, Drama]
 
 Title: Vampire in Brooklyn
 Year: 1999
-Director: W.Craven 
+Director: W.Craven
 Genres: [Comedy]
 
 Title: Scream 3
 Year: 2000
-Director: W.Craven 
+Director: W.Craven
 Genres: []
 
 Title: Tarzan's Deadly Silence
@@ -45059,7 +44944,7 @@ Year: 1995
 Director: R.Howard
 Genres: [null, History, Adventure]
 
-Title: Ransom 
+Title: Ransom
 Year: 1996
 Director: R.Howard
 Genres: [Thriller]
@@ -45181,13 +45066,8 @@ Genres: [null]
 
 Title: The End of Violence
 Year: 1997
-Director: Wenders 
+Director: Wenders
 Genres: [null]
-
-Title: Buena Vista Social Club
-Year: 19yy
-Director: Ullrich Felsberg
-Genres: [Musical]
 
 Title: Amelia Earhart
 Year: 1976
@@ -45461,12 +45341,12 @@ Genres: [Thriller]
 
 Title: Dante's Peak
 Year: 1997
-Director: Donaldson 
+Director: Donaldson
 Genres: [Disaster]
 
 Title: Thirteen Days
 Year: 2001
-Director: Donaldson 
+Director: Donaldson
 Genres: [Drama]
 
 Title: Short Eyes
@@ -45714,11 +45594,6 @@ Year: 1999
 Director: D.Lynch
 Genres: [Adventure, null]
 
-Title: Mulholland Drive
-Year: 19yy
-Director: D.Lynch
-Genres: [Uncategorized]
-
 Title: Ice Castles
 Year: 1978
 Director: Wrye
@@ -45949,7 +45824,7 @@ Year: 1998
 Director: Toback
 Genres: [Comedy]
 
-Title: The First Fight 
+Title: The First Fight
 Year: 1978
 Director: Besson
 Genres: []
@@ -46021,17 +45896,17 @@ Genres: []
 
 Title: Mishima
 Year: 1995
-Director: Schrader 
+Director: Schrader
 Genres: []
 
 Title: Touch
 Year: 1997
-Director: Schrader 
+Director: Schrader
 Genres: [Drama]
 
 Title: Affliction
 Year: 1999
-Director: Schrader 
+Director: Schrader
 Genres: [Drama]
 
 Title: Hot Lead and Cold Feet
@@ -46523,11 +46398,6 @@ Title: Class of '84
 Year: 1982
 Director: M.Lester
 Genres: [Drama]
-
-Title:  
-Year: 1984
-Director: M.Lester
-Genres: [Horror]
 
 Title: Space Camp
 Year: 1988
@@ -47196,12 +47066,12 @@ Genres: [null]
 
 Title: Batman and Robin
 Year: 1997
-Director: Schumacher 
+Director: Schumacher
 Genres: [null]
 
 Title: Phone Booth
 Year: 2002
-Director: Schumacher 
+Director: Schumacher
 Genres: [Thriller]
 
 Title: Borderline
@@ -47356,7 +47226,7 @@ Genres: []
 
 Title: Donnie Brasco
 Year: 1997
-Director: Newell 
+Director: Newell
 Genres: [Drama]
 
 Title: Union City
@@ -47686,7 +47556,7 @@ Genres: [Musical]
 
 Title: Everybody's All-American
 Year: 1988
-Director: HackfordD 
+Director: HackfordD
 Genres: []
 
 Title: Chuck Berry Hail! Hail! Rock 'n' Roll
@@ -47881,7 +47751,7 @@ Genres: [Horror, Sci-Fi]
 
 Title: The Blackout
 Year: 1997
-Director: Ferrara 
+Director: Ferrara
 Genres: []
 
 Title: Honeymoon in Vegas
@@ -48011,7 +47881,7 @@ Genres: [Drama]
 
 Title: Murder at my Door
 Year: 1996
-Director: Till 
+Director: Till
 Genres: [Drama]
 
 Title: Basket Case
@@ -48471,17 +48341,17 @@ Genres: [Comedy]
 
 Title: Contact
 Year: 1997
-Director: Zemeckis 
+Director: Zemeckis
 Genres: [Sci-Fi]
 
 Title: Cast Away
 Year: 1999
-Director: Zemeckis 
+Director: Zemeckis
 Genres: []
 
 Title: What Lies Beneath
 Year: 2000
-Director: Zemeckis 
+Director: Zemeckis
 Genres: [Horror]
 
 Title: Arthur
@@ -48551,7 +48421,7 @@ Genres: [Horror]
 
 Title: Lost in Space
 Year: 1998
-Director: St.Gordon 
+Director: St.Gordon
 Genres: [Sci-Fi]
 
 Title: Attack Force Z
@@ -48801,7 +48671,7 @@ Genres: [Thriller]
 
 Title: The River Wild
 Year: 1995
-Director: Hanson 
+Director: Hanson
 Genres: [Adventure]
 
 Title: L.A. Confidential
@@ -48904,9 +48774,9 @@ Year: 1994
 Director: Gey.Marshall
 Genres: [Romantic, Pornography]
 
-Title: Dear God 
+Title: Dear God
 Year: 1996
-Director: Gey.Marshall 
+Director: Gey.Marshall
 Genres: [Comedy]
 
 Title: Runaway Bride
@@ -49926,12 +49796,12 @@ Genres: [Drama]
 
 Title: The Pillowbook
 Year: 1997
-Director: Greenaway 
+Director: Greenaway
 Genres: [Pornography]
 
 Title: 8 1/2 Women
 Year: 1999
-Director: Greenaway 
+Director: Greenaway
 Genres: [null]
 
 Title: Le juge
@@ -50149,7 +50019,7 @@ Year: 1990
 Director: T.Scott
 Genres: [Action]
 
-Title: Crimson Tide 
+Title: Crimson Tide
 Year: 1995
 Director: T.Scott
 Genres: [Adventure]
@@ -50234,11 +50104,6 @@ Year: 1993
 Director: Egoyan
 Genres: [Drama]
 
-Title: Sarabande
-Year: 19yy
-Director: Egoyan
-Genres: []
-
 Title: Exotica
 Year: 1995
 Director: Egoyan
@@ -50246,12 +50111,12 @@ Genres: [Drama]
 
 Title: The Sweet Hereafter
 Year: 1997
-Director: Egoyan 
+Director: Egoyan
 Genres: [Drama]
 
 Title: Felicia's Journey
 Year: 1999
-Director: Egoyan 
+Director: Egoyan
 Genres: [Drama]
 
 Title: Dawandeh
@@ -50466,7 +50331,7 @@ Genres: [Drama]
 
 Title: Things to do in Denver When You're Dead
 Year: 1995
-Director: J.Coen 
+Director: J.Coen
 Genres: []
 
 Title: Fargo
@@ -50886,17 +50751,17 @@ Genres: [Romantic, Comedy]
 
 Title: Jerry Maguire
 Year: 1996
-Director: C.Crowe 
+Director: C.Crowe
 Genres: [Romantic]
 
 Title: Almost Famous
 Year: 1999
-Director: C.Crowe 
+Director: C.Crowe
 Genres: [Drama]
 
 Title: Vanilla Sky
 Year: 2001
-Director: C.Crowe 
+Director: C.Crowe
 Genres: [Romantic]
 
 Title: Shoah
@@ -51304,7 +51169,7 @@ Year: 1994
 Director: T.Burton
 Genres: [null]
 
-Title: Mars Attacks 
+Title: Mars Attacks
 Year: 1996
 Director: T.Burton
 Genres: [Comedy, Sci-Fi]
@@ -52001,7 +51866,7 @@ Genres: []
 
 Title: Ulee's Gold
 Year: 1997
-Director: Nunez 
+Director: Nunez
 Genres: [Drama]
 
 Title: Clownhouse
@@ -52116,7 +51981,7 @@ Genres: [Adventure]
 
 Title: Twist and Shout
 Year: 1990
-Director: August 
+Director: August
 Genres: [Drama]
 
 Title: The Best Intentions
@@ -52131,28 +51996,23 @@ Genres: [Drama]
 
 Title: Smilla's Sense of Snow
 Year: 1995
-Director: August 
+Director: August
 Genres: [Drama]
 
 Title: Jerusalem
 Year: 1997
-Director: August 
+Director: August
 Genres: [Drama]
 
 Title: Les Miserables
 Year: 1998
-Director: August 
+Director: August
 Genres: [Drama]
 
 Title: Funny
 Year: 1988
 Director: Ferren
 Genres: [Comedy]
-
-Title: 
-Year: 1988
-Director: Silberling
-Genres: [Thriller]
 
 Title: Caspar
 Year: 1995
@@ -52471,22 +52331,22 @@ Genres: [Drama]
 
 Title: Breaking the Waves
 Year: 1996
-Director: vonTrier 
+Director: vonTrier
 Genres: [Romantic, Pornography]
 
 Title: The Kingdom
 Year: 1998
-Director: vonTrier 
+Director: vonTrier
 Genres: [null]
 
 Title: The Idiots
 Year: 198
-Director: vonTrier 
+Director: vonTrier
 Genres: []
 
 Title: Dancer in the Dark
 Year: 1999
-Director: vonTrier 
+Director: vonTrier
 Genres: [Drama]
 
 Title: Stormy Monday
@@ -52509,7 +52369,7 @@ Year: 1994
 Director: Figgis
 Genres: []
 
-Title: Leaving Las Vegas 
+Title: Leaving Las Vegas
 Year: 1996
 Director: Figgis
 Genres: [Romantic]
@@ -53151,7 +53011,7 @@ Genres: [Adventure, Sci-Fi]
 
 Title: Jumanji
 Year: 1995
-Director: Johnston 
+Director: Johnston
 Genres: [null]
 
 Title: October Sky
@@ -53209,12 +53069,12 @@ Year: 1993
 Director: Branagh
 Genres: [Comedy]
 
-Title: A Mid-Winter's Tale 
+Title: A Mid-Winter's Tale
 Year: 1996
 Director: Branagh
 Genres: [Drama]
 
-Title: William Shakespeare's Romeo and Juliet 
+Title: William Shakespeare's Romeo and Juliet
 Year: 1996
 Director: Branagh
 Genres: [Drama]
@@ -53256,7 +53116,7 @@ Genres: [Romantic]
 
 Title: Kama Sutra, A Tale of Love
 Year: 1997
-Director: Nair 
+Director: Nair
 Genres: []
 
 Title: Scandal
@@ -53894,7 +53754,7 @@ Year: 1993
 Director: Amiel
 Genres: [Romantic, Drama]
 
-Title: Copy Cat 
+Title: Copy Cat
 Year: 1995
 Director: Amiel
 Genres: [Thriller]
@@ -54601,12 +54461,12 @@ Genres: [Romantic, Comedy]
 
 Title: The English Patient
 Year: 1996
-Director: Minghella 
+Director: Minghella
 Genres: [Romantic, Drama]
 
 Title: The Talented Mr. Ripley
 Year: 2000
-Director: Minghella 
+Director: Minghella
 Genres: [Comedy]
 
 Title: Do or Die
@@ -54681,12 +54541,12 @@ Genres: [Comedy, Action]
 
 Title: Men in Black
 Year: 1997
-Director: Sonnenfeld 
+Director: Sonnenfeld
 Genres: [null, Comedy]
 
 Title: Wild Wild West
 Year: 1999
-Director: Sonnenfeld 
+Director: Sonnenfeld
 Genres: [Action, Comedy]
 
 Title: The Usual Suspects
@@ -54871,12 +54731,12 @@ Genres: [Musical]
 
 Title: Hackers
 Year: 1996
-Director: Softley 
+Director: Softley
 Genres: [Drama]
 
 Title: Wings of the Dove
 Year: 1997
-Director: Softley 
+Director: Softley
 Genres: [Romantic]
 
 Title: In the Shadow of the Stars
@@ -54996,7 +54856,7 @@ Genres: [null]
 
 Title: Kolya
 Year: 1997
-Director: Sverak 
+Director: Sverak
 Genres: [Romantic]
 
 Title: Hangin' with the Homeboys
@@ -55231,17 +55091,17 @@ Genres: [Action]
 
 Title: Independence Day
 Year: 1996
-Director: Emmerich 
+Director: Emmerich
 Genres: [Sci-Fi]
 
 Title: Godzilla
 Year: 1998
-Director: Emmerich 
+Director: Emmerich
 Genres: [Sci-Fi]
 
 Title: The Patriot
 Year: 2000
-Director: Emmerich 
+Director: Emmerich
 Genres: [Drama, History]
 
 Title: Slacker
@@ -55584,11 +55444,6 @@ Year: 1992
 Director: Sturridge
 Genres: [Romantic]
 
-Title: Fairy Tale: A True Story
-Year: 199x
-Director: Sturridge
-Genres: [null]
-
 Title: La Discrete
 Year: 1992
 Director: C.Vincent
@@ -55836,7 +55691,7 @@ Genres: []
 
 Title: Contempt
 Year: 1963
-Director: Goddard 
+Director: Goddard
 Genres: [Comedy, Drama]
 
 Title: De terre et de sang
@@ -56151,12 +56006,12 @@ Genres: [Horror, Sci-Fi]
 
 Title: Tank Girl
 Year: 1995
-Director: Talalay 
+Director: Talalay
 Genres: []
 
 Title: The Ghost and the Darkness
 Year: 1996
-Director: Talalay 
+Director: Talalay
 Genres: [Adventure]
 
 Title: Requiem pour un Beau Sanscoeur
@@ -56476,7 +56331,7 @@ Genres: [Drama, Romantic]
 
 Title: Temptress Moon
 Year: 1997
-Director: Kaige 
+Director: Kaige
 Genres: [Drama]
 
 Title: House of Angels
@@ -56586,12 +56441,12 @@ Genres: [Drama]
 
 Title: Mrs. Brown
 Year: 1997
-Director: Madden 
+Director: Madden
 Genres: [History]
 
 Title: Shakespeare in Love
 Year: 1998
-Director: Madden 
+Director: Madden
 Genres: [null, Romantic, Musical]
 
 Title: The Boys of St.Vincent
@@ -56706,17 +56561,17 @@ Genres: []
 
 Title: Jude
 Year: 1995
-Director: Winterbottom 
+Director: Winterbottom
 Genres: []
 
 Title: Welcome to Sarajevo
 Year: 1997
-Director: Winterbottom 
+Director: Winterbottom
 Genres: [Documentary]
 
 Title: Go Now
 Year: 1998
-Director: Winterbottom 
+Director: Winterbottom
 Genres: [Drama]
 
 Title: A Far Off Place
@@ -57071,7 +56926,7 @@ Genres: [Drama]
 
 Title: Cyclo
 Year: 1997
-Director: Hung 
+Director: Hung
 Genres: []
 
 Title: From Hollywood to Hanoi
@@ -57489,7 +57344,7 @@ Year: 1994
 Director: M.Campbell
 Genres: [Action]
 
-Title: GoldenEye 
+Title: GoldenEye
 Year: 1995
 Director: M.Campbell
 Genres: [Action]
@@ -57896,7 +57751,7 @@ Genres: [Documentary]
 
 Title: Good Men, Good Women
 Year: 1995
-Director: Hsiaahsien 
+Director: Hsiaahsien
 Genres: [Drama]
 
 Title: Gauzon Maudit
@@ -57928,11 +57783,6 @@ Title: The Sum of Us
 Year: 1995
 Director: Dowling
 Genres: [Drama]
-
-Title: 
-Year: 199x
-Director: 
-Genres: []
 
 Title: Clerks
 Year: 1995
@@ -58049,11 +57899,6 @@ Year: 1997
 Director: diCillo
 Genres: []
 
-Title: Jerry and Tom
-Year: 19yy
-Director: diCillo
-Genres: []
-
 Title: Lawn Dogs
 Year: 1998
 Director: diCillo
@@ -58071,7 +57916,7 @@ Genres: [Drama]
 
 Title: My Son the Fanatic
 Year: 1997
-Director: Prasad 
+Director: Prasad
 Genres: [Drama]
 
 Title: Scared to Death
@@ -58129,7 +57974,7 @@ Year: 1995
 Director: UnYear95
 Genres: [null]
 
-Title: Desperate Remedies 
+Title: Desperate Remedies
 Year: 1995
 Director: UnYear95
 Genres: []
@@ -58164,11 +58009,6 @@ Year: 1995
 Director: UnYear95
 Genres: [Drama, Romantic]
 
-Title: The Shanghai Triad
-Year: 19yy
-Director: UnYear95
-Genres: [null]
-
 Title: Two if by Sea
 Year: 1995
 Director: UnYear95
@@ -58178,11 +58018,6 @@ Title: Through the Olive Trees
 Year: 1996
 Director: Kiarostami
 Genres: []
-
-Title: Taste of Cherry
-Year: 19yy
-Director: Kiarostami
-Genres: [Drama]
 
 Title: Sometimes they come back ... again
 Year: 1996
@@ -58435,7 +58270,7 @@ Director: M.Joffe
 Genres: []
 
 Title: The Matchmaker
-Year: 1997 
+Year: 1997
 Director: M.Joffe
 Genres: [Romantic, Comedy]
 
@@ -58501,7 +58336,7 @@ Genres: [Drama]
 
 Title: Parting Glances
 Year: 1996
-Director: Buscemi 
+Director: Buscemi
 Genres: []
 
 Title: Shine
@@ -58584,7 +58419,7 @@ Year: 1996
 Director: UnYear96
 Genres: []
 
-Title: Fly Away Home 
+Title: Fly Away Home
 Year: 1996
 Director: UnYear96
 Genres: [Drama, null]
@@ -58614,7 +58449,7 @@ Year: 1996
 Director: UnYear96
 Genres: [Comedy]
 
-Title: House Arrest 
+Title: House Arrest
 Year: 1996
 Director: UnYear96
 Genres: [Comedy]
@@ -58796,12 +58631,12 @@ Genres: []
 
 Title: When the Cat' Away
 Year: 1997
-Director: Klapisch 
+Director: Klapisch
 Genres: []
 
 Title: Un Air de Famille
 Year: 1998
-Director: Klapisch 
+Director: Klapisch
 Genres: [Black]
 
 Title: The Grass Harp
@@ -58851,12 +58686,12 @@ Genres: []
 
 Title: Addicted to Love
 Year: 1997
-Director: G.Dunne 
+Director: G.Dunne
 Genres: [Romantic, Comedy]
 
 Title: Practical Magic
 Year: 1998
-Director: G.Dunne 
+Director: G.Dunne
 Genres: [Romantic]
 
 Title: Kiss the Girls
@@ -59146,12 +58981,12 @@ Genres: [Comedy, Romantic]
 
 Title: Con Air
 Year: 1997
-Director: S.West 
+Director: S.West
 Genres: [Action]
 
 Title: The General's Daughter
 Year: 1999
-Director: S.West 
+Director: S.West
 Genres: [Drama, Pornography]
 
 Title: Johns
@@ -59619,11 +59454,6 @@ Year: 1999
 Director: M.Judge
 Genres: [Comedy]
 
-Title: All is Routine
-Year: 19yy
-Director: M.Judge
-Genres: []
-
 Title: Marie Baie des Anges
 Year: 1998
 Director: Pradal
@@ -59744,7 +59574,7 @@ Year: 1998
 Director: Ra.Wallace
 Genres: [History, Drama]
 
-Title: The Governess 
+Title: The Governess
 Year: 1998
 Director: Goldbacher
 Genres: [Drama]
@@ -60526,7 +60356,7 @@ Genres: [Cops and Robbers]
 
 Title: Original Sin
 Year: 2001
-Director: Cristofer 
+Director: Cristofer
 Genres: [Thriller]
 
 Title: What Women Want

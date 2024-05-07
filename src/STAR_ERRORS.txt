@@ -1,0 +1,197 @@
+No of Stars '49'.
+Year contains non-numeric characters
+Star Name: The Andrews Sisters
+Birth Year: n.a.
+
+Year contains non-numeric characters
+Star Name: Alec Baldwin
+Birth Year: 195x
+
+Year contains non-numeric characters
+Star Name: Stephen Baldwin
+Birth Year: 1963+
+
+Year contains non-numeric characters
+Star Name: Vincent Ball
+Birth Year: *
+
+Year contains non-numeric characters
+Star Name: The Beatles
+Birth Year: n.a.
+
+Year contains non-numeric characters
+Star Name: Halle Berry
+Birth Year: 196x
+
+Year contains non-numeric characters
+Star Name: The Bowery Boys
+Birth Year: n.a.
+
+Year contains non-numeric characters
+Star Name: Miriam Brickman
+Birth Year: dob
+
+Year contains non-numeric characters
+Star Name: Soumitra Chatterjee
+Birth Year: 19bb
+
+Year contains non-numeric characters
+Star Name: Anne Chevalier
+Birth Year: 1915+
+
+Year contains non-numeric characters
+Star Name: George Clooney
+Birth Year: dob
+
+Year contains non-numeric characters
+Star Name: The Commodores
+Birth Year: n.a.
+
+Year contains non-numeric characters
+Star Name: Lynn Frederick
+Birth Year: *
+
+Year contains non-numeric characters
+Star Name: Charlotte Gainsbourg
+Birth Year: *
+
+Year contains non-numeric characters
+Star Name: The Little Tough Guys
+Birth Year: n.a.
+
+Year contains non-numeric characters
+Star Name: Ray Hallam
+Birth Year: [1]1905
+
+Year contains non-numeric characters
+Star Name: Terry Hatcher
+Birth Year: dob
+
+Year contains non-numeric characters
+Star Name: Max Haufler
+Birth Year: 19bb
+
+Year contains non-numeric characters
+Star Name: Dead End Kids
+Birth Year: n.a.
+
+Year contains non-numeric characters
+Star Name: East Side Kids
+Birth Year: n.a.
+
+Year contains non-numeric characters
+Star Name: Keystone Kops
+Birth Year: n.a.
+
+Year contains non-numeric characters
+Star Name: Queen Latifah
+Birth Year: 19bb
+
+Year contains non-numeric characters
+Star Name: Laurel and Hardy
+Birth Year: n.a.
+
+Year contains non-numeric characters
+Star Name: Marx Brothers
+Birth Year: n.a.
+
+Year contains non-numeric characters
+Star Name: David Morrissey
+Birth Year: 19bb
+
+Year contains non-numeric characters
+Star Name: Mickey Mouse
+Birth Year: 19bb
+
+Year contains non-numeric characters
+Star Name: Rene Navarre
+Birth Year: 18bb
+
+Year contains non-numeric characters
+Star Name: Super Dave Osborne
+Birth Year: ~1945
+
+Year contains non-numeric characters
+Star Name: The Sons of the Pioneers
+Birth Year: n.a.
+
+Year contains non-numeric characters
+Star Name: Brad Pitt
+Birth Year: dob
+
+Year contains non-numeric characters
+Star Name: Moliere Players
+Birth Year: n.a.
+
+Year contains non-numeric characters
+Star Name: Sarah Polley
+Birth Year: 19bb
+
+Year contains non-numeric characters
+Star Name: Gilda Radner
+Birth Year: *
+
+Year contains non-numeric characters
+Star Name: Pamela Reed
+Birth Year: *
+
+Year contains non-numeric characters
+Star Name: The Ritz-Brothers
+Birth Year: n.a.
+
+Year contains non-numeric characters
+Star Name: Tanya Roberts
+Birth Year: *
+
+Year contains non-numeric characters
+Star Name: Howard E. Rollins~jr.
+Birth Year: *
+
+Year contains non-numeric characters
+Star Name: Tim Roth
+Birth Year: 19bb
+
+Year contains non-numeric characters
+Star Name: Mercedes Ruehl
+Birth Year: ~1992
+
+Year contains non-numeric characters
+Star Name: Claudia Schiffer
+Birth Year: 19bb
+
+Year contains non-numeric characters
+Star Name: Tony Shalhoub
+Birth Year: 19bb
+
+Year contains non-numeric characters
+Star Name: Posh Spice
+Birth Year: 19bb
+
+Year contains non-numeric characters
+Star Name: The Loving Spoonful
+Birth Year: n.a.
+
+Year contains non-numeric characters
+Star Name: Sting
+Birth Year: n.a.
+
+Year contains non-numeric characters
+Star Name: Natalie Talmadge
+Birth Year: 19bb
+
+Year contains non-numeric characters
+Star Name: Fred Thompson
+Birth Year: dob
+
+Year contains non-numeric characters
+Star Name: The Who
+Birth Year: n.a.
+
+Year contains non-numeric characters
+Star Name: The Wiere~Brothers
+Birth Year: n.a.
+
+Year contains non-numeric characters
+Star Name: Dianne Wiest
+Birth Year: *
+

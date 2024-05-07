@@ -17,16 +17,25 @@ import org.xml.sax.helpers.DefaultHandler;
 //
 public class StarParser extends DefaultHandler {
     ArrayList<Star> myStars;
+    ArrayList<Star> inconsistentStars;
+
     private Star tempStar;
     private String tempVal;
 
+    // 0 means the entry is consistent
+    // 1 means the entry is inconsistent
+    int flag = 0;
+
     public StarParser() {
+
         myStars = new ArrayList<Star>();
+        inconsistentStars = new ArrayList<>();
     }
 
     public void startParse() {
         parseDocument();
-        printDataToFile("starresults.txt");
+        printDataToFile("STARS.txt");
+        printInconsistenciesToFile("STAR_ERRORS.txt");
     }
 
     public static void main(String[] args) {
@@ -39,6 +48,19 @@ public class StarParser extends DefaultHandler {
             writer.write("No of Stars '" + myStars.size() + "'.\n");
 
             for (Star myStar : myStars) {
+                writer.write(myStar.toString() + "\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void printInconsistenciesToFile(String fileName) {
+        try (FileWriter writer = new FileWriter(fileName)) {
+            writer.write("No of Stars '" + inconsistentStars.size() + "'.\n");
+
+            for (Star myStar : inconsistentStars) {
+                writer.write(myStar.getReason() + "\n");
                 writer.write(myStar.toString() + "\n");
             }
         } catch (IOException e) {
@@ -78,6 +100,7 @@ public class StarParser extends DefaultHandler {
         if (qName.equalsIgnoreCase("actor")) {
             //create a new instance of employee
             tempStar = new Star();
+            flag = 0;
         }
     }
 
@@ -93,16 +116,46 @@ public class StarParser extends DefaultHandler {
 
         if (tempStar != null) {
             if (qName.equalsIgnoreCase("actor")) {
+
                 //add it to the list
-                myStars.add(tempStar);
+                if (flag == 0) {
+                    myStars.add(tempStar);
+                }
+                else {
+                    inconsistentStars.add(tempStar);
+                }
+
             }
             else if (qName.equalsIgnoreCase("stagename")) {
+                checkNameInconsistencies(tempVal);
                 tempStar.setName(tempVal);
             }
             else if (qName.equalsIgnoreCase("dob")) {
+                checkDOBInconsistencies(tempVal);
                 tempStar.setBirthYear(tempVal);
             }
         }
     }
 
+    public void checkNameInconsistencies(String tempVal) {
+        tempVal = tempVal.trim();
+
+        if (tempVal.equals("")) {
+            flag = 1;
+            tempStar.setReason("Name is empty");
+        }
+        else if (tempVal.length() > 100) {
+            flag = 1;
+            tempStar.setReason("Name is too long");
+        }
+    }
+
+    public void checkDOBInconsistencies(String tempVal) {
+        tempVal = tempVal.trim();
+
+        if (!tempVal.equals("") && !tempVal.matches("\\d+")) {
+            flag = 1;
+            tempStar.setReason("Year contains non-numeric characters");
+        }
+    }
 }

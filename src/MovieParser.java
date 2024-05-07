@@ -1,9 +1,6 @@
 import java.io.FileWriter;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -30,27 +27,23 @@ public class MovieParser extends DefaultHandler {
     Map<String, String> newGenreMap = new HashMap<>();
 
     ArrayList<Movie> myMovies;
+    ArrayList<Movie> inconsistentMovies;
+
     private Movie tempMovie;
     private String tempVal;
 
+    // 0 means the entry is consistent
+    // 1 means the entry is inconsistent
+    int flag = 0;
+
     private DataSource dataSource;
 
-    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/moviedb";
-    private static final String JDBC_USER = "your_username";
-    private static final String JDBC_PASSWORD = "your_password";
 
     public MovieParser() {
         // initialize genre map and myMovies arraylist to store movies
         myMovies = new ArrayList<Movie>();
+        inconsistentMovies = new ArrayList<Movie>();
         create_genre_map();
-
-        // connect to moviedb
-        try {
-            dataSource = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/moviedb");
-        }
-        catch (NamingException e) {
-            e.printStackTrace();
-        }
     }
 
     public void create_genre_map() {
@@ -82,9 +75,10 @@ public class MovieParser extends DefaultHandler {
 
     public void startParse() {
         parseDocument();
-        populate_existing_genres();
-        System.out.println(oldGenres);
-        printDataToFile("movieresults.txt");
+//        populate_existing_genres();
+//        System.out.println(oldGenres);
+        printDataToFile("MOVIES.txt");
+        printInconsistenciesToFile("MOVIE_ERRORS.txt");
     }
 
     public void parseDocument() {
@@ -110,7 +104,8 @@ public class MovieParser extends DefaultHandler {
     }
 
     public void populate_existing_genres() {
-        try (Connection conn = dataSource.getConnection()) {
+
+        try (Connection conn = dataSource.getConnection()){
             String query = "SELECT name FROM genres;";
 
             PreparedStatement statement = conn.prepareStatement(query);
@@ -137,6 +132,21 @@ public class MovieParser extends DefaultHandler {
         }
     }
 
+    private void printInconsistenciesToFile(String fileName) {
+        try (FileWriter writer = new FileWriter(fileName)) {
+            writer.write("No of Movies '" + inconsistentMovies.size() + "'.\n");
+
+            Iterator<Movie> it = inconsistentMovies.iterator();
+            while (it.hasNext()) {
+                Movie m = it.next();
+                writer.write(m.getReason() + "\n");
+                writer.write(m.toString()  + "\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     //Event Handlers
 
     // startElement() is invoked when the parsing begins for an element
@@ -147,6 +157,7 @@ public class MovieParser extends DefaultHandler {
         if (qName.equalsIgnoreCase("film")) {
             //create a new instance of employee
             tempMovie = new Movie();
+            flag = 0;
         }
     }
 
@@ -162,24 +173,70 @@ public class MovieParser extends DefaultHandler {
 
         if (tempMovie != null) {
             if (qName.equalsIgnoreCase("film")) {
+
                 //add it to the list
-                myMovies.add(tempMovie);
+                if (flag == 0) {
+                    myMovies.add(tempMovie);
+                }
+                else {
+                    inconsistentMovies.add(tempMovie);
+                }
+
             }
             else if (qName.equalsIgnoreCase("t")) {
-                tempMovie.setTitle(tempVal);
+                checkTitleInconsistencies(tempVal);
+                tempMovie.setTitle(tempVal.trim());
             }
             else if (qName.equalsIgnoreCase("year")) {
-                tempMovie.setYear(tempVal);
+                checkYearInconsistencies(tempVal);
+                tempMovie.setYear(tempVal.trim());
             }
             else if (qName.equalsIgnoreCase("cat")) {
                 String full_cat = newGenreMap.get(tempVal);
                 tempMovie.setGenres(full_cat);
             }
             else if (qName.equalsIgnoreCase("dirn")) {
-                tempMovie.setDirector(tempVal);
+                checkDirectorInconsistencies(tempVal);
+                tempMovie.setDirector(tempVal.trim());
             }
         }
+    }
 
+    public void checkTitleInconsistencies(String tempVal) {
+        tempVal = tempVal.trim();
+
+        if (tempVal.equals("")) {
+            flag = 1;
+            tempMovie.setReason("Title is unknown");
+        }
+        else if (tempVal.length() > 100) {
+            flag = 1;
+            tempMovie.setReason("Title is too long");
+        }
+    }
+
+    public void checkYearInconsistencies(String tempVal) {
+        tempVal = tempVal.trim();
+        if (tempVal.isEmpty()) {
+            flag = 1;
+            tempMovie.setReason("Year is unknown");
+        }
+        else if (!tempVal.matches("\\d+")) {
+            flag = 1;
+            tempMovie.setReason("Year contains non-numeric characters");
+        }
+    }
+
+    public void checkDirectorInconsistencies(String tempVal) {
+        tempVal = tempVal.trim();
+        if (tempVal.isEmpty()) {
+            flag = 1;
+            tempMovie.setReason("Director is unknown");
+        }
+        else if (tempVal.length() > 100) {
+            flag = 1;
+            tempMovie.setReason("Director name is too long");
+        }
     }
 
     public static void main(String[] args) {

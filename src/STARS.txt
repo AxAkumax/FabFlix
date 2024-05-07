@@ -1,4 +1,4 @@
-No of Stars '6863'.
+No of Stars '6814'.
 Star Name: Willie Aames
 Birth Year: 1960
 
@@ -457,9 +457,6 @@ Birth Year: 1911
 
 Star Name: Julie Andrews
 Birth Year: 1934
-
-Star Name: The Andrews Sisters
-Birth Year: n.a.
 
 Star Name: Stanley Andrews
 Birth Year: 1892
@@ -926,14 +923,8 @@ Birth Year:
 Star Name: Adam Baldwin
 Birth Year: 
 
-Star Name: Alec Baldwin
-Birth Year: 195x
-
 Star Name: Daniel Baldwin
 Birth Year: 
-
-Star Name: Stephen Baldwin
-Birth Year: 1963+
 
 Star Name: William Baldwin
 Birth Year: 1963
@@ -949,9 +940,6 @@ Birth Year:
 
 Star Name: Lucille Ball
 Birth Year: 1910
-
-Star Name: Vincent Ball
-Birth Year: *
 
 Star Name: Kay Ballard
 Birth Year: 1926
@@ -1252,9 +1240,6 @@ Birth Year:
 
 Star Name: Emanuelle Beart
 Birth Year: 1965
-
-Star Name: The Beatles
-Birth Year: n.a.
 
 Star Name: Ned Beatty
 Birth Year: 1937
@@ -1585,9 +1570,6 @@ Birth Year:
 
 Star Name: Chuck Berry
 Birth Year: 
-
-Star Name: Halle Berry
-Birth Year: 196x
 
 Star Name: Jules Berry
 Birth Year: 1883
@@ -2039,9 +2021,6 @@ Birth Year: 1970
 Star Name: Peter Boyle
 Birth Year: 1933
 
-Star Name: The Bowery Boys
-Birth Year: n.a.
-
 Star Name: Reizel Bozyk
 Birth Year: 1914
 
@@ -2080,9 +2059,6 @@ Birth Year: 1912
 
 Star Name: Kenneth Branagh
 Birth Year: 1960
-
-Star Name: Miriam Brickman
-Birth Year: dob
 
 Star Name: Wilford Brimley
 Birth Year: 
@@ -3206,9 +3182,6 @@ Birth Year:
 Star Name: Marvin Chatinover
 Birth Year: 
 
-Star Name: Soumitra Chatterjee
-Birth Year: 19bb
-
 Star Name: Ruth Chatterton
 Birth Year: 1893
 
@@ -3241,9 +3214,6 @@ Birth Year:
 
 Star Name: Leslie Cheung
 Birth Year: 
-
-Star Name: Anne Chevalier
-Birth Year: 1915+
 
 Star Name: Maurice Chevalier
 Birth Year: 1888
@@ -3421,9 +3391,6 @@ Birth Year: 1879
 
 Star Name: Al Cliver
 Birth Year: 
-
-Star Name: George Clooney
-Birth Year: dob
 
 Star Name: Rosemary Clooney
 Birth Year: 1928
@@ -3619,9 +3586,6 @@ Birth Year: 1942
 
 Star Name: Dorothy Comingore
 Birth Year: 1913
-
-Star Name: The Commodores
-Birth Year: n.a.
 
 Star Name: Betty Compson
 Birth Year: 1896
@@ -6374,9 +6338,6 @@ Birth Year:
 Star Name: Sheila Frazer
 Birth Year: 
 
-Star Name: Lynn Frederick
-Birth Year: *
-
 Star Name: Pauline Frederick
 Birth Year: 1883
 
@@ -6526,9 +6487,6 @@ Birth Year:
 
 Star Name: Max Gail
 Birth Year: 
-
-Star Name: Charlotte Gainsbourg
-Birth Year: *
 
 Star Name: Serge Gainsbourg
 Birth Year: 
@@ -7487,9 +7445,6 @@ Birth Year:
 Star Name: Steve Guttenberg
 Birth Year: 
 
-Star Name: The Little Tough Guys
-Birth Year: n.a.
-
 Star Name: Edmund Gwenn
 Birth Year: 1875
 
@@ -7645,9 +7600,6 @@ Birth Year: 1888
 
 Star Name: Thurston Hall
 Birth Year: 1883
-
-Star Name: Ray Hallam
-Birth Year: [1]1905
 
 Star Name: May Hallatt
 Birth Year: 1882
@@ -7991,9 +7943,6 @@ Birth Year: 1947
 Star Name: Signe Hasso
 Birth Year: 1915
 
-Star Name: Terry Hatcher
-Birth Year: dob
-
 Star Name: Richard Hatch
 Birth Year: 
 
@@ -8011,9 +7960,6 @@ Birth Year:
 
 Star Name: Rutger Hauer
 Birth Year: 1944
-
-Star Name: Max Haufler
-Birth Year: 19bb
 
 Star Name: Fay Hauser
 Birth Year: 
@@ -9932,12 +9878,6 @@ Birth Year: 1948
 Star Name: Nicole Kidman
 Birth Year: 1967
 
-Star Name: Dead End Kids
-Birth Year: n.a.
-
-Star Name: East Side Kids
-Birth Year: n.a.
-
 Star Name: Richard Kiel
 Birth Year: 1939
 
@@ -10153,9 +10093,6 @@ Birth Year: 1907
 
 Star Name: Leopoldine Konstatin
 Birth Year: 
-
-Star Name: Keystone Kops
-Birth Year: n.a.
 
 Star Name: Miliza Korjus
 Birth Year: 1908
@@ -10568,9 +10505,6 @@ Birth Year:
 Star Name: Louise Latham
 Birth Year: 
 
-Star Name: Queen Latifah
-Birth Year: 19bb
-
 Star Name: Frank Latimore
 Birth Year: 
 
@@ -10600,9 +10534,6 @@ Birth Year:
 
 Star Name: Stan Laurel
 Birth Year: 1890
-
-Star Name: Laurel and Hardy
-Birth Year: n.a.
 
 Star Name: John Laurie
 Birth Year: 
@@ -11960,9 +11891,6 @@ Birth Year: 1893
 Star Name: Zeppo Marx
 Birth Year: 1901
 
-Star Name: Marx Brothers
-Birth Year: n.a.
-
 Star Name: Ron Masak
 Birth Year: 
 
@@ -13202,9 +13130,6 @@ Birth Year: 1908
 Star Name: Shelley Morrison
 Birth Year: 
 
-Star Name: David Morrissey
-Birth Year: 19bb
-
 Star Name: Doretta Morrow
 Birth Year: 1925
 
@@ -13273,9 +13198,6 @@ Birth Year: 1945
 
 Star Name: Peggy Mount
 Birth Year: 1916
-
-Star Name: Mickey Mouse
-Birth Year: 19bb
 
 Star Name: Jane Movak
 Birth Year: 
@@ -13528,9 +13450,6 @@ Birth Year:
 
 Star Name: James Naughton
 Birth Year: 1945
-
-Star Name: Rene Navarre
-Birth Year: 18bb
 
 Star Name: Alla Nazimova
 Birth Year: 1879
@@ -14200,9 +14119,6 @@ Birth Year: 1880
 
 Star Name: Mechu Ortiz
 Birth Year: 
-
-Star Name: Super Dave Osborne
-Birth Year: ~1945
 
 Star Name: Vivienne Osborne
 Birth Year: 1900
@@ -14879,9 +14795,6 @@ Birth Year:
 Star Name: Ezio Pinza
 Birth Year: 1893
 
-Star Name: The Sons of the Pioneers
-Birth Year: n.a.
-
 Star Name: Frederick Piper
 Birth Year: 1902
 
@@ -14890,9 +14803,6 @@ Birth Year: 1944
 
 Star Name: Wensley Pithey
 Birth Year: 1914
-
-Star Name: Brad Pitt
-Birth Year: dob
 
 Star Name: Ingrid Pitt
 Birth Year: 1944
@@ -14920,9 +14830,6 @@ Birth Year: 1914
 
 Star Name: Marc Platt
 Birth Year: 1913
-
-Star Name: Moliere Players
-Birth Year: n.a.
 
 Star Name: Donald Pleasence
 Birth Year: 1919
@@ -14974,9 +14881,6 @@ Birth Year: 1886
 
 Star Name: Tommy Pollard
 Birth Year: 
-
-Star Name: Sarah Polley
-Birth Year: 19bb
 
 Star Name: Ellen Pollock
 Birth Year: 1903
@@ -15293,9 +15197,6 @@ Birth Year: 1897
 Star Name: M.G. Ramachandran
 Birth Year: 
 
-Star Name: Gilda Radner
-Birth Year: *
-
 Star Name: Chips Rafferty
 Birth Year: 1909
 
@@ -15559,9 +15460,6 @@ Birth Year: 1920
 
 Star Name: Oliver Reed
 Birth Year: 1938
-
-Star Name: Pamela Reed
-Birth Year: *
 
 Star Name: Philip Reed
 Birth Year: 1908
@@ -15917,9 +15815,6 @@ Birth Year: 1905
 Star Name: Harry Ritz
 Birth Year: 
 
-Star Name: The Ritz-Brothers
-Birth Year: n.a.
-
 Star Name: Emmanuele Riva
 Birth Year: 1932
 
@@ -16003,9 +15898,6 @@ Birth Year: 1930
 
 Star Name: Roy Roberts
 Birth Year: 1900
-
-Star Name: Tanya Roberts
-Birth Year: *
 
 Star Name: Teal Roberts
 Birth Year: 
@@ -16151,9 +16043,6 @@ Birth Year: 1893
 Star Name: Guy Rolfe
 Birth Year: 1915
 
-Star Name: Howard E. Rollins~jr.
-Birth Year: *
-
 Star Name: Yvonne Romain
 Birth Year: 1938
 
@@ -16250,9 +16139,6 @@ Birth Year: 1926
 Star Name: Lilian Roth
 Birth Year: 1910
 
-Star Name: Tim Roth
-Birth Year: 19bb
-
 Star Name: Richard Roundtree
 Birth Year: 1937
 
@@ -16294,9 +16180,6 @@ Birth Year: 1911
 
 Star Name: Rita Rudner
 Birth Year: 
-
-Star Name: Mercedes Ruehl
-Birth Year: ~1992
 
 Star Name: Charles Ruggles
 Birth Year: 1886
@@ -16694,9 +16577,6 @@ Birth Year: 1939
 Star Name: Ralph Schicha
 Birth Year: 
 
-Star Name: Claudia Schiffer
-Birth Year: 19bb
-
 Star Name: Joseph Schildkraut
 Birth Year: 1895
 
@@ -16981,9 +16861,6 @@ Birth Year:
 
 Star Name: Tupac Shakur
 Birth Year: 1971
-
-Star Name: Tony Shalhoub
-Birth Year: 19bb
 
 Star Name: Harry Shannon
 Birth Year: 1890
@@ -17603,9 +17480,6 @@ Birth Year:
 Star Name: Jeremy Spenser
 Birth Year: 1937
 
-Star Name: Posh Spice
-Birth Year: 19bb
-
 Star Name: David Spielberg
 Birth Year: 
 
@@ -17614,9 +17488,6 @@ Birth Year:
 
 Star Name: Victor Spinetti
 Birth Year: 1932
-
-Star Name: The Loving Spoonful
-Birth Year: n.a.
 
 Star Name: G.D. Spradlin
 Birth Year: 
@@ -17932,9 +17803,6 @@ Birth Year:
 
 Star Name: Ben Stiller
 Birth Year: 
-
-Star Name: Sting
-Birth Year: n.a.
 
 Star Name: Raymond StJacques
 Birth Year: 1930
@@ -18260,9 +18128,6 @@ Birth Year: 1902
 Star Name: Constance Talmadge
 Birth Year: 1898
 
-Star Name: Natalie Talmadge
-Birth Year: 19bb
-
 Star Name: Norma Talmadge
 Birth Year: 1893
 
@@ -18517,9 +18382,6 @@ Birth Year:
 
 Star Name: Emma Thompson
 Birth Year: 
-
-Star Name: Fred Thompson
-Birth Year: dob
 
 Star Name: Eric Thompson
 Birth Year: 1929
@@ -19922,9 +19784,6 @@ Birth Year: 1923
 Star Name: May Whitty
 Birth Year: 1865
 
-Star Name: The Who
-Birth Year: n.a.
-
 Star Name: Richard Whorf
 Birth Year: 1906
 
@@ -19937,14 +19796,8 @@ Birth Year: 1914
 Star Name: Dorothea Wieck
 Birth Year: 1908
 
-Star Name: The Wiere~Brothers
-Birth Year: n.a.
-
 Star Name: Lynda Wiesmeyer
 Birth Year: 
-
-Star Name: Dianne Wiest
-Birth Year: *
 
 Star Name: Collin Wilcox
 Birth Year: 

@@ -1,0 +1,205 @@
+No of Movies '34'.
+Director is unknown
+Title: Mesalina
+Year: 1924
+Director: Palermi
+Genres: [Epic]
+
+Director is unknown
+Title: Crime School
+Year: 1938
+Director: 
+Genres: []
+
+Year contains non-numeric characters
+Title: El grand cavalcodos
+Year: 19yy
+Director: Bunuel
+Genres: []
+
+Director is unknown
+Title: Desire Me
+Year: 1947
+Director: 
+Genres: []
+
+Director is unknown
+Title: Babes in Toyland
+Year: 1934
+Director: ``Buddy''? Charles Rogers
+Genres: [Musical]
+
+Director is unknown
+Title: A Girl with Ideas
+Year: 1937
+Director: 
+Genres: []
+
+Director is unknown
+Title: Four Girls in White
+Year: 1939
+Director: 
+Genres: []
+
+Director is unknown
+Title: Whistling in the Dark
+Year: 1941
+Director: 
+Genres: []
+
+Director is unknown
+Title: Song of the Open Road
+Year: 1944
+Director: 
+Genres: []
+
+Director is unknown
+Title: Secret Agents
+Year: 1966
+Director: 
+Genres: []
+
+Director is unknown
+Title: I Believe in You
+Year: 1952
+Director: 
+Genres: []
+
+Title is unknown
+Title: 
+Year: 1947
+Director: Dassin
+Genres: [Action]
+
+Year contains non-numeric characters
+Title: Catherine of Russia
+Year: 19yy
+Director: W.Staudte
+Genres: [Uncategorized]
+
+Title is unknown
+Title: 
+Year: 1949
+Director: W.Jackson
+Genres: []
+
+Year contains non-numeric characters
+Title: Morgan Stewart's Coming Home
+Year: 199x
+Director: Alan~Smithee
+Genres: []
+
+Year contains non-numeric characters
+Title: Raging Angels
+Year: 199x
+Director: Alan~Smithee
+Genres: []
+
+Title is unknown
+Title: 
+Year: 1999
+Director: Pollock
+Genres: []
+
+Title is unknown
+Title: 
+Year: 1954
+Director: G.Reinhardt
+Genres: []
+
+Title is unknown
+Title: 
+Year: 1954
+Director: G.Reinhardt
+Genres: []
+
+Year contains non-numeric characters
+Title: Stop Train 349
+Year: 199x
+Director: Haedrich
+Genres: [Thriller]
+
+Director is unknown
+Title: The Human Duplicators
+Year: 1965
+Director: 
+Genres: [Sci-Fi]
+
+Year contains non-numeric characters
+Title: Karate Kid
+Year: 199x
+Director: J.G.Avildsen
+Genres: []
+
+Year contains non-numeric characters
+Title: The Eternal City
+Year: 196x
+Director: Scorsese
+Genres: [Drama]
+
+Year contains non-numeric characters
+Title: Buena Vista Social Club
+Year: 19yy
+Director: Ullrich Felsberg
+Genres: [Musical]
+
+Year contains non-numeric characters
+Title: Mulholland Drive
+Year: 19yy
+Director: D.Lynch
+Genres: [Uncategorized]
+
+Title is unknown
+Title: 
+Year: 1984
+Director: M.Lester
+Genres: [Horror]
+
+Year contains non-numeric characters
+Title: Sarabande
+Year: 19yy
+Director: Egoyan
+Genres: []
+
+Title is unknown
+Title: 
+Year: 1988
+Director: Silberling
+Genres: [Thriller]
+
+Year contains non-numeric characters
+Title: Fairy Tale: A True Story
+Year: 199x
+Director: Sturridge
+Genres: [null]
+
+Director is unknown
+Title: 
+Year: 199x
+Director: 
+Genres: []
+
+Year contains non-numeric characters
+Title: Jerry and Tom
+Year: 19yy
+Director: diCillo
+Genres: []
+
+Year contains non-numeric characters
+Title: The Shanghai Triad
+Year: 19yy
+Director: UnYear95
+Genres: [null]
+
+Year contains non-numeric characters
+Title: Taste of Cherry
+Year: 19yy
+Director: Kiarostami
+Genres: [Drama]
+
+Year contains non-numeric characters
+Title: All is Routine
+Year: 19yy
+Director: M.Judge
+Genres: []
+
