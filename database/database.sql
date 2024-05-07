@@ -56,3 +56,5 @@ CREATE TABLE ratings(
 	numVotes INTEGER NOT NULL,
 	FOREIGN KEY (movieId) REFERENCES movies(id)
 );
+
+ALTER TABLE sales ADD quantity INTEGER DEFAULT 1;

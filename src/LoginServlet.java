@@ -53,7 +53,10 @@ public class LoginServlet extends HttpServlet {
                 String storedPassword = emailResultSet.getString("password");
 
                 if (password.equals(storedPassword)) {
+                    int customerId = emailResultSet.getInt("customerId");
+
                     request.getSession().setAttribute("user", email);
+                    request.getSession().setAttribute("customerId", customerId);
                     responseJsonObject.addProperty("status", "success");
                     responseJsonObject.addProperty("message", "success");
                 } else {

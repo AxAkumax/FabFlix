@@ -39,13 +39,6 @@ public class PaymentServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         JsonObject jsonData = new JsonObject();
 
-//        try {
-//            jsonData = parseRequestToJson(request);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-
-//        String action = jsonData.get("action").getAsString();
         System.out.println(request);
         String action = request.getParameter("action");
 
@@ -61,6 +54,10 @@ public class PaymentServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         JsonObject jsonData = new JsonObject();
+
+        HttpSession session = request.getSession();
+        Map<String, Integer> cart_items = (HashMap<String, Integer>) session.getAttribute("cart_items");
+        int customerId = (int) session.getAttribute("customerId");
 
         try {
             jsonData = parseRequestToJson(request);
@@ -81,6 +78,8 @@ public class PaymentServlet extends HttpServlet {
             try {
                 if (checkCreditCardRecords(jsonData)) {
                     jsonResult.addProperty("result", "success");
+
+                    insertSalesRecord(cart_items, customerId);
                     response.setStatus(200);
                 }
                 else {
@@ -151,6 +150,40 @@ public class PaymentServlet extends HttpServlet {
         }
 
         return false;
+    }
+
+    public void insertSalesRecord(Map<String, Integer> cart_items, int customerId) throws SQLException {
+
+        try (Connection conn = dataSource.getConnection()) {
+            // INSERT INTO sales VALUES(4,490012,'tt0386486', '2005/01/01');
+
+            String query = "INSERT INTO sales (customerId, movieId, saleDate, quantity) VALUES(?,?,?,?);";
+
+            PreparedStatement statement = conn.prepareStatement(query);
+
+            LocalDate localDate = LocalDate.now();
+            Date date = Date.valueOf(localDate);
+
+            for (Map.Entry<String, Integer> entry : cart_items.entrySet()) {
+                String key = entry.getKey();
+                Integer value = entry.getValue();
+
+                // logged in customer's id
+                statement.setInt(1, customerId);
+                statement.setString(2, key);
+                statement.setDate(3, date);
+                statement.setInt(4, value);
+
+                int rowsAffected = statement.executeUpdate(); // Use executeUpdate() instead of executeQuery()
+
+                // Check if the insertion was successful
+                if (rowsAffected > 0) {
+                    System.out.println("Data inserted successfully.");
+                } else {
+                    System.out.println("Failed to insert data.");
+                }
+            }
+        }
     }
 
 
