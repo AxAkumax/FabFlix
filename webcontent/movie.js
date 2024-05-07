@@ -50,6 +50,7 @@ function fetchSearchResults(){
 
                 console.log(resultData.movies.length);
                 console.log(recordsPerPage);
+
                 if (resultData && resultData.movies && resultData.movies.length === parseInt(recordsPerPage)) {
                     $("#nextBtn").prop("disabled", false); // Enable Next button
                 } else {
@@ -108,6 +109,7 @@ function fetchMoviesByGenre(genreId, character, sortAttribute, recordsPerPage, p
             else{
                 $("#prevBtn").prop("disabled", true);
             }
+
         },
         error: function (xhr, status, error) {
             console.log(genreId);
@@ -129,7 +131,6 @@ function populateTable(resultData) {
         if(currentPage>1){
             $("#prevBtn").prop("disabled", false);
             window.location.href = sessionStorage.getItem('recentURL');
-            return;
         }
         else {
             console.log("No movies found.");
@@ -137,8 +138,8 @@ function populateTable(resultData) {
             noResultsMessage.show();
             table.hide();
             tableHeadings.hide()
-            return;
         }
+        return;
 
     }
 
