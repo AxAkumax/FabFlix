@@ -18,6 +18,7 @@
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -46,53 +47,48 @@
             </li>
 
             <li class="nav-item active">
-                <a class="nav-link" href="search.html"> Search <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="browse.html"> Browse <span class="sr-only">(current)</span></a>
             </li>
 
             <li class="nav-item active">
-                <a class="nav-link" href="browse.html"> Browse <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="search.html"> <i class="fas fa-search icon"> </i> <span class="sr-only">(current)</span></a>
             </li>
 
         </ul>
 
-        <a class="nav-link" href="shopping.html">Cart</a>
+        <a class="nav-link" href="shopping.html"> <i class="fas fa-shopping-cart"></i> </a>
 
         <a class="nav-link" href="login.html">Logout</a>
 
     </div>
 </nav>
 
-
-<!--<header>Fablix <span style="font-size: 6.5vw;">&#10025; </span></header>-->
-
-<h2>Top 20 Movies</h2>
-
-
-<div class="container">
-    <div class="row" id="movie_cards">
-        <!-- Id "star_table" is useful for jQuery to find the html element with id, class here is mapping to Bootstrap defined class CSS -->
-        <table id=movie_table class="table table-hover table-dark">
-            <!-- Create a table header -->
-            <thead>
-            <tr>
-                <!-- Titles of each column-->
-                <th>#</th>
-                <th>Title</th>
-                <th>Year</th>
-                <th>Director</th>
-                <th>Stars</th>
-                <th>Genres</th>
-                <th>Rating</th>
-                <th>Add to Cart</th>
-            </tr>
-            </thead>
-            <!-- Table body is left empty here, will be populated with the data retrieved with index.js -->
-            <!-- Again, id "star_table_body" is useful for jQuery to find this html element -->
-            <tbody id=movie_table_body></tbody>
-        </table>
+<h1> <span style="font-size: 20vw;padding-left: 0.5vw; color: #bb86fc">&#10025;</span>Fabflix </h1>
+<div class="img-text-container">
+    <p> Explore Timeless Classics and Latest Releases <br> Now Available to Purchase!</p>
+    <div class="slideshow-container">
+        <div class="slide fade">
+            <img src="./images/Alexander.png" alt="Alexander" style="width: 18vw;">
+        </div>
+        <div class="slide fade">
+            <img src="./images/Cinderella%20Man.png" alt="Cinderella Man" style="width: 18vw;">
+        </div>
+        <div class="slide fade">
+            <img src="./images/die-hard.png" alt="Die Hard" style="width: 18vw;">
+        </div>
+        <div class="slide fade">
+            <img src="./images/Guru.png" alt="Die Hard" style="width: 18vw;">
+        </div>
+        <div class="slide fade">
+            <img src="./images/Ali.png" alt="Ali" style="width: 18vw;">
+        </div>
+        <div class="slide fade">
+            <img src="./images/Bambi-2.png" alt="Bambi-2" style="width: 18vw;">
+        </div>
     </div>
 </div>
 
+<!--<header>Fablix <span style="font-size: 6.5vw;">&#10025; </span></header>-->
 
 <!-- Load jQuery and Bootstrap JS -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

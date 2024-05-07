@@ -32,6 +32,8 @@ html{
 }
 h2{
     margin-bottom: 1.6vw;
+    font-family: "DM Sans", sans-serif;
+    font-style: normal;
 }
 
 .browse-link{
@@ -44,6 +46,8 @@ h2{
 a {
     color: lightgrey;
     text-align: center;
+    font-family: "DM Sans", sans-serif;
+    font-style: normal;
 }
 
 /* Color for links when hovered */
@@ -83,4 +87,6 @@ main {
 }
 label{
     color: lightgray;
+    font-family: "DM Sans", sans-serif;
+    font-style: normal;
 }
