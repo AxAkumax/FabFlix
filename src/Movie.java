@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 public class Movie {
+    private String movieId;
     private String title;
     private String year;
     private String director;
@@ -12,6 +13,9 @@ public class Movie {
         this.genres = new ArrayList<String>();
     }
 
+    public void setMovieId(String movieId) {
+        this.movieId = movieId;
+    }
     public void setTitle(String title) {
         this.title = title;
     }
@@ -30,6 +34,10 @@ public class Movie {
 
     public void setReason(String reason) {
         this.reason = reason;
+    }
+
+    public String getMovieId() {
+        return movieId;
     }
 
     public String getTitle() {
@@ -55,6 +63,7 @@ public class Movie {
     public String toString() {
         StringBuffer sb = new StringBuffer();
 
+        sb.append("Movie Id: " + movieId + "\n");
         sb.append("Title: " + getTitle() + "\n");
         sb.append("Year: " + getYear() + "\n");
         sb.append("Director: " + getDirector() + "\n");
