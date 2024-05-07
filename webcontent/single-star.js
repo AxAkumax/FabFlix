@@ -97,7 +97,8 @@ function handleResult(resultData) {
             // Append dropdown option values to the genre links
             let sortAttribute = "title ASC, average_rating ASC";
             let moviesPerPage = "10";
-            let urlParams = "&sortAttribute=" + encodeURIComponent(sortAttribute)
+            let page = "1";
+            let urlParams = "&sortAttribute=" + encodeURIComponent(sortAttribute)+ "&page="+ encodeURIComponent(page)
                 + "&recordsPerPage=" + encodeURIComponent(moviesPerPage);
             genreLink.attr("href", genreLink.attr("href") + urlParams);
 

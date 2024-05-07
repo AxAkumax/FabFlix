@@ -57,11 +57,6 @@ function fetchSearchResults(){
             console.log(resultData.movies.length);
             console.log(recordsPerPage);
 
-            // if (resultData && resultData.movies && resultData.movies.length === parseInt(recordsPerPage)) {
-            //     $("#nextBtn").prop("disabled", false); // Enable Next button
-            // } else {
-            //     $("#nextBtn").prop("disabled", true); // Disable Next button
-            // }
             if (resultData.hasOwnProperty("hasNextPage")) {
                 // Extract the value of hasNextPage
                 var hasNextPage = resultData.hasNextPage;
@@ -221,7 +216,8 @@ function populateTable(resultData) {
             // Append dropdown option values to the genre links
             let sortAttribute = $("#sortAttribute").val();
             let moviesPerPage = $("#moviesPerPage").val();
-            let urlParams = "&sortAttribute=" + encodeURIComponent(sortAttribute)
+            let page = "1";
+            let urlParams = "&sortAttribute=" + encodeURIComponent(sortAttribute) + "&page="+ encodeURIComponent(page)
                 + "&recordsPerPage=" + encodeURIComponent(moviesPerPage);
             genreLink.attr("href", genreLink.attr("href") + urlParams);
 
