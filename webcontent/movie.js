@@ -47,6 +47,21 @@ function fetchSearchResults(){
                 console.log("sucesss");
 
                 populateTable(resultData);
+
+                console.log(resultData.movies.length);
+                console.log(recordsPerPage);
+                if (resultData && resultData.movies && resultData.movies.length === parseInt(recordsPerPage)) {
+                    $("#nextBtn").prop("disabled", false); // Enable Next button
+                } else {
+                    $("#nextBtn").prop("disabled", true); // Disable Next button
+                }
+                if(currentPage>1){
+                    $("#prevBtn").prop("disabled", false); // Enable Next button
+                }
+                else{
+                    $("#prevBtn").prop("disabled", true);
+                }
+
             },
             error: function(xhr, status, error) {
                 $("#noResultsMessage").show();
@@ -79,7 +94,20 @@ function fetchMoviesByGenre(genreId, character, sortAttribute, recordsPerPage, p
         success: function (resultData) {
             // Populate the table with genre results
             console.log("success");
+
             populateTable(resultData);
+            if (resultData && resultData.movies && resultData.movies.length === parseInt(recordsPerPage)) {
+                $("#nextBtn").prop("disabled", false); // Enable Next button
+            } else {
+                $("#nextBtn").prop("disabled", true); // Disable Next button
+            }
+
+            if(currentPage>1){
+                $("#prevBtn").prop("disabled", false); // Enable Next button
+            }
+            else{
+                $("#prevBtn").prop("disabled", true);
+            }
         },
         error: function (xhr, status, error) {
             console.log(genreId);
@@ -97,12 +125,20 @@ function populateTable(resultData) {
     var noResultsMessage = $("#noResultsMessage");
 
     if (!resultData || !resultData.movies || resultData.movies.length === 0) {
-        console.log("No movies found.");
-        // Hide the table and show the no results message
-        noResultsMessage.show();
-        table.hide();
-        tableHeadings.hide()
-        return;
+
+        if(currentPage>1){
+            $("#prevBtn").prop("disabled", false);
+            window.location.href = sessionStorage.getItem('recentURL');
+            return;
+        }
+        else {
+            console.log("No movies found.");
+            // Hide the table and show the no results message
+            noResultsMessage.show();
+            table.hide();
+            tableHeadings.hide()
+            return;
+        }
 
     }
 
