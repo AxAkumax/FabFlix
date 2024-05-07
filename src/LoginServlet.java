@@ -24,20 +24,29 @@ public class LoginServlet extends HttpServlet {
     public void init(ServletConfig config) {
         try {
             dataSource = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/moviedb");
+
         } catch (NamingException e) {
             e.printStackTrace();
         }
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
+        JsonObject responseJsonObject = new JsonObject();
+        PrintWriter out = response.getWriter();
+
+        try {
+            RecaptchaVerifyUtils.verify(gRecaptchaResponse);
+        } catch (Exception e) {
+            responseJsonObject.addProperty("status", "fail");
+            responseJsonObject.addProperty("message", "reCAPTCHA verification failed");
+            out.write(responseJsonObject.toString());
+            return;
+        }
+
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        PrintWriter out = response.getWriter();
-        JsonObject responseJsonObject = new JsonObject();
-
-        /* This example only allows username/password to be test/test
-        /  in the real project, you should talk to the database to verify username/password
-        */
         try {
             Connection dbCon = dataSource.getConnection();
             String query = "SELECT * FROM customers WHERE email = ?";
