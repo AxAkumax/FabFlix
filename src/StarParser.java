@@ -1,7 +1,6 @@
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -24,7 +23,7 @@ public class StarParser extends DefaultHandler {
 
     // 0 means the entry is consistent
     // 1 means the entry is inconsistent
-    int flag = 0;
+    int inconsistent_flag = 0;
 
     public StarParser() {
 
@@ -100,7 +99,7 @@ public class StarParser extends DefaultHandler {
         if (qName.equalsIgnoreCase("actor")) {
             //create a new instance of employee
             tempStar = new Star();
-            flag = 0;
+            inconsistent_flag = 0;
         }
     }
 
@@ -118,7 +117,7 @@ public class StarParser extends DefaultHandler {
             if (qName.equalsIgnoreCase("actor")) {
 
                 //add it to the list
-                if (flag == 0) {
+                if (inconsistent_flag == 0) {
                     myStars.add(tempStar);
                 }
                 else {
@@ -141,11 +140,11 @@ public class StarParser extends DefaultHandler {
         tempVal = tempVal.trim();
 
         if (tempVal.equals("")) {
-            flag = 1;
+            inconsistent_flag = 1;
             tempStar.setReason("Name is empty");
         }
         else if (tempVal.length() > 100) {
-            flag = 1;
+            inconsistent_flag = 1;
             tempStar.setReason("Name is too long");
         }
     }
@@ -154,7 +153,7 @@ public class StarParser extends DefaultHandler {
         tempVal = tempVal.trim();
 
         if (!tempVal.equals("") && !tempVal.matches("\\d+")) {
-            flag = 1;
+            inconsistent_flag = 1;
             tempStar.setReason("Year contains non-numeric characters");
         }
     }

@@ -9,7 +9,6 @@ import java.util.Map;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-import javax.xml.crypto.Data;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -34,7 +33,7 @@ public class MovieParser extends DefaultHandler {
 
     // 0 means the entry is consistent
     // 1 means the entry is inconsistent
-    int flag = 0;
+    int inconsistent_flag = 0;
 
     private DataSource dataSource;
 
@@ -44,6 +43,12 @@ public class MovieParser extends DefaultHandler {
         myMovies = new ArrayList<Movie>();
         inconsistentMovies = new ArrayList<Movie>();
         create_genre_map();
+
+        try {
+            dataSource = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/moviedb");
+        } catch (NamingException e) {
+            e.printStackTrace();
+        }
     }
 
     public void create_genre_map() {
@@ -75,7 +80,7 @@ public class MovieParser extends DefaultHandler {
 
     public void startParse() {
         parseDocument();
-//        populate_existing_genres();
+        // populate_existing_genres();
 //        System.out.println(oldGenres);
         printDataToFile("MOVIES.txt");
         printInconsistenciesToFile("MOVIE_ERRORS.txt");
@@ -157,7 +162,7 @@ public class MovieParser extends DefaultHandler {
         if (qName.equalsIgnoreCase("film")) {
             //create a new instance of employee
             tempMovie = new Movie();
-            flag = 0;
+            inconsistent_flag = 0;
         }
     }
 
@@ -175,7 +180,7 @@ public class MovieParser extends DefaultHandler {
             if (qName.equalsIgnoreCase("film")) {
 
                 //add it to the list
-                if (flag == 0) {
+                if (inconsistent_flag == 0) {
                     myMovies.add(tempMovie);
                 }
                 else {
@@ -206,11 +211,11 @@ public class MovieParser extends DefaultHandler {
         tempVal = tempVal.trim();
 
         if (tempVal.equals("")) {
-            flag = 1;
+            inconsistent_flag = 1;
             tempMovie.setReason("Title is unknown");
         }
         else if (tempVal.length() > 100) {
-            flag = 1;
+            inconsistent_flag = 1;
             tempMovie.setReason("Title is too long");
         }
     }
@@ -218,23 +223,23 @@ public class MovieParser extends DefaultHandler {
     public void checkYearInconsistencies(String tempVal) {
         tempVal = tempVal.trim();
         if (tempVal.isEmpty()) {
-            flag = 1;
+            inconsistent_flag = 1;
             tempMovie.setReason("Year is unknown");
         }
         else if (!tempVal.matches("\\d+")) {
-            flag = 1;
+            inconsistent_flag = 1;
             tempMovie.setReason("Year contains non-numeric characters");
         }
     }
 
     public void checkDirectorInconsistencies(String tempVal) {
         tempVal = tempVal.trim();
-        if (tempVal.isEmpty()) {
-            flag = 1;
+        if (tempVal.equals("")) {
+            inconsistent_flag = 1;
             tempMovie.setReason("Director is unknown");
         }
         else if (tempVal.length() > 100) {
-            flag = 1;
+            inconsistent_flag = 1;
             tempMovie.setReason("Director name is too long");
         }
     }

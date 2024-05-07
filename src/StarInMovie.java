@@ -2,8 +2,11 @@ public class StarInMovie {
     String star_name;
     String movie_name;
     String director;
+    String reason;
 
-    StarInMovie() {}
+    StarInMovie() {
+        this.reason = "None";
+    }
 
     StarInMovie(String star_name, String movie_name, String director) {
         this.star_name = star_name;
@@ -23,6 +26,10 @@ public class StarInMovie {
         this.director = director;
     }
 
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
+
     public String getStarName() {
         return star_name;
     }
@@ -33,6 +40,10 @@ public class StarInMovie {
 
     public String getDirector() {
         return director;
+    }
+
+    public String getReason() {
+        return reason;
     }
 
     public String toString() {
