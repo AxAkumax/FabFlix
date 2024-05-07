@@ -11,10 +11,11 @@ function fetchSearchResults(){
         var character =  urlParams.get('character');
         var sortAttribute = urlParams.get('sortAttribute');
         var recordsPerPage = urlParams.get('recordsPerPage');
+        var page = urlParams.get('page');
         if (genreId || character) {
             console.log(genreId);
             console.log("before going into fetch movies by genre");
-            fetchMoviesByGenre(genreId, character, sortAttribute, recordsPerPage);
+            fetchMoviesByGenre(genreId, character, sortAttribute, recordsPerPage,page);
             return;
         }
         var title = urlParams.get('title');
@@ -29,7 +30,7 @@ function fetchSearchResults(){
         if(starName){ formData["starName"]=starName; }
         if(sortAttribute){ formData["sortAttribute"]=sortAttribute; }
         if(recordsPerPage){ formData["recordsPerPage"]=recordsPerPage; }
-        formData["page"]=urlParams.get('page');
+        formData["page"]=page;
 
         console.log(formData);
 
@@ -56,7 +57,7 @@ function fetchSearchResults(){
 
 
 // Function to populate the table with search results
-function fetchMoviesByGenre(genreId, character, sortAttribute, recordsPerPage) {
+function fetchMoviesByGenre(genreId, character, sortAttribute, recordsPerPage, page) {
     //Make AJAX request to fetch movies by genreId
     formData = {};
     if(genreId){
@@ -67,7 +68,7 @@ function fetchMoviesByGenre(genreId, character, sortAttribute, recordsPerPage) {
     }
     formData["sortAttribute"] = sortAttribute;
     formData["recordsPerPage"] = recordsPerPage;
-    formData["page"]=currentPage;
+    formData["page"]=page;
 
     console.log("formData: ", formData);
     $.ajax({
