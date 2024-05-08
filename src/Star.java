@@ -1,9 +1,10 @@
 public class Star {
     private String name;
-    private String birth_year;
+    private String birth_year = "";
     private String reason;
 
     public Star() {
+        this.birth_year = "";
         this.reason = "None";
     }
     
@@ -34,8 +35,12 @@ public class Star {
     public String toString() {
         StringBuffer sb = new StringBuffer();
 
-        sb.append("Star Name: " + getName() + "\n");
+        sb.append("Star Name: " + getName() + ", ");
         sb.append("Birth Year: " + getBirthYear() + "\n");
+
+        if (!getReason().equals("None")) {
+            sb.append("Reason: " + getReason() + "\n");
+        }
 
         return sb.toString();
     }

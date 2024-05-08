@@ -1,5 +1,6 @@
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.*;
 import java.util.ArrayList;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -13,28 +14,20 @@ import org.xml.sax.helpers.DefaultHandler;
 
 
 
-//
+// to insert actors63.xml
 public class StarParser extends DefaultHandler {
-    ArrayList<Star> myStars;
-    ArrayList<Star> inconsistentStars;
+    ArrayList<Star> myStars = new ArrayList<Star>();
+    ArrayList<Star> inconsistentStars = new ArrayList<>();;
 
     private Star tempStar;
     private String tempVal;
 
-    // 0 means the entry is consistent
-    // 1 means the entry is inconsistent
-    int inconsistent_flag = 0;
+    boolean consistent = true;
+
+    Connection conn;
 
     public StarParser() {
-
-        myStars = new ArrayList<Star>();
-        inconsistentStars = new ArrayList<>();
-    }
-
-    public void startParse() {
-        parseDocument();
-        printDataToFile("STARS.txt");
-        printInconsistenciesToFile("STAR_ERRORS.txt");
+        connectDatabase();
     }
 
     public static void main(String[] args) {
@@ -42,29 +35,40 @@ public class StarParser extends DefaultHandler {
         my_parser.startParse();
     }
 
-    private void printDataToFile(String fileName) {
-        try (FileWriter writer = new FileWriter(fileName)) {
-            writer.write("No of Stars '" + myStars.size() + "'.\n");
+    public void connectDatabase() {
+        try {
+            String dbtype = "mysql";
+            String dbname = "moviedb";
+            String username = "mytestuser";
+            String password = "My6$Password";
 
-            for (Star myStar : myStars) {
-                writer.write(myStar.toString() + "\n");
-            }
-        } catch (IOException e) {
+            // Incorporate mySQL driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // Connect to the test database
+            conn = DriverManager.getConnection("jdbc:" + dbtype + ":///" + dbname + "?autoReconnect=true&useSSL=false",
+                                                username, password);
+        }
+        catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    private void printInconsistenciesToFile(String fileName) {
-        try (FileWriter writer = new FileWriter(fileName)) {
-            writer.write("No of Stars '" + inconsistentStars.size() + "'.\n");
+    public void startParse() {
+        parseDocument();
+        printDataToFile("STARS.txt", myStars);
+        printDataToFile("STAR_ERRORS.txt", inconsistentStars);
 
-            for (Star myStar : inconsistentStars) {
-                writer.write(myStar.getReason() + "\n");
-                writer.write(myStar.toString() + "\n");
-            }
-        } catch (IOException e) {
+        try {
+            insertStars();
+        }
+        catch (SQLException e) {
             e.printStackTrace();
         }
+
     }
 
     public void parseDocument() {
@@ -75,19 +79,62 @@ public class StarParser extends DefaultHandler {
             SAXParser sp = spf.newSAXParser();
 
             //parse the file and also register this class for call backs
-            sp.parse("../stanford-movies/actors63.xml", this);
+            sp.parse("./stanford-movies/actors63.xml", this);
 
         } catch (SAXException se) {
-            System.out.println("SAXException: ");
             se.printStackTrace();
         } catch (ParserConfigurationException pce) {
-            System.out.println("ParserConfigurationException: ");
             pce.printStackTrace();
         } catch (IOException ie) {
-            System.out.println("IOException: ");
             ie.printStackTrace();
         }
     }
+
+    public void printDataToFile(String fileName, ArrayList<Star> data) {
+        try (FileWriter writer = new FileWriter(fileName)) {
+            writer.write("Number of Entries '" + data.size() + "'.\n");
+
+            for (Star myStar : data) {
+                writer.write(myStar.toString() + "\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void insertStars() throws SQLException {
+        if (conn != null) {
+            String with_year_query = "INSERT INTO stars (id, name, birthYear) VALUES (?, ?, ?);";
+            String without_year_query = "INSERT INTO stars (id, name) VALUES (?, ?);";
+
+            PreparedStatement with_year_statement = conn.prepareStatement(with_year_query);
+            PreparedStatement without_year_statement = conn.prepareStatement(without_year_query);
+            PreparedStatement statement;
+
+            int count = 1;
+
+            for (Star s : myStars) {
+                String id = "A" + count;
+                System.out.println("inserting: " + s);
+
+               if (s.getBirthYear().equals("")) {
+                   without_year_statement.setString(1, id);
+                   without_year_statement.setString(2, s.getName());
+                   statement = without_year_statement;
+               }
+               else {
+                   with_year_statement.setString(1, id);
+                   with_year_statement.setString(2, s.getName());
+                   with_year_statement.setString(3, s.getBirthYear());
+                   statement = with_year_statement;
+               }
+
+               int rows_affected = statement.executeUpdate();
+               count++;
+            }
+        }
+    }
+
 
     //Event Handlers
 
@@ -99,7 +146,7 @@ public class StarParser extends DefaultHandler {
         if (qName.equalsIgnoreCase("actor")) {
             //create a new instance of employee
             tempStar = new Star();
-            inconsistent_flag = 0;
+            consistent = true;
         }
     }
 
@@ -112,12 +159,13 @@ public class StarParser extends DefaultHandler {
     // endElement() is invoked when the parsing ends for an element
     // this is when we’ll assign the content of the tags to their respective variables
     public void endElement(String uri, String localName, String qName) throws SAXException {
+        tempVal = tempVal.trim();
 
         if (tempStar != null) {
             if (qName.equalsIgnoreCase("actor")) {
 
                 //add it to the list
-                if (inconsistent_flag == 0) {
+                if (consistent) {
                     myStars.add(tempStar);
                 }
                 else {
@@ -137,23 +185,19 @@ public class StarParser extends DefaultHandler {
     }
 
     public void checkNameInconsistencies(String tempVal) {
-        tempVal = tempVal.trim();
-
         if (tempVal.equals("")) {
-            inconsistent_flag = 1;
+            consistent = false;
             tempStar.setReason("Name is empty");
         }
         else if (tempVal.length() > 100) {
-            inconsistent_flag = 1;
+            consistent = false;
             tempStar.setReason("Name is too long");
         }
     }
 
     public void checkDOBInconsistencies(String tempVal) {
-        tempVal = tempVal.trim();
-
         if (!tempVal.equals("") && !tempVal.matches("\\d+")) {
-            inconsistent_flag = 1;
+            consistent = false;
             tempStar.setReason("Year contains non-numeric characters");
         }
     }

@@ -33,28 +33,16 @@ public class MovieParser extends DefaultHandler {
     // 1 means the entry is inconsistent
     int inconsistent_flag = 0;
 
+    Connection conn;
 
     public MovieParser() throws SQLException, ClassNotFoundException {
         // initialize genre map and myMovies arraylist to store movies
         myMovies = new ArrayList<Movie>();
         inconsistentMovies = new ArrayList<Movie>();
-        newGenres = new ArrayList<>();
+
         create_genre_map();
 
-//        String dbtype = "mysql";
-//        String dbname = "moviedbexample";
-//        String username = "mytestuser";
-//        String password = "My6$Password";
-//
-//        // Incorporate mySQL driver
-//        Class.forName("com.mysql.cj.jdbc.Driver");
-//
-//        // Connect to the test database
-//        Connection connection = DriverManager.getConnection("jdbc:" + dbtype + ":///" + dbname + "?autoReconnect=true&useSSL=false",
-//                username, password);
-
-
-
+        connectDatabase();
     }
 
     public void create_genre_map() {
@@ -84,12 +72,27 @@ public class MovieParser extends DefaultHandler {
         newGenreMap.put("West", "Western");
     }
 
-    public void startParse() {
+    public void connectDatabase() throws SQLException, ClassNotFoundException {
+        String dbtype = "mysql";
+        String dbname = "moviedb";
+        String username = "mytestuser";
+        String password = "My6$Password";
+
+        // Incorporate mySQL driver
+        Class.forName("com.mysql.cj.jdbc.Driver");
+
+        // Connect to the test database
+        conn = DriverManager.getConnection("jdbc:" + dbtype + ":///" + dbname + "?autoReconnect=true&useSSL=false",
+                username, password);
+    }
+
+    public void startParse() throws SQLException, ClassNotFoundException {
         parseDocument();
-        // populate_existing_genres();
-//        System.out.println(oldGenres);
+
+        populate_existing_genres();
         printDataToFile("MOVIES.txt");
         printInconsistenciesToFile("MOVIE_ERRORS.txt");
+
 //        addNewGenresToDatabase();
 //        addMoviesToDatabase();
 //        addGenresInMoviesToDatabase();
@@ -103,7 +106,7 @@ public class MovieParser extends DefaultHandler {
             SAXParser sp = spf.newSAXParser();
 
             //parse the file and also register this class for call backs
-            sp.parse("../stanford-movies/mains243.xml", this);
+            sp.parse("./stanford-movies/mains243.xml", this);
 
         } catch (SAXException se) {
             System.out.println("SAXException: ");
@@ -117,21 +120,19 @@ public class MovieParser extends DefaultHandler {
         }
     }
 
-//    public void populate_existing_genres() {
-//
-//        try (Connection conn = dataSource.getConnection()){
-//            String query = "SELECT name FROM genres;";
-//
-//            PreparedStatement statement = conn.prepareStatement(query);
-//            ResultSet rs = statement.executeQuery();
-//            while (rs.next()) {
-//                oldGenres.add(rs.getString("name"));
-//            }
-//        }
-//        catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
+    public void populate_existing_genres() throws SQLException {
+        if (conn != null){
+            System.out.println("connection is not null");
+
+            String query = "SELECT name FROM genres;";
+
+            PreparedStatement statement = conn.prepareStatement(query);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                oldGenres.add(rs.getString("name"));
+            }
+        }
+    }
 
     private void printDataToFile(String fileName) {
         try (FileWriter writer = new FileWriter(fileName)) {
