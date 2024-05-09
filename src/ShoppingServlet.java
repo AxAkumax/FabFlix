@@ -21,13 +21,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+
 @WebServlet(name = "ShoppingServlet", urlPatterns = "/api/cart")
 public class ShoppingServlet extends HttpServlet {
-    // movieId, quantity
-    private Map<String, Integer> all_items = new HashMap<>();
 
     private DataSource dataSource;
 
@@ -41,9 +41,12 @@ public class ShoppingServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // gets the contents of shopping cart
+        HttpSession session = request.getSession();
+        Map<String, Integer> cart_items = (HashMap<String, Integer>) session.getAttribute("cart_items");
+
         PrintWriter out = response.getWriter();
 
-        JsonArray jsonArray = createJsonObject();
+        JsonArray jsonArray = createJsonObject(cart_items);
         out.write(jsonArray.toString());
         response.setStatus(200);
 
@@ -51,7 +54,12 @@ public class ShoppingServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        // updates the shopping cart for incrementing/decrementing
+        // updates the shopping cart for incrementing/decrementing/deleting
+
+        HttpSession session = request.getSession();
+
+        // get the previous items in a Map
+        Map<String, Integer> cart_items = (HashMap<String, Integer>) session.getAttribute("cart_items");
 
         JsonObject jsonData = new JsonObject();
         try {
@@ -65,56 +73,86 @@ public class ShoppingServlet extends HttpServlet {
 
         if (action.equals("increment")) {
             System.out.println("Incrementing movie quantity");
-            increment(movieId);
+            increment(request, cart_items, movieId);
         }
         else if (action.equals("decrement")) {
             System.out.println("Decrementing movie quantity");
-            decrement(movieId);
+            decrement(cart_items, movieId);
         }
         else if (action.equals("delete")) {
             System.out.println("Deleting movie from cart");
-            all_items.remove(movieId);
+            delete(cart_items, movieId);
         }
 
         doGet(request, response);
     }
 
-
-    public void increment(String movie_id) {
-        // Check if the movieId is already in the cart
-        if (all_items.containsKey(movie_id)) {
-            // If yes, increment its quantity
-            int quantity = all_items.get(movie_id);
-            all_items.put(movie_id, quantity + 1);
-        }
-        else {
-            // If not, add it to the cart with quantity 1
-            all_items.put(movie_id, 1);
-        }
-    }
-
-    public void decrement(String movieId) {
-        // check if the movieId is already in the car
-        if (all_items.containsKey(movieId)) {
-            // if it is, then decrement the quantity
-            int quantity = all_items.get(movieId) - 1;
-
-            // if quantity is 0, remove from list, otherwise update quantity
-            if (quantity == 0) {
-                all_items.remove(movieId);
-            } else {
-                all_items.put(movieId, quantity);
+    public void delete(Map<String, Integer> cart_items, String movieId) {
+        // if cart_items is not null, synchronize the cart and remove the given movieId
+        if (cart_items != null) {
+            synchronized (cart_items) {
+                cart_items.remove(movieId);
             }
         }
-        // if movieId is not in the map, do nothing for decrementing
     }
 
-    public JsonArray createJsonObject() {
+    public void increment(HttpServletRequest request, Map<String, Integer> cart_items, String movie_id) {
+        // if cart_items is null
+            // create a new Map object, add the movieId, and put the map in session
+        // if cart_items already exists
+            // synchronize it
+            // if movieId exists already, increment the quantity. Else put in a new key, value pair
+
+        if (cart_items == null) {
+            cart_items = new HashMap<String, Integer>();
+            cart_items.put(movie_id, 1);
+
+            HttpSession session = request.getSession();
+            session.setAttribute("cart_items", cart_items);
+        }
+        else {
+            synchronized (cart_items) {
+                if (cart_items.containsKey(movie_id)) {
+                    int prev_quantity = cart_items.get(movie_id);
+                    cart_items.put(movie_id, prev_quantity + 1);
+                }
+                else {
+                    cart_items.put(movie_id, 1);
+                }
+            }
+        }
+    }
+
+    public void decrement(Map<String, Integer> cart_items, String movie_id) {
+        // if cart_items exists
+            // synchronize it
+            // if movie exists and quantity is 1, remove it
+            // if movie exists, and quantity is more than 1, decrement the count
+
+        if (cart_items != null) {
+            synchronized (cart_items) {
+
+                if (cart_items.containsKey(movie_id)) {
+                    int prev_quantity = cart_items.get(movie_id);
+
+                    if (prev_quantity == 1) {
+                        cart_items.remove(movie_id);
+                    }
+                    else {
+                        cart_items.put(movie_id, prev_quantity - 1);
+                    }
+                }
+            }
+
+        }
+    }
+
+    public JsonArray createJsonObject(Map<String, Integer> cart_items) {
         JsonArray jsonArray = new JsonArray();
 
         try (Connection conn = dataSource.getConnection()) {
 
-            for (String item : all_items.keySet()) {
+            for (String item : cart_items.keySet()) {
                 JsonObject jsonObject = new JsonObject();
 
                 String query = "SELECT m.id AS movie_id, m.title AS movie_title " +
@@ -128,7 +166,7 @@ public class ShoppingServlet extends HttpServlet {
                 if (rs.next()) { // Move cursor to the first row
                     String movieId = rs.getString("movie_id");
                     String movieTitle = rs.getString("movie_title");
-                    String movie_quantity = all_items.get(item).toString();
+                    String movie_quantity = cart_items.get(item).toString();
 
                     jsonObject.addProperty("movieId", movieId);
                     jsonObject.addProperty("movieTitle", movieTitle);
