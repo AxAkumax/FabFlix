@@ -1,7 +1,5 @@
 
 function showOrderDetails(cart_items) {
-    var saleIdElement = $('#sale_id_label');
-    var saleIdElement = $('#customer_id_label');
     var totalElement = $('#total_price')
 
     var tableBody = $('#confirmation_movies_table_body');
@@ -26,6 +24,9 @@ function showOrderDetails(cart_items) {
         // Adding row number
         rowHTML += "<th>" + (i + 1).toString() + "</th>";
 
+        // sale id
+        rowHTML += "<th>" + cart_items[i]["saleId"] + "</th>";
+
         // movie title
         rowHTML += "<th>" + cart_items[i]["movieTitle"] + "</th>";
 
@@ -48,8 +49,8 @@ function showOrderDetails(cart_items) {
 }
 
 $.ajax({
-    url: "api/cart",
-    method: "GET",
+    url: "api/confirm",
+    method: "POST",
     dataType: "json",
     success: (resultData) => showOrderDetails(resultData)
 });
