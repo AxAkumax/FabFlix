@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import org.jasypt.util.password.StrongPasswordEncryptor;
 import java.sql.ResultSet;
 
 @WebServlet(name = "LoginServlet", urlPatterns = "/api/login")
@@ -60,21 +61,38 @@ public class LoginServlet extends HttpServlet {
             if (emailResultSet.next()) {
                 // Email exists in the database, now check if the password matches
                 String storedPassword = emailResultSet.getString("password");
-
-                if (password.equals(storedPassword)) {
+//
+//                if (password.equals(storedPassword)) {
+//                    int customerId = emailResultSet.getInt("customerId");
+//
+//                    request.getSession().setAttribute("user", email);
+//                    request.getSession().setAttribute("customerId", customerId);
+//                    responseJsonObject.addProperty("status", "success");
+//                    responseJsonObject.addProperty("message", "success");
+//                } else {
+//                    // Password is incorrect
+//                    // Redirect to login.html with error parameter
+//                    responseJsonObject.addProperty("status", "fail");
+//                    request.getServletContext().log("Login failed");
+//                    responseJsonObject.addProperty("message", "*Incorrect password");
+//                }
+                boolean exists = new StrongPasswordEncryptor().checkPassword(password, storedPassword);
+                if (exists) {
                     int customerId = emailResultSet.getInt("customerId");
 
                     request.getSession().setAttribute("user", email);
                     request.getSession().setAttribute("customerId", customerId);
                     responseJsonObject.addProperty("status", "success");
                     responseJsonObject.addProperty("message", "success");
-                } else {
+                }
+                else{
                     // Password is incorrect
                     // Redirect to login.html with error parameter
                     responseJsonObject.addProperty("status", "fail");
                     request.getServletContext().log("Login failed");
                     responseJsonObject.addProperty("message", "*Incorrect password");
                 }
+
             }
             else {
                 responseJsonObject.addProperty("status", "fail");
