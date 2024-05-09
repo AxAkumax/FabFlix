@@ -58,16 +58,28 @@ public class StarParser extends DefaultHandler {
     }
 
     public void startParse() {
+        long start, end;
+        long start2 = 0;
+        long end2 = 0;
+
+        start = System.currentTimeMillis();
         parseDocument();
+        end = System.currentTimeMillis();
+
         printDataToFile("STARS.txt", myStars);
         printDataToFile("STAR_ERRORS.txt", inconsistentStars);
 
         try {
+            start2 = System.currentTimeMillis();
             insertStars();
+            end2 = System.currentTimeMillis();
         }
         catch (SQLException e) {
             e.printStackTrace();
         }
+
+        double total_time = (end - start)/1000.0 + (end2 - start2)/1000.0;
+        System.out.println("Time in Seconds for Movie Parser: " + total_time);
 
     }
 

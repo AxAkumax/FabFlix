@@ -3,9 +3,6 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.*;
 
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -19,83 +16,149 @@ import org.xml.sax.helpers.DefaultHandler;
 
 // for mains243.xml
 public class MovieParser extends DefaultHandler {
-    ArrayList<String> oldGenres = new ArrayList<>();
-    ArrayList<String> newGenres = new ArrayList<>();
-    Map<String, String> newGenreMap = new HashMap<>();
+    Map<String, String> genreNameMap = new HashMap<>();
+    HashSet<String> new_genres = new HashSet<>();
 
-    ArrayList<Movie> myMovies;
-    ArrayList<Movie> inconsistentMovies;
+    ArrayList<Movie> myMovies = new ArrayList<>();
+    ArrayList<Movie> inconsistentMovies  = new ArrayList<>();
 
     private Movie tempMovie;
     private String tempVal;
 
-    // 0 means the entry is consistent
-    // 1 means the entry is inconsistent
-    int inconsistent_flag = 0;
+    boolean consistent = true;
+
+
+    // Data already in the database
+    HashSet<Movie> existing_movies = new HashSet<>();
+    HashSet<String> existing_genres = new HashSet<>();
+
 
     Connection conn;
 
-    public MovieParser() throws SQLException, ClassNotFoundException {
-        // initialize genre map and myMovies arraylist to store movies
-        myMovies = new ArrayList<Movie>();
-        inconsistentMovies = new ArrayList<Movie>();
-
+    public MovieParser(){
         create_genre_map();
-
         connectDatabase();
     }
 
     public void create_genre_map() {
-        newGenreMap.put("Ctxx", "Uncategorized");
-        newGenreMap.put("Actn", "Action");
-        newGenreMap.put("Advt", "Adventure");
-        newGenreMap.put("AvGa", "Avant Garde");
-        newGenreMap.put("Camp", "Now - Camp");
-        newGenreMap.put("Cart", "Cartoon");
-        newGenreMap.put("CnR", "Cops and Robbers");
-        newGenreMap.put("Comd", "Comedy");
-        newGenreMap.put("Disa", "Disaster");
-        newGenreMap.put("Docu", "Documentary");
-        newGenreMap.put("Dram", "Drama");
-        newGenreMap.put("Epic", "Epic");
-        newGenreMap.put("Faml", "Family");
-        newGenreMap.put("Hist", "History");
-        newGenreMap.put("Horr", "Horror");
-        newGenreMap.put("Musc", "Musical");
-        newGenreMap.put("Myst", "Mystery");
-        newGenreMap.put("Noir", "Black");
-        newGenreMap.put("Porn", "Pornography");
-        newGenreMap.put("Romt", "Romantic");
-        newGenreMap.put("ScFi", "Sci-Fi");
-        newGenreMap.put("Surl", "Sureal");
-        newGenreMap.put("Susp", "Thriller");
-        newGenreMap.put("West", "Western");
+        genreNameMap.put("Ctxx", "Uncategorized");
+        genreNameMap.put("Actn", "Action");
+        genreNameMap.put("Advt", "Adventure");
+        genreNameMap.put("AvGa", "Avant Garde");
+        genreNameMap.put("Camp", "Now - Camp");
+        genreNameMap.put("Cart", "Cartoon");
+        genreNameMap.put("CnR", "Cops and Robbers");
+        genreNameMap.put("Comd", "Comedy");
+        genreNameMap.put("Disa", "Disaster");
+        genreNameMap.put("Docu", "Documentary");
+        genreNameMap.put("Dram", "Drama");
+        genreNameMap.put("Epic", "Epic");
+        genreNameMap.put("Faml", "Family");
+        genreNameMap.put("Hist", "History");
+        genreNameMap.put("Horr", "Horror");
+        genreNameMap.put("Musc", "Musical");
+        genreNameMap.put("Myst", "Mystery");
+        genreNameMap.put("Noir", "Black");
+        genreNameMap.put("Porn", "Pornography");
+        genreNameMap.put("Romt", "Romance");
+        genreNameMap.put("ScFi", "Sci-Fi");
+        genreNameMap.put("Surl", "Surreal");
+        genreNameMap.put("Susp", "Thriller");
+        genreNameMap.put("West", "Western");
     }
 
-    public void connectDatabase() throws SQLException, ClassNotFoundException {
-        String dbtype = "mysql";
-        String dbname = "moviedb";
-        String username = "mytestuser";
-        String password = "My6$Password";
+    public void connectDatabase() {
+        try {
+            String dbtype = "mysql";
+            String dbname = "moviedb";
+            String username = "mytestuser";
+            String password = "My6$Password";
 
-        // Incorporate mySQL driver
-        Class.forName("com.mysql.cj.jdbc.Driver");
+            // Incorporate mySQL driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
 
-        // Connect to the test database
-        conn = DriverManager.getConnection("jdbc:" + dbtype + ":///" + dbname + "?autoReconnect=true&useSSL=false",
-                username, password);
+            // Connect to the test database
+            conn = DriverManager.getConnection("jdbc:" + dbtype + ":///" + dbname + "?autoReconnect=true&useSSL=false",
+                    username, password);
+        }
+        catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void startParse() throws SQLException, ClassNotFoundException {
-        parseDocument();
+    public void startParse() throws ClassNotFoundException {
+        try {
+            getExistingMovies();
+            getExistingGenres();
+            parseDocument();
+            insertMoviesAndGenres();
 
-        populate_existing_genres();
-        printDataToFile("MOVIES.txt");
-        printInconsistenciesToFile("MOVIE_ERRORS.txt");
+            printDataToFile("MOVIES.txt", myMovies);
+            printDataToFile("MOVIE_ERRORS.txt", inconsistentMovies);
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-//        addNewGenresToDatabase();
-//        addMoviesToDatabase();
-//        addGenresInMoviesToDatabase();
+        for (String g: new_genres) {
+            System.out.println(g);
+        }
+    }
+
+    public void insertMoviesAndGenres() throws SQLException {
+        if (conn != null) {
+            String m_query = "INSERT INTO movies (id, title, year, director) VALUES (?, ?, ?, ?);";
+            String g_query = "INSERT INTO genres (name) VALUES (?);";
+            String mg_query = "INSERT INTO genres_in_movies (genre_id, movie_id) VALUES (?, ?);";
+        }
+    }
+
+    public void getExistingMovies() throws SQLException {
+        if (conn != null) {
+            String query = "SELECT id, title, year, director " +
+                    "FROM movies;";
+
+            PreparedStatement statement = conn.prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                String id = resultSet.getString("id");
+                String title = resultSet.getString("title");
+                String year = resultSet.getString("year");
+                String director = resultSet.getString("director");
+
+                Movie movie = new Movie(id, title, year, director);
+                existing_movies.add(movie);
+            }
+        }
+    }
+
+    public void getExistingGenres() throws SQLException {
+        if (conn != null){
+            String query = "SELECT name FROM genres;";
+
+            PreparedStatement statement = conn.prepareStatement(query);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                existing_genres.add(rs.getString("name"));
+            }
+        }
+    }
+
+    private void printDataToFile(String fileName, ArrayList<Movie> data) {
+        try (FileWriter writer = new FileWriter(fileName)) {
+            writer.write("Number of entries '" + data.size() + "'.\n");
+
+            Iterator<Movie> it = data.iterator();
+            while (it.hasNext()) {
+                writer.write(it.next().toString() + "\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void parseDocument() {
@@ -120,48 +183,6 @@ public class MovieParser extends DefaultHandler {
         }
     }
 
-    public void populate_existing_genres() throws SQLException {
-        if (conn != null){
-            System.out.println("connection is not null");
-
-            String query = "SELECT name FROM genres;";
-
-            PreparedStatement statement = conn.prepareStatement(query);
-            ResultSet rs = statement.executeQuery();
-            while (rs.next()) {
-                oldGenres.add(rs.getString("name"));
-            }
-        }
-    }
-
-    private void printDataToFile(String fileName) {
-        try (FileWriter writer = new FileWriter(fileName)) {
-            writer.write("No of Movies '" + myMovies.size() + "'.\n");
-
-            Iterator<Movie> it = myMovies.iterator();
-            while (it.hasNext()) {
-                writer.write(it.next().toString() + "\n");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void printInconsistenciesToFile(String fileName) {
-        try (FileWriter writer = new FileWriter(fileName)) {
-            writer.write("No of Movies '" + inconsistentMovies.size() + "'.\n");
-
-            Iterator<Movie> it = inconsistentMovies.iterator();
-            while (it.hasNext()) {
-                Movie m = it.next();
-                writer.write(m.getReason() + "\n");
-                writer.write(m.toString()  + "\n");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     //Event Handlers
 
     // startElement() is invoked when the parsing begins for an element
@@ -172,7 +193,7 @@ public class MovieParser extends DefaultHandler {
         if (qName.equalsIgnoreCase("film")) {
             //create a new instance of employee
             tempMovie = new Movie();
-            inconsistent_flag = 0;
+            consistent = true;
         }
     }
 
@@ -189,9 +210,9 @@ public class MovieParser extends DefaultHandler {
 
         if (tempMovie != null) {
             if (qName.equalsIgnoreCase("film")) {
+                checkMovieDuplicateInconsistencies(tempMovie);
 
-                //add it to the list
-                if (inconsistent_flag == 0) {
+                if (consistent) {
                     myMovies.add(tempMovie);
                 }
                 else {
@@ -212,7 +233,8 @@ public class MovieParser extends DefaultHandler {
                 tempMovie.setYear(tempVal.trim());
             }
             else if (qName.equalsIgnoreCase("cat")) {
-                String full_cat = newGenreMap.get(tempVal);
+                String full_cat = genreNameMap.getOrDefault(tempVal, "");
+                documentNewGenre(full_cat);
                 tempMovie.setGenres(full_cat);
             }
             else if (qName.equalsIgnoreCase("dirn")) {
@@ -222,89 +244,67 @@ public class MovieParser extends DefaultHandler {
         }
     }
 
+    public void documentNewGenre(String full_cat) {
+        if (!full_cat.equals("")) {
+            if (!existing_genres.contains(full_cat) && !new_genres.contains(full_cat)) {
+                new_genres.add(full_cat);
+            }
+        }
+    }
+
+    public void checkMovieDuplicateInconsistencies(Movie tempMovie) {
+        if (existing_movies.contains(tempMovie)) {
+            consistent = false;
+            tempMovie.setReason("Duplicate: Movie exists in database already");
+        }
+        else if (myMovies.contains(tempMovie)) {
+            consistent = false;
+            tempMovie.setReason("Duplicate: Movie parsed already");
+        }
+    }
+
     public void checkIdInconsistencies(String tempVal) {
         if (tempVal.equals("")) {
-            inconsistent_flag = 1;
+            consistent = false;
             tempMovie.setReason("Movie Id is unknown");
         }
         else if (tempVal.length() > 10) {
-            inconsistent_flag = 1;
+            consistent = false;
             tempMovie.setReason("Movie Id is too long");
         }
     }
 
     public void checkTitleInconsistencies(String tempVal) {
         if (tempVal.equals("")) {
-            inconsistent_flag = 1;
+            consistent = false;
             tempMovie.setReason("Title is unknown");
         }
         else if (tempVal.length() > 100) {
-            inconsistent_flag = 1;
+            consistent = false;
             tempMovie.setReason("Title is too long");
         }
     }
 
     public void checkYearInconsistencies(String tempVal) {
         if (tempVal.isEmpty()) {
-            inconsistent_flag = 1;
+            consistent = false;
             tempMovie.setReason("Year is unknown");
         }
         else if (!tempVal.matches("\\d+")) {
-            inconsistent_flag = 1;
+            consistent = false;
             tempMovie.setReason("Year contains non-numeric characters");
         }
     }
 
     public void checkDirectorInconsistencies(String tempVal) {
         if (tempVal.equals("")) {
-            inconsistent_flag = 1;
+            consistent = false;
             tempMovie.setReason("Director is unknown");
         }
         else if (tempVal.length() > 100) {
-            inconsistent_flag = 1;
+            consistent = false;
             tempMovie.setReason("Director name is too long");
         }
-    }
-
-    public void addNewGenresToDatabase() throws SQLException {
-        if (conn != null) {
-            String query = "INSERT INTO genres (name) " +
-                            "VALUES (?);";
-
-            PreparedStatement statement = conn.prepareStatement(query);
-
-            for (String full_genre_name: newGenres) {
-                statement.setString(1, full_genre_name);
-
-                int i = statement.executeUpdate();
-                System.out.println(i + " rows affected");
-            }
-        }
-    }
-
-
-    public void addMoviesToDatabase() throws SQLException {
-        if (conn != null) {
-
-            String query = "INSERT INTO MOVIES (id, title, year, director) " +
-                            "VALUES (?, ?, ?, ?);";
-
-            PreparedStatement statement = conn.prepareStatement(query);
-
-            for (Movie m : myMovies) {
-                statement.setString(1, m.getMovieId());
-                statement.setString(2, m.getTitle());
-                statement.setInt(3, Integer.parseInt(m.getYear()));
-                statement.setString(4, m.getDirector());
-
-                int i = statement.executeUpdate();
-                System.out.println(i + " rows affected");
-            }
-        }
-    }
-
-    public void addGenresInMoviesToDatabase() {
-
     }
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Movie {
     private String movieId;
@@ -10,6 +11,16 @@ public class Movie {
 
     public Movie() {
         this.reason = "None";
+        this.genres = new ArrayList<String>();
+    }
+
+    public Movie(String movieId, String title, String year, String director) {
+        this.movieId = movieId;
+        this.title = title;
+        this.year = year;
+        this.director = director;
+        this.reason = "None";
+
         this.genres = new ArrayList<String>();
     }
 
@@ -29,7 +40,9 @@ public class Movie {
     }
 
     public void setGenres(String genre) {
-        this.genres.add(genre);
+        if (genre != null) {
+            this.genres.add(genre);
+        }
     }
 
     public void setReason(String reason) {
@@ -63,13 +76,41 @@ public class Movie {
     public String toString() {
         StringBuffer sb = new StringBuffer();
 
-        sb.append("Movie Id: " + movieId + "\n");
-        sb.append("Title: " + getTitle() + "\n");
-        sb.append("Year: " + getYear() + "\n");
-        sb.append("Director: " + getDirector() + "\n");
+        sb.append("Movie Id: " + movieId + ", ");
+        sb.append("Title: " + getTitle() + ", ");
+        sb.append("Year: " + getYear() + ", ");
+        sb.append("Director: " + getDirector() + ", ");
         sb.append("Genres: " + getGenres() + "\n");
 
+        if (!getReason().equals("None")) {
+            sb.append("Reason: " + getReason() + "\n");
+        }
+
         return sb.toString();
+    }
+
+    /**
+     * Returns true if the given object is a Movie with the same instance
+     * variable values as this one
+     */
+    @Override
+    public boolean equals(Object otherObj) {
+        //return false; // FIX ME
+
+        if (this.getClass() == otherObj.getClass()) {
+            Movie other = (Movie)otherObj;
+
+            return (this.title.equals(other.getTitle()) &&
+                    this.year.equals(other.getYear()) &&
+                    this.director.equals(other.getDirector()));
+        }
+
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.title, this.year, this.director);
     }
 }
 

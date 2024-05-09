@@ -81,7 +81,7 @@ public class StarInMovieParser extends DefaultHandler {
             SAXParser sp = spf.newSAXParser();
 
             //parse the file and also register this class for call backs
-            sp.parse("../stanford-movies/casts124.xml", this);
+            sp.parse("./stanford-movies/casts124.xml", this);
 
         } catch (SAXException se) {
             System.out.println("SAXException: ");
