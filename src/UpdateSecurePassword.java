@@ -1,7 +1,4 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 import org.jasypt.util.password.PasswordEncryptor;
@@ -28,6 +25,10 @@ public class UpdateSecurePassword {
 
         Class.forName("com.mysql.jdbc.Driver").newInstance();
         Connection connection = DriverManager.getConnection(loginUrl, loginUser, loginPasswd);
+
+        update_employee_password(connection);
+
+
         Statement statement = connection.createStatement();
 
         // change the customers table password column from VARCHAR(20) to VARCHAR(128)
@@ -45,37 +46,93 @@ public class UpdateSecurePassword {
         PasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
 
         ArrayList<String> updateQueryList = new ArrayList<>();
+        PreparedStatement preparedStatement = null;
+        try {
 
-        System.out.println("encrypting password (this might take a while)");
-        while (rs.next()) {
-            // get the ID and plain text password from current table
-            String id = rs.getString("customerId");
-            String password = rs.getString("password");
+            System.out.println("encrypting password (this might take a while)");
+            while (rs.next()) {
+                // get the ID and plain text password from current table
+                String id = rs.getString("customerId");
+                String password = rs.getString("password");
 
-            // encrypt the password using StrongPasswordEncryptor
-            String encryptedPassword = passwordEncryptor.encryptPassword(password);
+                // encrypt the password using StrongPasswordEncryptor
+                String encryptedPassword = passwordEncryptor.encryptPassword(password);
 
-            // generate the update query
-            String updateQuery = String.format("UPDATE customers SET password='%s' WHERE customerId=%s;", encryptedPassword,
-                    id);
-            updateQueryList.add(updateQuery);
+                // generate the update query
+                String updateQuery = "UPDATE customers SET password=? WHERE customerId=?";
+                preparedStatement = connection.prepareStatement(updateQuery);
+                preparedStatement.setString(1, encryptedPassword);
+                preparedStatement.setString(2, id);
+                updateQueryList.add(updateQuery);
+            }
+            rs.close();
+
+            // execute the update queries to update the password
+            System.out.println("updating password");
+            int count = 0;
+            for (String updateQuery : updateQueryList) {
+                int updateResult = preparedStatement.executeUpdate();
+                count += updateResult;
+            }
+            System.out.println("updating password completed, " + count + " rows affected");
+
+            statement.close();
+            connection.close();
+
+            System.out.println("finished");
         }
-        rs.close();
-
-        // execute the update queries to update the password
-        System.out.println("updating password");
-        int count = 0;
-        for (String updateQuery : updateQueryList) {
-            int updateResult = statement.executeUpdate(updateQuery);
-            count += updateResult;
+        catch (Exception e){
+            e.printStackTrace();
         }
-        System.out.println("updating password completed, " + count + " rows affected");
+    }
+    private static void update_employee_password(Connection connection) throws Exception {
+        Statement statement = connection.createStatement();
+        String alterQuery = "ALTER TABLE employees MODIFY COLUMN password VARCHAR(128);";
+        int alterResult = statement.executeUpdate(alterQuery);
+        System.out.println("altering employees table schema completed, " + alterResult + " rows affected");
+        String query = "SELECT email, password from employees;";
+        ResultSet rs = statement.executeQuery(query);
 
-        statement.close();
-        connection.close();
+        PasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
 
-        System.out.println("finished");
+        ArrayList<String> updateQueryList = new ArrayList<>();
+        PreparedStatement preparedStatement = null;
+        try {
 
+            System.out.println("encrypting password (this might take a while)");
+            while (rs.next()) {
+                // get the ID and plain text password from current table
+                String email = rs.getString("email");
+                String password = rs.getString("password");
+
+                // encrypt the password using StrongPasswordEncryptor
+                String encryptedPassword = passwordEncryptor.encryptPassword(password);
+
+                // generate the update query
+                System.out.println("email: " + email + ", password: " + encryptedPassword);
+
+                String updateQuery = "UPDATE employees SET password=? WHERE email=?";
+                preparedStatement = connection.prepareStatement(updateQuery);
+                preparedStatement.setString(1, encryptedPassword);
+                preparedStatement.setString(2, email);
+
+                updateQueryList.add(updateQuery);
+            }
+            rs.close();
+
+            // execute the update queries to update the password
+            System.out.println("updating password");
+            int count = 0;
+            for (String updateQuery : updateQueryList) {
+                int updateResult = preparedStatement.executeUpdate();
+                count += updateResult;
+            }
+            System.out.println("updating password completed, " + count + " rows affected");
+            statement.close();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
