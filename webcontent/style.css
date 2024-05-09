@@ -34,20 +34,29 @@ header{
     font-weight: 500;
     font-style: normal;
 }
-
-h2{
-    background-color: black;
-    text-align: center;
-    color:  #bb86fc;
-    font-size: 3vw;
-    padding-left: 2.6vw;
-    padding-bottom: 1.3vw;
+h1{
+    color: #bb86fc;
     font-family: "DM Sans", sans-serif;
     font-weight: 400;
     font-style: normal;
-    margin-top: 6vw;
-    margin-bottom: 1.2vw;
+    margin-top: 10vw;
+    /*margin-left: 5.1vw;*/
+    text-align: center;
+    font-size: 18vw;
+    margin-bottom: 1vw;
+    opacity: 0; /* Initially hidden */
+    animation: fadeIn 2s ease forwards; /* Animation name, duration, timing function, and fill mode */
 }
+
+@keyframes fadeIn {
+    from {
+        opacity: 0; /* Start opacity */
+    }
+    to {
+        opacity: 1; /* End opacity */
+    }
+}
+
 a {
     color: lightgrey;  /* blue color */
 }
@@ -57,31 +66,16 @@ a:hover {
     color: #bb86fc; /* orange color */
 }
 
-/* Styling for the table */
-#movie_table {
-    background-color: black; /* black background color for the table */
-    color: lightgrey; /* white text color for the table */
+p{
+    color: lightgray;
+    text-align: center;
+    font-size: 3vw;
     font-family: "DM Sans", sans-serif;
     font-style: normal;
-    max-width: 98vw; /* Set a maximum width for the table */
-    margin: 0 auto;
+    margin-bottom: 4vw;
+    margin-left: 1vw;
+    margin-right: 3vw;
 }
-
-/*#movie_table th {*/
-/*    color: lightgrey; !* white text color for table headers *!*/
-/*}*/
-
-#movie_table tbody tr {
-    color: lightgrey; /* white text color for table body rows */
-    transition: all 0.3s ease; /* Add transition for smooth animation */
-}
-
-
-#movie_table tbody tr:hover {
-    background-color: #333; /* Darken background color when hovered */
-    transform: scale(1.1); /* Increase size of row when hovered */
-}
-
 
 footer{
     bottom: 0;
@@ -107,11 +101,47 @@ main {
     flex: 1; /* Allow main content to expand and push footer to the bottom */
 }
 
-header, #movie_table {
+header {
     margin-top: 0; /* Remove default margin */
     margin-bottom: 0; /* Remove default margin */
 }
 
+.container {
+    position: relative;
+    width: 200px;
+    height: 200px;
+}
+.img-text-container{
+    display: flex;
+    align-items: center; /* Align items vertically */
+    margin-left: 9vw;
+    margin-right: 9vw;
+    margin-bottom: 4.5vw;
+}
 
+.slideshow-container {
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto; /* Center the slideshow horizontally */
+    flex-wrap: nowrap;
+}
 
+.slide {
+    display: none;
+}
 
+.fade {
+    animation: fadeEffect 4s infinite;
+}
+
+@keyframes fadeEffect {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}

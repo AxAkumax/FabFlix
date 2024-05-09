@@ -47,8 +47,14 @@ p{
     font-size: 1.8vw;
     padding-left: 8vw;
     color: lightgrey;
+    margin-bottom: 1.5vw;
 }
-h2, p{
+#stars{
+    margin-bottom: 2.1vw;
+    margin-right: 4vw;
+
+}
+h2{
     margin: 0vw;
 }
 a {
@@ -82,4 +88,24 @@ body {
 
 main {
     flex: 1; /* Allow main content to expand and push footer to the bottom */
+}
+
+.navigation {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #bb86fc;
+    color: black;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    font-size: 16px;
+    margin-top: 8vw;
+}
+.navigation:hover{
+    background-color: black;
+    color:lightgray;
+    border-color: lightgray;
+    border-width: thin;
 }
