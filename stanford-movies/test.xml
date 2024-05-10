@@ -1,21 +1,7 @@
-<movies>
-    <!-- Movie Year: 1922 - Early British Movies by Alfred Hitchcock. -->
-    <directorfilms><director><dirid>H</dirid><dirstart>@1922</dirstart><dirname>Hitchcock</dirname><coverage>all
-        early British</coverage></director><films>
-        <film><fid>H1</fid><t>Always Tell Your Wife</t> <year>1922</year><dirs><dir><dirk>R</dirk><dirn>Se.Hicks</dirn></dir> <dir><dirk>R</dirk><dirn>Hitchcock</dirn></dir></dirs> <prods><prod><prodk>R</prodk><pname>Lasky</pname></prod></prods> <studios><studio>Famous</studio></studios><prcs><prc>sbw</prc></prcs><cats><cat>Dram</cat></cats> <awards></awards> <loc></loc><notes/></film>
-        <film><fid>H2</fid><t>Number Thirteen</t> <year>1922</year><dirs><dir><dirk>R</dirk><dirn>Hitchcock</dirn></dir></dirs> <prods><prod><prodk>R</prodk><pname>Hitchcock</pname></prod></prods> <studios><studio>Islington</studio><distributor>Famous</distributor></studios><prcs><prc>sbw</prc><prctext>unfinished</prctext></prcs><cats></cats> <awards></awards> <loc></loc><notes/></film>
-        <film><fid>H3</fid><t>Number Thirteen</t> <year>1922</year><dirs><dir><dirk>R</dirk><dirn>Hitchcock</dirn></dir></dirs> <prods><prod><prodk>R</prodk><pname>Hitchcock</pname></prod></prods> <studios><studio>Islington</studio><distributor>Famous</distributor></studios><prcs><prc>sbw</prc><prctext>unfinished</prctext></prcs><cats></cats> <awards></awards> <loc></loc><notes/></film>
 
-    </films>
-    </directorfilms>
+<actors>
+<actor><stagename>John Cassavetes</stagename> <dowstart>1954</dowstart> <dowend>1983</dowend> <familyname>Cassavetes</familyname> <firstname>John</firstname> <gender>M</gender> <dob>1929</dob> <dod>1989</dod> <roletype>intense</roletype> <origin>\Am</origin> <picref>[4.204</picref> <notes><also>D</also></notes></actor> <relationships><relship><reltype>Ww</reltype><towhom><relname>Hitchcock</relname><relattr>D</relattr></towhom></relship></relationships> <notes/>
+    <actor><stagename>Bud Abbott</stagename> <dowstart>1939</dowstart> <dowend>1956</dowend> <familyname> Abbott</familyname> <firstname>William</firstname> <gender>M</gender> <dob>1895</dob> <dod>1974</dod> <roletype>straight comedian</roletype> <origin>\Am</origin>  <studio>Universal</studio> <relationships><relship><reltype>Ww</reltype><towhom><relname>Lou Costello</relname></towhom></relship></relationships> <notes/></actor>
+    <actor><stagename>Gena Rowlands</stagename> <dowstart>1958</dowstart> <dowend>1980</dowend> <familyname>Rowlands</familyname> <firstname>Virginia</firstname> <gender>F</gender> <dob>1934</dob> <dod>1984+</dod> <roletype>lead</roletype> <origin>\Am</origin> <picref>[34.253]</picref>  <relationships><relship><reltype>Mt</reltype><towhom><relname>John Cassavetes</relname></towhom></relship> <relship><reltype>Ww</reltype><towhom><relname>Hitchcock</relname><relattr>D</relattr></towhom></relship></relationships> <notes/></actor>
 
-
-    <director><dirid>HH</dirid><dirstart>@1922</dirstart><dirname>Terry Green</dirname><coverage>all
-        early British</coverage></director><films>
-        <film><fid>H4</fid><t>Heavens Fall</t> <year>2006</year><dirs><dir><dirk>R</dirk><dirn>Terry Green</dirn></dir> <dir><dirk>R</dirk><dirn>Terry Green</dirn></dir></dirs> <prods><prod><prodk>R</prodk><pname>Lasky</pname></prod></prods> <studios><studio>Famous</studio></studios><prcs><prc>sbw</prc></prcs><cats><cat>Dram</cat></cats> <awards></awards> <loc></loc><notes/></film>
-    <film><fid>H5</fid><t>Number Thirteen</t> <year>1922</year><dirs><dir><dirk>R</dirk><dirn>Hitchcock</dirn></dir></dirs> <prods><prod><prodk>R</prodk><pname>Hitchcock</pname></prod></prods> <studios><studio>Islington</studio><distributor>Famous</distributor></studios><prcs><prc>sbw</prc><prctext>unfinished</prctext></prcs><cats><cat>Dram</cat></cats> <awards></awards> <loc></loc><notes/></film>
-    <film><filmed>RM15</filmed><t>Summer Holiday</t> <year>1948</year><dirs><dir><dirk>R</dirk><dirn>Mamoulian</dirn></dir></dirs> <prods><prod><prodk>R</prodk><pname>Freed</pname></prod></prods> <studios><studio>MGM</studio></studios><prcs><prc>Tcol</prc><prctext>released 1948</prctext></prcs><cats><cat>Musc</cat></cats> <awards><aw><awtype>H</awtype><awattr>**</awattr></aw></awards> <loc><site><siteclass>town</siteclass><siteplace>USA</siteplace></site></loc> <people><authors><names><name>Eugene O'Neil</name></names></authors><choreographers><names><name>Charles Walters</name></names></choreographers><cingraphs><names><name>Charles Schoenbaum</name></names></cingraphs></people><notes/></film>
-
-</films>
-
-</movies>
+</actors>
