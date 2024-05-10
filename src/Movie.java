@@ -2,7 +2,8 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Movie {
-    private String movieId;
+    private String fid;
+    private String db_movie_id;
     private String title;
     private String year;
     private String director;
@@ -10,12 +11,18 @@ public class Movie {
     private ArrayList<String> genres;
 
     public Movie() {
+        this.fid = "";
+        this.db_movie_id = "";
+        this.title = "";
+        this.year = "";
+        this.director = "";
         this.reason = "None";
         this.genres = new ArrayList<String>();
     }
 
-    public Movie(String movieId, String title, String year, String director) {
-        this.movieId = movieId;
+    public Movie(String fid, String title, String year, String director) {
+        this.fid = fid;
+        this.db_movie_id = "";
         this.title = title;
         this.year = year;
         this.director = director;
@@ -24,9 +31,14 @@ public class Movie {
         this.genres = new ArrayList<String>();
     }
 
-    public void setMovieId(String movieId) {
-        this.movieId = movieId;
+    public void setFID(String fid) {
+        this.fid = fid;
     }
+
+    public void setDBMovieID(String db_movie_id) {
+        this.db_movie_id = db_movie_id;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -40,7 +52,7 @@ public class Movie {
     }
 
     public void setGenres(String genre) {
-        if (genre != null) {
+        if (genre != null && !genre.isEmpty()) {
             this.genres.add(genre);
         }
     }
@@ -49,8 +61,12 @@ public class Movie {
         this.reason = reason;
     }
 
-    public String getMovieId() {
-        return movieId;
+    public String getMovieFID() {
+        return fid;
+    }
+
+    public String getDBMovieID() {
+        return db_movie_id;
     }
 
     public String getTitle() {
@@ -76,7 +92,7 @@ public class Movie {
     public String toString() {
         StringBuffer sb = new StringBuffer();
 
-        sb.append("Movie Id: " + movieId + ", ");
+        sb.append("FID: " + getMovieFID() + ", ");
         sb.append("Title: " + getTitle() + ", ");
         sb.append("Year: " + getYear() + ", ");
         sb.append("Director: " + getDirector() + ", ");

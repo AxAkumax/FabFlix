@@ -1,196 +1,214 @@
-Number of entries '65'.
-Movie Id: Z0220, Title: Romeo and Juliet, Year: 1908, Director: Unknown2, Genres: [Romance]
+Number of entries '71'.
+FID: Z0220, Title: Romeo and Juliet, Year: 1908, Director: Unknown2, Genres: [Romance]
 Reason: Duplicate: Movie parsed already
 
-Movie Id: Z0230, Title: Romeo and Juliet, Year: 1908, Director: Unknown2, Genres: [Romance]
+FID: Z0230, Title: Romeo and Juliet, Year: 1908, Director: Unknown2, Genres: [Romance]
 Reason: Duplicate: Movie parsed already
 
-Movie Id: Z0250, Title: Romeo and Juliet, Year: 1911, Director: Unknown2, Genres: [Romance]
+FID: Z0250, Title: Romeo and Juliet, Year: 1911, Director: Unknown2, Genres: [Romance]
 Reason: Duplicate: Movie parsed already
 
-Movie Id: Z0270, Title: Romeo and Juliet, Year: 1916, Director: Unknown2, Genres: [Romance]
+FID: Z0270, Title: Romeo and Juliet, Year: 1916, Director: Unknown2, Genres: [Romance]
 Reason: Duplicate: Movie parsed already
 
-Movie Id: CGl44, Title: Mesalina, Year: 1924, Director: Palermi, Genres: [Epic]
+FID: MSe10, Title: Dough and Dynamite, Year: 1914, Director: , Genres: [Comedy]
+Reason: XML file does not contain any director
+
+FID: MSe15, Title: Fatty and Mabel at the San Diego Exposition, Year: 1915, Director: , Genres: [Comedy]
+Reason: XML file does not contain any director
+
+FID: MSe18, Title: Fatty and Mabel's Simple Life, Year: 1915, Director: , Genres: [Comedy]
+Reason: XML file does not contain any director
+
+FID: CGl44, Title: Mesalina, Year: 1924, Director: Palermi, Genres: [Epic]
 Reason: Director is unknown
 
-Movie Id: JuD11, Title: La Fin de Jour, Year: 1939, Director: Duvivier, Genres: []
+FID: JuD11, Title: La Fin de Jour, Year: 1939, Director: Duvivier, Genres: []
 Reason: Duplicate: Movie parsed already
 
-Movie Id: GCt30, Title: The Rat, Year: 1927, Director: Cutts, Genres: []
+FID: GCt30, Title: The Rat, Year: 1927, Director: Cutts, Genres: []
 Reason: Duplicate: Movie parsed already
 
-Movie Id: FNm10, Title: Doctor Jack, Year: 1922, Director: Newmeyer, Genres: [Comedy]
+FID: FNm10, Title: Doctor Jack, Year: 1922, Director: Newmeyer, Genres: [Comedy]
 Reason: Duplicate: Movie parsed already
 
-Movie Id: LwS150, Title: Crime School, Year: 1938, Director: , Genres: []
+FID: LwS150, Title: Crime School, Year: 1938, Director: , Genres: []
+Reason: XML file does not contain any director
+
+FID: MLR25, Title: Waterloo Bridge, Year: 1940, Director: M.LeRoy, Genres: []
+Reason: Duplicate: Movie parsed already
+
+FID: VrS40, Title: Evergreen, Year: 1934, Director: V.Saville, Genres: []
+Reason: Duplicate: Movie parsed already
+
+FID: LB9, Title: El grand cavalcodos, Year: 19yy, Director: Bunuel, Genres: []
+Reason: Year contains non-numeric characters
+
+FID: RdR64, Title: Topper Returns, Year: 1941, Director: delRuth, Genres: []
+Reason: Duplicate: Movie parsed already
+
+FID: GC28, Title: Desire Me, Year: 1947, Director: , Genres: []
+Reason: XML file does not contain any director
+
+FID: OP13, Title: Forever Amber, Year: 1947, Director: Preminger, Genres: [Drama]
+Reason: Duplicate: Movie parsed already
+
+FID: GMe10, Title: Babes in Toyland, Year: 1934, Director: ``Buddy''? Charles Rogers, Genres: [Musical]
 Reason: Director is unknown
 
-Movie Id: MLR25, Title: Waterloo Bridge, Year: 1940, Director: M.LeRoy, Genres: []
+FID: SSS15, Title: A Girl with Ideas, Year: 1937, Director: , Genres: []
+Reason: XML file does not contain any director
+
+FID: SSS20, Title: Four Girls in White, Year: 1939, Director: , Genres: []
+Reason: XML file does not contain any director
+
+FID: SSS25, Title: Whistling in the Dark, Year: 1941, Director: , Genres: []
+Reason: XML file does not contain any director
+
+FID: SSS50, Title: Song of the Open Road, Year: 1944, Director: , Genres: []
+Reason: XML file does not contain any director
+
+FID: ChJ60, Title: Secret Agents, Year: 1966, Director: , Genres: []
+Reason: XML file does not contain any director
+
+FID: BaD16, Title: I Believe in You, Year: 1952, Director: , Genres: []
+Reason: XML file does not contain any director
+
+FID: PaJ2, Title: Ferry Pilot, Year: 1941, Director: P.Jackson, Genres: [Documentary, Drama]
 Reason: Duplicate: Movie parsed already
 
-Movie Id: VrS40, Title: Evergreen, Year: 1934, Director: V.Saville, Genres: []
+FID: JD7, Title: , Year: 1947, Director: Dassin, Genres: [Action]
+Reason: XML file does not contain any title
+
+FID: MiG7, Title: Crime Doctor's Strangest Case, Year: 1943, Director: M.Gordon, Genres: []
 Reason: Duplicate: Movie parsed already
 
-Movie Id: LB9, Title: El grand cavalcodos, Year: 19yy, Director: Bunuel, Genres: []
+FID: CoB1, Title: The Seventh Veil, Year: 1945, Director: Bennett, Genres: []
+Reason: Duplicate: Movie parsed already
+
+FID: WS45, Title: Catherine of Russia, Year: 19yy, Director: W.Staudte, Genres: [Uncategorized]
 Reason: Year contains non-numeric characters
 
-Movie Id: RdR64, Title: Topper Returns, Year: 1941, Director: delRuth, Genres: []
+FID: NR1, Title: They Live By Night, Year: 1947, Director: N.Ray, Genres: [Drama]
 Reason: Duplicate: Movie parsed already
 
-Movie Id: GC28, Title: Desire Me, Year: 1947, Director: , Genres: []
-Reason: Director is unknown
-
-Movie Id: OP13, Title: Forever Amber, Year: 1947, Director: Preminger, Genres: [Drama]
+FID: Z04120, Title: As Young as You Feel, Year: 1951, Director: Unknown4, Genres: []
 Reason: Duplicate: Movie parsed already
 
-Movie Id: GMe10, Title: Babes in Toyland, Year: 1934, Director: ``Buddy''? Charles Rogers, Genres: [Musical]
-Reason: Director is unknown
+FID: WlJ10, Title: , Year: 1949, Director: W.Jackson, Genres: []
+Reason: XML file does not contain any title
 
-Movie Id: SSS15, Title: A Girl with Ideas, Year: 1937, Director: , Genres: []
-Reason: Director is unknown
-
-Movie Id: SSS20, Title: Four Girls in White, Year: 1939, Director: , Genres: []
-Reason: Director is unknown
-
-Movie Id: SSS25, Title: Whistling in the Dark, Year: 1941, Director: , Genres: []
-Reason: Director is unknown
-
-Movie Id: SSS50, Title: Song of the Open Road, Year: 1944, Director: , Genres: []
-Reason: Director is unknown
-
-Movie Id: ChJ60, Title: Secret Agents, Year: 1966, Director: , Genres: []
-Reason: Director is unknown
-
-Movie Id: BaD16, Title: I Believe in You, Year: 1952, Director: , Genres: []
-Reason: Director is unknown
-
-Movie Id: PaJ2, Title: Ferry Pilot, Year: 1941, Director: P.Jackson, Genres: [Documentary, Drama]
+FID: CMk30, Title: The Koumiko Mystery, Year: 1965, Director: Marker, Genres: []
 Reason: Duplicate: Movie parsed already
 
-Movie Id: JD7, Title: , Year: 1947, Director: Dassin, Genres: [Action]
-Reason: Title is unknown
-
-Movie Id: MiG7, Title: Crime Doctor's Strangest Case, Year: 1943, Director: M.Gordon, Genres: []
-Reason: Duplicate: Movie parsed already
-
-Movie Id: CoB1, Title: The Seventh Veil, Year: 1945, Director: Bennett, Genres: []
-Reason: Duplicate: Movie parsed already
-
-Movie Id: WS45, Title: Catherine of Russia, Year: 19yy, Director: W.Staudte, Genres: [Uncategorized]
+FID: AS22, Title: Morgan Stewart's Coming Home, Year: 199x, Director: Alan~Smithee, Genres: []
 Reason: Year contains non-numeric characters
 
-Movie Id: NR1, Title: They Live By Night, Year: 1947, Director: N.Ray, Genres: [Drama]
-Reason: Duplicate: Movie parsed already
-
-Movie Id: Z04120, Title: As Young as You Feel, Year: 1951, Director: Unknown4, Genres: []
-Reason: Duplicate: Movie parsed already
-
-Movie Id: WlJ10, Title: , Year: 1949, Director: W.Jackson, Genres: []
-Reason: Title is unknown
-
-Movie Id: CMk30, Title: The Koumiko Mystery, Year: 1965, Director: Marker, Genres: []
-Reason: Duplicate: Movie parsed already
-
-Movie Id: AS22, Title: Morgan Stewart's Coming Home, Year: 199x, Director: Alan~Smithee, Genres: []
+FID: AS32, Title: Raging Angels, Year: 199x, Director: Alan~Smithee, Genres: []
 Reason: Year contains non-numeric characters
 
-Movie Id: AS32, Title: Raging Angels, Year: 199x, Director: Alan~Smithee, Genres: []
+FID: GeP45, Title: , Year: 1999, Director: Pollock, Genres: []
+Reason: XML file does not contain any title
+
+FID: GxR10, Title: , Year: 1954, Director: G.Reinhardt, Genres: []
+Reason: XML file does not contain any title
+
+FID: GxR10, Title: , Year: 1954, Director: G.Reinhardt, Genres: []
+Reason: XML file does not contain any title
+
+FID: JaS13, Title: The Dark Pool, Year: 1963, Director: Smight, Genres: [Thriller]
+Reason: Duplicate: Movie parsed already
+
+FID: RHd2, Title: Stop Train 349, Year: 199x, Director: Haedrich, Genres: [Thriller]
 Reason: Year contains non-numeric characters
 
-Movie Id: GeP45, Title: , Year: 1999, Director: Pollock, Genres: []
-Reason: Title is unknown
-
-Movie Id: GxR10, Title: , Year: 1954, Director: G.Reinhardt, Genres: []
-Reason: Title is unknown
-
-Movie Id: GxR10, Title: , Year: 1954, Director: G.Reinhardt, Genres: []
-Reason: Title is unknown
-
-Movie Id: JaS13, Title: The Dark Pool, Year: 1963, Director: Smight, Genres: [Thriller]
+FID: KRu25, Title: Rainbow, Year: 1989, Director: K.Russell, Genres: [Drama]
 Reason: Duplicate: Movie parsed already
 
-Movie Id: RHd2, Title: Stop Train 349, Year: 199x, Director: Haedrich, Genres: [Thriller]
+FID: Z6510, Title: The Human Duplicators, Year: 1965, Director: , Genres: [Sci-Fi]
+Reason: XML file does not contain any director
+
+FID: IAv12, Title: Karate Kid, Year: 199x, Director: J.G.Avildsen, Genres: []
 Reason: Year contains non-numeric characters
 
-Movie Id: KRu25, Title: Rainbow, Year: 1989, Director: K.Russell, Genres: [Drama]
+FID: RWF7, Title: The American Soldier, Year: 1970, Director: Fassbinder, Genres: []
 Reason: Duplicate: Movie parsed already
 
-Movie Id: Z6510, Title: The Human Duplicators, Year: 1965, Director: , Genres: [Sci-Fi]
-Reason: Director is unknown
-
-Movie Id: IAv12, Title: Karate Kid, Year: 199x, Director: J.G.Avildsen, Genres: []
+FID: MS0, Title: The Eternal City, Year: 196x, Director: Scorsese, Genres: [Drama]
 Reason: Year contains non-numeric characters
 
-Movie Id: RWF7, Title: The American Soldier, Year: 1970, Director: Fassbinder, Genres: []
-Reason: Duplicate: Movie parsed already
-
-Movie Id: MS0, Title: The Eternal City, Year: 196x, Director: Scorsese, Genres: [Drama]
+FID: WiW30, Title: Buena Vista Social Club, Year: 19yy, Director: Ullrich Felsberg, Genres: [Musical]
 Reason: Year contains non-numeric characters
 
-Movie Id: WiW30, Title: Buena Vista Social Club, Year: 19yy, Director: Ullrich Felsberg, Genres: [Musical]
+FID: DLy25, Title: Mulholland Drive, Year: 19yy, Director: D.Lynch, Genres: [Uncategorized]
 Reason: Year contains non-numeric characters
 
-Movie Id: DLy25, Title: Mulholland Drive, Year: 19yy, Director: D.Lynch, Genres: [Uncategorized]
+FID: WBe1, Title: Heaven Can Wait, Year: 1978, Director: Beatty, Genres: [Romance]
+Reason: Duplicate: Movie parsed already
+
+FID: MLt15, Title: , Year: 1984, Director: M.Lester, Genres: [Horror]
+Reason: XML file does not contain any title
+
+FID: FOR12, Title: Scream Queen Hot Tub Party, Year: 1984, Director: F.O.Ray, Genres: [Pornography]
+Reason: Duplicate: Movie parsed already
+
+FID: PAl4, Title: Matador, Year: 1985, Director: Almodovar, Genres: [Comedy]
+Reason: Duplicate: Movie parsed already
+
+FID: BLe5, Title: Tin Men, Year: 1987, Director: B.Levinson, Genres: [Comedy]
+Reason: Duplicate: Movie parsed already
+
+FID: KaK10, Title: Another Way, Year: 1982, Director: Makk, Genres: [Thriller]
+Reason: Duplicate: Movie parsed already
+
+FID: DdH10, Title: Tendres Cousines, Year: 1983, Director: D.Hamilton, Genres: [Pornography]
+Reason: Duplicate: Movie parsed already
+
+FID: AEy13, Title: Sarabande, Year: 19yy, Director: Egoyan, Genres: []
 Reason: Year contains non-numeric characters
 
-Movie Id: WBe1, Title: Heaven Can Wait, Year: 1978, Director: Beatty, Genres: [Romance]
+FID: LeN10, Title: The Good Mother, Year: 1988, Director: Nimoy, Genres: []
 Reason: Duplicate: Movie parsed already
 
-Movie Id: MLt15, Title: , Year: 1984, Director: M.Lester, Genres: [Horror]
-Reason: Title is unknown
+FID: BSi3, Title: , Year: 1988, Director: Silberling, Genres: [Thriller]
+Reason: XML file does not contain any title
 
-Movie Id: FOR12, Title: Scream Queen Hot Tub Party, Year: 1984, Director: F.O.Ray, Genres: [Pornography]
+FID: BS6, Title: For Love or Money, Year: 1993, Director: Sonnenfeld, Genres: [Comedy, Romance]
 Reason: Duplicate: Movie parsed already
 
-Movie Id: PAl4, Title: Matador, Year: 1985, Director: Almodovar, Genres: [Comedy]
-Reason: Duplicate: Movie parsed already
-
-Movie Id: BLe5, Title: Tin Men, Year: 1987, Director: B.Levinson, Genres: [Comedy]
-Reason: Duplicate: Movie parsed already
-
-Movie Id: KaK10, Title: Another Way, Year: 1982, Director: Makk, Genres: [Thriller]
-Reason: Duplicate: Movie parsed already
-
-Movie Id: DdH10, Title: Tendres Cousines, Year: 1983, Director: D.Hamilton, Genres: [Pornography]
-Reason: Duplicate: Movie parsed already
-
-Movie Id: AEy13, Title: Sarabande, Year: 19yy, Director: Egoyan, Genres: []
+FID: CsS15, Title: Fairy Tale: A True Story, Year: 199x, Director: Sturridge, Genres: []
 Reason: Year contains non-numeric characters
 
-Movie Id: LeN10, Title: The Good Mother, Year: 1988, Director: Nimoy, Genres: []
+FID: , Title: Cradle will Rock, Year: 2000, Director: T.Robbins, Genres: [Drama]
+Reason: XML file does not contain any movie ID
+
+FID: BeM10, Title: Batman, Mask of The Phantasm, Year: 1993, Director: , Genres: [Cartoon]
+Reason: XML file does not contain any director
+
+FID: KDo1x, Title: , Year: 199x, Director: , Genres: []
+Reason: XML file does not contain any title
+
+FID: TdC13, Title: Jerry and Tom, Year: 19yy, Director: diCillo, Genres: []
+Reason: Year contains non-numeric characters
+
+FID: Z9590, Title: The Shanghai Triad, Year: 19yy, Director: UnYear95, Genres: []
+Reason: Year contains non-numeric characters
+
+FID: AbK15, Title: Taste of Cherry, Year: 19yy, Director: Kiarostami, Genres: [Drama]
+Reason: Year contains non-numeric characters
+
+FID: MJu15, Title: All is Routine, Year: 19yy, Director: M.Judge, Genres: []
+Reason: Year contains non-numeric characters
+
+FID: NtB10, Title: On the Ropes, Year: 1999, Director: Brett Morgen, Genres: [Documentary]
 Reason: Duplicate: Movie parsed already
 
-Movie Id: BSi3, Title: , Year: 1988, Director: Silberling, Genres: [Thriller]
-Reason: Title is unknown
-
-Movie Id: BS6, Title: For Love or Money, Year: 1993, Director: Sonnenfeld, Genres: [Comedy, Romance]
+FID: PSv10, Title: Metroland, Year: 1999, Director: P.Saville, Genres: []
 Reason: Duplicate: Movie parsed already
 
-Movie Id: CsS15, Title: Fairy Tale: A True Story, Year: 199x, Director: Sturridge, Genres: []
-Reason: Year contains non-numeric characters
+FID: LDo10, Title: Knockout, Year: 2000, Director: , Genres: []
+Reason: XML file does not contain any director
 
-Movie Id: , Title: Cradle will Rock, Year: 2000, Director: T.Robbins, Genres: [Drama]
-Reason: Movie Id is unknown
-
-Movie Id: KDo1x, Title: , Year: 199x, Director: , Genres: []
-Reason: Director is unknown
-
-Movie Id: TdC13, Title: Jerry and Tom, Year: 19yy, Director: diCillo, Genres: []
-Reason: Year contains non-numeric characters
-
-Movie Id: Z9590, Title: The Shanghai Triad, Year: 19yy, Director: UnYear95, Genres: []
-Reason: Year contains non-numeric characters
-
-Movie Id: AbK15, Title: Taste of Cherry, Year: 19yy, Director: Kiarostami, Genres: [Drama]
-Reason: Year contains non-numeric characters
-
-Movie Id: MJu15, Title: All is Routine, Year: 19yy, Director: M.Judge, Genres: []
-Reason: Year contains non-numeric characters
-
-Movie Id: NtB10, Title: On the Ropes, Year: 1999, Director: Brett Morgen, Genres: [Documentary]
-Reason: Duplicate: Movie parsed already
-
-Movie Id: PSv10, Title: Metroland, Year: 1999, Director: P.Saville, Genres: []
-Reason: Duplicate: Movie parsed already
+FID: RSc10, Title: Crime + Punsihment in Suburbia, Year: 2000, Director: , Genres: []
+Reason: XML file does not contain any director
 
