@@ -21,8 +21,14 @@ function populateMetadata(data){
         const tableElement = document.createElement('table');
         const headerRow = document.createElement('tr');
         const tableNameHeader = document.createElement('th');
+        const tableNameHeader1 = document.createElement('th');
         tableNameHeader.textContent = tableName;
+
+        tableNameHeader1.textContent = "datatype";
+
         headerRow.appendChild(tableNameHeader);
+        headerRow.appendChild(tableNameHeader1);
+
         tableElement.appendChild(headerRow);
         columns.forEach(column => {
             const columnRow = document.createElement('tr');

@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
 
-@WebServlet(name = "GenreServlet", urlPatterns = "/api/genre")
+@WebServlet(name = "MetadataServlet", urlPatterns = "/api/metadata")
 public class MetadataServlet extends HttpServlet {
     private DataSource dataSource;
 
@@ -40,17 +40,15 @@ public class MetadataServlet extends HttpServlet {
                 JsonArray columnsArray = new JsonArray();
 
                 // Use a prepared statement for SHOW COLUMNS query
-                String columnQuery = "SHOW COLUMNS FROM ?";
-                try (PreparedStatement preparedStatement = conn.prepareStatement(columnQuery)) {
-                    preparedStatement.setString(1, tableName);
-                    try (ResultSet columnsResultSet = preparedStatement.executeQuery()) {
+                String columnQuery = "SHOW COLUMNS FROM " + tableName;
+                Statement columnsStatement = conn.createStatement();
+                try (ResultSet columnsResultSet = columnsStatement.executeQuery(columnQuery)) {
                         while (columnsResultSet.next()) {
                             JsonObject columnObject = new JsonObject();
                             columnObject.addProperty("column_name", columnsResultSet.getString("Field"));
                             columnObject.addProperty("column_type", columnsResultSet.getString("Type"));
                             columnsArray.add(columnObject);
                         }
-                    }
                 }
 
                 tableObject.add("columns", columnsArray);
