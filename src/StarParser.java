@@ -2,7 +2,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -26,7 +25,6 @@ public class StarParser extends DefaultHandler {
     boolean consistent = true;
 
     ArrayList<Star> existingStars = new ArrayList<Star>();
-    ArrayList<Star> duplicates = new ArrayList<Star>();
 
     int max_star_id;
 
@@ -77,22 +75,31 @@ public class StarParser extends DefaultHandler {
 
             printDataToFile("STARS.txt", myStars);
             printDataToFile("STAR_ERRORS.txt", inconsistentStars);
+            conn.close();
         }
         catch (SQLException e) {
             e.printStackTrace();
         }
 
         double total_time = (end - start)/1000.0;
-        System.out.println("Time in Seconds for Movie Parser: " + total_time);
+//        System.out.println("Time in Seconds for Movie Parser: " + total_time);
 
         int count = 0;
         for (Star s: existingStars) {
             // System.out.println(s);
             count++;
         }
-        System.out.println("Number of existing stars: " + count);
+//        System.out.println("Number of existing stars: " + count);
+//
+//        System.out.println("max star id: " + max_star_id);
+    }
 
-        System.out.println("max star id: " + max_star_id);
+    public ArrayList<Star> getParsedStarsData() {
+        return myStars;
+    }
+
+    public ArrayList<Star> getExistingStarsData() {
+        return existingStars;
     }
 
     public void getExistingStars() throws SQLException {
@@ -163,11 +170,13 @@ public class StarParser extends DefaultHandler {
 
             int count = 1;
 
-            for (Star s : myStars) {
+            for (int i = 0; i < myStars.size(); i++) {
+                Star s = myStars.get(i);
+
                 max_star_id++;
                 String star_id = "nm" + max_star_id;
 
-                s.setStarId(star_id);
+                s.setStarDbid(star_id);
 
                if (s.getBirthYear().equals("")) {
                    without_year_statement.setString(1, star_id);
@@ -181,12 +190,14 @@ public class StarParser extends DefaultHandler {
                    statement = with_year_statement;
                }
 
+               existingStars.add(s);
+
                int rows_affected = statement.executeUpdate();
                count++;
             }
-            System.out.println("Inserted " + count + " rows");
-            System.out.println("max id now " + max_star_id);
         }
+
+        System.out.println("db stars size: " + existingStars.size());
     }
 
 
@@ -221,16 +232,9 @@ public class StarParser extends DefaultHandler {
 
                 //add it to the list
                 if (consistent) {
-                    if (tempStar.getName().equals("John Cassavetes")) {
-
-                        System.out.println("in my stars: " + tempStar);
-                    }
                     myStars.add(tempStar);
                 }
                 else {
-                    if (tempStar.getName().equals("John Cassavetes")) {
-                        System.out.println("inconsistent: " + tempStar);
-                    }
                     inconsistentStars.add(tempStar);
                 }
 

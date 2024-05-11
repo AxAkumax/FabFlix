@@ -3,7 +3,7 @@ import java.util.Objects;
 
 public class Movie {
     private String fid;
-    private String db_movie_id;
+    private String dbId;
     private String title;
     private String year;
     private String director;
@@ -12,7 +12,7 @@ public class Movie {
 
     public Movie() {
         this.fid = "";
-        this.db_movie_id = "";
+        this.dbId = "";
         this.title = "";
         this.year = "";
         this.director = "";
@@ -20,9 +20,9 @@ public class Movie {
         this.genres = new ArrayList<String>();
     }
 
-    public Movie(String fid, String title, String year, String director) {
-        this.fid = fid;
-        this.db_movie_id = "";
+    public Movie(String dbid, String title, String year, String director) {
+        this.fid = "";
+        this.dbId = dbid;
         this.title = title;
         this.year = year;
         this.director = director;
@@ -32,11 +32,11 @@ public class Movie {
     }
 
     public void setFID(String fid) {
-        this.fid = fid;
+        this.fid = fid.toLowerCase();
     }
 
-    public void setDBMovieID(String db_movie_id) {
-        this.db_movie_id = db_movie_id;
+    public void setDBID(String dbId) {
+        this.dbId = dbId;
     }
 
     public void setTitle(String title) {
@@ -52,7 +52,7 @@ public class Movie {
     }
 
     public void setGenres(String genre) {
-        if (genre != null && !genre.isEmpty()) {
+        if (genre != null) {
             this.genres.add(genre);
         }
     }
@@ -65,8 +65,8 @@ public class Movie {
         return fid;
     }
 
-    public String getDBMovieID() {
-        return db_movie_id;
+    public String getMovieDBID() {
+        return dbId;
     }
 
     public String getTitle() {
@@ -93,6 +93,7 @@ public class Movie {
         StringBuffer sb = new StringBuffer();
 
         sb.append("FID: " + getMovieFID() + ", ");
+        sb.append("DBID: " + getMovieDBID() + ", ");
         sb.append("Title: " + getTitle() + ", ");
         sb.append("Year: " + getYear() + ", ");
         sb.append("Director: " + getDirector() + ", ");
@@ -126,7 +127,7 @@ public class Movie {
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.title, this.year, this.director);
+        return Objects.hash(this.dbId);
     }
 }
 

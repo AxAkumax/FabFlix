@@ -1,7 +1,10 @@
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.HashSet;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -16,57 +19,162 @@ import org.xml.sax.helpers.DefaultHandler;
 
 // for casts124.xml
 public class StarInMovieParser extends DefaultHandler {
-    ArrayList<StarInMovie> starMovies;
-    ArrayList<StarInMovie> inconsistentEntries;
+    ArrayList<StarInMovie> starMovies = new ArrayList<StarInMovie>();
+    ArrayList<StarInMovie> inconsistentEntries = new ArrayList<StarInMovie>();;
+
+//    ArrayList<Star> parsedStars;
+//    ArrayList<Movie> parsedMovies;
+
+    HashSet<StarInMovie> existingStarsInMovies = new HashSet<StarInMovie>();
+    HashSet<Star> existingStars;
+//    HashSet<Movie> existingMovies;
+    HashMap<String, Movie> parsedMovies;
 
     private StarInMovie tempStarMovie;
     private String tempVal;
     private String director;
 
     private boolean directorflag;
+    boolean consistent = true;
 
-    // 0 means the entry is consistent
-    // 1 means the entry is inconsistent
-    int inconsistent_flag = 0;
+    int max_star_id = 0;
+    int max_movie_id = 0;
 
-    public StarInMovieParser() {
+    Connection conn;
+
+    public StarInMovieParser(ArrayList<Star> existingStars, HashMap<String, Movie> parsedMovies) {
+        this.existingStars = new HashSet<>(existingStars);
+        this.parsedMovies = parsedMovies;
         director = "";
-        starMovies = new ArrayList<StarInMovie>();
-        inconsistentEntries = new ArrayList<StarInMovie>();
+
+        connectDatabase();
     }
 
     public void startParse() {
-        parseDocument();
-        printDataToFile("STARMOVIES.txt");
-        printInconsistenciesToFile("STARMOVIE_ERRORS.txt");
-    }
 
-    public static void main(String[] args) {
-        StarInMovieParser my_parser = new StarInMovieParser();
-        my_parser.startParse();
-    }
+        try {
+            getMaxIds();
+            getExistingStarsInMovies();
 
-    private void printDataToFile(String fileName) {
-        try (FileWriter writer = new FileWriter(fileName)) {
-            writer.write("No of Star Movies'" + starMovies.size() + "'.\n");
+            parseDocument();
 
-            for (StarInMovie myStarMovie : starMovies) {
-                writer.write(myStarMovie.toString() + "\n");
-            }
-        } catch (IOException e) {
+            insertStarsInMovies();
+
+            printDataToFile("STARMOVIES.txt", starMovies);
+            printDataToFile("STARMOVIE_ERRORS.txt", inconsistentEntries);
+            conn.close();
+        }
+        catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    private void printInconsistenciesToFile(String fileName) {
-        try (FileWriter writer = new FileWriter(fileName)) {
-            writer.write("No of Movies '" + inconsistentEntries.size() + "'.\n");
+    public void insertStarsInMovies() throws SQLException {
+        if (conn != null) {
+            String query = "INSERT INTO stars_in_movies (starId, movieId) VALUES (?, ?)";
+            PreparedStatement ps = conn.prepareStatement(query);
 
-            Iterator<StarInMovie> it = inconsistentEntries.iterator();
-            while (it.hasNext()) {
-                StarInMovie m = it.next();
-                writer.write(m.getReason() + "\n");
-                writer.write(m.toString()  + "\n");
+            for (StarInMovie sm: starMovies) {
+//                System.out.println("inserting: " + sm);
+
+                Movie movie = parsedMovies.get(sm.getMovieFID());
+                String starId = findStarId(sm.getStarName());
+
+                if (starId != null) {
+                    String movieId = movie.getMovieDBID();
+                    ps.setString(1, starId);
+                    ps.setString(2, movieId);
+                    ps.executeUpdate();
+                }
+                else {
+                    sm.setReason("star id was not found in stars table");
+                    inconsistentEntries.add(sm);
+                }
+            }
+        }
+    }
+
+    public String findStarId(String star_name) {
+        for (Star s: existingStars) {
+            if (s.getName().equals(star_name)) {
+                return s.getStarDbid();
+            }
+        }
+        return null;
+    }
+
+    public void connectDatabase() {
+        try {
+            String dbtype = "mysql";
+            String dbname = "moviedb";
+            String username = "mytestuser";
+            String password = "My6$Password";
+
+            // Incorporate mySQL driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // Connect to the test database
+            conn = DriverManager.getConnection("jdbc:" + dbtype + ":///" + dbname + "?autoReconnect=true&useSSL=false",
+                    username, password);
+        }
+        catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void getMaxIds() throws SQLException {
+        if (conn != null) {
+            String query = "SELECT max(id) as max_star_id FROM stars;";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String star_id = rs.getString("max_star_id");
+                max_star_id = Integer.parseInt(star_id.substring(2));
+            }
+
+            query = "SELECT max(id) as max_movie_id FROM movies;";
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String movie_id = rs.getString("max_movie_id");
+                max_movie_id = Integer.parseInt(movie_id.substring(2));
+            }
+        }
+    }
+
+    public void getExistingStarsInMovies() throws SQLException {
+        if (conn != null) {
+            String query = "SELECT sm.starId, sm.movieId, m.title, m.year, m.director, s.name " +
+                            "FROM stars_in_movies sm " +
+                            "JOIN movies m ON sm.movieId = m.id " +
+                            "JOIN stars s ON sm.starId = s.id;";
+
+            PreparedStatement statement = conn.prepareStatement(query);
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                String starId = rs.getString("starId");
+                String starName = rs.getString("name");
+                String movieId = rs.getString("movieId");
+                String title = rs.getString("title");
+                String year = rs.getString("year");
+                String director = rs.getString("director");
+
+                StarInMovie new_entry = new StarInMovie(movieId, starName, title, director);
+                existingStarsInMovies.add(new_entry);
+            }
+        }
+    }
+
+    public void printDataToFile(String fileName, ArrayList<StarInMovie> data) {
+        try (FileWriter writer = new FileWriter(fileName)) {
+            writer.write("Number of Entries '" + data.size() + "'.\n");
+
+            for (StarInMovie myStarMovie : data) {
+                writer.write(myStarMovie.toString() + "\n");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -107,7 +215,7 @@ public class StarInMovieParser extends DefaultHandler {
         }
         else if (qName.equalsIgnoreCase("m")) {
             tempStarMovie = new StarInMovie();
-            inconsistent_flag = 0;
+            consistent = true;
         }
     }
 
@@ -129,21 +237,21 @@ public class StarInMovieParser extends DefaultHandler {
     public void endElement(String uri, String localName, String qName) throws SAXException {
         tempVal = tempVal.trim();
 
-//        System.out.println(qName);
-//        System.out.println("temp: " + tempVal);
-
         if (tempStarMovie != null) {
 
             if (qName.equalsIgnoreCase("m")) {
                 tempStarMovie.setDirector(director);
+                checkStarMovieInconsistencies();
 
-                if (inconsistent_flag == 0) {
+                if (consistent) {
                     starMovies.add(tempStarMovie);
-                }
-                else {
+                } else {
                     inconsistentEntries.add(tempStarMovie);
                 }
 
+            }
+            else if (qName.equalsIgnoreCase("f")) {
+                tempStarMovie.setMovieFID(tempVal);
             } else if (qName.equalsIgnoreCase("t")) {
                 checkMovieTitleInconsistencies(tempVal);
                 tempStarMovie.setMovieName(tempVal);
@@ -153,28 +261,47 @@ public class StarInMovieParser extends DefaultHandler {
                 tempStarMovie.setStarName(tempVal);
             }
         }
+    }
 
-//        System.out.println("temp: " + tempVal + "\n");
+    public void checkStarMovieInconsistencies() {
+        if (starMovies.contains(tempStarMovie)) {
+            consistent = false;
+            tempStarMovie.setReason("Duplicate: Star movie parsed already");
+        }
+        else if (existingStarsInMovies.contains(tempStarMovie)) {
+            consistent = false;
+            tempStarMovie.setReason("Duplicate: Star movie exists in database already");
+        }
+        else if (!parsedMovies.containsKey(tempStarMovie.getMovieFID())) {
+            consistent = false;
+            tempStarMovie.setReason("Referenced movie id does not exist in mains243.xml");
+
+        }
+
+        if (tempStarMovie.getDirector().equals("")) {
+            consistent = false;
+            tempStarMovie.setDirector("Unknown Director");
+        }
     }
 
     private void checkMovieTitleInconsistencies(String tempVal) {
         if (tempVal.equals("")) {
-            inconsistent_flag = 1;
+            consistent = false;
             tempStarMovie.setReason("Title is Unknown");
         }
         else if (tempVal.length() > 100) {
-            inconsistent_flag = 1;
+            consistent = false;
             tempStarMovie.setReason("Title is too long");
         }
     }
 
     private void checkNameInconsistencies(String tempVal, String who) {
         if (tempVal.equals("")) {
-            inconsistent_flag = 1;
+            consistent = false;
             tempStarMovie.setReason(who + " Name is Unknown");
         }
         else if (tempVal.length() > 100) {
-            inconsistent_flag = 1;
+            consistent = false;
             tempStarMovie.setReason(who + " Name is too long");
         }
     }

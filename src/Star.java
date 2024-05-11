@@ -2,26 +2,31 @@ import java.util.Objects;
 
 public class Star {
     private String star_id;
+    private String star_dbid;
     private String name;
     private String birth_year = "";
     private String reason;
 
     public Star() {
         this.star_id = "";
+        this.star_dbid = "";
         this.name = "";
         this.birth_year = "";
         this.reason = "None";
     }
 
-    public Star(String star_id, String name, String birth_year) {
-        this.star_id = star_id;
+    public Star(String star_dbid, String name, String birth_year) {
+        this.star_id = "";
+        this.star_dbid = star_dbid;
         this.name = name;
 
         if (birth_year == null) {
             birth_year = "";
         }
+        else {
+            this.birth_year = birth_year;
+        }
 
-        this.birth_year = birth_year;
         this.reason = "None";
     }
     
@@ -31,6 +36,10 @@ public class Star {
 
     public void setStarId(String star_id){
         this.star_id = star_id;
+    }
+
+    public void setStarDbid(String star_dbid){
+        this.star_dbid = star_dbid;
     }
     
     public void setBirthYear(String birth_year){
@@ -46,6 +55,10 @@ public class Star {
 
     public String getStarId(){
         return star_id;
+    }
+
+    public String getStarDbid(){
+        return star_dbid;
     }
 
     public String getName(){
@@ -64,6 +77,7 @@ public class Star {
         StringBuffer sb = new StringBuffer();
 
         sb.append("Star Id: " + getStarId() + ", ");
+        sb.append("Star Dbid: " + getStarDbid() + ", ");
         sb.append("Star Name: " + getName() + ", ");
         sb.append("Birth Year: " + getBirthYear() + "\n");
 
@@ -78,6 +92,7 @@ public class Star {
     public boolean equals(Object otherObj) {
         if (this.getClass() == otherObj.getClass()) {
             Star other = (Star) otherObj;
+
             return this.getName().equals(other.getName()) &&
                     this.getBirthYear().equals(other.getBirthYear());
         }
@@ -86,7 +101,7 @@ public class Star {
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.getName(), this.getBirthYear());
+        return Objects.hash(this.getStarDbid());
     }
 
 }

@@ -30,8 +30,9 @@ public class MovieParser extends DefaultHandler {
     boolean consistent = true;
 
     // Data already in the database
-    HashSet<Movie> existing_movies = new HashSet<>();
+    ArrayList<Movie> existing_movies = new ArrayList<>();
     HashMap<Integer, String> existing_genres = new HashMap<>();
+    HashMap<String, Movie> parsed_movie_map = new HashMap<>();
 
     // index to hold max movie id. Increment from there to get new movie ids
     int max_movie_id = 0;
@@ -129,12 +130,20 @@ public class MovieParser extends DefaultHandler {
 
             printDataToFile("MOVIES.txt", myMovies);
             printDataToFile("MOVIE_ERRORS.txt", inconsistentMovies);
+            conn.close();
         }
         catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
+    public HashMap<String, Movie> getParsedMoviesData() {
+        return parsed_movie_map;
+    }
+
+    public ArrayList<Movie> getExistingMoviesData() {
+        return existing_movies;
+    }
 
     /**
      * Inserts new genres that were collected during parsing into the database.
@@ -165,11 +174,13 @@ public class MovieParser extends DefaultHandler {
             String query = "INSERT INTO movies (id, title, year, director) VALUES (?, ?, ?, ?);";
             PreparedStatement statement = conn.prepareStatement(query);
 
-            for (Movie movie : myMovies) {
+            for (int i = 0; i < myMovies.size(); i++) {
+                Movie movie = myMovies.get(i);
+
                 max_movie_id++;
                 String movie_id = "tt" + max_movie_id;
 
-                movie.setDBMovieID(movie_id);
+                movie.setDBID(movie_id);
 
                 statement.setString(1, movie_id);
                 statement.setString(2, movie.getTitle());
@@ -177,8 +188,12 @@ public class MovieParser extends DefaultHandler {
                 statement.setString(4, movie.getDirector());
 
                 statement.executeUpdate();
+
+                existing_movies.add(movie);
             }
         }
+
+        System.out.println("Movies in db: " + existing_movies.size());
     }
 
 
@@ -214,7 +229,7 @@ public class MovieParser extends DefaultHandler {
 
                     if (genre_id != -1) {
                         statement.setInt(1, genre_id);
-                        statement.setString(2, movie.getDBMovieID());
+                        statement.setString(2, movie.getMovieDBID());
                         statement.executeUpdate();
                     }
                 }
@@ -396,6 +411,7 @@ public class MovieParser extends DefaultHandler {
 
                 if (consistent) {
                     myMovies.add(tempMovie);
+                    parsed_movie_map.put(tempMovie.getMovieFID(), tempMovie);
                 }
                 else {
                     inconsistentMovies.add(tempMovie);
