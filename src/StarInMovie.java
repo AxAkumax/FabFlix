@@ -2,6 +2,7 @@ import java.util.Objects;
 
 public class StarInMovie {
     String movie_fid;
+    String star_id;
     String star_name;
     String movie_name;
     String director;
@@ -25,6 +26,10 @@ public class StarInMovie {
         this.movie_fid = movie_fid.toLowerCase();
     }
 
+    public void setStarID(String star_id) {
+        this.star_id = star_id.toLowerCase();
+    }
+
     public void setStarName(String star_name) {
         this.star_name = star_name;
     }
@@ -43,6 +48,10 @@ public class StarInMovie {
 
     public String getMovieFID() {
         return movie_fid;
+    }
+
+    public String getStarID() {
+        return star_id;
     }
 
     public String getStarName() {

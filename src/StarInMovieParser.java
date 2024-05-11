@@ -22,12 +22,8 @@ public class StarInMovieParser extends DefaultHandler {
     ArrayList<StarInMovie> starMovies = new ArrayList<StarInMovie>();
     ArrayList<StarInMovie> inconsistentEntries = new ArrayList<StarInMovie>();;
 
-//    ArrayList<Star> parsedStars;
-//    ArrayList<Movie> parsedMovies;
-
     HashSet<StarInMovie> existingStarsInMovies = new HashSet<StarInMovie>();
     HashSet<Star> existingStars;
-//    HashSet<Movie> existingMovies;
     HashMap<String, Movie> parsedMovies;
 
     private StarInMovie tempStarMovie;
@@ -71,26 +67,35 @@ public class StarInMovieParser extends DefaultHandler {
 
     public void insertStarsInMovies() throws SQLException {
         if (conn != null) {
+            conn.setAutoCommit(false);
+
             String query = "INSERT INTO stars_in_movies (starId, movieId) VALUES (?, ?)";
             PreparedStatement ps = conn.prepareStatement(query);
 
-            for (StarInMovie sm: starMovies) {
-//                System.out.println("inserting: " + sm);
+            int batchSize = 0;
+            int MAX_BATCH_SIZE = 2000;
+            int star_movie_size = starMovies.size();
 
+            for (int i = 0; i < star_movie_size; i++) {
+                StarInMovie sm = starMovies.get(i);
                 Movie movie = parsedMovies.get(sm.getMovieFID());
-                String starId = findStarId(sm.getStarName());
 
-                if (starId != null) {
-                    String movieId = movie.getMovieDBID();
-                    ps.setString(1, starId);
-                    ps.setString(2, movieId);
-                    ps.executeUpdate();
-                }
-                else {
-                    sm.setReason("star id was not found in stars table");
-                    inconsistentEntries.add(sm);
+                String starId = sm.getStarID();
+                String movieId = movie.getMovieDBID();
+
+                ps.setString(1, starId);
+                ps.setString(2, movieId);
+                ps.addBatch();
+                batchSize++;
+
+                if (batchSize >= MAX_BATCH_SIZE) {
+                    ps.executeBatch();
+                    conn.commit();
+                    batchSize = 0;
                 }
             }
+            ps.executeBatch();
+            conn.commit();
         }
     }
 
@@ -277,6 +282,16 @@ public class StarInMovieParser extends DefaultHandler {
             tempStarMovie.setReason("Referenced movie id does not exist in mains243.xml");
 
         }
+
+        String star_id = findStarId(tempStarMovie.getStarName());
+        if (star_id == null) {
+            consistent = false;
+            tempStarMovie.setReason("Referenced star name does not exist in database and actors.xml");
+        }
+        else {
+            tempStarMovie.setStarID(star_id);
+        }
+
 
         if (tempStarMovie.getDirector().equals("")) {
             consistent = false;

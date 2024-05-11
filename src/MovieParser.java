@@ -151,6 +151,7 @@ public class MovieParser extends DefaultHandler {
      */
     public void insertGenres() throws SQLException {
         if (conn != null) {
+            conn.setAutoCommit(false);
             String query = "INSERT INTO genres (id, name) VALUES (?, ?)";
             PreparedStatement statement = conn.prepareStatement(query);
 
@@ -158,9 +159,12 @@ public class MovieParser extends DefaultHandler {
                 if (entry.getKey() >= new_genre_start_index) {
                     statement.setInt(1, entry.getKey());
                     statement.setString(2, entry.getValue());
-                    statement.executeUpdate();
+                    statement.addBatch();
                 }
             }
+
+            statement.executeBatch();
+            conn.commit();
         }
     }
 
@@ -171,8 +175,14 @@ public class MovieParser extends DefaultHandler {
      */
     public void insertMovies() throws SQLException {
         if (conn != null) {
+            conn.setAutoCommit(false);
+
             String query = "INSERT INTO movies (id, title, year, director) VALUES (?, ?, ?, ?);";
             PreparedStatement statement = conn.prepareStatement(query);
+
+            int MAX_BATCH_SIZE = 2000;
+            int batchSize = 0;
+            int totalMovies = myMovies.size();
 
             for (int i = 0; i < myMovies.size(); i++) {
                 Movie movie = myMovies.get(i);
@@ -187,9 +197,17 @@ public class MovieParser extends DefaultHandler {
                 statement.setInt(3, Integer.parseInt(movie.getYear()));
                 statement.setString(4, movie.getDirector());
 
-                statement.executeUpdate();
+                statement.addBatch();
+                batchSize++;
 
                 existing_movies.add(movie);
+
+                // Execute batch after every 1000 iterations or if it's the last batch
+                if (batchSize == MAX_BATCH_SIZE || i == totalMovies - 1) {
+                    statement.executeBatch();
+                    conn.commit(); // Commit the batch
+                    batchSize = 0;
+                }
             }
         }
 
@@ -220,8 +238,13 @@ public class MovieParser extends DefaultHandler {
      */
     public void insertGenresInMovies() throws SQLException {
         if (conn != null) {
+            conn.setAutoCommit(false);
+
             String query = "INSERT INTO genres_in_movies (genreId, movieId) VALUES (?, ?)";
             PreparedStatement statement = conn.prepareStatement(query);
+
+            int MAX_BATCH_SIZE = 2000;
+            int batchSize = 0;
 
             for (Movie movie : myMovies) {
                 for (String genre: movie.getGenres()) {
@@ -230,9 +253,21 @@ public class MovieParser extends DefaultHandler {
                     if (genre_id != -1) {
                         statement.setInt(1, genre_id);
                         statement.setString(2, movie.getMovieDBID());
-                        statement.executeUpdate();
+                        statement.addBatch();
+                        batchSize++;
+                    }
+
+                    if (batchSize == MAX_BATCH_SIZE) {
+                        statement.executeBatch();
+                        conn.commit();
+                        batchSize = 0;
                     }
                 }
+            }
+
+            if (batchSize > 0) {
+                statement.executeBatch();
+                conn.commit();
             }
         }
     }

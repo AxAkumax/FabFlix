@@ -62,16 +62,11 @@ public class StarParser extends DefaultHandler {
     }
 
     public void startParse() {
-        long start = 0;
-        long end = 0;
-
         try {
-            start = System.currentTimeMillis();
             getExistingStars();
             parseDocument();
 
             insertStars();
-            end = System.currentTimeMillis();
 
             printDataToFile("STARS.txt", myStars);
             printDataToFile("STAR_ERRORS.txt", inconsistentStars);
@@ -80,18 +75,6 @@ public class StarParser extends DefaultHandler {
         catch (SQLException e) {
             e.printStackTrace();
         }
-
-        double total_time = (end - start)/1000.0;
-//        System.out.println("Time in Seconds for Movie Parser: " + total_time);
-
-        int count = 0;
-        for (Star s: existingStars) {
-            // System.out.println(s);
-            count++;
-        }
-//        System.out.println("Number of existing stars: " + count);
-//
-//        System.out.println("max star id: " + max_star_id);
     }
 
     public ArrayList<Star> getParsedStarsData() {
@@ -161,14 +144,16 @@ public class StarParser extends DefaultHandler {
 
     public void insertStars() throws SQLException {
         if (conn != null) {
+            conn.setAutoCommit(false);
+
             String with_year_query = "INSERT INTO stars (id, name, birthYear) VALUES (?, ?, ?);";
             String without_year_query = "INSERT INTO stars (id, name) VALUES (?, ?);";
 
             PreparedStatement with_year_statement = conn.prepareStatement(with_year_query);
             PreparedStatement without_year_statement = conn.prepareStatement(without_year_query);
-            PreparedStatement statement;
 
-            int count = 1;
+            int MAX_BATCH_SIZE = 2000;
+            int batchSize = 0;
 
             for (int i = 0; i < myStars.size(); i++) {
                 Star s = myStars.get(i);
@@ -181,20 +166,28 @@ public class StarParser extends DefaultHandler {
                if (s.getBirthYear().equals("")) {
                    without_year_statement.setString(1, star_id);
                    without_year_statement.setString(2, s.getName());
-                   statement = without_year_statement;
+                   without_year_statement.addBatch();
                }
                else {
                    with_year_statement.setString(1, star_id);
                    with_year_statement.setString(2, s.getName());
                    with_year_statement.setString(3, s.getBirthYear());
-                   statement = with_year_statement;
+                   with_year_statement.addBatch();
                }
 
                existingStars.add(s);
+               batchSize++;
 
-               int rows_affected = statement.executeUpdate();
-               count++;
+                if (batchSize >= MAX_BATCH_SIZE) {
+                    without_year_statement.executeBatch();
+                    with_year_statement.executeBatch();
+                    conn.commit();
+                    batchSize = 0;
+                }
             }
+            without_year_statement.executeBatch();
+            with_year_statement.executeBatch();
+            conn.commit();
         }
 
         System.out.println("db stars size: " + existingStars.size());

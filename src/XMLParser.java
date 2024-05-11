@@ -17,6 +17,8 @@ public class XMLParser {
 
 
     public void startParsing() {
+        long start = System.currentTimeMillis();
+
         System.out.println("Starting star parsing...");
         starParser.startParse();
         parsed_stars = starParser.getParsedStarsData();
@@ -28,16 +30,19 @@ public class XMLParser {
         parsed_movies = movieParser.getParsedMoviesData();
         existing_movies = movieParser.getExistingMoviesData();
 
-        System.out.println("Size of parsed stars: " + parsed_stars.size());
-        System.out.println("Size of existing stars: " + existing_stars.size());
-
-        System.out.println("Size of parsed movies: " + parsed_movies.size());
-        System.out.println("Size of existing movies: " + existing_movies.size());
+//        System.out.println("Size of parsed stars: " + parsed_stars.size());
+//        System.out.println("Size of existing stars: " + existing_stars.size());
+//
+//        System.out.println("Size of parsed movies: " + parsed_movies.size());
+//        System.out.println("Size of existing movies: " + existing_movies.size());
 
 
         System.out.println("Starting star movie parsing...");
         starInMovieParser = new StarInMovieParser(existing_stars, parsed_movies);
         starInMovieParser.startParse();
+
+        long end = System.currentTimeMillis();
+        System.out.println("Finished star parsing. Took " + (end - start)/1000 + "s");
 
         printArrayToFile("teststar.txt", "testmovie.txt");
     }

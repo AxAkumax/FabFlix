@@ -118,10 +118,10 @@ function addToCart(movieId) {
  * Once this index.js is loaded, following scripts will be executed by the browser
  */
 
-// Makes the HTTP GET request and registers on success callback function handleStarResult
-jQuery.ajax({
-    dataType: "json", // Setting return data type
-    method: "GET", // Setting request method
-    url: "api/movies", // Setting request url, which is mapped by MovieServlet
-    success: (resultData) => handleMovieResult(resultData) // Setting callback function to handle data returned successfully by the StarsServlet
-});
+// // Makes the HTTP GET request and registers on success callback function handleStarResult
+// jQuery.ajax({
+//     dataType: "json", // Setting return data type
+//     method: "GET", // Setting request method
+//     url: "api/movies", // Setting request url, which is mapped by MovieServlet
+//     success: (resultData) => handleMovieResult(resultData) // Setting callback function to handle data returned successfully by the StarsServlet
+// });
