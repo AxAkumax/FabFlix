@@ -44,7 +44,7 @@ public class XMLParser {
         long end = System.currentTimeMillis();
         System.out.println("Finished star parsing. Took " + (end - start)/1000 + "s");
 
-        printArrayToFile("teststar.txt", "testmovie.txt");
+//        printArrayToFile("teststar.txt", "testmovie.txt");
     }
 
     public void printArrayToFile(String fileName1, String fileName2) {
