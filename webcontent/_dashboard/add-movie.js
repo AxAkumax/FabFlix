@@ -33,13 +33,18 @@ function submitAddMovieForm(event) {
     }
 
     console.log(formData);
-    if (!formData || Object.keys(formData).length <6) {
+    if (!formData || Object.keys(formData).length <5) {
         // Display a message or perform any other action indicating that the form is empty
         $("#nParametersMessage").show();
 
         return; // Exit the function
     }
     $("#nParametersMessage").hide();
+    $("#errorMessage").hide();
+    $("#successMessage").hide();
+    $("#movieId").hide();
+    $("#starId").hide();
+    $("#genreId").hide();
 
     $.ajax({
         url: "../api/add-movie", // Update with the correct servlet URL
@@ -52,16 +57,25 @@ function submitAddMovieForm(event) {
                 console.error("Error occurred while adding the movie:", responseData.error);
                 // Display error message to the user
                 $("#errorMessage").text(responseData.error).show();
+                $("#errorMessage").show();
+
             } else {
                 // No error, display success message or perform any other action
                 console.log("Movie added successfully!");
                 $("#successMessage").text("Movie added successfully!").show();
+                // Display additional information about the added movie
+                $("#movieId").text("Movie ID: " + responseData.movieId).show();
+                $("#starId").text("Star ID: " + responseData.starId).show();
+                $("#genreId").text("Genre ID: " + responseData.genreId).show();
+
+                $("#successMessage").show();
+                $("#movieId").show();
+                $("#starId").show();
+                $("#genreId").show();
             }
         },
         error: function (xhr, status, error) {
             console.error("Error occurred while adding the movie:", error);
-            // Display error message to the user
-            // For example: $("#errorMessage").text("An error occurred while adding the movie.").show();
         }
     });
 }

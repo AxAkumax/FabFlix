@@ -14,13 +14,16 @@ function submitAddStarForm(event) {
     }
 
     console.log(formData);
-    if (!formData || Object.keys(formData).length <2) {
+    if (!formData || Object.keys(formData).length < 1) {
         // Display a message or perform any other action indicating that the form is empty
         $("#nParametersMessage").show();
 
         return; // Exit the function
     }
     $("#nParametersMessage").hide();
+    $("#successMessage").hide();
+    $("#starId").hide();
+    $("#errorMessage").hide();
 
     $.ajax({
         url: "../api/add-star", // Update with the correct servlet URL
@@ -29,14 +32,22 @@ function submitAddStarForm(event) {
         data: formData,
         success: function (responseData) {
             // Check if there is an error message
+            $("#nParametersMessage").hide();
+
             if (responseData.error) {
                 console.error("Error occurred while adding the star:", responseData.error);
                 // Display error message to the user
                 $("#errorMessage").text(responseData.error).show();
+                $("#errorMessage").show();
+
             } else {
                 // No error, display success message or perform any other action
                 console.log("Star added successfully!");
                 $("#successMessage").text("Star added successfully!").show();
+                $("#starId").text("Star ID: " + responseData.starId).show();
+
+                $("#successMessage").show();
+                $("#starId").show();
             }
         },
         error: function (xhr, status, error) {

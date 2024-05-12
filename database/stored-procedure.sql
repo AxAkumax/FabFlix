@@ -6,7 +6,10 @@ CREATE PROCEDURE add_movie (
     IN movie_director VARCHAR(100),
     IN star_name VARCHAR(100),
     IN genre_name VARCHAR(32),
-    IN birth_year INT
+    IN birth_year INT,
+    OUT out_movie_id VARCHAR(10),
+    OUT out_star_id VARCHAR(10),
+    OUT out_genre_id INT
 )
 BEGIN
     DECLARE star_id VARCHAR(10);
@@ -26,7 +29,7 @@ BEGIN
     SET max_star_number = IFNULL(max_star_number, 0) + 1;
 
     -- Generate the new movie ID
-    SELECT id into movie_id from movies where title = movie_title and year = movie_year LIMIT 1;
+    SELECT id into movie_id from movies where title = movie_title and year = movie_year and director = movie_director LIMIT 1;
 
     IF movie_id IS NOT NULL THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Movie already exists';
@@ -34,7 +37,7 @@ BEGIN
 
     SET movie_id = CONCAT('tt', LPAD(max_movie_number, 7, '0'));
 
-    SELECT id into star_id from stars where name = star_name and birthYear = birth_year LIMIT 1;
+    SELECT id into star_id from stars where name = star_name and (birthYear = birth_year OR (birthYear IS NULL AND birth_year IS NULL)) LIMIT 1;
 
     -- Check if the genre exists, if not, insert it
     SELECT id INTO genre_id FROM genres WHERE name = genre_name LIMIT 1;
@@ -59,6 +62,12 @@ BEGIN
 
     -- Link the genre to the movie
     INSERT INTO genres_in_movies (genreId, movieId) VALUES (genre_id, movie_id);
+
+    -- Set the output parameters
+    SET out_movie_id = movie_id;
+    SET out_star_id = star_id;
+    SET out_genre_id = genre_id;
+
 END //
 
 DELIMITER ;
@@ -67,7 +76,8 @@ DELIMITER //
 
 CREATE PROCEDURE add_star (
     IN star_name VARCHAR(100),
-    IN birth_year INT
+    IN birth_year INT,
+    OUT out_star_id VARCHAR(10)
 )
 BEGIN
     DECLARE star_id VARCHAR(10);
@@ -84,6 +94,8 @@ BEGIN
 
     -- Insert the star
     INSERT INTO stars (id, name, birthYear) VALUES (star_id, star_name, birth_year);
+
+    SET out_star_id = star_id;
 END //
 
 DELIMITER ;
