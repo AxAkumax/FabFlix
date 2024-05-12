@@ -60,6 +60,10 @@
                 <input type="text" class="form-control" id="inputStar" placeholder="Enter Star's name">
             </div>
             <div class="form-group col-md-3">
+                <label for="inputBirthYear">Birth Year:</label>
+                <input type="text" class="form-control" id="inputBirthYear" placeholder="Enter birth year">
+            </div>
+            <div class="form-group col-md-3">
                 <label for="inputGenre">Genre Name:</label>
                 <input type="text" class="form-control" id="inputGenre" placeholder="Enter Genre name">
             </div>
@@ -71,6 +75,16 @@
 <div id="nParametersMessage" class="text-center" style="display: none; justify-content: center;
     margin-top: 1vw; align-items: center; width: 100%; height: 100%;">
     <p id ="noParameters">Incomplete parameters given</p>
+</div>
+
+<div id="errorMessage" class="text-center" style="display: none; justify-content: center;
+    margin-top: 1vw; align-items: center; width: 100%; height: 100%; color: red;">
+    <!-- Error message will be displayed here -->
+</div>
+
+<div id="successMessage" class="text-center" style="display: none; justify-content: center;
+    margin-top: 1vw; align-items: center; width: 100%; height: 100%; color: limegreen;">
+    <!-- Success message will be displayed here -->
 </div>
 
 <!-- Bootstrap and other JavaScript libraries -->

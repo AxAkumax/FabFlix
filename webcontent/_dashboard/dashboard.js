@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     $.ajax({
-        url: "api/metadata",
+        url: "../api/metadata",
         method: "GET",
         dataType: "json",
         success: function (resultData) {
