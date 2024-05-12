@@ -1,7 +1,0 @@
-
-<actors>
-<actor><stagename>John Cassavetes</stagename> <dowstart>1954</dowstart> <dowend>1983</dowend> <familyname>Cassavetes</familyname> <firstname>John</firstname> <gender>M</gender> <dob>1929</dob> <dod>1989</dod> <roletype>intense</roletype> <origin>\Am</origin> <picref>[4.204</picref> <notes><also>D</also></notes></actor> <relationships><relship><reltype>Ww</reltype><towhom><relname>Hitchcock</relname><relattr>D</relattr></towhom></relship></relationships> <notes/>
-    <actor><stagename>Bud Abbott</stagename> <dowstart>1939</dowstart> <dowend>1956</dowend> <familyname> Abbott</familyname> <firstname>William</firstname> <gender>M</gender> <dob>1895</dob> <dod>1974</dod> <roletype>straight comedian</roletype> <origin>\Am</origin>  <studio>Universal</studio> <relationships><relship><reltype>Ww</reltype><towhom><relname>Lou Costello</relname></towhom></relship></relationships> <notes/></actor>
-    <actor><stagename>Gena Rowlands</stagename> <dowstart>1958</dowstart> <dowend>1980</dowend> <familyname>Rowlands</familyname> <firstname>Virginia</firstname> <gender>F</gender> <dob>1934</dob> <dod>1984+</dod> <roletype>lead</roletype> <origin>\Am</origin> <picref>[34.253]</picref>  <relationships><relship><reltype>Mt</reltype><towhom><relname>John Cassavetes</relname></towhom></relship> <relship><reltype>Ww</reltype><towhom><relname>Hitchcock</relname><relattr>D</relattr></towhom></relship></relationships> <notes/></actor>
-
-</actors>
