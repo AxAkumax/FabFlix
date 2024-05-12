@@ -1,0 +1,1027 @@
+Number of Entries '342'.
+Star Id: , Star Dbid: , Star Name: Brooke Adams, Birth Year: 1949
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Mario Adorf, Birth Year: 1930
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Rati Agnihotri, Birth Year: 1960
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Edward Albert, Birth Year: 1951
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Alan Alda, Birth Year: 1936
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: John Alderton, Birth Year: 1940
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Woody Allen, Birth Year: 1935
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Richard Anderson, Birth Year: 1926
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Ursula Andress, Birth Year: 1936
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Fanny Ardant, Birth Year: 1949
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Alan Arkin, Birth Year: 1934
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Lucie Arnaz, Birth Year: 1951
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Elizabeth Ashley, Birth Year: 1939
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Fred Astaire, Birth Year: 1899
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: William Atherton, Birth Year: 1947
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Christopher Atkins, Birth Year: 1961
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Richard Attenborough, Birth Year: 1923
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Charles Aznavour, Birth Year: 1924
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Hank Azaria, Birth Year: 1964
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Amitabh Bachchan, Birth Year: 1942
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Josephine Baker, Birth Year: 1906
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Jill Balcon, Birth Year: 1925
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: William Baldwin, Birth Year: 1963
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Anne Bancroft, Birth Year: 1931
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Antonio Banderas, Birth Year: 1960
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Ellen Barkin, Birth Year: 1954
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Kim Basinger, Birth Year: 1953
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Angela Bassett, Birth Year: 1958
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Ned Beatty, Birth Year: 1937
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Warren Beatty, Birth Year: 1937
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: John Beck, Birth Year: 1943
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Harry Belafonte, Birth Year: 1927
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Tom Bell, Birth Year: 1933
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Dirk Benedict, Birth Year: 1945
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Hywel Bennett, Birth Year: 1944
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Candice Bergen, Birth Year: 1946
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Pat Boone, Birth Year: 1934
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: John Boorman, Birth Year: 1933
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Tom Bosley, Birth Year: 1927
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: David Bowie, Birth Year: 1947
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Bruce Boxleitner, Birth Year: 1950
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Kenneth Branagh, Birth Year: 1960
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Marlon Brando, Birth Year: 1924
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Claude Brasseur, Birth Year: 1936
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Beau Bridges, Birth Year: 1941
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Jeff Bridges, Birth Year: 1949
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Wilford Brimley, Birth Year: 
+Reason: Duplicate: Star parsed already
+
+Star Id: , Star Dbid: , Star Name: James Brolin, Birth Year: 1940
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Albert Brooks, Birth Year: 1947
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Mel Brooks, Birth Year: 1926
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Gary Brown, Birth Year: 
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Jim Brown, Birth Year: 1936
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Peter Brown, Birth Year: 
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Carol Burnett, Birth Year: 1933
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Ellen Burstyn, Birth Year: 1932
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Gary Busey, Birth Year: 1944
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Robert Butler, Birth Year: 
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: William Butler, Birth Year: 
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Nicolas Cage, Birth Year: 1964
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Michael Caine, Birth Year: 1933
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Helena Bonham Carter, Birth Year: 1966
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Veronica Cartwright, Birth Year: 1949
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Johnny Cash, Birth Year: 1932
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: nm9424020, Star Name: John Cassavetes, Birth Year: 1929
+Reason: Duplicate: Star parsed already
+
+Star Id: , Star Dbid: , Star Name: Seymour Cassel, Birth Year: 1935
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Phoebe Cates, Birth Year: 1963
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Adolfo Celi, Birth Year: 1922
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Stockard Channing, Birth Year: 1944
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Geraldine Chaplin, Birth Year: 1944
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Sydney Chaplin, Birth Year: 1926
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Cher, Birth Year: 1946
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Thomas Chong, Birth Year: 
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Julie Christie, Birth Year: 1940
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: John Cleese, Birth Year: 1939
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Glenn Close, Birth Year: 1947
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Jennifer Cluff, Birth Year: 
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: James Coburn, Birth Year: 1928
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Jeff Conaway, Birth Year: 1950
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Robert Conrad, Birth Year: 1935
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Ron Cook, Birth Year: 
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Francis Ford Coppola, Birth Year: 1939
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Roger Corman, Birth Year: 1926
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Kevin Costner, Birth Year: 1955
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Clotilde Courau, Birth Year: 1969
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Tom Courtenay, Birth Year: 1937
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Ronny Cox, Birth Year: 1938
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: John Crawford, Birth Year: 
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Billy Crystal, Birth Year: 1948
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Kieran Culkin, Birth Year: 1982
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Robert Culp, Birth Year: 1930
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Tim Curry, Birth Year: 1946
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Jamie Lee Curtis, Birth Year: 1958
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Roger Daltrey, Birth Year: 1944
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Kim Darby, Birth Year: 1947
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: James Darren, Birth Year: 1936
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Danielle Darrieux, Birth Year: 1917
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Ossie Davis, Birth Year: 1917
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Julie Delpy, Birth Year: 1969
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Dom DeLuise, Birth Year: 1933
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Judi Dench, Birth Year: 1934
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Catherine Deneuve, Birth Year: 1943
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Bruce Dern, Birth Year: 1936
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Laura Dern, Birth Year: 1967
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: William Devane, Birth Year: 
+Reason: Duplicate: Star parsed already
+
+Star Id: , Star Dbid: , Star Name: Marlene Dietrich, Birth Year: 1901
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Phyllis Diller, Birth Year: 1917
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Matt Dillon, Birth Year: 1964
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Kirk Douglas, Birth Year: 1916
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Brad Dourif, Birth Year: 1950
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: James Drury, Birth Year: 1934
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Faye Dunaway, Birth Year: 1941
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Griffin Dunne, Birth Year: 1955
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Robert Duvall, Birth Year: 1931
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Clint Eastwood, Birth Year: 1930
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Blake Edwards, Birth Year: 1922
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Lisa Eichhorn, Birth Year: 1952
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Hector Elizondo, Birth Year: 1936
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Sam Elliott, Birth Year: 1944
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Michael Elphick, Birth Year: 1946
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Peter Falk, Birth Year: 1927
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Charles Farrell, Birth Year: 1901
+Reason: Duplicate: Star parsed already
+
+Star Id: , Star Dbid: , Star Name: Mia Farrow, Birth Year: 1945
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Sherilyn Fenn, Birth Year: 1965
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Sally Field, Birth Year: 1946
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Frank Finlay, Birth Year: 1926
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Albert Finney, Birth Year: 1936
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Frances Fisher, Birth Year: 1952
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Bridget Fonda, Birth Year: 1964
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Jodie Foster, Birth Year: 1962
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: John Foster, Birth Year: 
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: James Fox, Birth Year: 1939
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Michael J. Fox, Birth Year: 1961
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Dominic Frontiere, Birth Year: 1931
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Greta Garbo, Birth Year: 1905
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Allen Garfield, Birth Year: 1939
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Beverly Garland, Birth Year: 1926
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: James Garner, Birth Year: 1928
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Ben Gazzara, Birth Year: 1930
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Judy Geeson, Birth Year: 1948
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Bill Gerber, Birth Year: 
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Richard Gere, Birth Year: 1949
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Balthazar Getty, Birth Year: 1975
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Giancarlo Giannini, Birth Year: 1942
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Henry Gibson, Birth Year: 1935
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Annie Girardot, Birth Year: 1931
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Paul Michael Glaser, Birth Year: 1943
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Jeff Goldblum, Birth Year: 1952
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Colin Gordon, Birth Year: 1911
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Robert Gordon, Birth Year: 
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Elliott Gould, Birth Year: 1938
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Harold Gould, Birth Year: 1923
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Graham Greene, Birth Year: 1904
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Pam Grier, Birth Year: 1949
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Melanie Griffith, Birth Year: 1957
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Charles Grodin, Birth Year: 1935
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Gene Hackman, Birth Year: 1930
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Harry Hamlin, Birth Year: 1951
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Tom Hanks, Birth Year: 1956
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Mark Harmon, Birth Year: 1951
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: John Hart, Birth Year: 
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Mariette Hartley, Birth Year: 1940
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Rutger Hauer, Birth Year: 1944
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Goldie Hawn, Birth Year: 1945
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: John Heard, Birth Year: 1946
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Mariel Hemingway, Birth Year: 1961
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: David Hemmings, Birth Year: 1941
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Justin Henry, Birth Year: 1971
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Bernard Hepton, Birth Year: 1925
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Dustin Hoffman, Birth Year: 1937
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Bo Hopkins, Birth Year: 1942
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Bob Hoskins, Birth Year: 1942
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Dan Howard, Birth Year: 
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Helen Hunt, Birth Year: 1963
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Holly Hunter, Birth Year: 1958
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Elizabeth Hurley, Birth Year: 1965
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: John Hurt, Birth Year: 1940
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: William Hurt, Birth Year: 1950
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Olivia Hussey, Birth Year: 1951
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Anjelica Huston, Birth Year: 1951
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Timothy Hutton, Birth Year: 1960
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Jeremy Irons, Birth Year: 1948
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Samuel L. Jackson, Birth Year: 1948
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Derek Jacobi, Birth Year: 1938
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Elton John, Birth Year: 1947
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Stephen Johnson, Birth Year: 
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Freddie Jones, Birth Year: 1927
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Shirley Jones, Birth Year: 1934
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Tommy Lee Jones, Birth Year: 1946
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Stacy Keach, Birth Year: 1941
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Marthe Keller, Birth Year: 1945
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Gary Kemp, Birth Year: 1959
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: George Kennedy, Birth Year: 1925
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Margot Kidder, Birth Year: 1948
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Nicole Kidman, Birth Year: 1967
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Val Kilmer, Birth Year: 1959
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Greg Kinnear, Birth Year: 1963
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Kris Kristofferson, Birth Year: 1936
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Burt Kwouk, Birth Year: 1930
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Diane Lane, Birth Year: 1965
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Mike Lane, Birth Year: 
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Jessica Lange, Birth Year: 1949
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Louise Lasser, Birth Year: 1939
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: John Phillip Law, Birth Year: 1937
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Cloris Leachman, Birth Year: 1926
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Mark Lee, Birth Year: 
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Joe Lewis, Birth Year: 
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Robert Loggia, Birth Year: 1930
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Karina Lombard, Birth Year: 1969
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Shirley MacLaine, Birth Year: 1934
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Jena Malone, Birth Year: 1984
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Jane March, Birth Year: 1973
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Jane March, Birth Year: 1973
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Bryan Marshall, Birth Year: 
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: James Marshall, Birth Year: 1967
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Steve Martin, Birth Year: 1945
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Anna Massey, Birth Year: 1937
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Peter Masterson, Birth Year: 
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Chiara Mastroianni, Birth Year: 1972
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Elaine May, Birth Year: 1932
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Malcolm McDowell, Birth Year: 1943
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Ian McShane, Birth Year: 1942
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Spike Milligan, Birth Year: 1918
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Ron Moody, Birth Year: 1924
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Terry Moore, Birth Year: 1929
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Jeanne Moreau, Birth Year: 1928
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Rita Moreno, Birth Year: 1931
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Michael Murphy, Birth Year: 
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Don Murray, Birth Year: 1929
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Tom Murray, Birth Year: 
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: James Naughton, Birth Year: 1945
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Judd Nelson, Birth Year: 1959
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Willie Nelson, Birth Year: 1933
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Paul Newman, Birth Year: 1925
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Jack Nicholson, Birth Year: 1937
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Nick Nolte, Birth Year: 1941
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Kim Novak, Birth Year: 1933
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Kevin OConnor, Birth Year: 
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Gary Oldman, Birth Year: 1958
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Per Oscarsson, Birth Year: 1927
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Peter OToole, Birth Year: 1932
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Frank Oz, Birth Year: 1944
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Sarah Jessica Parker, Birth Year: 1965
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Dolly Parton, Birth Year: 1946
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Sean Penn, Birth Year: 1960
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Bernadette Peters, Birth Year: 1948
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Leslie Phillips, Birth Year: 1924
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Michel Piccoli, Birth Year: 1925
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Ronald Pickup, Birth Year: 1940
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Marie-France Pisier, Birth Year: 1944
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Joan Plowright, Birth Year: 1929
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Roman Polanski, Birth Year: 1933
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Sydney Pollack, Birth Year: 1934
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Natalie Portman, Birth Year: 1981
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Micheline Presle, Birth Year: 1922
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Elvis Presley, Birth Year: 1935
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Barry Primus, Birth Year: 1938
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Jonathan Pryce, Birth Year: 1947
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Anthony Quinn, Birth Year: 1915
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Ronald Reagan, Birth Year: 1911
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Lynn Redgrave, Birth Year: 1943
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Vanessa Redgrave, Birth Year: 1937
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Roger Rees, Birth Year: 1944
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Frances Reid, Birth Year: 
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Carl Reiner, Birth Year: 1922
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Burt Reynolds, Birth Year: 1936
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Don Rickles, Birth Year: 1926
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Leni Riefenstahl, Birth Year: 1902
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Diana Rigg, Birth Year: 1938
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: John Ritter, Birth Year: 1948
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Eric Roberts, Birth Year: 1956
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Julia Roberts, Birth Year: 1967
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: James Robertson, Birth Year: 
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Jean Rochefort, Birth Year: 1930
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Mickey Rooney, Birth Year: 1920
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Leo Rossi, Birth Year: 
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Kurt Russell, Birth Year: 1951
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Winona Ryder, Birth Year: 1971
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Soupy Sales, Birth Year: 1926
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Peter Sallis, Birth Year: 1921
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Jennifer Salt, Birth Year: 1944
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Adam Sandler, Birth Year: 1966
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Chris Sarandon, Birth Year: 1942
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Susan Sarandon, Birth Year: 1946
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Fred Savage, Birth Year: 1976
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Greta Scacchi, Birth Year: 1960
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Arnold Schwarzenegger, Birth Year: 1947
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Hanna Schygulla, Birth Year: 1943
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Steven Seagal, Birth Year: 1952
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: George Segal, Birth Year: 1934
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Jane Seymour, Birth Year: 1951
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Tupac Shakur, Birth Year: 1971
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Omar Sharif, Birth Year: 1932
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: William Shatner, Birth Year: 1931
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Martin Sheen, Birth Year: 1940
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Sam Shepard, Birth Year: 1943
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Martin Short, Birth Year: 1950
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Ron Silver, Birth Year: 1946
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Tom Skerritt, Birth Year: 1933
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Christian Slater, Birth Year: 1969
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Lois Smith, Birth Year: 1930
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Maggie Smith, Birth Year: 1934
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Paul Sorvino, Birth Year: 1939
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: David Soul, Birth Year: 1943
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Bud Spencer, Birth Year: 1929
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Sylvester Stallone, Birth Year: 1946
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: John Standing, Birth Year: 1934
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Maureen Stapleton, Birth Year: 1925
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Rod Steiger, Birth Year: 1925
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Andrew Stevens, Birth Year: 1955
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Sting, Birth Year: 
+Reason: Duplicate: Star parsed already
+
+Star Id: , Star Dbid: , Star Name: Christopher Stone, Birth Year: 
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Meryl Streep, Birth Year: 1949
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Donald Sutherland, Birth Year: 1935
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Dudley Sutton, Birth Year: 1933
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Bo Svenson, Birth Year: 1941
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Patrick Swayze, Birth Year: 1952
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Derek Thompson, Birth Year: 
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Jack Thompson, Birth Year: 1940
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Rip Torn, Birth Year: 1931
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: John Travolta, Birth Year: 1954
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Guinevere Turner, Birth Year: 1968
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Beverly Tyler, Birth Year: 1924
+Reason: Duplicate: Star parsed already
+
+Star Id: , Star Dbid: , Star Name: Peter Vaughan, Birth Year: 1923
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Robert Vaughn, Birth Year: 1932
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Jon Voight, Birth Year: 1938
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Lindsay Wagner, Birth Year: 1949
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Robert Wagner, Birth Year: 1930
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Christopher Walken, Birth Year: 1943
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Lesley Ann Warren, Birth Year: 1946
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Craig Wasson, Birth Year: 1954
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Sam Waterston, Birth Year: 1940
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Emily Watson, Birth Year: 1967
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Sigourney Weaver, Birth Year: 1949
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Robin Williams, Birth Year: 1951
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Vanessa Williams, Birth Year: 1963
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Vanessa Williams, Birth Year: 1963
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Fred Williamson, Birth Year: 1938
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Scott Wilson, Birth Year: 1942
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Kate Winslet, Birth Year: 1975
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: David Wood, Birth Year: 
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Elijah Wood, Birth Year: 1981
+Reason: Duplicate: Star exists in database already
+
+Star Id: , Star Dbid: , Star Name: Michael York, Birth Year: 1942
+Reason: Duplicate: Star exists in database already
+

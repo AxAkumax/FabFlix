@@ -45,24 +45,4 @@
         <servlet-name>EmployeeLoginServlet</servlet-name>
         <url-pattern>/employee/api/employee-login</url-pattern>
     </servlet-mapping>
-
-<!--    &lt;!&ndash; Filter mappings &ndash;&gt;-->
-<!--    <filter>-->
-<!--        <filter-name>LoginFilter</filter-name>-->
-<!--        <filter-class>LoginFilter</filter-class>-->
-<!--    </filter>-->
-<!--    <filter-mapping>-->
-<!--        <filter-name>LoginFilter</filter-name>-->
-<!--        <url-pattern>/*</url-pattern>-->
-<!--    </filter-mapping>-->
-
-<!--    <filter>-->
-<!--        <filter-name>EmployeeLoginFilter</filter-name>-->
-<!--        <filter-class>EmployeeLoginFilter</filter-class>-->
-<!--    </filter>-->
-<!--    <filter-mapping>-->
-<!--        <filter-name>EmployeeLoginFilter</filter-name>-->
-<!--        <url-pattern>/_dashboard/*</url-pattern>-->
-<!--    </filter-mapping>-->
-
 </web-app>
