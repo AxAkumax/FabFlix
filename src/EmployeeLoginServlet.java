@@ -15,8 +15,8 @@ import java.sql.PreparedStatement;
 import org.jasypt.util.password.StrongPasswordEncryptor;
 import java.sql.ResultSet;
 
-@WebServlet(name = "LoginServlet", urlPatterns = "/user/api/login")
-public class LoginServlet extends HttpServlet {
+@WebServlet(name = "EmployeeLoginServlet", urlPatterns = "/employee/api/employee-login")
+public class EmployeeLoginServlet extends HttpServlet {
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
@@ -50,7 +50,7 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
         try {
             Connection dbCon = dataSource.getConnection();
-            String query = "SELECT * FROM customers WHERE email = ?";
+            String query = "SELECT * FROM employees WHERE email = ?";
 
             PreparedStatement emailCheckStatement = dbCon.prepareStatement(query);
             emailCheckStatement.setString(1, email);
@@ -78,10 +78,7 @@ public class LoginServlet extends HttpServlet {
 //                }
                 boolean exists = new StrongPasswordEncryptor().checkPassword(password, storedPassword);
                 if (exists) {
-                    int customerId = emailResultSet.getInt("customerId");
-
-                    request.getSession().setAttribute("user", email);
-                    request.getSession().setAttribute("customerId", customerId);
+                    request.getSession().setAttribute("employee", email);
                     responseJsonObject.addProperty("status", "success");
                     responseJsonObject.addProperty("message", "success");
                 }
@@ -110,3 +107,4 @@ public class LoginServlet extends HttpServlet {
         }
     }
 }
+

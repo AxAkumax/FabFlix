@@ -52,8 +52,6 @@ function submitAddStarForm(event) {
         },
         error: function (xhr, status, error) {
             console.error("Error occurred while adding the star:", error);
-            // Display error message to the user
-            // For example: $("#errorMessage").text("An error occurred while adding the movie.").show();
         }
     });
 }
