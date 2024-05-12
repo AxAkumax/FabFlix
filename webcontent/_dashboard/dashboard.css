@@ -27,7 +27,7 @@ body{
 h1{
     color: lightgray;
     text-align: center;
-    margin-top: 5vw;
+    margin-top: 4.6vw;
     font-family: "DM Sans", sans-serif;
 }
 
@@ -67,4 +67,18 @@ th:first-child {
 td:last-child,
 th:last-child {
     width: 35%; /* Adjust the width as needed */
+}
+
+footer{
+    bottom: 0;
+    margin-top: auto;
+    width: 100%;
+    padding-top: 1.2vw;
+    padding-bottom: 1.2vw;
+    padding-left: 0.8vw;
+    background-color: black;
+    color: #bb86fc; /* white text color for the table */
+    font-family: "DM Sans", sans-serif;
+    font-style: normal;
+    font-size: 1.3vw;
 }

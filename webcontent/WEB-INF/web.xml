@@ -5,6 +5,7 @@
     <display-name>cs122b-spring21-project1-api-example</display-name>
     <welcome-file-list>
         <welcome-file>login.html</welcome-file>
+        <welcome-file>_dashboard/employee_login.html</welcome-file>
     </welcome-file-list>
 
     <!-- Register the DataSource which defined in META-INF/context.xml-->
@@ -26,4 +27,22 @@
 </security-constraint>
  -->
 
+    <!-- Servlet mappings -->
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/user/api/login</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>EmployeeLoginServlet</servlet-name>
+        <servlet-class>EmployeeLoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EmployeeLoginServlet</servlet-name>
+        <url-pattern>/employee/api/employee-login</url-pattern>
+    </servlet-mapping>
 </web-app>
