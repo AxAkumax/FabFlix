@@ -25,6 +25,7 @@ Project 3:
     * BrowseServlet
     * ConfirmationServlet
     * GenreServlet
+    * EmployeeLoginServlet
     * LoginServlet
     * MetadataServlet
     * MovieParser
