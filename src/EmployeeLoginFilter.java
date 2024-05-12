@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /**
  * Servlet Filter implementation class LoginFilter
  */
-@WebFilter(filterName = "EmployeeLoginFilter", urlPatterns = "/employee/*")
+@WebFilter(filterName = "EmployeeLoginFilter", urlPatterns = "/*")
 public class EmployeeLoginFilter implements Filter {
     private final ArrayList<String> allowedURIs = new ArrayList<>();
 
@@ -50,7 +50,7 @@ public class EmployeeLoginFilter implements Filter {
         allowedURIs.add("_dashboard/dashboard.html");
         allowedURIs.add("_dashboard/dashboard.js");
         allowedURIs.add("_dashboard/dashboard.css");
-        allowedURIs.add("api/employee-login");
+        allowedURIs.add("/employee/api/employee-login");
     }
 
     public void destroy() {
