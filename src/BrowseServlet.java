@@ -67,26 +67,15 @@ public class BrowseServlet extends HttpServlet {
                         "m.year AS movie_year, " +
                         "m.director AS movie_director, " +
 
-                        "(SELECT GROUP_CONCAT(CONCAT(topStars.starId, ';', topStars.name) SEPARATOR ';') " +
-                        " FROM (SELECT s.id AS starId, s.name, COUNT(*) AS movieCount " +
-                        "       FROM stars s " +
-                        "       JOIN stars_in_movies sm ON s.id = sm.starId " +
-                        "       WHERE s.id IN (SELECT starId FROM stars_in_movies WHERE movieId = m.id) " +
-                        "       GROUP BY s.id, s.name " +
-                        "       ORDER BY " +
-                        "           CASE " +
-                        "               WHEN COUNT(*) = (SELECT COUNT(*) " +
-                        "                                   FROM stars_in_movies " +
-                        "                                   WHERE movieId = m.id " +
-                        "                                   GROUP BY movieId, starId " +
-                        "                                   ORDER BY COUNT(*) DESC " +
-                        "                                   LIMIT 1) " +
-                        "               THEN s.name " +
-                        "               ELSE movieCount " +
-                        "           END DESC, " +
-                        "           s.name ASC " +
-                        "       LIMIT 3) AS topStars) AS star_ids_and_names, "
-                        +
+                        "(SELECT GROUP_CONCAT(DISTINCT CONCAT(s.id, ';', s.name, ';', total_movies) ORDER BY total_movies DESC, s.name ASC SEPARATOR ';') " +
+                        " FROM (SELECT starId, COUNT(*) AS total_movies " +
+                        "       FROM stars_in_movies " +
+                        "       GROUP BY starId " +
+                        "       ) AS star_movies " +
+                        " JOIN stars s ON star_movies.starId = s.id " +
+                        " JOIN stars_in_movies sm ON s.id = sm.starId " +
+                        " WHERE sm.movieId = m.id " +
+                        ") AS star_ids_and_names, "  +
 
                         "GROUP_CONCAT(DISTINCT CONCAT(g.id, ';', g.name) SEPARATOR ';') AS genres, " +
                         "AVG(r.rating) AS average_rating " + // Calculate average rating
@@ -106,36 +95,48 @@ public class BrowseServlet extends HttpServlet {
                 PreparedStatement statement = conn.prepareStatement(query);
                 statement.setInt(1, genreId);
 
-                statement.setInt(2, recordsPerPage); // Set limit
+                statement.setInt(2, recordsPerPage + 1); // Set limit
                 statement.setInt(3, offset); // Set offset
 
                 ResultSet rs = statement.executeQuery();
                 JsonArray jsonArray = new JsonArray();
+                boolean hasNextPage = false; // Flag to track if there are more pages available
 
                 while (rs.next()) {
+                    if (jsonArray.size() < recordsPerPage) {
+                        String movieId = rs.getString("movie_id");
+                        String movieTitle = rs.getString("title");
+                        String movieYear = rs.getString("movie_year");
+                        String movieDirector = rs.getString("movie_director");
+                        String movieGenres = rs.getString("genres");
+                        double averageRating = Math.round(rs.getDouble("average_rating") * 10.0) / 10.0;
 
-                    String movieId = rs.getString("movie_id");
-                    String movieTitle = rs.getString("title");
-                    String movieYear = rs.getString("movie_year");
-                    String movieDirector = rs.getString("movie_director");
-                    String movieGenres = rs.getString("genres");
-                    double averageRating = Math.round(rs.getDouble("average_rating") * 10.0) / 10.0;
+                        JsonObject jsonObject = new JsonObject();
+                        jsonObject.addProperty("id", movieId);
+                        jsonObject.addProperty("title", movieTitle);
+                        jsonObject.addProperty("year", movieYear);
+                        jsonObject.addProperty("director", movieDirector);
+                        jsonObject.addProperty("stars", rs.getString("star_ids_and_names"));
+                        jsonObject.addProperty("genres", movieGenres);
+                        jsonObject.addProperty("rating", averageRating);
+                        jsonArray.add(jsonObject);
+                    }
+                    else{
+                        hasNextPage = true; // Set the flag indicating more pages are available
+                        break; // Exit the loop as we fetched more records than the recordsPerPage
+                    }
+                }
 
-                    JsonObject jsonObject = new JsonObject();
-                    jsonObject.addProperty("id", movieId);
-                    jsonObject.addProperty("title", movieTitle);
-                    jsonObject.addProperty("year", movieYear);
-                    jsonObject.addProperty("director", movieDirector);
-                    jsonObject.addProperty("stars", rs.getString("star_ids_and_names"));
-                    jsonObject.addProperty("genres", movieGenres);
-                    jsonObject.addProperty("rating", averageRating);
-
-                    jsonArray.add(jsonObject);
+                if (jsonArray.size() > recordsPerPage) {
+                    jsonArray.remove(jsonArray.size() - 1);
+                    hasNextPage = true;
                 }
 
                 rs.close();
                 statement.close();
                 jsonResponse.add("movies", jsonArray);
+                jsonResponse.addProperty("hasNextPage", hasNextPage);
+
                 out.print(jsonResponse.toString());
 
                 response.setStatus(200);
@@ -153,27 +154,16 @@ public class BrowseServlet extends HttpServlet {
                             "m.year AS movie_year, " +
                             "m.director AS movie_director, " +
 
-                            "(SELECT GROUP_CONCAT(CONCAT(topStars.starId, ';', topStars.name) SEPARATOR ';') " +
-                            " FROM (SELECT s.id AS starId, s.name, COUNT(*) AS movieCount " +
-                            "       FROM stars s " +
-                            "       JOIN stars_in_movies sm ON s.id = sm.starId " +
-                            "       WHERE s.id IN (SELECT starId FROM stars_in_movies WHERE movieId = m.id) " +
-                            "       GROUP BY s.id, s.name " +
-                            "       ORDER BY " +
-                            "           CASE " +
-                            "               WHEN COUNT(*) = (SELECT COUNT(*) " +
-                            "                                   FROM stars_in_movies " +
-                            "                                   WHERE movieId = m.id " +
-                            "                                   GROUP BY movieId, starId " +
-                            "                                   ORDER BY COUNT(*) DESC " +
-                            "                                   LIMIT 1) " +
-                            "               THEN s.name " +
-                            "               ELSE movieCount " +
-                            "           END DESC, " +
-                            "           s.name ASC " +
-                            "       LIMIT 3) AS topStars) AS star_ids_and_names, "
+                            "(SELECT GROUP_CONCAT(DISTINCT CONCAT(s.id, ';', s.name, ';', total_movies) ORDER BY total_movies DESC, s.name ASC SEPARATOR ';') " +
+                            " FROM (SELECT starId, COUNT(*) AS total_movies " +
+                            "       FROM stars_in_movies " +
+                            "       GROUP BY starId " +
+                            "       ) AS star_movies " +
+                            " JOIN stars s ON star_movies.starId = s.id " +
+                            " JOIN stars_in_movies sm ON s.id = sm.starId " +
+                            " WHERE sm.movieId = m.id " +
+                            ") AS star_ids_and_names, " +
 
-                            +
                             "(SELECT GROUP_CONCAT(DISTINCT CONCAT(g.id, ';', g.name) SEPARATOR ';') " +
                             "FROM genres_in_movies gm JOIN genres g ON gm.genreId = g.id " +
                             "WHERE gm.movieId = m.id) AS genres, " +
@@ -186,7 +176,7 @@ public class BrowseServlet extends HttpServlet {
 
                     query+= " ORDER BY " + orderByClause.toString() + " LIMIT ? OFFSET ?";
                     statement = conn.prepareStatement(query);
-                    statement.setInt(1, recordsPerPage); // Set limit
+                    statement.setInt(1, recordsPerPage + 1); // Set limit
                     statement.setInt(2, offset); // Set offset
 
                 }
@@ -200,26 +190,15 @@ public class BrowseServlet extends HttpServlet {
                             "m.year AS movie_year, " +
                             "m.director AS movie_director, " +
 
-                            "(SELECT GROUP_CONCAT(CONCAT(topStars.starId, ';', topStars.name) SEPARATOR ';') " +
-                            " FROM (SELECT s.id AS starId, s.name, COUNT(*) AS movieCount " +
-                            "       FROM stars s " +
-                            "       JOIN stars_in_movies sm ON s.id = sm.starId " +
-                            "       WHERE s.id IN (SELECT starId FROM stars_in_movies WHERE movieId = m.id) " +
-                            "       GROUP BY s.id, s.name " +
-                            "       ORDER BY " +
-                            "           CASE " +
-                            "               WHEN COUNT(*) = (SELECT COUNT(*) " +
-                            "                                   FROM stars_in_movies " +
-                            "                                   WHERE movieId = m.id " +
-                            "                                   GROUP BY movieId, starId " +
-                            "                                   ORDER BY COUNT(*) DESC " +
-                            "                                   LIMIT 1) " +
-                            "               THEN s.name " +
-                            "               ELSE movieCount " +
-                            "           END DESC, " +
-                            "           s.name ASC " +
-                            "       LIMIT 3) AS topStars) AS star_ids_and_names, "
-                            +
+                            "(SELECT GROUP_CONCAT(DISTINCT CONCAT(s.id, ';', s.name, ';', total_movies) ORDER BY total_movies DESC, s.name ASC SEPARATOR ';') " +
+                            " FROM (SELECT starId, COUNT(*) AS total_movies " +
+                            "       FROM stars_in_movies " +
+                            "       GROUP BY starId " +
+                            "       ) AS star_movies " +
+                            " JOIN stars s ON star_movies.starId = s.id " +
+                            " JOIN stars_in_movies sm ON s.id = sm.starId " +
+                            " WHERE sm.movieId = m.id " +
+                            ") AS star_ids_and_names, "  +
 
                             "(SELECT GROUP_CONCAT(DISTINCT CONCAT(g.id, ';', g.name) SEPARATOR ';') " +
                             "FROM genres_in_movies gm JOIN genres g ON gm.genreId = g.id " +
@@ -234,37 +213,49 @@ public class BrowseServlet extends HttpServlet {
                     query+= " ORDER BY " + orderByClause.toString() + " LIMIT ? OFFSET ?";
                     statement = conn.prepareStatement(query);
                     statement.setString(1, titleStartParameter + "%");
-                    statement.setInt(2, recordsPerPage); // Set limit
+                    statement.setInt(2, recordsPerPage + 1); // Set limit
                     statement.setInt(3, offset); // Set offset
                 }
 
                 ResultSet rs = statement.executeQuery();
                 JsonArray jsonArray = new JsonArray();
+                boolean hasNextPage = false; // Flag to track if there are more pages available
 
                 while (rs.next()) {
+                    if (jsonArray.size() < recordsPerPage) {
+                        String movieId = rs.getString("movie_id");
+                        String movieTitle = rs.getString("title");
+                        String movieYear = rs.getString("movie_year");
+                        String movieDirector = rs.getString("movie_director");
+                        String movieGenres = rs.getString("genres");
+                        double averageRating = Math.round(rs.getDouble("average_rating") * 10.0) / 10.0;
 
-                    String movieId = rs.getString("movie_id");
-                    String movieTitle = rs.getString("title");
-                    String movieYear = rs.getString("movie_year");
-                    String movieDirector = rs.getString("movie_director");
-                    String movieGenres = rs.getString("genres");
-                    double averageRating = Math.round(rs.getDouble("average_rating") * 10.0) / 10.0;
+                        JsonObject jsonObject = new JsonObject();
+                        jsonObject.addProperty("id", movieId);
+                        jsonObject.addProperty("title", movieTitle);
+                        jsonObject.addProperty("year", movieYear);
+                        jsonObject.addProperty("director", movieDirector);
+                        jsonObject.addProperty("stars", rs.getString("star_ids_and_names"));
+                        jsonObject.addProperty("genres", movieGenres);
+                        jsonObject.addProperty("rating", averageRating);
 
-                    JsonObject jsonObject = new JsonObject();
-                    jsonObject.addProperty("id", movieId);
-                    jsonObject.addProperty("title", movieTitle);
-                    jsonObject.addProperty("year", movieYear);
-                    jsonObject.addProperty("director", movieDirector);
-                    jsonObject.addProperty("stars", rs.getString("star_ids_and_names"));
-                    jsonObject.addProperty("genres", movieGenres);
-                    jsonObject.addProperty("rating", averageRating);
+                        jsonArray.add(jsonObject);
+                    }
+                    else{
+                        hasNextPage = true; // Set the flag indicating more pages are available
+                        break; // Exit the loop as we fetched more records than the recordsPerPage
+                    }
+                }
 
-                    jsonArray.add(jsonObject);
+
+                if (!hasNextPage && jsonArray.size() == recordsPerPage) {
+                    jsonArray.remove(jsonArray.size() - 1);
                 }
 
                 rs.close();
                 statement.close();
                 jsonResponse.add("movies", jsonArray);
+                jsonResponse.addProperty("hasNextPage", hasNextPage);
                 out.print(jsonResponse.toString());
 
                 response.setStatus(200);

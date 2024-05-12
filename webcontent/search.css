@@ -32,6 +32,12 @@ html{
 }
 label{
     color: lightgray;
+    font-family: "DM Sans", sans-serif;
+    font-style: normal;
+}
+input, option{
+    font-family: "DM Sans", sans-serif;
+    font-style: normal;
 }
 
 body{
@@ -47,6 +53,8 @@ body{
     cursor: pointer; /* Change cursor to pointer on hover */
     transition: background-color 0.3s, color 0.3s, border-color 0.3s;
     margin-bottom: 0.3vw;
+    font-family: "DM Sans", sans-serif;
+    font-style: normal;
 }
 .btn-purple:hover{
     background-color: black;
@@ -57,6 +65,8 @@ body{
 }
 h2, p{
     color: white;
+    font-family: "DM Sans", sans-serif;
+    font-style: normal;
 }
 #searchResults{
     margin-top: 2vw;

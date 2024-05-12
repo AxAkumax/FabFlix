@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import org.jasypt.util.password.StrongPasswordEncryptor;
 import java.sql.ResultSet;
 
 @WebServlet(name = "LoginServlet", urlPatterns = "/api/login")
@@ -24,20 +25,29 @@ public class LoginServlet extends HttpServlet {
     public void init(ServletConfig config) {
         try {
             dataSource = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/moviedb");
+
         } catch (NamingException e) {
             e.printStackTrace();
         }
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
+        JsonObject responseJsonObject = new JsonObject();
+        PrintWriter out = response.getWriter();
+
+        try {
+            RecaptchaVerifyUtils.verify(gRecaptchaResponse);
+        } catch (Exception e) {
+            responseJsonObject.addProperty("status", "fail");
+            responseJsonObject.addProperty("message", "reCAPTCHA verification failed");
+            out.write(responseJsonObject.toString());
+            return;
+        }
+
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        PrintWriter out = response.getWriter();
-        JsonObject responseJsonObject = new JsonObject();
-
-        /* This example only allows username/password to be test/test
-        /  in the real project, you should talk to the database to verify username/password
-        */
         try {
             Connection dbCon = dataSource.getConnection();
             String query = "SELECT * FROM customers WHERE email = ?";
@@ -51,18 +61,38 @@ public class LoginServlet extends HttpServlet {
             if (emailResultSet.next()) {
                 // Email exists in the database, now check if the password matches
                 String storedPassword = emailResultSet.getString("password");
+//
+//                if (password.equals(storedPassword)) {
+//                    int customerId = emailResultSet.getInt("customerId");
+//
+//                    request.getSession().setAttribute("user", email);
+//                    request.getSession().setAttribute("customerId", customerId);
+//                    responseJsonObject.addProperty("status", "success");
+//                    responseJsonObject.addProperty("message", "success");
+//                } else {
+//                    // Password is incorrect
+//                    // Redirect to login.html with error parameter
+//                    responseJsonObject.addProperty("status", "fail");
+//                    request.getServletContext().log("Login failed");
+//                    responseJsonObject.addProperty("message", "*Incorrect password");
+//                }
+                boolean exists = new StrongPasswordEncryptor().checkPassword(password, storedPassword);
+                if (exists) {
+                    int customerId = emailResultSet.getInt("customerId");
 
-                if (password.equals(storedPassword)) {
                     request.getSession().setAttribute("user", email);
+                    request.getSession().setAttribute("customerId", customerId);
                     responseJsonObject.addProperty("status", "success");
                     responseJsonObject.addProperty("message", "success");
-                } else {
+                }
+                else{
                     // Password is incorrect
                     // Redirect to login.html with error parameter
                     responseJsonObject.addProperty("status", "fail");
                     request.getServletContext().log("Login failed");
                     responseJsonObject.addProperty("message", "*Incorrect password");
                 }
+
             }
             else {
                 responseJsonObject.addProperty("status", "fail");

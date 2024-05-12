@@ -65,7 +65,7 @@ function handleResult(resultData) {
     let movieTableBodyElement = jQuery("#movie_table_body");
 
     // Concatenate the html tags with resultData jsonObject to create table rows
-    for (let i = 0; i < Math.min(10, resultData.length); i++) {
+    for (let i = 0; i <  resultData.length; i++) {
         let rowHTML = "";
         rowHTML += "<tr>";
         rowHTML += "<td>" + '<a href="single-movie.html?id=' + resultData[i]['movie_id'] + '">'
@@ -88,7 +88,7 @@ function handleResult(resultData) {
 
         let genreSpan = $("<span>");
 
-        for (let i = 0; i < Math.min(3, genres.length); i++) {
+        for (let i = 0; i <  genres.length; i++) {
             let genre = genres[i];
 
             let genreLink = $("<a class='browse-link'>")
@@ -97,7 +97,8 @@ function handleResult(resultData) {
             // Append dropdown option values to the genre links
             let sortAttribute = "title ASC, average_rating ASC";
             let moviesPerPage = "10";
-            let urlParams = "&sortAttribute=" + encodeURIComponent(sortAttribute)
+            let page = "1";
+            let urlParams = "&sortAttribute=" + encodeURIComponent(sortAttribute)+ "&page="+ encodeURIComponent(page)
                 + "&recordsPerPage=" + encodeURIComponent(moviesPerPage);
             genreLink.attr("href", genreLink.attr("href") + urlParams);
 
@@ -110,11 +111,49 @@ function handleResult(resultData) {
 
         rowHTML +="<td>" + genreSpanHTML + "</td>";
 
+        rowHTML += '<td> <button type="button" class="btn btn-outline-secondary" ' +
+            'onclick="addToCart(\'' + resultData[i]['movie_id'] + '\', this)"> Add </button> </td>';
+
         rowHTML += "</tr>";
 
         // Append the row created to the table body, which will refresh the page
         movieTableBodyElement.append(rowHTML);
     }
+}
+function addToCart(movieId, buttonElement) {
+    // Create a JSON object containing the movie ID
+    let data = {
+        "movieId": movieId,
+        "action": "increment"
+    };
+
+    let originalText = "Add";
+
+    // Send an AJAX POST request to your backend API to add the movie to the cart
+    $.ajax({
+        type: "POST",
+        url: "api/cart", // Replace this with the actual endpoint of your backend API
+        contentType: "application/json",
+        data: JSON.stringify(data),
+        success: function(response) {
+            // Handle the success response from the server
+            console.log("Movie successfully added to cart");
+
+            // Change the color of the button when successfully added to cart
+            $(buttonElement).removeClass("btn-outline-secondary").addClass("btn-success");
+            $(buttonElement).text("Added");
+
+            // Revert the color back to original after 1 second
+            setTimeout(function() {
+                $(buttonElement).removeClass("btn-success").addClass("btn-outline-secondary");
+                $(buttonElement).text(originalText);
+            }, 500);
+        },
+        error: function(xhr, status, error) {
+            // Handle errors if any
+            console.error("Error adding movie to cart:", error);
+        }
+    });
 }
 
 /**
@@ -131,3 +170,21 @@ jQuery.ajax({
     url: "api/single-star?id=" + starId, // Setting request url, which is mapped by StarsServlet in Stars.java
     success: (resultData) => handleResult(resultData) // Setting callback function to handle data returned successfully by the SingleStarServlet
 });
+
+// Function to retrieve the most recent URL from session storage
+function getRecentURL() {
+    return sessionStorage.getItem('recentURL');
+}
+
+console.log(getRecentURL());
+
+document.getElementById('goBack').addEventListener('click', () => {
+var recentURL = getRecentURL();
+if (recentURL) {
+    // Redirect back to the recent URL (movie page)
+    window.location.href = recentURL;
+} else {
+    // Handle case when no recent URL is stored
+}
+});
+

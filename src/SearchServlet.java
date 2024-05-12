@@ -61,9 +61,17 @@ public class SearchServlet extends HttpServlet {
                     "m.title AS movie_title, " +
                     "m.year AS movie_year, " +
                     "m.director AS movie_director, " +
-                    "(SELECT GROUP_CONCAT(DISTINCT CONCAT(s.id, ';', s.name) SEPARATOR ';') " +
-                    "FROM stars_in_movies sm JOIN stars s ON sm.starId = s.id " +
-                    "WHERE sm.movieId = m.id) AS star_ids_and_names, " +
+
+                    "(SELECT GROUP_CONCAT(DISTINCT CONCAT(s.id, ';', s.name, ';', total_movies) ORDER BY total_movies DESC, s.name ASC SEPARATOR ';') " +
+                    " FROM (SELECT starId, COUNT(*) AS total_movies " +
+                    "       FROM stars_in_movies " +
+                    "       GROUP BY starId " +
+                    "       ) AS star_movies " +
+                    " JOIN stars s ON star_movies.starId = s.id " +
+                    " JOIN stars_in_movies sm ON s.id = sm.starId " +
+                    " WHERE sm.movieId = m.id " +
+                    ") AS star_ids_and_names, " +
+
                     "(SELECT GROUP_CONCAT(DISTINCT CONCAT(g.id, ';', g.name) SEPARATOR ';') " +
                     "FROM genres_in_movies gm JOIN genres g ON gm.genreId = g.id " +
                     "WHERE gm.movieId = m.id) AS movie_id_genres, " +
@@ -115,32 +123,45 @@ public class SearchServlet extends HttpServlet {
             }
 
 // Set limit and offset parameters for pagination
-            statement.setInt(parameterIndex++, recordsPerPage);
+            statement.setInt(parameterIndex++, recordsPerPage + 1);
             statement.setInt(parameterIndex, (currentPage - 1) * recordsPerPage);
 
             ResultSet rs = statement.executeQuery();
 
             JsonArray movieArray = new JsonArray();
+            boolean hasNextPage = false; // Flag to track if there are more pages available
 
             // Iterate through result set and add movie objects to the array
             while (rs.next()) {
-                JsonObject movieObject = new JsonObject();
-                movieObject.addProperty("id", rs.getString("movie_id"));
-                movieObject.addProperty("title", rs.getString("movie_title"));
-                movieObject.addProperty("year", rs.getString("movie_year"));
-                movieObject.addProperty("director", rs.getString("movie_director"));
+                if (movieArray.size() < recordsPerPage) {
+                    JsonObject movieObject = new JsonObject();
+                    movieObject.addProperty("id", rs.getString("movie_id"));
+                    movieObject.addProperty("title", rs.getString("movie_title"));
+                    movieObject.addProperty("year", rs.getString("movie_year"));
+                    movieObject.addProperty("director", rs.getString("movie_director"));
 
-                movieObject.addProperty("genres", rs.getString("movie_id_genres"));
-                movieObject.addProperty("stars", rs.getString("star_ids_and_names"));
+                    movieObject.addProperty("genres", rs.getString("movie_id_genres"));
+                    movieObject.addProperty("stars", rs.getString("star_ids_and_names"));
 
-                double averageRating = Math.round(rs.getDouble("average_rating") * 10.0) / 10.0;
-                movieObject.addProperty("rating", averageRating);
+                    double averageRating = Math.round(rs.getDouble("average_rating") * 10.0) / 10.0;
+                    movieObject.addProperty("rating", averageRating);
 
-                movieArray.add(movieObject);
+                    movieArray.add(movieObject);
+                }
+                else{
+                    hasNextPage = true; // Set the flag indicating more pages are available
+                    break; // Exit the loop as we fetched more records than the recordsPerPage
+                }
+            }
+
+            if (movieArray.size() > recordsPerPage) {
+                movieArray.remove(movieArray.size() - 1);
             }
 
             jsonResponse.add("movies", movieArray);
             response.setStatus(HttpServletResponse.SC_OK);
+            jsonResponse.addProperty("hasNextPage", hasNextPage);
+
         } catch (SQLException e) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             e.printStackTrace();

@@ -77,23 +77,50 @@ function handleResult(resultData) {
             // Append dropdown option values to the genre links
             let sortAttribute = "title ASC, average_rating ASC";
             let moviesPerPage = "10";
-            let urlParams = "&sortAttribute=" + encodeURIComponent(sortAttribute)
+            let page = "1";
+            let urlParams = "&sortAttribute=" + encodeURIComponent(sortAttribute) + "&page="+ encodeURIComponent(page)
                 + "&recordsPerPage=" + encodeURIComponent(moviesPerPage);
             genreLink.attr("href", genreLink.attr("href") + urlParams);
 
             genreSpan.append(genreLink);
-            if (i < resultData.length - 1) {
+            if (i < genres.length - 1) {
                 genreSpan.append(", ");
             }
         }
         let genreSpanHTML = genreSpan.prop('outerHTML');
         content+= "<p>Genres: "+genreSpanHTML+"</p>";
 
+        let star_id_names = resultData[0]["movie_stars"].split(";");
+    let stars = [];
 
+    // Create star objects and push them into the stars array
+    for (let i = 0; i <  star_id_names.length; i += 3) {
+        let star_id = star_id_names[i];
+        let star_name = star_id_names[i + 1];
+        let total_movies = star_id_names[i + 2];
+        stars.push({ id: star_id, name: star_name, total_movies: total_movies });
+    }
+
+    // Initialize the star_entry string
+    let star_entry = '';
+
+    // Construct hyperlinks for sorted stars
+    for (let i = 0; i < stars.length; i++) {
+        let star = stars[i];
+        let star_link = '<a href="single-star.html?id=' + star.id + '">' + star.name + '</a>';
+        star_entry += star_link;
+
+        // Add comma and space if it's not the last star
+        if (i < stars.length - 1) {
+            star_entry += ", ";
+        }
+    }
+    //Display hyperlinked star names
+    content += "<p id = 'stars'> Stars: " + star_entry + "</p>";
 
     // delete button
     content += '<p> <button type="button" class="btn btn-outline-secondary" ' +
-        'onclick="addToCart(\'' + resultData[0]["movie_id"] + '\')"> Add to Cart </button> </p>';
+        'onclick="addToCart(\'' + resultData[0]["movie_id"] + '\', this)"> Add to Cart </button> </p>';
 
 
     starInfoElement.append(content);
@@ -106,13 +133,16 @@ function handleResult(resultData) {
 }
 
 
-function addToCart(movieId) {
+function addToCart(movieId, buttonElement) {
     // Create a JSON object containing the movie ID
 
     let data = {
         "movieId": movieId,
         "action": "increment"
     };
+
+    // Save the original text of the button
+    let originalText = "Add to Cart";
 
     // Send an AJAX POST request to your backend API to add the movie to the cart
     $.ajax({
@@ -123,7 +153,16 @@ function addToCart(movieId) {
         success: function(response) {
             // Handle the success response from the server
             console.log("Movie successfully added to cart");
-            // Optionally, can redirect the user to the shopping cart page after adding the movie
+
+            // Change the color of the button when successfully added to cart
+            $(buttonElement).removeClass("btn-outline-secondary").addClass("btn-success");
+            $(buttonElement).text("Added");
+
+            // Revert the color back to original after 1 second
+            setTimeout(function() {
+                $(buttonElement).removeClass("btn-success").addClass("btn-outline-secondary");
+                $(buttonElement).text(originalText);
+            }, 500);
         },
         error: function(xhr, status, error) {
             // Handle errors if any
@@ -147,3 +186,20 @@ jQuery.ajax({
     url: "api/single-movie?id=" + movieId, // Setting request url, which is mapped by StarsServlet in Stars.java
     success: (resultData) => handleResult(resultData) // Setting callback function to handle data returned successfully by the SingleStarServlet
 });
+
+// Function to retrieve the most recent URL from session storage
+function getRecentURL() {
+    return sessionStorage.getItem('recentURL');
+}
+
+
+document.getElementById('goBack').addEventListener('click', () => {
+    var recentURL = getRecentURL();
+    if (recentURL) {
+        // Redirect back to the recent URL (movie page)
+        window.location.href = recentURL;
+    } else {
+        // Handle case when no recent URL is stored
+    }
+});
+
