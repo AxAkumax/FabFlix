@@ -32,7 +32,7 @@ public class EmployeeLoginServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
+        System.out.println("inside employee servlet doPost");
         String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
         JsonObject responseJsonObject = new JsonObject();
         PrintWriter out = response.getWriter();

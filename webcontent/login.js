@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
         formSubmitEvent.preventDefault();
 
         $.ajax(
-            "/user/api/login", {
+            "/cs122b_suikalordsproject_war/user/api/login", {
                 method: "POST",
                 // Serialize the login form to the data sent by POST request
                 data: login_form.serialize(),

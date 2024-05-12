@@ -1,7 +1,10 @@
+import com.mysql.cj.Session;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -29,12 +32,78 @@ public class LoginFilter implements Filter {
             return;
         }
 
-        // Redirect to login page if the "user" attribute doesn't exist in session
-        if (httpRequest.getSession().getAttribute("user") == null) {
-            httpResponse.sendRedirect("login.html");
-        } else {
-            chain.doFilter(request, response);
+//        // Redirect to login page if the "user" attribute doesn't exist in session
+//        HttpSession session = httpRequest.getSession();
+//
+//        // if it is an employee link and employee is not set
+//        if (session.getAttribute("employee") == null && httpRequest.getRequestURI().equals("_dashboard")) {
+//            httpResponse.sendRedirect("employee-login.html");
+//        }
+//        // if it is a user link and user is not set
+//        else if (session.getAttribute("user") != null && !httpRequest.getRequestURI().equals("_dashboard")) {
+//            httpResponse.sendRedirect("login.html");
+//        }
+//        else {
+//            chain.doFilter(request, response);
+//        }
+
+        HttpSession session = httpRequest.getSession();
+
+        if (httpRequest.getRequestURI().contains("_dashboard")) {
+            if (session.getAttribute("employee") != null) {
+                chain.doFilter(request, response);
+            }
+            else {
+                httpResponse.sendRedirect("employee-login.html");
+            }
         }
+        else {
+            if (session.getAttribute("user") != null) {
+                chain.doFilter(request, response);
+            }
+//            else if (session.getAttribute("employee") != null) {
+//                chain.doFilter(request, response);
+//            }
+            else {
+                httpResponse.sendRedirect("login.html");
+            }
+        }
+
+//        if (session.getAttribute("employee") == null &&
+//                session.getAttribute("user") == null &&
+//                httpRequest.getRequestURI().contains("_dashboard")) {
+//
+//            // if neither employee nor user is set, set dashboard queries to employee login
+//            httpResponse.sendRedirect("employee-login.html");
+//        }
+//        else if (session.getAttribute("employee") != null &&
+//                session.getAttribute("user") == null &&
+//                httpRequest.getRequestURI().contains("_dashboard")) {
+//
+//            // if employee is set and its a dashboard query, let it through
+//            chain.doFilter(request, response);
+//        }
+//        else if (session.getAttribute("employee") == null &&
+//                session.getAttribute("user") == null &&
+//                httpRequest.getRequestURI().contains("_dashboard")) {
+//
+//        }
+
+
+
+
+//        if (httpRequest.getSession().getAttribute("user") == null) {
+//
+//            if (httpRequest.getRequestURI().contains("_dashboard") && httpRequest.getSession().getAttribute("employee") == null) {
+//                httpResponse.sendRedirect("employee-login.html");
+//            }
+//            else {
+//                httpResponse.sendRedirect("login.html");
+//            }
+//        }
+//        else {
+//            chain.doFilter(request, response);
+//        }
     }
 
     private boolean isUrlAllowedWithoutLogin(String requestURI) {
@@ -47,6 +116,13 @@ public class LoginFilter implements Filter {
     }
 
     public void init(FilterConfig fConfig) {
+        System.out.println("inside LoginFilter init");
+
+        allowedURIs.add("_dashboard/employee-login.html");
+        allowedURIs.add("_dashboard/employee-login.js");
+        allowedURIs.add("_dashboard/employee-login.css");
+        allowedURIs.add("api/employee-login");
+
         allowedURIs.add("login.html");
         allowedURIs.add("login.js");
         allowedURIs.add("login.css");

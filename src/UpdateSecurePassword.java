@@ -52,29 +52,31 @@ public class UpdateSecurePassword {
             System.out.println("encrypting password (this might take a while)");
             while (rs.next()) {
                 // get the ID and plain text password from current table
-                String id = rs.getString("customerId");
+                int id = rs.getInt("customerId");
                 String password = rs.getString("password");
 
                 // encrypt the password using StrongPasswordEncryptor
                 String encryptedPassword = passwordEncryptor.encryptPassword(password);
 
                 // generate the update query
-                String updateQuery = "UPDATE customers SET password=? WHERE customerId=?";
+                String updateQuery = "UPDATE customers SET password=? WHERE customerId=?;";
                 preparedStatement = connection.prepareStatement(updateQuery);
                 preparedStatement.setString(1, encryptedPassword);
-                preparedStatement.setString(2, id);
+                preparedStatement.setInt(2, id);
                 updateQueryList.add(updateQuery);
+                preparedStatement.executeUpdate();
             }
             rs.close();
 
-            // execute the update queries to update the password
-            System.out.println("updating password");
-            int count = 0;
-            for (String updateQuery : updateQueryList) {
-                int updateResult = preparedStatement.executeUpdate();
-                count += updateResult;
-            }
-            System.out.println("updating password completed, " + count + " rows affected");
+//            // execute the update queries to update the password
+//            System.out.println("updating password");
+//            int count = 0;
+//            for (String updateQuery : updateQueryList) {
+//                System.out.println(updateQuery);
+//                int updateResult = preparedStatement.executeUpdate(updateQuery);
+//                count += updateResult;
+//            }
+//            System.out.println("updating password completed, " + count + " rows affected");
 
             statement.close();
             connection.close();
