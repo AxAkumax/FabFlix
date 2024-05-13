@@ -3,7 +3,14 @@ Team: Suika-Lords
 
 Members: Akshita Akumalla, Niharika Kumar
 
-Demo URL: 
+Demo URL: https://drive.google.com/file/d/1azrLnqpxVsGjdvh0TN_oT64ayRIxKsZ_/view?usp=sharing
+
+Generated files:
+   STAR_ERRORS.txt: https://drive.google.com/file/d/1_GAad8E95eW0dFkzZCLeoEm1UvEdkhgA/view?usp=sharing
+   STARMOVIE_ERRORS.txt: https://drive.google.com/file/d/1RVi3Sj1Z0jpb-eF-9U0sy2_Xi8auIBJk/view?usp=sharing
+   MOVIE_ERRORS.txt: https://drive.google.com/file/d/1Oae__nYdT_UUu96aKpxEW1XmEmdFvmrW/view?usp=sharing
+
+
 
 Project 3:
 
