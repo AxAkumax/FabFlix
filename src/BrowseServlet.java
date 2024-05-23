@@ -41,8 +41,8 @@ public class BrowseServlet extends HttpServlet {
 
         try (Connection conn = dataSource.getConnection()) {
 
-             String genreIdParameter = request.getParameter("genreId");
-             String titleStartParameter = request.getParameter("character");
+            String genreIdParameter = request.getParameter("genreId");
+            String titleStartParameter = request.getParameter("character");
 
             String sortAttribute = request.getParameter("sortAttribute"); // Get sort attribute
             int recordsPerPage = Integer.parseInt(request.getParameter("recordsPerPage"));
@@ -62,7 +62,7 @@ public class BrowseServlet extends HttpServlet {
                 int genreId = Integer.parseInt(genreIdParameter);
                 // Execute SQL query to get movies for the given genreId
                 String query = "SELECT " +
-                "m.id AS movie_id, " +
+                        "m.id AS movie_id, " +
                         "m.title AS title, " +
                         "m.year AS movie_year, " +
                         "m.director AS movie_director, " +
