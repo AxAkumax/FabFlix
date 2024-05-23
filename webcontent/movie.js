@@ -1,21 +1,31 @@
 var currentPage =  1;
+var isFetching = false;
 
 $(document).ready(function() {
     var urlParams = new URLSearchParams(window.location.search);
     var page = urlParams.get('page');
     currentPage = parseInt(page) || 1; // Initialize currentPage with the value from URL, default to 1 if not found
 
-    fetchSearchResults(); // Call fetchSearchResults directly
+    $("#nextBtn").click(nextPage);
+    $("#prevBtn").click(prevPage);
+    $("#sortForm").submit(submitSortForm);
+
+    fetchSearchResults();
+
 });
 
 function fetchSearchResults(){
     // Extract search parameters from the URL
+    console.log("Fetching results for page:", currentPage); // Debugging line
+
+
     var urlParams = new URLSearchParams(window.location.search);
     var genreId = urlParams.get('genreId'); // Check if genreId parameter exists
     var character =  urlParams.get('character');
     var sortAttribute = urlParams.get('sortAttribute');
     var recordsPerPage = urlParams.get('recordsPerPage');
-    var page = urlParams.get('page');
+    var page = currentPage;
+        //urlParams.get('page');
 
     if (genreId || character) {
         console.log(genreId);
@@ -23,6 +33,10 @@ function fetchSearchResults(){
         fetchMoviesByGenre(genreId, character, sortAttribute, recordsPerPage,page);
         return;
     }
+
+    if (isFetching) return; // Prevent multiple simultaneous requests
+    isFetching = true;
+
     var title = urlParams.get('title');
     var year = urlParams.get('year');
     var director = urlParams.get('director');
@@ -49,7 +63,6 @@ function fetchSearchResults(){
             // Populate the table with search results
             $("#noResultsMessage").hide();
             console.log(formData);
-            console.log("sucesss");
             console.log("CURRENT PAGE: ", currentPage);
 
             populateTable(resultData);
@@ -70,8 +83,8 @@ function fetchSearchResults(){
                 }
             }
 
-            if(currentPage>1){
-                $("#prevBtn").prop("disabled", false); // Enable Next button
+            if(currentPage > 1){
+                $("#prevBtn").prop("disabled", false);
             }
             else{
                 $("#prevBtn").prop("disabled", true);
@@ -81,14 +94,21 @@ function fetchSearchResults(){
         error: function(xhr, status, error) {
             $("#noResultsMessage").show();
             console.error("Error occurred while fetching search results:", error);
+        },
+        complete: function() {
+            isFetching = false; // Reset the flag after the request is complete
         }
     });
 }
 
-
 // Function to populate the table with search results
 function fetchMoviesByGenre(genreId, character, sortAttribute, recordsPerPage, page) {
     //Make AJAX request to fetch movies by genreId
+
+    console.log("FetchingMoviesByGenre entered")
+    if (isFetching) return; // Prevent multiple simultaneous requests
+    isFetching = true;
+
     formData = {};
     if(genreId){
         formData["genreId"] = genreId;
@@ -134,10 +154,10 @@ function fetchMoviesByGenre(genreId, character, sortAttribute, recordsPerPage, p
                     // More pages available, enable the next button
                     $("#nextBtn").prop("disabled", false);
                 }
-            }
 
-            if(currentPage>1){
-                $("#prevBtn").prop("disabled", false); // Enable Next button
+            }
+            if(currentPage > 1){
+                $("#prevBtn").prop("disabled", false);
             }
             else{
                 $("#prevBtn").prop("disabled", true);
@@ -147,12 +167,17 @@ function fetchMoviesByGenre(genreId, character, sortAttribute, recordsPerPage, p
         error: function (xhr, status, error) {
             console.log(genreId);
             console.error("Error occurred while fetching genre movies:", error);
+        },
+        complete: function() {
+            isFetching = false; // Reset the flag after the request is complete
         }
     });
 }
 function populateTable(resultData) {
     var table = $("#movie_table_body");
     var tableHeadings = $("#movie_table thead");
+
+    console.log("POPULATING TABLE");
 
     // Clear existing table rows
     table.empty();
@@ -179,7 +204,6 @@ function populateTable(resultData) {
     tableHeadings.show()
     $("#prevNextButton").show()
     // Iterate through search results and populate table
-    console.log(resultData);
 
     for (let j = 0; j < resultData.movies.length; j++) {
         // Construct HTML for table row
@@ -230,7 +254,6 @@ function populateTable(resultData) {
         rowHTML += "<td>" + genreSpanHTML + "</td>";
 
         let star_id_names = movie.stars.split(";");
-        console.log(movie.stars);
         let stars = [];
 
         // Create star objects and push them into the stars array
@@ -317,6 +340,8 @@ function addToCart(movieId, buttonElement) {
 
 
 function nextPage() {
+    if (isFetching) return;
+
     currentPage++; // Increment current page number
     console.log("Next Page: Current Page is now", currentPage);
     updatePageQueryParam();
@@ -326,13 +351,12 @@ function nextPage() {
 
 // Function to handle "Prev" button click
 function prevPage() {
-    if (currentPage > 1) {
+    if (isFetching || currentPage <= 1) return;
         currentPage--; // Decrement current page number if not already on the first page
         console.log("Next Page: Current Page is now", currentPage);
         updatePageQueryParam();
         storeRecentURL();
         fetchSearchResults();
-    }
 }
 
 function updatePageQueryParam() {
@@ -340,13 +364,6 @@ function updatePageQueryParam() {
     var updatedUrl = updateQueryStringParameter(currentUrl, 'page', currentPage);
     window.history.replaceState({ path: updatedUrl }, '', updatedUrl);
 }
-
-
-$(document).ready(function() {
-    $("#nextBtn").click(nextPage);
-    $("#prevBtn").click(prevPage);
-    $("#sortForm").submit(submitSortForm);
-});
 
 function submitSortForm(event) {
     event.preventDefault(); // Prevent default form submission
@@ -383,7 +400,6 @@ function storeRecentURL() {
     // Include the current page number in the URL
     var currentURL = window.location.href;
     var recentURL = updateQueryStringParameter(currentURL, 'page', currentPage);
-    console.log(recentURL);
     sessionStorage.setItem('recentURL', recentURL);
 }
 
