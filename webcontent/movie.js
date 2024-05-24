@@ -37,16 +37,17 @@ function fetchSearchResults(){
     if (isFetching) return; // Prevent multiple simultaneous requests
     isFetching = true;
 
-    var title = urlParams.get('title');
-    var year = urlParams.get('year');
-    var director = urlParams.get('director');
-    var starName = urlParams.get('starName');
+    var search = urlParams.get('search');
+    // var year = urlParams.get('year');
+    // var director = urlParams.get('director');
+    // var starName = urlParams.get('starName');
 
     var formData = {};
-    if(title){ formData["title"]=title;}
-    if(year){ formData["year"]=year; }
-    if(director){ formData["director"]=director; }
-    if(starName){ formData["starName"]=starName; }
+    if(search){ formData["search"]=search;}
+    // if(year){ formData["year"]=year; }
+    // if(director){ formData["director"]=director; }
+    // if(starName){ formData["starName"]=starName; }
+
     if(sortAttribute){ formData["sortAttribute"]=sortAttribute; }
     if(recordsPerPage){ formData["recordsPerPage"]=recordsPerPage; }
     formData["page"]=page;
@@ -405,3 +406,30 @@ function storeRecentURL() {
 
 // Call this function before redirecting to single movie or single star page
 storeRecentURL();
+
+document.addEventListener('DOMContentLoaded', function () {
+    const searchForm = document.getElementById('search-form');
+    const searchInput = document.getElementById('search-input');
+    const searchButton = document.getElementById('search-button');
+
+    // Handle form submission
+    searchForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const query = searchInput.value.trim();
+
+        if (query) {
+            const formData = {
+                search: query,
+                page: '1',
+                recordsPerPage: '10',
+                sortAttribute: 'title ASC, average_rating ASC'
+            };
+
+            const queryString = new URLSearchParams(formData).toString();
+            const url = `movie.html?${queryString}`;
+            console.log(url);
+            // Redirect to the new page
+            window.location.href = url;
+        }
+    });
+});

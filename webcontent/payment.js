@@ -79,3 +79,30 @@ function handleResult(response) {
         label.text("Unable to authenticate user info. Please enter correct information.");
     }
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    const searchForm = document.getElementById('search-form');
+    const searchInput = document.getElementById('search-input');
+    const searchButton = document.getElementById('search-button');
+
+    // Handle form submission
+    searchForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const query = searchInput.value.trim();
+
+        if (query) {
+            const formData = {
+                search: query,
+                page: '1',
+                recordsPerPage: '10',
+                sortAttribute: 'title ASC, average_rating ASC'
+            };
+
+            const queryString = new URLSearchParams(formData).toString();
+            const url = `movie.html?${queryString}`;
+            console.log(url);
+            // Redirect to the new page
+            window.location.href = url;
+        }
+    });
+});
