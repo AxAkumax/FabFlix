@@ -54,6 +54,24 @@ $('#search-input').autocomplete({
     deferRequestBy: 300,
     // there are some other parameters that you might want to use to satisfy all the requirements
     // TODO: add other parameters, such as minimum characters
+    formatResult: function (suggestion, currentValue) {
+        // Highlight matched words in suggestion value
+
+        // Split input value into words and escape special characters
+        const currentValueWords = currentValue.split(' ').map($.Autocomplete.utils.escapeRegExChars);
+        console.log('Current Value Words:', currentValueWords);
+
+// Create regex to match parts of words from the input
+        const regex = new RegExp('(' + currentValueWords.join('|') + ')', 'gi');
+        console.log('Regex:', regex);
+
+// Highlight matched parts of words from the query in suggestion value
+        const highlightedValue = suggestion.value.replace(regex, '<span class="highlight">$1</span>');
+        console.log('Highlighted Value:', highlightedValue);
+
+        return '<div>' + highlightedValue + '</div>';
+
+    }
 });
 
 function handleLookup(query, doneCallback) {
