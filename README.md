@@ -10,7 +10,26 @@ Generated files:
    STARMOVIE_ERRORS.txt: https://drive.google.com/file/d/1RVi3Sj1Z0jpb-eF-9U0sy2_Xi8auIBJk/view?usp=sharing
    MOVIE_ERRORS.txt: https://drive.google.com/file/d/1Oae__nYdT_UUu96aKpxEW1XmEmdFvmrW/view?usp=sharing
 
+Project 4:
+* Contributions:
+  * Akshita
+    * Worked on building full-text search
+    * Changed search navigation to the navigation bar instead of a separate page
+    * Worked on auto-complete for search (included new Servlet for suggestions)
 
+- # Connection Pooling
+    - #### Include the filename/path of all code/configuration files in GitHub of using JDBC Connection Pooling.
+    
+    - #### Explain how Connection Pooling is utilized in the Fabflix code.
+    
+    - #### Explain how Connection Pooling works with two backend SQL.
+    
+
+- # Master/Slave
+    - #### Include the filename/path of all code/configuration files in GitHub of routing queries to Master/Slave SQL.
+
+    - #### How read/write requests were routed to Master/Slave SQL?
+      
 
 Project 3:
 
