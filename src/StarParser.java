@@ -42,9 +42,9 @@ public class StarParser extends DefaultHandler {
     public void connectDatabase() {
         try {
             String dbtype = "mysql";
-            String dbname = "moviedb";
+            String dbname = "master";
             String username = "mytestuser";
-            String password = "My6$Password";
+            String password = "mypassword";
 
             // Incorporate mySQL driver
             Class.forName("com.mysql.cj.jdbc.Driver");

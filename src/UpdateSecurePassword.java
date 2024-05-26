@@ -20,8 +20,8 @@ public class UpdateSecurePassword {
     public static void main(String[] args) throws Exception {
 
         String loginUser = "mytestuser";
-        String loginPasswd = "My6$Password";
-        String loginUrl = "jdbc:mysql://localhost:3306/moviedb";
+        String loginPasswd = "mypassword";
+        String loginUrl = "jdbc:mysql://172.31.32.61:3306/moviedb";
 
         Class.forName("com.mysql.jdbc.Driver").newInstance();
         Connection connection = DriverManager.getConnection(loginUrl, loginUser, loginPasswd);
