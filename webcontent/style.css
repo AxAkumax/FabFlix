@@ -84,19 +84,6 @@ input[type=text] {
 .autocomplete-group { padding: 2px 5px; }
 .autocomplete-group strong { display: block; border-bottom: 1px solid #000; }
 
-/*.container {*/
-/*    height: 100%;*/
-/*    width: 100%;*/
-/*    display: flex;*/
-/*    justify-content: center;*/
-/*    align-items: center;*/
-/*}*/
-
-/*.autocomplete-searchbox {*/
-/*    height: 50px;*/
-/*    width: 600px;*/
-/*}*/
-
 header {
     padding: 0.6vw;
     font-size: 5vw;
