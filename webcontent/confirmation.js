@@ -118,7 +118,7 @@ function handleLookup(query, doneCallback) {
 }
 
 function handleLookupAjaxSuccess(data, query, doneCallback) {
-    console.log("lookup ajax successful");
+    //console.log("lookup ajax successful");
 
     try {
         if (Array.isArray(data) && data.length > 0) {
@@ -157,7 +157,7 @@ $('#search-input').keypress(function (event) {
 });
 
 function handleNormalSearch(query) {
-    console.log("doing normal search with query: " + query);
+    //console.log("doing normal search with query: " + query);
     if (query) {
         const formData = {
             search: query,
