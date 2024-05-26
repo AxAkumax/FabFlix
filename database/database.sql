@@ -58,3 +58,4 @@ CREATE TABLE ratings(
 );
 
 ALTER TABLE sales ADD quantity INTEGER DEFAULT 1;
+ALTER TABLE movies ADD FULLTEXT(title);
