@@ -49,25 +49,30 @@ public class LoginFilter implements Filter {
 
         HttpSession session = httpRequest.getSession();
 
-        if (httpRequest.getRequestURI().contains("_dashboard")) {
+        // if (httpRequest.getRequestURI().contains("_dashboard")) {
+            
             if (session.getAttribute("employee") != null) {
                 chain.doFilter(request, response);
             }
-            else {
-                httpResponse.sendRedirect("cs122b-suikalordsproject/_dashboard/employee-login.html");
-            }
-        }
-        else {
-            if (session.getAttribute("user") != null) {
+            else if (session.getAttribute("user") != null) {
                 chain.doFilter(request, response);
             }
+            else {
+                httpResponse.sendRedirect("login.html");
+            }
+                
+        // }
+        // else {
+        //     if (session.getAttribute("user") != null) {
+        //         chain.doFilter(request, response);
+        //     }
 //            else if (session.getAttribute("employee") != null) {
 //                chain.doFilter(request, response);
 //            }
-            else {
-                httpResponse.sendRedirect("cs122b-suikalordsproject/login.html");
-            }
-        }
+        //     else {
+        //         httpResponse.sendRedirect("login.html");
+        //     }
+        // }
 
 //        if (session.getAttribute("employee") == null &&
 //                session.getAttribute("user") == null &&
