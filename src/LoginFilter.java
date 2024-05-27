@@ -49,7 +49,9 @@ public class LoginFilter implements Filter {
 
         HttpSession session = httpRequest.getSession();
 
-        if (httpRequest.getRequestURI().contains("_dashboard")) {
+        if (httpRequest.getRequestURI().contains("dashboard") || 
+           httpRequest.getRequestURI().contains("metadata") ||
+            httpRequest.getRequestURI().contains("add") ) {
             if (session.getAttribute("employee") != null) {
                 chain.doFilter(request, response);
             }
