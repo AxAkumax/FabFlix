@@ -3,7 +3,7 @@
 
     - #### Names: Akshita Akumalla, Niharika Kumar
 
-    - #### Project 5 Video Demo Link:
+    - #### Project 5 Video Demo Link: https://drive.google.com/file/d/1xtR2e5dOrLUnSDlXewViCo992MuCkMdg/view?usp=sharing
 
     - #### Instruction of deployment:
         - Locally:
@@ -89,4 +89,4 @@
         - src/UpdateSecurePassword.java
 
   - #### How read/write requests were routed to Master/Slave SQL?
-      - The load balancer routes requests to master/slave SQL depending on which instance is available. In order to make sure that read can happen from both instances, all the queries that are read-only are routed to localhost (the SQL that is on the available instance). In order to make sure that writes only happen from master SQL, a new datasource is setup in context.xml that solely connects to master SQL. When the slave instance receives a write request, it connects to the new datasource that connects to master's SQL.
+      - The load balancer routes requests to master/slave SQL depending on which instance is available. In order to make sure that read can happen from both instances, all the queries that are read-only are routed to localhost (the SQL that is on the available instance (master/slave). In order to make sure that writes only happen from master SQL, a new datasource is setup in context.xml that solely connects to master's SQL. When the slave instance (or the slave) receives a write request, it connects to the new datasource that connects to master's SQL.
