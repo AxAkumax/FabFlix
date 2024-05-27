@@ -54,7 +54,7 @@ public class LoginFilter implements Filter {
                 chain.doFilter(request, response);
             }
             else {
-                httpResponse.sendRedirect("employee-login.html");
+                httpResponse.sendRedirect("cs122b-suikalordsproject/_dashboard/employee-login.html");
             }
         }
         else {
@@ -65,7 +65,7 @@ public class LoginFilter implements Filter {
 //                chain.doFilter(request, response);
 //            }
             else {
-                httpResponse.sendRedirect("login.html");
+                httpResponse.sendRedirect("cs122b-suikalordsproject/login.html");
             }
         }
 
