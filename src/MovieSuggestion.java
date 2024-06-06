@@ -52,24 +52,24 @@ public class MovieSuggestion extends HttpServlet {
             }
 
             // Process the query string to build a full-text search query
-            String[] tokens = query.split("\\s+");
-            StringBuilder booleanQuery = new StringBuilder();
+            String[] tokens = query.split(" ");
+            String booleanQuery = "";
             for (String token : tokens) {
-                if (booleanQuery.length() > 0) {
-                    booleanQuery.append(" ");
-                }
-                booleanQuery.append("+").append(token).append("*");
+                booleanQuery += "+" + token + "* ";
             }
 
-            // Build the SQL query
             String query_string = "SELECT " +
                     "m.id AS movie_id, " +
                     "m.title AS movie_title " +
                     "FROM movies m " +
-                    "WHERE MATCH(m.title) AGAINST(? IN BOOLEAN MODE) " +
-                    "LIMIT 10";
+                    "WHERE (m.title = ? " + // Exact match
+                    "OR (MATCH(m.title) AGAINST(? IN BOOLEAN MODE) " + // Tokenized match
+                    "AND m.title LIKE ?))"; // Partial match
+
             PreparedStatement statement = conn.prepareStatement(query_string);
-            statement.setString(1, booleanQuery.toString());
+            statement.setString(1, query);
+            statement.setString(2, booleanQuery);
+            statement.setString(3, "%" + query + "%");
 
             ResultSet rs = statement.executeQuery();
 
