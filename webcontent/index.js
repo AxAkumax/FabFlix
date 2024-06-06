@@ -29,12 +29,13 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 //autocomplete------
+// Handle manual filling of the input field when a suggestion is selected
 $('#search-input').autocomplete({
     lookup: function (query, doneCallback) {
         handleLookup(query, doneCallback)
     },
     onSelect: function (suggestion) {
-        handleSelectSuggestion(suggestion)
+        handleSelectSuggestion(suggestion);
     },
     deferRequestBy: 300,
     formatResult: function (suggestion, currentValue) {
@@ -86,6 +87,12 @@ function handleLookupAjaxSuccess(data, query, doneCallback) {
                 data: { movieID: item.data.movieID }
             }));
 
+            // //Add the exact match suggestion
+            // const exactMatchIndex = suggestions.findIndex(suggestion => suggestion.value === query);
+            // if (exactMatchIndex === -1) {
+            //     suggestions.push({ value: query, data: { movieID: null } });
+            // }
+
             // Cache the result
             sessionStorage.setItem(query, JSON.stringify(suggestions));
             doneCallback({ suggestions });
@@ -105,7 +112,7 @@ function handleSelectSuggestion(suggestion) {
         value: suggestion["value"],
         movieID: suggestion["data"]["movieID"]
     };
-    sessionStorage.setItem('selectedMovieData', JSON.stringify(selectedMovieData));
+    //sessionStorage.setItem('selectedMovieData', JSON.stringify(selectedMovieData));
 }
 
 // Bind pressing enter key to a handler function
@@ -114,6 +121,7 @@ $('#search-input').keypress(function (event) {
         handleNormalSearch($('#search-input').val());
     }
 });
+
 
 function handleNormalSearch(query) {
     //console.log("doing normal search with query: " + query);
