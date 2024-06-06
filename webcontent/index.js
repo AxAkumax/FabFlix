@@ -112,7 +112,7 @@ function handleSelectSuggestion(suggestion) {
         value: suggestion["value"],
         movieID: suggestion["data"]["movieID"]
     };
-    //sessionStorage.setItem('selectedMovieData', JSON.stringify(selectedMovieData));
+    sessionStorage.setItem('selectedMovieData', JSON.stringify(selectedMovieData));
 }
 
 // Bind pressing enter key to a handler function
