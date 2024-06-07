@@ -219,72 +219,82 @@ function populateTable(resultData) {
         rowHTML += "<td>" + movie.year + "</td>";
         rowHTML += "<td>" + movie.director + "</td>";
 
-        let genre_id_names = movie.genres.split(";");
-        let genres = [];
+        if(movie.genres) {
+            let genre_id_names = movie.genres.split(";");
+            let genres = [];
 
-        for (let i = 0; i < genre_id_names.length; i += 2) {
-            let genre_id = genre_id_names[i];
-            let genre_name = genre_id_names[i + 1];
-            genres.push({id: genre_id, name: genre_name});
-        }
-        //sorted alphabetically
-        genres.sort((a, b) => a.name.localeCompare(b.name));
-
-        let genreSpan = $("<span>");
-
-        for (let i = 0; i < Math.min(3, genres.length); i++) {
-            let genre = genres[i];
-
-            let genreLink = $("<a class='browse-link'>")
-                .attr("href", "movie.html?genreId=" + genre.id)
-                .text(genre.name);
-            // Append dropdown option values to the genre links
-            let sortAttribute = $("#sortAttribute").val();
-            let moviesPerPage = $("#moviesPerPage").val();
-            let page = "1";
-            let urlParams = "&sortAttribute=" + encodeURIComponent(sortAttribute) + "&page="+ encodeURIComponent(page)
-                + "&recordsPerPage=" + encodeURIComponent(moviesPerPage);
-            genreLink.attr("href", genreLink.attr("href") + urlParams);
-
-            genreSpan.append(genreLink);
-            if (i < genres.length - 1) {
-                genreSpan.append(", ");
+            for (let i = 0; i < genre_id_names.length; i += 2) {
+                let genre_id = genre_id_names[i];
+                let genre_name = genre_id_names[i + 1];
+                genres.push({id: genre_id, name: genre_name});
             }
-        }
-        let genreSpanHTML = genreSpan.prop('outerHTML');
-        rowHTML += "<td>" + genreSpanHTML + "</td>";
+            //sorted alphabetically
+            genres.sort((a, b) => a.name.localeCompare(b.name));
 
-        let star_id_names = movie.stars.split(";");
-        let stars = [];
+            let genreSpan = $("<span>");
 
-        // Create star objects and push them into the stars array
-        for (let i = 0; i <  Math.min(star_id_names.length, 9); i += 3) {
-            let star_id = star_id_names[i];
-            let star_name = star_id_names[i + 1];
-            let total_movies = star_id_names[i + 2];
-            stars.push({ id: star_id, name: star_name, total_movies: total_movies });
-        }
+            for (let i = 0; i < Math.min(3, genres.length); i++) {
+                let genre = genres[i];
 
-        // Initialize the star_entry string
-        let star_entry = '';
+                let genreLink = $("<a class='browse-link'>")
+                    .attr("href", "movie.html?genreId=" + genre.id)
+                    .text(genre.name);
+                // Append dropdown option values to the genre links
+                let sortAttribute = $("#sortAttribute").val();
+                let moviesPerPage = $("#moviesPerPage").val();
+                let page = "1";
+                let urlParams = "&sortAttribute=" + encodeURIComponent(sortAttribute) + "&page=" + encodeURIComponent(page)
+                    + "&recordsPerPage=" + encodeURIComponent(moviesPerPage);
+                genreLink.attr("href", genreLink.attr("href") + urlParams);
 
-        // Construct hyperlinks for sorted stars
-        for (let i = 0; i < stars.length; i++) {
-            let star = stars[i];
-            let star_link = '<a href="single-star.html?id=' + star.id + '">' + star.name + '</a>';
-
-            storeRecentURL();
-
-            star_entry += star_link;
-
-            // Add comma and space if it's not the last star
-            if (i < stars.length - 1) {
-                star_entry += ", ";
+                genreSpan.append(genreLink);
+                if (i < genres.length - 1) {
+                    genreSpan.append(", ");
+                }
             }
+            let genreSpanHTML = genreSpan.prop('outerHTML');
+            rowHTML += "<td>" + genreSpanHTML + "</td>";
+        }
+        else{
+            rowHTML += "<td>" + "N/A" + "</td>";
         }
 
-        //Display hyperlinked star names
-        rowHTML += "<td>" + star_entry + "</td>";
+        if(movie.stars) {
+            let star_id_names = movie.stars.split(";");
+            let stars = [];
+
+            // Create star objects and push them into the stars array
+            for (let i = 0; i < Math.min(star_id_names.length, 9); i += 3) {
+                let star_id = star_id_names[i];
+                let star_name = star_id_names[i + 1];
+                let total_movies = star_id_names[i + 2];
+                stars.push({id: star_id, name: star_name, total_movies: total_movies});
+            }
+
+            // Initialize the star_entry string
+            let star_entry = '';
+
+            // Construct hyperlinks for sorted stars
+            for (let i = 0; i < stars.length; i++) {
+                let star = stars[i];
+                let star_link = '<a href="single-star.html?id=' + star.id + '">' + star.name + '</a>';
+
+                storeRecentURL();
+
+                star_entry += star_link;
+
+                // Add comma and space if it's not the last star
+                if (i < stars.length - 1) {
+                    star_entry += ", ";
+                }
+            }
+
+            //Display hyperlinked star names
+            rowHTML += "<td>" + star_entry + "</td>";
+        }
+        else{
+            rowHTML += "<td>" + "N/A" + "</td>";
+        }
 
         //rowHTML += "<td>" + movie.stars + "</td>";
         rowHTML += "<td>" + movie.rating + "</td>";
