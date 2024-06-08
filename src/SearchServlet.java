@@ -50,15 +50,21 @@ public class SearchServlet extends HttpServlet {
             int offset = (currentPage - 1) * recordsPerPage;
 
             // Prepare the query tokens for BOOLEAN MODE
-            String[] tokens = search.split("\\s+");
-            StringBuilder booleanQuery = new StringBuilder();
+//            String[] tokens = search.split("\\s+");
+//            StringBuilder booleanQuery = new StringBuilder();
+//            for (String token : tokens) {
+//                if (booleanQuery.length() > 0) {
+//                    booleanQuery.append(" ");
+//                }
+//                booleanQuery.append("+").append(token).append("*");
+//            }
+//            System.out.println(booleanQuery.toString());
+            // Process the query string to build a full-text search query
+            String[] tokens = search.split(" ");
+            String booleanQuery = "";
             for (String token : tokens) {
-                if (booleanQuery.length() > 0) {
-                    booleanQuery.append(" ");
-                }
-                booleanQuery.append("+").append(token).append("*");
+                booleanQuery += "+" + token + "* ";
             }
-            System.out.println(booleanQuery.toString());
 
             // Build the SQL query
             String query = "SELECT " +
@@ -83,15 +89,22 @@ public class SearchServlet extends HttpServlet {
                     "LEFT JOIN ratings r ON m.id = r.movieId " +
                     "LEFT JOIN stars_in_movies sm ON m.id = sm.movieId " +
                     "LEFT JOIN stars s ON sm.starId = s.id " +
-                    "WHERE MATCH(m.title) AGAINST(? IN BOOLEAN MODE) " +
+
+                    "WHERE (m.title = ? " + // Exact match
+                    "OR (MATCH(m.title) AGAINST(? IN BOOLEAN MODE) " + // Tokenized match
+                    "AND m.title LIKE ?)) "+
+
                     "GROUP BY m.id, m.title, m.year, m.director " +
-                    "ORDER BY " + sortAttribute + " " +
+                    "ORDER BY ? "+
                     "LIMIT ? OFFSET ?";
 
             PreparedStatement statement = conn.prepareStatement(query);
-            statement.setString(1, booleanQuery.toString());
-            statement.setInt(2, recordsPerPage + 1); // Fetch one extra record to check for the next page
-            statement.setInt(3, offset);
+            statement.setString(1, search);
+            statement.setString(2, booleanQuery);
+            statement.setString(3, "%" + search + "%");
+            statement.setString(4, sortAttribute);
+            statement.setInt(5, recordsPerPage + 1); // Fetch one extra record to check for the next page
+            statement.setInt(6, offset);
 
             ResultSet rs = statement.executeQuery();
 
